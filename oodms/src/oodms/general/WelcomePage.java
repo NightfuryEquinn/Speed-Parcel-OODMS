@@ -46,6 +46,8 @@ public class WelcomePage extends javax.swing.JFrame {
         inputAddress = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Welcome to Speed Parcel");
+        setName(""); // NOI18N
 
         welcomePanel.setBackground(new java.awt.Color(250, 242, 224));
 
