@@ -11,12 +11,12 @@ import javax.swing.table.TableColumnModel;
  *
  * @author User
  */
-public class UserMgmtDisplay extends javax.swing.JFrame {
+public class CategoryMgmtDisplay extends javax.swing.JFrame {
 
     /**
-     * Creates new form UserMgmtDisplayPage
+     * Creates new form CategoryMgmtDisplay
      */
-    public UserMgmtDisplay() {
+    public CategoryMgmtDisplay() {
         initComponents();
     }
 
@@ -29,59 +29,59 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        userMgmtPanel = new javax.swing.JPanel();
-        userMgmtLabel = new javax.swing.JLabel();
-        searchUserLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        categoryMgmtLabel = new javax.swing.JLabel();
+        searchCategoryLabel = new javax.swing.JLabel();
         backgroundPanel1 = new javax.swing.JPanel();
-        searchUserIDLabel = new javax.swing.JLabel();
-        inputUserID = new javax.swing.JTextField();
-        searchUserIDBtn = new javax.swing.JButton();
+        searchCatIDLabel = new javax.swing.JLabel();
+        inputCatID = new javax.swing.JTextField();
+        searchCatIDBtn = new javax.swing.JButton();
         detailLabel = new javax.swing.JLabel();
         backgroundPanel2 = new javax.swing.JPanel();
-        usernameLabel = new javax.swing.JLabel();
-        emailLabel = new javax.swing.JLabel();
-        contactLabel = new javax.swing.JLabel();
-        addressLabel = new javax.swing.JLabel();
+        catNameLabel = new javax.swing.JLabel();
+        childrenItemLabel = new javax.swing.JLabel();
+        insertImageLabel = new javax.swing.JLabel();
+        descriptionLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        inputAddress = new javax.swing.JTextArea();
-        inputUsername = new javax.swing.JTextField();
-        inputEmail = new javax.swing.JTextField();
-        inputContact = new javax.swing.JTextField();
+        inputDescription = new javax.swing.JTextArea();
+        inputCatName = new javax.swing.JTextField();
+        inputChildrenItem = new javax.swing.JTextField();
         addBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
-        listUserLabel = new javax.swing.JLabel();
+        insertImageBtn = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
+        listUserLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        displayUserTable = new javax.swing.JTable();
+        displayCatTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        userMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
+        jPanel1.setBackground(new java.awt.Color(250, 242, 224));
 
-        userMgmtLabel.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
-        userMgmtLabel.setForeground(new java.awt.Color(76, 43, 24));
-        userMgmtLabel.setText("User Management");
+        categoryMgmtLabel.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
+        categoryMgmtLabel.setForeground(new java.awt.Color(76, 43, 24));
+        categoryMgmtLabel.setText("Category Management");
 
-        searchUserLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        searchUserLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchUserLabel.setText("Search");
+        searchCategoryLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        searchCategoryLabel.setForeground(new java.awt.Color(76, 43, 24));
+        searchCategoryLabel.setText("Search");
 
         backgroundPanel1.setBackground(new java.awt.Color(230, 207, 201));
 
-        searchUserIDLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        searchUserIDLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchUserIDLabel.setText("Enter ID:");
+        searchCatIDLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        searchCatIDLabel.setForeground(new java.awt.Color(76, 43, 24));
+        searchCatIDLabel.setText("Enter ID:");
 
-        inputUserID.setBackground(new java.awt.Color(184, 145, 104));
-        inputUserID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputUserID.setForeground(new java.awt.Color(76, 43, 24));
+        inputCatID.setBackground(new java.awt.Color(184, 145, 104));
+        inputCatID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputCatID.setForeground(new java.awt.Color(76, 43, 24));
 
-        searchUserIDBtn.setBackground(new java.awt.Color(184, 145, 104));
-        searchUserIDBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        searchUserIDBtn.setForeground(new java.awt.Color(76, 43, 24));
-        searchUserIDBtn.setText("Search");
+        searchCatIDBtn.setBackground(new java.awt.Color(184, 145, 104));
+        searchCatIDBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        searchCatIDBtn.setForeground(new java.awt.Color(76, 43, 24));
+        searchCatIDBtn.setText("Search");
 
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
@@ -89,11 +89,11 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(searchUserIDLabel)
+                .addComponent(searchCatIDLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(searchUserIDBtn)
+                .addComponent(inputCatID, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(searchCatIDBtn)
                 .addGap(16, 16, 16))
         );
         backgroundPanel1Layout.setVerticalGroup(
@@ -101,9 +101,9 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchUserIDLabel)
-                    .addComponent(inputUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchUserIDBtn))
+                    .addComponent(searchCatIDLabel)
+                    .addComponent(inputCatID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchCatIDBtn))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -113,41 +113,37 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
 
         backgroundPanel2.setBackground(new java.awt.Color(230, 207, 201));
 
-        usernameLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        usernameLabel.setForeground(new java.awt.Color(76, 43, 24));
-        usernameLabel.setText("Username:");
+        catNameLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        catNameLabel.setForeground(new java.awt.Color(76, 43, 24));
+        catNameLabel.setText("Category Name:");
 
-        emailLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        emailLabel.setForeground(new java.awt.Color(76, 43, 24));
-        emailLabel.setText("Email Address:");
+        childrenItemLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        childrenItemLabel.setForeground(new java.awt.Color(76, 43, 24));
+        childrenItemLabel.setText("Children Items:");
 
-        contactLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        contactLabel.setForeground(new java.awt.Color(76, 43, 24));
-        contactLabel.setText("Contact Number:");
+        insertImageLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        insertImageLabel.setForeground(new java.awt.Color(76, 43, 24));
+        insertImageLabel.setText("Insert Image:");
 
-        addressLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        addressLabel.setForeground(new java.awt.Color(76, 43, 24));
-        addressLabel.setText("Address:");
+        descriptionLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        descriptionLabel.setForeground(new java.awt.Color(76, 43, 24));
+        descriptionLabel.setText("Description:");
 
-        inputAddress.setBackground(new java.awt.Color(184, 145, 104));
-        inputAddress.setColumns(20);
-        inputAddress.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputAddress.setForeground(new java.awt.Color(76, 43, 24));
-        inputAddress.setLineWrap(true);
-        inputAddress.setRows(5);
-        jScrollPane1.setViewportView(inputAddress);
+        inputDescription.setBackground(new java.awt.Color(184, 145, 104));
+        inputDescription.setColumns(20);
+        inputDescription.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputDescription.setForeground(new java.awt.Color(76, 43, 24));
+        inputDescription.setLineWrap(true);
+        inputDescription.setRows(5);
+        jScrollPane1.setViewportView(inputDescription);
 
-        inputUsername.setBackground(new java.awt.Color(184, 145, 104));
-        inputUsername.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputUsername.setForeground(new java.awt.Color(76, 43, 24));
+        inputCatName.setBackground(new java.awt.Color(184, 145, 104));
+        inputCatName.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputCatName.setForeground(new java.awt.Color(76, 43, 24));
 
-        inputEmail.setBackground(new java.awt.Color(184, 145, 104));
-        inputEmail.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputEmail.setForeground(new java.awt.Color(76, 43, 24));
-
-        inputContact.setBackground(new java.awt.Color(184, 145, 104));
-        inputContact.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputContact.setForeground(new java.awt.Color(76, 43, 24));
+        inputChildrenItem.setBackground(new java.awt.Color(184, 145, 104));
+        inputChildrenItem.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputChildrenItem.setForeground(new java.awt.Color(76, 43, 24));
 
         addBtn.setBackground(new java.awt.Color(184, 145, 104));
         addBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -189,6 +185,16 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
             }
         });
 
+        insertImageBtn.setBackground(new java.awt.Color(184, 145, 104));
+        insertImageBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        insertImageBtn.setForeground(new java.awt.Color(76, 43, 24));
+        insertImageBtn.setText("Add Image");
+        insertImageBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertImageBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
         backgroundPanel2Layout.setHorizontalGroup(
@@ -206,16 +212,16 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                         .addComponent(deleteBtn))
                     .addGroup(backgroundPanel2Layout.createSequentialGroup()
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(contactLabel)
-                            .addComponent(emailLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addressLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(childrenItemLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(catNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(descriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(insertImageLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inputUsername)
-                            .addComponent(inputEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                            .addComponent(inputContact)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(inputCatName)
+                            .addComponent(inputChildrenItem, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(insertImageBtn))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         backgroundPanel2Layout.setVerticalGroup(
@@ -223,19 +229,19 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
             .addGroup(backgroundPanel2Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usernameLabel)
-                    .addComponent(inputUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(catNameLabel)
+                    .addComponent(inputCatName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailLabel)
-                    .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(childrenItemLabel)
+                    .addComponent(inputChildrenItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(contactLabel)
-                    .addComponent(inputContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(insertImageLabel)
+                    .addComponent(insertImageBtn))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addressLabel)
+                    .addComponent(descriptionLabel)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -246,109 +252,108 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        listUserLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        listUserLabel.setForeground(new java.awt.Color(76, 43, 24));
-        listUserLabel.setText("List");
-
         backBtn.setBackground(new java.awt.Color(184, 145, 104));
         backBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         backBtn.setForeground(new java.awt.Color(76, 43, 24));
         backBtn.setText("Back");
 
-        displayUserTable.setBackground(new java.awt.Color(230, 207, 201));
-        displayUserTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        displayUserTable.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        displayUserTable.setForeground(new java.awt.Color(76, 43, 24));
-        displayUserTable.setModel(new javax.swing.table.DefaultTableModel(
+        listUserLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        listUserLabel.setForeground(new java.awt.Color(76, 43, 24));
+        listUserLabel.setText("List");
+
+        displayCatTable.setBackground(new java.awt.Color(230, 207, 201));
+        displayCatTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        displayCatTable.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        displayCatTable.setForeground(new java.awt.Color(76, 43, 24));
+        displayCatTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"C0001", "John Doe", "johndoe@example.com", "0123456789", "29, King Street, Queen Lane, 56A7U, London, UK."},
-                {"C0002", "Alvin Doe", "alvindoe@contoh.com", "0198765432", "10, Bishop Lane, Castle Road, 16Y4, London, UK"},
+                {"CAT0001", "Accessory",  new Integer(5), null, "Random Accessories Available"},
+                {"CAT0002", "Food & Beverage",  new Integer(8), null, "Random Food and Beverages Available"},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
             new String [] {
-                "User ID", "Username", "Email Address", "Contact Number", "Address"
+                "Category ID", "Category Name", "Children Items", "Image", "Description"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Long.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        displayUserTable.setGridColor(new java.awt.Color(230, 207, 201));
-        displayUserTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
-        displayUserTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
-        displayUserTable.setShowVerticalLines(true);
-        jScrollPane2.setViewportView(displayUserTable);
+        displayCatTable.setGridColor(new java.awt.Color(230, 207, 201));
+        displayCatTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
+        displayCatTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
+        displayCatTable.setShowVerticalLines(true);
+        jScrollPane2.setViewportView(displayCatTable);
         // Change Table Header Font
-        displayUserTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
+        displayCatTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
 
         // Change Table Column Width
-        TableColumnModel columnModel = displayUserTable.getColumnModel();
+        TableColumnModel columnModel = displayCatTable.getColumnModel();
 
-        columnModel.getColumn(0).setPreferredWidth(75);
-        columnModel.getColumn(1).setPreferredWidth(125);
+        columnModel.getColumn(0).setPreferredWidth(125);
+        columnModel.getColumn(1).setPreferredWidth(150);
         columnModel.getColumn(2).setPreferredWidth(175);
-        columnModel.getColumn(3).setPreferredWidth(150);
-        columnModel.getColumn(4).setPreferredWidth(300);
+        columnModel.getColumn(3).setPreferredWidth(100);
+        columnModel.getColumn(4).setPreferredWidth(275);
 
-        javax.swing.GroupLayout userMgmtPanelLayout = new javax.swing.GroupLayout(userMgmtPanel);
-        userMgmtPanel.setLayout(userMgmtPanelLayout);
-        userMgmtPanelLayout.setHorizontalGroup(
-            userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userMgmtPanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(detailLabel)
-                        .addComponent(searchUserLabel)
-                        .addComponent(userMgmtLabel)
-                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(backBtn))
-                .addGap(39, 39, 39)
-                .addGroup(userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(backBtn))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(categoryMgmtLabel)
+                        .addComponent(searchCategoryLabel)
+                        .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(listUserLabel)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
-        userMgmtPanelLayout.setVerticalGroup(
-            userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userMgmtPanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(userMgmtLabel)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(categoryMgmtLabel)
                 .addGap(18, 18, 18)
-                .addGroup(userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchUserLabel)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchCategoryLabel)
                     .addComponent(listUserLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(userMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(userMgmtPanelLayout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
+                        .addGap(44, 44, 44)
                         .addComponent(detailLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(backBtn)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(userMgmtPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(userMgmtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -370,6 +375,10 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteBtnActionPerformed
 
+    private void insertImageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertImageBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_insertImageBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -387,51 +396,50 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategoryMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategoryMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategoryMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategoryMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserMgmtDisplay().setVisible(true);
+                new CategoryMgmtDisplay().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
-    private javax.swing.JLabel addressLabel;
     private javax.swing.JButton backBtn;
     private javax.swing.JPanel backgroundPanel1;
     private javax.swing.JPanel backgroundPanel2;
-    private javax.swing.JLabel contactLabel;
+    private javax.swing.JLabel catNameLabel;
+    private javax.swing.JLabel categoryMgmtLabel;
+    private javax.swing.JLabel childrenItemLabel;
     private javax.swing.JButton deleteBtn;
+    private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel detailLabel;
-    private javax.swing.JTable displayUserTable;
+    private javax.swing.JTable displayCatTable;
     private javax.swing.JButton editBtn;
-    private javax.swing.JLabel emailLabel;
-    private javax.swing.JTextArea inputAddress;
-    private javax.swing.JTextField inputContact;
-    private javax.swing.JTextField inputEmail;
-    private javax.swing.JTextField inputUserID;
-    private javax.swing.JTextField inputUsername;
+    private javax.swing.JTextField inputCatID;
+    private javax.swing.JTextField inputCatName;
+    private javax.swing.JTextField inputChildrenItem;
+    private javax.swing.JTextArea inputDescription;
+    private javax.swing.JButton insertImageBtn;
+    private javax.swing.JLabel insertImageLabel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel listUserLabel;
     private javax.swing.JButton saveBtn;
-    private javax.swing.JButton searchUserIDBtn;
-    private javax.swing.JLabel searchUserIDLabel;
-    private javax.swing.JLabel searchUserLabel;
-    private javax.swing.JLabel userMgmtLabel;
-    private javax.swing.JPanel userMgmtPanel;
-    private javax.swing.JLabel usernameLabel;
+    private javax.swing.JButton searchCatIDBtn;
+    private javax.swing.JLabel searchCatIDLabel;
+    private javax.swing.JLabel searchCategoryLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -23,20 +23,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="userMgmtPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="userMgmtPanel" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="userMgmtPanel">
+    <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e0" green="f2" red="fa" type="rgb"/>
@@ -47,56 +44,58 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="detailLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="searchUserLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="userMgmtLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="backgroundPanel2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="backgroundPanel1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="detailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="backgroundPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="backBtn" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="backBtn" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="categoryMgmtLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="searchCategoryLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="backgroundPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="listUserLabel" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="640" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                  <EmptySpace pref="36" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="userMgmtLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="categoryMgmtLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="searchUserLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="searchCategoryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="listUserLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="backgroundPanel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                           <Component id="detailLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="backgroundPanel2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane2" min="-2" pref="427" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="441" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="backBtn" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="19" max="32767" attributes="0"/>
+                  <EmptySpace pref="8" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="userMgmtLabel">
+        <Component class="javax.swing.JLabel" name="categoryMgmtLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat" size="24" style="1"/>
@@ -104,10 +103,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="18" green="2b" red="4c" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="User Management"/>
+            <Property name="text" type="java.lang.String" value="Category Management"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="searchUserLabel">
+        <Component class="javax.swing.JLabel" name="searchCategoryLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat" size="18" style="1"/>
@@ -130,11 +129,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="searchUserIDLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="searchCatIDLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="inputUserID" min="-2" pref="143" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="searchUserIDBtn" min="-2" max="-2" attributes="0"/>
+                      <Component id="inputCatID" min="-2" pref="143" max="-2" attributes="0"/>
+                      <EmptySpace pref="40" max="32767" attributes="0"/>
+                      <Component id="searchCatIDBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -144,9 +143,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="searchUserIDLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputUserID" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="searchUserIDBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="searchCatIDLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputCatID" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="searchCatIDBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="15" max="32767" attributes="0"/>
                   </Group>
@@ -154,7 +153,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="searchUserIDLabel">
+            <Component class="javax.swing.JLabel" name="searchCatIDLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Karla" size="14" style="0"/>
@@ -165,7 +164,7 @@
                 <Property name="text" type="java.lang.String" value="Enter ID:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="inputUserID">
+            <Component class="javax.swing.JTextField" name="inputCatID">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="68" green="91" red="b8" type="rgb"/>
@@ -178,7 +177,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="searchUserIDBtn">
+            <Component class="javax.swing.JButton" name="searchCatIDBtn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="68" green="91" red="b8" type="rgb"/>
@@ -218,7 +217,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="addBtn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="editBtn" min="-2" max="-2" attributes="0"/>
@@ -227,19 +226,19 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="deleteBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="contactLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="emailLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="usernameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="addressLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="childrenItemLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="catNameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="descriptionLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="insertImageLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="inputUsername" max="32767" attributes="0"/>
-                                  <Component id="inputEmail" alignment="0" pref="208" max="32767" attributes="0"/>
-                                  <Component id="inputContact" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="inputCatName" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="inputChildrenItem" alignment="0" pref="208" max="32767" attributes="0"/>
                                   <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="insertImageBtn" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -252,23 +251,23 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="usernameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputUsername" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="catNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputCatName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="emailLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="childrenItemLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputChildrenItem" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="contactLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputContact" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="insertImageLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="insertImageBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="addressLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="descriptionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="47" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -283,7 +282,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="usernameLabel">
+            <Component class="javax.swing.JLabel" name="catNameLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Karla" size="14" style="0"/>
@@ -291,10 +290,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Username:"/>
+                <Property name="text" type="java.lang.String" value="Category Name:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="emailLabel">
+            <Component class="javax.swing.JLabel" name="childrenItemLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Karla" size="14" style="0"/>
@@ -302,10 +301,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Email Address:"/>
+                <Property name="text" type="java.lang.String" value="Children Items:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="contactLabel">
+            <Component class="javax.swing.JLabel" name="insertImageLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Karla" size="14" style="0"/>
@@ -313,10 +312,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Contact Number:"/>
+                <Property name="text" type="java.lang.String" value="Insert Image:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="addressLabel">
+            <Component class="javax.swing.JLabel" name="descriptionLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Karla" size="14" style="0"/>
@@ -324,7 +323,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Address:"/>
+                <Property name="text" type="java.lang.String" value="Description:"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -334,7 +333,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="inputAddress">
+                <Component class="javax.swing.JTextArea" name="inputDescription">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="68" green="91" red="b8" type="rgb"/>
@@ -352,7 +351,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JTextField" name="inputUsername">
+            <Component class="javax.swing.JTextField" name="inputCatName">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="68" green="91" red="b8" type="rgb"/>
@@ -365,20 +364,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="inputEmail">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="68" green="91" red="b8" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Karla" size="14" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="18" green="2b" red="4c" type="rgb"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="inputContact">
+            <Component class="javax.swing.JTextField" name="inputChildrenItem">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="68" green="91" red="b8" type="rgb"/>
@@ -459,19 +445,25 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteBtnActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="insertImageBtn">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="68" green="91" red="b8" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Montserrat" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="18" green="2b" red="4c" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Add Image"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="insertImageBtnActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="listUserLabel">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Montserrat" size="18" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="18" green="2b" red="4c" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="List"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="backBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -486,6 +478,17 @@
             <Property name="text" type="java.lang.String" value="Back"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="listUserLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Montserrat" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="18" green="2b" red="4c" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="List"/>
+          </Properties>
+        </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -493,7 +496,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="displayUserTable">
+            <Component class="javax.swing.JTable" name="displayCatTable">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="c9" green="cf" red="e6" type="rgb"/>
@@ -511,66 +514,32 @@
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="4">
-                    <Column editable="true" title="User ID" type="java.lang.String">
-                      <Data value="C0001"/>
-                      <Data value="C0002"/>
+                    <Column editable="true" title="Category ID" type="java.lang.String">
+                      <Data value="CAT0001"/>
+                      <Data value="CAT0002"/>
                       <Data value="null"/>
                       <Data value="null"/>
                     </Column>
-                    <Column editable="true" title="Username" type="java.lang.String">
-                      <Data value="John Doe"/>
-                      <Data value="Alvin Doe"/>
+                    <Column editable="true" title="Category Name" type="java.lang.String">
+                      <Data value="Accessory"/>
+                      <Data value="Food &amp; Beverage"/>
                       <Data value="null"/>
                       <Data value="null"/>
                     </Column>
-                    <Column editable="true" title="Email Address" type="java.lang.String">
-                      <Data value="johndoe@example.com"/>
-                      <Data value="alvindoe@contoh.com"/>
+                    <Column editable="true" title="Children Items" type="java.lang.Integer">
+                      <Data value="5"/>
+                      <Data value="8"/>
                       <Data value="null"/>
                       <Data value="null"/>
                     </Column>
-                    <Column editable="true" title="Contact Number" type="java.lang.String">
-                      <Data value="0123456789"/>
-                      <Data value="0198765432"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Address" type="java.lang.String">
-                      <Data value="29, King Street, Queen Lane, 56A7U, London, UK."/>
-                      <Data value="10, Bishop Lane, Castle Road, 16Y4, London, UK"/>
+                    <Column editable="true" title="Image" type="java.lang.Long"/>
+                    <Column editable="true" title="Description" type="java.lang.String">
+                      <Data value="Random Accessories Available"/>
+                      <Data value="Random Food and Beverages Available"/>
                       <Data value="null"/>
                       <Data value="null"/>
                     </Column>
                   </Table>
-                </Property>
-                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                  <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                  </TableColumnModel>
                 </Property>
                 <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="c9" green="cf" red="e6" type="rgb"/>
@@ -587,7 +556,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="// Change Table Header Font&#xa;displayUserTable.getTableHeader().setFont(new Font(&quot;Karla&quot;, Font.PLAIN, 14));&#xa;&#xa;// Change Table Column Width&#xa;TableColumnModel columnModel = displayUserTable.getColumnModel();&#xa;&#xa;columnModel.getColumn(0).setPreferredWidth(75);&#xa;columnModel.getColumn(1).setPreferredWidth(125);&#xa;columnModel.getColumn(2).setPreferredWidth(175);&#xa;columnModel.getColumn(3).setPreferredWidth(150);&#xa;columnModel.getColumn(4).setPreferredWidth(300);"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="// Change Table Header Font&#xa;displayCatTable.getTableHeader().setFont(new Font(&quot;Karla&quot;, Font.PLAIN, 14));&#xa;&#xa;// Change Table Column Width&#xa;TableColumnModel columnModel = displayCatTable.getColumnModel();&#xa;&#xa;columnModel.getColumn(0).setPreferredWidth(125);&#xa;columnModel.getColumn(1).setPreferredWidth(150);&#xa;columnModel.getColumn(2).setPreferredWidth(175);&#xa;columnModel.getColumn(3).setPreferredWidth(100);&#xa;columnModel.getColumn(4).setPreferredWidth(275);"/>
               </AuxValues>
             </Component>
           </SubComponents>
