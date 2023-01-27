@@ -11,12 +11,12 @@ import javax.swing.table.TableColumnModel;
  *
  * @author User
  */
-public class CategoryMgmtDisplay extends javax.swing.JFrame {
+public class ItemMgmtDisplay extends javax.swing.JFrame {
 
     /**
-     * Creates new form CategoryMgmtDisplay
+     * Creates new form ItemMgmtDisplay
      */
-    public CategoryMgmtDisplay() {
+    public ItemMgmtDisplay() {
         initComponents();
     }
 
@@ -29,59 +29,61 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        categoryMgmtPanel = new javax.swing.JPanel();
-        categoryMgmtLabel = new javax.swing.JLabel();
-        searchCategoryLabel = new javax.swing.JLabel();
+        itemMgmtPanel = new javax.swing.JPanel();
+        itemMgmtLabel = new javax.swing.JLabel();
+        searchItemLabel = new javax.swing.JLabel();
         backgroundPanel1 = new javax.swing.JPanel();
-        searchCatIDLabel = new javax.swing.JLabel();
-        inputCatID = new javax.swing.JTextField();
-        searchCatIDBtn = new javax.swing.JButton();
+        searchItemIDLabel = new javax.swing.JLabel();
+        inputItemID = new javax.swing.JTextField();
+        searchItemIDBtn = new javax.swing.JButton();
         detailLabel = new javax.swing.JLabel();
         backgroundPanel2 = new javax.swing.JPanel();
-        catNameLabel = new javax.swing.JLabel();
-        childrenItemLabel = new javax.swing.JLabel();
+        itemNameLabel = new javax.swing.JLabel();
+        priceLabel = new javax.swing.JLabel();
         insertImageLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inputDescription = new javax.swing.JTextArea();
-        inputCatName = new javax.swing.JTextField();
-        inputChildrenItem = new javax.swing.JTextField();
+        inputItemName = new javax.swing.JTextField();
+        inputPrice = new javax.swing.JTextField();
         addBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         insertImageBtn = new javax.swing.JButton();
+        itemCategoryLabel = new javax.swing.JLabel();
+        inputItemCategory = new javax.swing.JComboBox<>();
         backBtn = new javax.swing.JButton();
-        listCatLabel = new javax.swing.JLabel();
+        listItemLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        displayCatTable = new javax.swing.JTable();
+        displayItemTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        categoryMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
+        itemMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
 
-        categoryMgmtLabel.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
-        categoryMgmtLabel.setForeground(new java.awt.Color(76, 43, 24));
-        categoryMgmtLabel.setText("Category Management");
+        itemMgmtLabel.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
+        itemMgmtLabel.setForeground(new java.awt.Color(76, 43, 24));
+        itemMgmtLabel.setText("Item Management");
 
-        searchCategoryLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        searchCategoryLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchCategoryLabel.setText("Search");
+        searchItemLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        searchItemLabel.setForeground(new java.awt.Color(76, 43, 24));
+        searchItemLabel.setText("Search");
 
         backgroundPanel1.setBackground(new java.awt.Color(230, 207, 201));
 
-        searchCatIDLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        searchCatIDLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchCatIDLabel.setText("Enter ID:");
+        searchItemIDLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        searchItemIDLabel.setForeground(new java.awt.Color(76, 43, 24));
+        searchItemIDLabel.setText("Enter ID:");
 
-        inputCatID.setBackground(new java.awt.Color(184, 145, 104));
-        inputCatID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputCatID.setForeground(new java.awt.Color(76, 43, 24));
+        inputItemID.setBackground(new java.awt.Color(184, 145, 104));
+        inputItemID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputItemID.setForeground(new java.awt.Color(76, 43, 24));
 
-        searchCatIDBtn.setBackground(new java.awt.Color(184, 145, 104));
-        searchCatIDBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        searchCatIDBtn.setForeground(new java.awt.Color(76, 43, 24));
-        searchCatIDBtn.setText("Search");
+        searchItemIDBtn.setBackground(new java.awt.Color(184, 145, 104));
+        searchItemIDBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        searchItemIDBtn.setForeground(new java.awt.Color(76, 43, 24));
+        searchItemIDBtn.setText("Search");
 
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
@@ -89,11 +91,11 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(searchCatIDLabel)
+                .addComponent(searchItemIDLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputCatID, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputItemID, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(searchCatIDBtn)
+                .addComponent(searchItemIDBtn)
                 .addGap(16, 16, 16))
         );
         backgroundPanel1Layout.setVerticalGroup(
@@ -101,9 +103,9 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchCatIDLabel)
-                    .addComponent(inputCatID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchCatIDBtn))
+                    .addComponent(searchItemIDLabel)
+                    .addComponent(inputItemID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchItemIDBtn))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -113,13 +115,13 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
 
         backgroundPanel2.setBackground(new java.awt.Color(230, 207, 201));
 
-        catNameLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        catNameLabel.setForeground(new java.awt.Color(76, 43, 24));
-        catNameLabel.setText("Category Name:");
+        itemNameLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        itemNameLabel.setForeground(new java.awt.Color(76, 43, 24));
+        itemNameLabel.setText("Item Name:");
 
-        childrenItemLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        childrenItemLabel.setForeground(new java.awt.Color(76, 43, 24));
-        childrenItemLabel.setText("Children Items:");
+        priceLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        priceLabel.setForeground(new java.awt.Color(76, 43, 24));
+        priceLabel.setText("Price (RM):");
 
         insertImageLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         insertImageLabel.setForeground(new java.awt.Color(76, 43, 24));
@@ -137,13 +139,13 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         inputDescription.setRows(5);
         jScrollPane1.setViewportView(inputDescription);
 
-        inputCatName.setBackground(new java.awt.Color(184, 145, 104));
-        inputCatName.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputCatName.setForeground(new java.awt.Color(76, 43, 24));
+        inputItemName.setBackground(new java.awt.Color(184, 145, 104));
+        inputItemName.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputItemName.setForeground(new java.awt.Color(76, 43, 24));
 
-        inputChildrenItem.setBackground(new java.awt.Color(184, 145, 104));
-        inputChildrenItem.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputChildrenItem.setForeground(new java.awt.Color(76, 43, 24));
+        inputPrice.setBackground(new java.awt.Color(184, 145, 104));
+        inputPrice.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputPrice.setForeground(new java.awt.Color(76, 43, 24));
 
         addBtn.setBackground(new java.awt.Color(184, 145, 104));
         addBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -195,6 +197,15 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
             }
         });
 
+        itemCategoryLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        itemCategoryLabel.setForeground(new java.awt.Color(76, 43, 24));
+        itemCategoryLabel.setText("Category:");
+
+        inputItemCategory.setBackground(new java.awt.Color(184, 145, 104));
+        inputItemCategory.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputItemCategory.setForeground(new java.awt.Color(76, 43, 24));
+        inputItemCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accessory", "Food & Beverages" }));
+
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
         backgroundPanel2Layout.setHorizontalGroup(
@@ -212,16 +223,18 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
                         .addComponent(deleteBtn))
                     .addGroup(backgroundPanel2Layout.createSequentialGroup()
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(childrenItemLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(catNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(priceLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(itemNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(descriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(insertImageLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(insertImageLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(itemCategoryLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inputCatName)
-                            .addComponent(inputChildrenItem, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                            .addComponent(inputPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(insertImageBtn))))
+                            .addComponent(insertImageBtn)
+                            .addComponent(inputItemName)
+                            .addComponent(inputItemCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         backgroundPanel2Layout.setVerticalGroup(
@@ -229,27 +242,34 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
             .addGroup(backgroundPanel2Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(catNameLabel)
-                    .addComponent(inputCatName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(itemNameLabel)
+                    .addComponent(inputItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(childrenItemLabel)
-                    .addComponent(inputChildrenItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(priceLabel)
+                    .addComponent(inputPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(itemCategoryLabel)
+                    .addComponent(inputItemCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(insertImageLabel)
                     .addComponent(insertImageBtn))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(descriptionLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addBtn)
-                    .addComponent(editBtn)
-                    .addComponent(saveBtn)
-                    .addComponent(deleteBtn))
-                .addGap(14, 14, 14))
+                    .addGroup(backgroundPanel2Layout.createSequentialGroup()
+                        .addComponent(descriptionLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addBtn)
+                            .addComponent(editBtn)
+                            .addComponent(saveBtn)
+                            .addComponent(deleteBtn))
+                        .addGap(14, 14, 14))
+                    .addGroup(backgroundPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(93, Short.MAX_VALUE))))
         );
 
         backBtn.setBackground(new java.awt.Color(184, 145, 104));
@@ -257,103 +277,104 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         backBtn.setForeground(new java.awt.Color(76, 43, 24));
         backBtn.setText("Back");
 
-        listCatLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        listCatLabel.setForeground(new java.awt.Color(76, 43, 24));
-        listCatLabel.setText("List");
+        listItemLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        listItemLabel.setForeground(new java.awt.Color(76, 43, 24));
+        listItemLabel.setText("List");
 
-        displayCatTable.setBackground(new java.awt.Color(230, 207, 201));
-        displayCatTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        displayCatTable.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        displayCatTable.setForeground(new java.awt.Color(76, 43, 24));
-        displayCatTable.setModel(new javax.swing.table.DefaultTableModel(
+        displayItemTable.setBackground(new java.awt.Color(230, 207, 201));
+        displayItemTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        displayItemTable.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        displayItemTable.setForeground(new java.awt.Color(76, 43, 24));
+        displayItemTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"CAT0001", "Accessory",  new Integer(5), null, "Random Accessories Available"},
-                {"CAT0002", "Food & Beverage",  new Integer(8), null, "Random Food and Beverages Available"},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {"AC0001", "Fountain Pen", "Accessory", null, "High-class fountain pen. Black ink.",  new Integer(599)},
+                {"FB0001", "Premium Abalone", "Food & Beverages", null, "Imported from Shandong, China.",  new Integer(79)},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Category ID", "Category Name", "Children Items", "Image", "Description"
+                "Item ID", "Item Name", "Category", "Image", "Description", "Price"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Long.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        displayCatTable.setGridColor(new java.awt.Color(230, 207, 201));
-        displayCatTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
-        displayCatTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
-        displayCatTable.setShowVerticalLines(true);
-        jScrollPane2.setViewportView(displayCatTable);
+        displayItemTable.setGridColor(new java.awt.Color(230, 207, 201));
+        displayItemTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
+        displayItemTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
+        displayItemTable.setShowVerticalLines(true);
+        jScrollPane2.setViewportView(displayItemTable);
         // Change Table Header Font
-        displayCatTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
+        displayItemTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
 
         // Change Table Column Width
-        TableColumnModel columnModel = displayCatTable.getColumnModel();
+        TableColumnModel columnModel = displayItemTable.getColumnModel();
 
-        columnModel.getColumn(0).setPreferredWidth(125);
+        columnModel.getColumn(0).setPreferredWidth(100);
         columnModel.getColumn(1).setPreferredWidth(150);
-        columnModel.getColumn(2).setPreferredWidth(175);
+        columnModel.getColumn(2).setPreferredWidth(200);
         columnModel.getColumn(3).setPreferredWidth(100);
         columnModel.getColumn(4).setPreferredWidth(275);
+        columnModel.getColumn(5).setPreferredWidth(75);
 
-        javax.swing.GroupLayout categoryMgmtPanelLayout = new javax.swing.GroupLayout(categoryMgmtPanel);
-        categoryMgmtPanel.setLayout(categoryMgmtPanelLayout);
-        categoryMgmtPanelLayout.setHorizontalGroup(
-            categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(categoryMgmtPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        javax.swing.GroupLayout itemMgmtPanelLayout = new javax.swing.GroupLayout(itemMgmtPanel);
+        itemMgmtPanel.setLayout(itemMgmtPanelLayout);
+        itemMgmtPanelLayout.setHorizontalGroup(
+            itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(itemMgmtPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(detailLabel)
                         .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(backBtn))
-                    .addGroup(categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(categoryMgmtLabel)
-                        .addComponent(searchCategoryLabel)
+                    .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(itemMgmtLabel)
+                        .addComponent(searchItemLabel)
                         .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
-                .addGroup(categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(listCatLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(listItemLabel)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
-        categoryMgmtPanelLayout.setVerticalGroup(
-            categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(categoryMgmtPanelLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(categoryMgmtLabel)
-                .addGap(18, 18, 18)
-                .addGroup(categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchCategoryLabel)
-                    .addComponent(listCatLabel))
+        itemMgmtPanelLayout.setVerticalGroup(
+            itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemMgmtPanelLayout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(itemMgmtLabel)
+                .addGap(14, 14, 14)
+                .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchItemLabel)
+                    .addComponent(listItemLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(categoryMgmtPanelLayout.createSequentialGroup()
+                .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(itemMgmtPanelLayout.createSequentialGroup()
                         .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addGap(36, 36, 36)
                         .addComponent(detailLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(backBtn)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(categoryMgmtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(itemMgmtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(categoryMgmtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(itemMgmtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -396,20 +417,20 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CategoryMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ItemMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CategoryMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ItemMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CategoryMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ItemMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CategoryMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ItemMgmtDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CategoryMgmtDisplay().setVisible(true);
+                new ItemMgmtDisplay().setVisible(true);
             }
         });
     }
@@ -419,27 +440,29 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JButton backBtn;
     private javax.swing.JPanel backgroundPanel1;
     private javax.swing.JPanel backgroundPanel2;
-    private javax.swing.JLabel catNameLabel;
-    private javax.swing.JLabel categoryMgmtLabel;
-    private javax.swing.JPanel categoryMgmtPanel;
-    private javax.swing.JLabel childrenItemLabel;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel detailLabel;
-    private javax.swing.JTable displayCatTable;
+    private javax.swing.JTable displayItemTable;
     private javax.swing.JButton editBtn;
-    private javax.swing.JTextField inputCatID;
-    private javax.swing.JTextField inputCatName;
-    private javax.swing.JTextField inputChildrenItem;
     private javax.swing.JTextArea inputDescription;
+    private javax.swing.JComboBox<String> inputItemCategory;
+    private javax.swing.JTextField inputItemID;
+    private javax.swing.JTextField inputItemName;
+    private javax.swing.JTextField inputPrice;
     private javax.swing.JButton insertImageBtn;
     private javax.swing.JLabel insertImageLabel;
+    private javax.swing.JLabel itemCategoryLabel;
+    private javax.swing.JLabel itemMgmtLabel;
+    private javax.swing.JPanel itemMgmtPanel;
+    private javax.swing.JLabel itemNameLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel listCatLabel;
+    private javax.swing.JLabel listItemLabel;
+    private javax.swing.JLabel priceLabel;
     private javax.swing.JButton saveBtn;
-    private javax.swing.JButton searchCatIDBtn;
-    private javax.swing.JLabel searchCatIDLabel;
-    private javax.swing.JLabel searchCategoryLabel;
+    private javax.swing.JButton searchItemIDBtn;
+    private javax.swing.JLabel searchItemIDLabel;
+    private javax.swing.JLabel searchItemLabel;
     // End of variables declaration//GEN-END:variables
 }
