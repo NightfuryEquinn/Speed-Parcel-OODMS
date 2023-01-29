@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package oodms.general;
 
-/**
- *
- * @author User
- */
 public class WelcomePage extends javax.swing.JFrame {
 
     /**
@@ -16,6 +8,12 @@ public class WelcomePage extends javax.swing.JFrame {
     public WelcomePage() {
         initComponents();
     }
+    
+    /**
+     * Global variable
+     */
+    // Boolean for login or signup
+    boolean checkLogin = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,20 +29,20 @@ public class WelcomePage extends javax.swing.JFrame {
         loginBtn = new javax.swing.JButton();
         signupBtn = new javax.swing.JButton();
         usernameLabel = new javax.swing.JLabel();
-        usernameLabel1 = new javax.swing.JLabel();
-        usernameLabel2 = new javax.swing.JLabel();
-        usernameLabel3 = new javax.swing.JLabel();
-        usernameLabel4 = new javax.swing.JLabel();
-        usernameLabel5 = new javax.swing.JLabel();
+        passwordLabel = new javax.swing.JLabel();
+        confirmPasswordLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        contactLabel = new javax.swing.JLabel();
+        addressLabel = new javax.swing.JLabel();
         proceedBtn = new javax.swing.JButton();
         inputUsername = new javax.swing.JTextField();
         inputEmail = new javax.swing.JTextField();
         inputContact = new javax.swing.JTextField();
-        guestBtn = new javax.swing.JLabel();
         inputPassword = new javax.swing.JPasswordField();
         inputConfirmPassword = new javax.swing.JPasswordField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        inputAddressScrollPanel = new javax.swing.JScrollPane();
         inputAddress = new javax.swing.JTextArea();
+        guestBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Welcome to Speed Parcel");
@@ -80,25 +78,25 @@ public class WelcomePage extends javax.swing.JFrame {
         usernameLabel.setForeground(new java.awt.Color(76, 43, 24));
         usernameLabel.setText("Username:");
 
-        usernameLabel1.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        usernameLabel1.setForeground(new java.awt.Color(76, 43, 24));
-        usernameLabel1.setText("Password:");
+        passwordLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        passwordLabel.setForeground(new java.awt.Color(76, 43, 24));
+        passwordLabel.setText("Password:");
 
-        usernameLabel2.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        usernameLabel2.setForeground(new java.awt.Color(76, 43, 24));
-        usernameLabel2.setText("Confirm Password:");
+        confirmPasswordLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        confirmPasswordLabel.setForeground(new java.awt.Color(76, 43, 24));
+        confirmPasswordLabel.setText("Confirm Password:");
 
-        usernameLabel3.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        usernameLabel3.setForeground(new java.awt.Color(76, 43, 24));
-        usernameLabel3.setText("Email Address:");
+        emailLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        emailLabel.setForeground(new java.awt.Color(76, 43, 24));
+        emailLabel.setText("Email Address:");
 
-        usernameLabel4.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        usernameLabel4.setForeground(new java.awt.Color(76, 43, 24));
-        usernameLabel4.setText("Contact Number:");
+        contactLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        contactLabel.setForeground(new java.awt.Color(76, 43, 24));
+        contactLabel.setText("Contact Number:");
 
-        usernameLabel5.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        usernameLabel5.setForeground(new java.awt.Color(76, 43, 24));
-        usernameLabel5.setText("Address:");
+        addressLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        addressLabel.setForeground(new java.awt.Color(76, 43, 24));
+        addressLabel.setText("Address:");
 
         proceedBtn.setBackground(new java.awt.Color(184, 145, 104));
         proceedBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -113,33 +111,44 @@ public class WelcomePage extends javax.swing.JFrame {
         inputUsername.setBackground(new java.awt.Color(230, 207, 201));
         inputUsername.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputUsername.setForeground(new java.awt.Color(76, 43, 24));
+        inputUsername.setMinimumSize(new java.awt.Dimension(274, 23));
 
         inputEmail.setBackground(new java.awt.Color(230, 207, 201));
         inputEmail.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputEmail.setForeground(new java.awt.Color(76, 43, 24));
+        inputEmail.setMinimumSize(new java.awt.Dimension(274, 23));
 
         inputContact.setBackground(new java.awt.Color(230, 207, 201));
         inputContact.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputContact.setForeground(new java.awt.Color(76, 43, 24));
-
-        guestBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        guestBtn.setForeground(new java.awt.Color(76, 43, 24));
-        guestBtn.setText("Guest");
+        inputContact.setMinimumSize(new java.awt.Dimension(274, 23));
 
         inputPassword.setBackground(new java.awt.Color(230, 207, 201));
         inputPassword.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputPassword.setForeground(new java.awt.Color(76, 43, 24));
+        inputPassword.setMinimumSize(new java.awt.Dimension(274, 23));
 
         inputConfirmPassword.setBackground(new java.awt.Color(230, 207, 201));
         inputConfirmPassword.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputConfirmPassword.setForeground(new java.awt.Color(76, 43, 24));
+        inputConfirmPassword.setMinimumSize(new java.awt.Dimension(274, 23));
 
         inputAddress.setBackground(new java.awt.Color(230, 207, 201));
         inputAddress.setColumns(20);
         inputAddress.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputAddress.setLineWrap(true);
         inputAddress.setRows(5);
-        jScrollPane1.setViewportView(inputAddress);
+        inputAddressScrollPanel.setViewportView(inputAddress);
+
+        guestBtn.setBackground(new java.awt.Color(184, 145, 104));
+        guestBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        guestBtn.setForeground(new java.awt.Color(76, 43, 24));
+        guestBtn.setText("Guest");
+        guestBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guestBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout welcomePanelLayout = new javax.swing.GroupLayout(welcomePanel);
         welcomePanel.setLayout(welcomePanelLayout);
@@ -158,25 +167,27 @@ public class WelcomePage extends javax.swing.JFrame {
                         .addComponent(signupBtn))
                     .addGroup(welcomePanelLayout.createSequentialGroup()
                         .addGap(210, 210, 210)
-                        .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(usernameLabel2)
-                            .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(usernameLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(usernameLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(usernameLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(usernameLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(confirmPasswordLabel)
+                                .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(emailLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(contactLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(addressLabel))
                         .addGap(18, 18, 18)
                         .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inputUsername)
-                            .addComponent(inputEmail)
-                            .addComponent(inputContact, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputPassword)
-                            .addComponent(inputConfirmPassword)
-                            .addComponent(proceedBtn)
-                            .addGroup(welcomePanelLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(guestBtn))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(inputEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inputContact, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inputPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inputConfirmPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inputAddressScrollPanel)
+                            .addComponent(inputUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(welcomePanelLayout.createSequentialGroup()
+                        .addGap(284, 284, 284)
+                        .addComponent(proceedBtn)
+                        .addGap(77, 77, 77)
+                        .addComponent(guestBtn)))
                 .addContainerGap(178, Short.MAX_VALUE))
         );
         welcomePanelLayout.setVerticalGroup(
@@ -194,29 +205,29 @@ public class WelcomePage extends javax.swing.JFrame {
                     .addComponent(inputUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usernameLabel1)
+                    .addComponent(passwordLabel)
                     .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usernameLabel2)
+                    .addComponent(confirmPasswordLabel)
                     .addComponent(inputConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usernameLabel3)
+                    .addComponent(emailLabel)
                     .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usernameLabel4)
+                    .addComponent(contactLabel)
                     .addComponent(inputContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(usernameLabel5)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(proceedBtn)
-                .addGap(18, 18, 18)
-                .addComponent(guestBtn)
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(addressLabel)
+                    .addComponent(inputAddressScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(proceedBtn)
+                    .addComponent(guestBtn))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -234,16 +245,52 @@ public class WelcomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupBtnActionPerformed
-        // TODO add your handling code here:
+        // Check login boolean
+        checkLogin = false;
+
+        // Hide Label
+        confirmPasswordLabel.setVisible(true);
+        emailLabel.setVisible(true);
+        contactLabel.setVisible(true);
+        addressLabel.setVisible(true);
+        
+        // Hide Input
+        inputConfirmPassword.setVisible(true);
+        inputEmail.setVisible(true);
+        inputContact.setVisible(true);
+        inputAddressScrollPanel.setVisible(true);
+        inputAddress.setVisible(true);
     }//GEN-LAST:event_signupBtnActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        // TODO add your handling code here:
+        // Check login boolean
+        checkLogin = true;
+
+        // Show Label
+        confirmPasswordLabel.setVisible(false);
+        emailLabel.setVisible(false);
+        contactLabel.setVisible(false);
+        addressLabel.setVisible(false);
+        
+        // Show Input
+        inputConfirmPassword.setVisible(false);
+        inputEmail.setVisible(false);
+        inputContact.setVisible(false);
+        inputAddressScrollPanel.setVisible(false);
+        inputAddress.setVisible(false);
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void proceedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedBtnActionPerformed
-        // TODO add your handling code here:
+        if(checkLogin) {
+            System.out.println("Login");
+        } else {
+            System.out.println("Signup");
+        }
     }//GEN-LAST:event_proceedBtnActionPerformed
+
+    private void guestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guestBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_guestBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,23 +328,23 @@ public class WelcomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel guestBtn;
+    private javax.swing.JLabel addressLabel;
+    private javax.swing.JLabel confirmPasswordLabel;
+    private javax.swing.JLabel contactLabel;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JButton guestBtn;
     private javax.swing.JTextArea inputAddress;
+    private javax.swing.JScrollPane inputAddressScrollPanel;
     private javax.swing.JPasswordField inputConfirmPassword;
     private javax.swing.JTextField inputContact;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JPasswordField inputPassword;
     private javax.swing.JTextField inputUsername;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton loginBtn;
+    private javax.swing.JLabel passwordLabel;
     private javax.swing.JButton proceedBtn;
     private javax.swing.JButton signupBtn;
     private javax.swing.JLabel usernameLabel;
-    private javax.swing.JLabel usernameLabel1;
-    private javax.swing.JLabel usernameLabel2;
-    private javax.swing.JLabel usernameLabel3;
-    private javax.swing.JLabel usernameLabel4;
-    private javax.swing.JLabel usernameLabel5;
     private javax.swing.JLabel welcomeLabel;
     private javax.swing.JPanel welcomePanel;
     // End of variables declaration//GEN-END:variables
