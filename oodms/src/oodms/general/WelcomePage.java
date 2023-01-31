@@ -1,5 +1,10 @@
 package oodms.general;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class WelcomePage extends javax.swing.JFrame {
 
     /**
@@ -283,13 +288,14 @@ public class WelcomePage extends javax.swing.JFrame {
     private void proceedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedBtnActionPerformed
         if(checkLogin) {
             System.out.println("Login");
+            
         } else {
             System.out.println("Signup");
         }
     }//GEN-LAST:event_proceedBtnActionPerformed
 
     private void guestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guestBtnActionPerformed
-        // TODO add your handling code here:
+        System.out.println("You are now a guest.");
     }//GEN-LAST:event_guestBtnActionPerformed
 
     /**
