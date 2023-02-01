@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class encapsulation_welcomePage {
 
@@ -17,23 +17,32 @@ public class encapsulation_welcomePage {
             // Read file
             BufferedReader br = new BufferedReader(new InputStreamReader(dataFile));
             
-            // Get Number of Lines in File
-            LineNumberReader lnr = new LineNumberReader(new InputStreamReader(dataFile));
+            getFileLineNumber lineLength = new getFileLineNumber();
+            int lineCount = lineLength.countFileLineNumber("/oodms/database/credentialsData.txt");
             
-            int lineLength = lnr.getLineNumber();
-
             // Create Array in Array
-            String credentials;
+            String[] credentialsData;
+            String[][] credentialsArr = new String[lineCount][2];
             
-            credentials = br.readLine();
+            String line;
+            int pass = 0;
             
-            String[] credentialsData = credentials.split("\\s\\|\\s");
+            while((line = br.readLine()) != null) {
+                credentialsData = line.split("\\s\\|\\s");
+
+                for(int i = 0; i < credentialsData.length; i++) {
+                    credentialsArr[pass][i] = credentialsData[i];
+                }
+                
+                pass++;
+            }
+
+            System.out.println(Arrays.deepToString(credentialsArr));
             
-            String[][] credentialsArr = new String[lineLength][2];
         }
         
         catch(IOException e) {
-            
+            System.out.println("Error");
         }
     }
 }
