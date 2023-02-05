@@ -1,9 +1,6 @@
 package oodms.general;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import oodms.oop.CheckUsernamePassword;
 
 public class WelcomePage extends javax.swing.JFrame {
 
@@ -288,9 +285,37 @@ public class WelcomePage extends javax.swing.JFrame {
     private void proceedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedBtnActionPerformed
         if(checkLogin) {
             System.out.println("Login");
-            
         } else {
             System.out.println("Signup");
+            
+            // Set input from user
+            String getUsername = inputUsername.getText();
+            
+            char[] targetPassword = inputPassword.getPassword();
+            String getPassword = new String(targetPassword);
+            
+            char[] targetConfirmPassword = inputConfirmPassword.getPassword();
+            String getConfirmPassword = new String(targetConfirmPassword);
+            
+            String getEmail = inputEmail.getText();
+            
+            String getContact = inputContact.getText();
+            
+            String getAddress = inputAddress.getText();
+            
+            CheckUsernamePassword checkNewUser = new CheckUsernamePassword();
+            boolean credentialsChecker = checkNewUser.credentialsChecker(
+                    getUsername, 
+                    getPassword, 
+                    getConfirmPassword, 
+                    getEmail, 
+                    getContact, 
+                    getAddress
+            );
+            
+            if(!credentialsChecker) {
+                System.out.println("Added new user");
+            }
         }
     }//GEN-LAST:event_proceedBtnActionPerformed
 

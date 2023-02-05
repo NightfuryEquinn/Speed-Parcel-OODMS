@@ -3,9 +3,9 @@ package oodms.oop;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class getFileLineNumber {
+public class GetFileLineNumber {
     int countFileLineNumber(String fileDirectory) {
-        InputStream dataFile = encapsulation_welcomePage.class.getResourceAsStream(fileDirectory);
+        InputStream dataFile = CheckUsernamePassword.class.getResourceAsStream(fileDirectory);
         
         // Get Number of Line in file
         int lineLength = 0;
