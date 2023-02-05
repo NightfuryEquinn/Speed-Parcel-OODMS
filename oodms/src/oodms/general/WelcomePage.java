@@ -1,5 +1,6 @@
 package oodms.general;
 
+import oodms.oop.AddNewCustomer;
 import oodms.oop.CheckUsernamePassword;
 
 public class WelcomePage extends javax.swing.JFrame {
@@ -315,6 +316,8 @@ public class WelcomePage extends javax.swing.JFrame {
             
             if(!credentialsChecker) {
                 System.out.println("Added new user");
+                
+                AddNewCustomer customer = new AddNewCustomer("Yip", "as", "as", "as", "as");
             }
         }
     }//GEN-LAST:event_proceedBtnActionPerformed
