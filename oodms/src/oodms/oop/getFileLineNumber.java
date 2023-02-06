@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class GetFileLineNumber {
     int countFileLineNumber(String fileDirectory) {
-        InputStream dataFile = CheckUsernamePassword.class.getResourceAsStream(fileDirectory);
+        InputStream dataFile = GetFileLineNumber.class.getResourceAsStream(fileDirectory);
         
         // Get Number of Line in file
         int lineLength = 0;

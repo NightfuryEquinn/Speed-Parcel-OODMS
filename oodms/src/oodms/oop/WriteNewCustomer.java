@@ -11,7 +11,7 @@ import java.io.OutputStreamWriter;
 public class WriteNewCustomer {
     public void newCustomer(String username, String password, String email, String contact, String address) {
         try {
-            InputStream dataFile = CheckUsernamePassword.class.getResourceAsStream("/oodms/database/credentials.txt");
+            InputStream dataFile = WriteNewCustomer.class.getResourceAsStream("/oodms/database/credentials.txt");
         
             // Read file
             BufferedReader br = new BufferedReader(new InputStreamReader(dataFile));
@@ -43,7 +43,8 @@ public class WriteNewCustomer {
             
             // Write file
             credentialsArr = addNewCustomer(credentialsArr, newCustomerArr);
-            rewriteCustomerData(credentialsArr);
+            FlushAndWrite flushWrite = new FlushAndWrite();
+            flushWrite.flushAndWrite(credentialsArr, "/oodms/database/credentials.txt");
         }
         
         catch(IOException e) {
@@ -65,30 +66,5 @@ public class WriteNewCustomer {
         System.arraycopy(newArr, 0, newExistingArr[arrRow], 0, arrCol);
         
         return newExistingArr;
-    }
-    
-    // Flush and write file
-    public static void rewriteCustomerData(String[][] existingArr) {
-        try(FileOutputStream toDataFile = new FileOutputStream("/oodms/database/credentials.txt")) {
-            OutputStreamWriter osWriter = new OutputStreamWriter(toDataFile);
-            BufferedWriter bw = new BufferedWriter(osWriter);
-            
-            // Flush file
-            bw.flush();
-            
-            for(String[] arrRow : existingArr) {
-                for(String dataElement : arrRow) {
-                    bw.write(dataElement + " | ");
-                }
-                bw.write("\n");
-            }
-            
-            // CLose file
-            bw.close();
-        }
-        
-        catch(IOException e) {
-            System.out.println("Write file error: " + e);
-        }
     }
 }
