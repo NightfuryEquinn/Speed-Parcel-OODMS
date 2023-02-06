@@ -317,7 +317,7 @@ public class WelcomePage extends javax.swing.JFrame {
             if(!credentialsChecker) {
                 System.out.println("Added new user");
                 
-                AddNewCustomer customer = new AddNewCustomer("Yip", "as", "as", "as", "as");
+                AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress);
             }
         }
     }//GEN-LAST:event_proceedBtnActionPerformed

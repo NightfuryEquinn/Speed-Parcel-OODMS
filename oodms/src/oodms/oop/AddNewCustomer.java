@@ -1,5 +1,7 @@
 package oodms.oop;
 
+import oodms.oop.WriteNewCustomer;
+
 public class AddNewCustomer {
     private String username;
     private String password;
@@ -13,6 +15,10 @@ public class AddNewCustomer {
         this.email = email;
         this.contact = contact;
         this.address = address;
+        
+        // OOP Method - Writing New User into File
+        WriteNewCustomer newCustomerData = new WriteNewCustomer();
+        newCustomerData.newCustomer(username, password, email, contact, address);
     }
     
     public String getUsername() {
@@ -33,5 +39,5 @@ public class AddNewCustomer {
     
     public String getAddress() {
         return address;
-    }
+    } 
 }

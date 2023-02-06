@@ -13,14 +13,14 @@ public class CheckUsernamePassword {
         
         try {
             // Get file from another package
-            InputStream dataFile = CheckUsernamePassword.class.getResourceAsStream("/oodms/database/credentialsData.txt");
+            InputStream dataFile = CheckUsernamePassword.class.getResourceAsStream("/oodms/database/credentials.txt");
 
             // Read file
             BufferedReader br = new BufferedReader(new InputStreamReader(dataFile));
 
             // OOP Method - Get .txt file line number
             GetFileLineNumber lineLength = new GetFileLineNumber();
-            int lineCount = lineLength.countFileLineNumber("/oodms/database/credentialsData.txt");
+            int lineCount = lineLength.countFileLineNumber("/oodms/database/credentials.txt");
 
             // Create Array in Array
             String[] credentialsData;
