@@ -19,7 +19,7 @@ public class CheckUsernamePassword {
             BufferedReader br = new BufferedReader(new InputStreamReader(dataFile));
 
             // OOP Method - Get .txt file line number
-            GetFileLineNumber lineLength = new GetFileLineNumber();
+            FileLineNumber lineLength = new FileLineNumber();
             int lineCount = lineLength.countFileLineNumber("/oodms/database/credentials.txt");
 
             // Create Array in Array

@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class GetFileLineNumber {
+public class FileLineNumber {
     public int countFileLineNumber(String fileDirectory) {
         int lineLength = 0;
         
         try {
-            InputStream dataFile = GetFileLineNumber.class.getResourceAsStream(fileDirectory);
+            InputStream dataFile = FileLineNumber.class.getResourceAsStream(fileDirectory);
 
             // Get Number of Line in file
             Scanner scan = new Scanner(dataFile);
