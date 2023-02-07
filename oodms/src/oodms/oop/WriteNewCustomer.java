@@ -1,12 +1,9 @@
 package oodms.oop;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
 public class WriteNewCustomer {
     public void newCustomer(String username, String password, String email, String contact, String address) {
@@ -36,6 +33,7 @@ public class WriteNewCustomer {
             }
             
             // Close file
+            dataFile.close();
             br.close();
             
             // New Customer Array
@@ -44,7 +42,7 @@ public class WriteNewCustomer {
             // Write file
             credentialsArr = addNewCustomer(credentialsArr, newCustomerArr);
             FlushAndWrite flushWrite = new FlushAndWrite();
-            flushWrite.flushAndWrite(credentialsArr, "/oodms/database/credentials.txt");
+            flushWrite.flushAndWrite(credentialsArr, "src/oodms/database/credentials.txt");
         }
         
         catch(IOException e) {

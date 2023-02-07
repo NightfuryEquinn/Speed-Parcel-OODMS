@@ -36,6 +36,10 @@ public class CheckUsernamePassword {
                 
                 pass++;
             }
+            
+            // Close file
+            dataFile.close();
+            br.close();
 
             // Check for similarity in Username and Password confirmation
             for(String[] singleData : credentialsArr) {
@@ -51,7 +55,7 @@ public class CheckUsernamePassword {
         }
         
         catch(IOException e) {
-            System.out.println("Error");
+            System.out.println("Error: " + e);
         }
         
         return checkSimilarity;
