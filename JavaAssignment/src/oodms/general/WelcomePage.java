@@ -3,6 +3,7 @@ package oodms.general;
 import oodms.oop.AddNewCustomer;
 import oodms.oop.CheckUsernamePassword;
 import javax.swing.JOptionPane;
+import oodms.admin.AdminDashboard;
 
 public class WelcomePage extends javax.swing.JFrame {
 
@@ -306,6 +307,20 @@ public class WelcomePage extends javax.swing.JFrame {
                 // Create a popup dialog message box
                 String message = String.join("", "Welcome back, ", String.valueOf(getUsername));
                 JOptionPane.showMessageDialog(null, message, "Login Successful", JOptionPane.INFORMATION_MESSAGE);
+                
+                // Decide which dashboard to setVisible
+                if(getUsername.toLowerCase().startsWith("admin")) {
+                    System.out.println("You are admin.");
+                    
+                    new AdminDashboard().setVisible(true);
+                    dispose();
+                } else if(getUsername.toLowerCase().startsWith("delivery")) {
+                    System.out.println("You are delivery staff.");
+                    
+                } else {
+                    System.out.println("You are customer.");
+                    
+                }
             } else {
                 // Create a popup dialog mesage box
                 JOptionPane.showMessageDialog(null, "Either username or password is incorrect. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
@@ -348,7 +363,7 @@ public class WelcomePage extends javax.swing.JFrame {
                 AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress);
             } else {
                 // Create a popup dialog message box
-                JOptionPane.showMessageDialog(null, "Account existed. Please check your username and password are correct", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Account existed. Please check your username and password are correct. Username can't start with Admin or Delivery.", "Error", JOptionPane.ERROR_MESSAGE);
                 
             }
         }

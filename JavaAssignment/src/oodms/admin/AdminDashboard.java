@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import oodms.general.WelcomePage;
 
 /**
  *
@@ -71,6 +73,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         logoutBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         logoutBtn.setForeground(new java.awt.Color(76, 43, 24));
         logoutBtn.setText("Log Out");
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
 
         functionLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         functionLabel.setForeground(new java.awt.Color(76, 43, 24));
@@ -314,6 +321,15 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        System.out.println("Logout");
+        
+        new WelcomePage().setVisible(true);
+        dispose();
+        
+        JOptionPane.showMessageDialog(null, "You have logged out.", "Logout Successful", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_logoutBtnActionPerformed
 
     /**
      * @param args the command line arguments
