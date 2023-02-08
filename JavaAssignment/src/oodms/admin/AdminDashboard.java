@@ -1,20 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package oodms.admin;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import oodms.general.WelcomePage;
 
-/**
- *
- * @author User
- */
 public class AdminDashboard extends javax.swing.JFrame {
 
     /**
@@ -325,6 +313,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         System.out.println("Logout");
         
+        // Go back to WelcomePage
         new WelcomePage().setVisible(true);
         dispose();
         
