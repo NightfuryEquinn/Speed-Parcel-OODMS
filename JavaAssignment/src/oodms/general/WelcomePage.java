@@ -2,6 +2,7 @@ package oodms.general;
 
 import oodms.oop.AddNewCustomer;
 import oodms.oop.CheckUsernamePassword;
+import javax.swing.JOptionPane;
 
 public class WelcomePage extends javax.swing.JFrame {
 
@@ -286,6 +287,30 @@ public class WelcomePage extends javax.swing.JFrame {
     private void proceedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedBtnActionPerformed
         if(checkLogin) {
             System.out.println("Login");
+            
+            // Set input from user
+            String getUsername = inputUsername.getText();
+            
+            char[] targetPassword = inputPassword.getPassword();
+            String getPassword = new String(targetPassword);
+            
+            CheckUsernamePassword checkExistingUser = new CheckUsernamePassword();
+            boolean loginChecker = checkExistingUser.loginChecker(
+                getUsername, 
+                getPassword
+            );
+            
+            if(loginChecker) {
+                System.out.println("Login successful");
+                
+                // Create a popup dialog message box
+                String message = String.join("", "Welcome back, ", String.valueOf(getUsername));
+                JOptionPane.showMessageDialog(null, message, "Login Successful", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                // Create a popup dialog mesage box
+                JOptionPane.showMessageDialog(null, "Either username or password is incorrect. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
         } else {
             System.out.println("Signup");
             
@@ -306,18 +331,25 @@ public class WelcomePage extends javax.swing.JFrame {
             
             CheckUsernamePassword checkNewUser = new CheckUsernamePassword();
             boolean credentialsChecker = checkNewUser.credentialsChecker(
-                    getUsername, 
-                    getPassword, 
-                    getConfirmPassword, 
-                    getEmail, 
-                    getContact, 
-                    getAddress
+                getUsername, 
+                getPassword, 
+                getConfirmPassword, 
+                getEmail, 
+                getContact, 
+                getAddress
             );
             
             if(!credentialsChecker) {
                 System.out.println("Added new user");
                 
+                // Create a popup dialog message box
+                JOptionPane.showMessageDialog(null, "Your account has been created. Please login.", "Account Created", JOptionPane.INFORMATION_MESSAGE);
+                
                 AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress);
+            } else {
+                // Create a popup dialog message box
+                JOptionPane.showMessageDialog(null, "Account existed. Please check your username and password are correct", "Error", JOptionPane.ERROR_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_proceedBtnActionPerformed

@@ -23,4 +23,22 @@ public class CheckUsernamePassword {
         
         return checkSimilarity;
     }
+    
+    public boolean loginChecker(String username, String password) {
+        // Declare variable to validate existing username and password
+        boolean checkUserPass = false;
+        
+        // OOP Method - Get Multidimensional Array
+        String[][] credentialsArr = new Create3DArray().create3D();
+        
+        // Check for user input and actual data
+        for(String[] singleData : credentialsArr) {
+            if((singleData[0].equals(username)) && (singleData[1].equals(password))) {
+                checkUserPass = true;
+                break;
+            }
+        }
+        
+        return checkUserPass;
+    }
 }
