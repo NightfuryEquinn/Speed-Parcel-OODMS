@@ -1,54 +1,23 @@
 package oodms.oop;
 
-import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class WriteNewCustomer {
-    public void newCustomer(String username, String password, String email, String contact, String address) {
-        try {
-            InputStream dataFile = WriteNewCustomer.class.getResourceAsStream("/oodms/database/credentials.txt");
+    public void newCustomer(String username, String password, String email, String contact, String address) {   
+        // OOP Method - Get Multidimensional Array
+        String[][] credentialsArr = new Create3DArray().create3D();
+
+        // New Customer Array
+        String[] newCustomerArr = {username, password, email, contact, address};
+
+        // Write file
+        credentialsArr = addNewCustomer(credentialsArr, newCustomerArr);
         
-            // Read file
-            BufferedReader br = new BufferedReader(new InputStreamReader(dataFile));
-
-            // OOP Method - Get .txt file line number
-            FileLineNumber lineLength = new FileLineNumber();
-            int lineCount = lineLength.countFileLineNumber("/oodms/database/credentials.txt");
-
-            // Create Array in Array
-            String[] credentialsData;
-            String[][] credentialsArr = new String[lineCount][5];
-
-            String line;
-            int pass = 0;
-
-            while((line = br.readLine()) != null) {
-                credentialsData = line.split("\\s\\|\\s");
-
-                System.arraycopy(credentialsData, 0, credentialsArr[pass], 0, credentialsData.length);
-                
-                pass++;
-            }
-            
-            // Close file
-            dataFile.close();
-            br.close();
-            
-            // New Customer Array
-            String[] newCustomerArr = {username, password, email, contact, address};
-            
-            // Write file
-            credentialsArr = addNewCustomer(credentialsArr, newCustomerArr);
-            FlushAndWrite flushWrite = new FlushAndWrite();
-            flushWrite.flushAndWrite(credentialsArr, "src/oodms/database/credentials.txt");
-        }
-        
-        catch(IOException e) {
-            System.out.println("Add New Customer Error: " + e);
-        }
-    } 
+        flushAndWrite(credentialsArr, "src/oodms/database/credentials.txt");
+    }
     
     // Add New Customer Data into Existing Customer Data
     public static String[][] addNewCustomer(String[][] existingArr, String[] newArr) {
@@ -64,5 +33,46 @@ public class WriteNewCustomer {
         System.arraycopy(newArr, 0, newExistingArr[arrRow], 0, arrCol);
         
         return newExistingArr;
+    }
+    
+    // Flush and write new and existing data
+    public static void flushAndWrite(String[][] existingArr, String fileDirectory) {
+        File f = new File(fileDirectory);
+        
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f.getAbsolutePath()));
+            
+            // Flush file
+            bw.flush();
+            
+            // Loop through the multidimensional array
+            for(int i = 0; i < existingArr.length; i++) {
+                // Create variable for each array in the multidimensional array
+                String[] arrRow = existingArr[i];
+                
+                // Loop through the array
+                for(int j = 0; j < arrRow.length; j++) {
+                    // Create Variable for each element in the array
+                    String dataElement = arrRow[j];
+                    
+                    bw.write(dataElement);
+                    // Ignore | for the last element
+                    if(j != arrRow.length - 1) {
+                        bw.write(" | ");
+                    }
+                }
+                // Ignore new line for the last array
+                if(i != existingArr.length - 1) {
+                    bw.write("\n");
+                }
+            }
+            
+            // CLose file
+            bw.close();
+        }
+        
+        catch(IOException e) {
+            System.out.println("Write Error: " + e);
+        }
     }
 }
