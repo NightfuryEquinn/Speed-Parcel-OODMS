@@ -7,7 +7,7 @@ public class CheckUsernamePassword {
         boolean checkSimilarity = false;
         
         // OOP Method - Get Multidimensional Array
-        String[][] credentialsArr = new Create3DArray().create3D();
+        String[][] credentialsArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
 
         // Check for similarity in Username and Password confirmation
         for(String[] singleData : credentialsArr) {
@@ -29,7 +29,7 @@ public class CheckUsernamePassword {
         boolean checkUserPass = false;
         
         // OOP Method - Get Multidimensional Array
-        String[][] credentialsArr = new Create3DArray().create3D();
+        String[][] credentialsArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
         
         // Check for user input and actual data
         for(String[] singleData : credentialsArr) {

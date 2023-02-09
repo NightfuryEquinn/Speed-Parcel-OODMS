@@ -1,16 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package oodms.admin;
 
 import java.awt.Font;
+import java.util.Arrays;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import oodms.oop.Create3DArray;
 
-/**
- *
- * @author User
- */
 public class UserMgmtDisplay extends javax.swing.JFrame {
 
     /**
@@ -72,7 +67,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
 
         searchUserIDLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         searchUserIDLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchUserIDLabel.setText("Enter ID:");
+        searchUserIDLabel.setText("Enter Name:");
 
         inputUserID.setBackground(new java.awt.Color(184, 145, 104));
         inputUserID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
@@ -297,11 +292,10 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         // Change Table Column Width
         TableColumnModel columnModel = displayUserTable.getColumnModel();
 
-        columnModel.getColumn(0).setPreferredWidth(75);
+        columnModel.getColumn(0).setPreferredWidth(125);
         columnModel.getColumn(1).setPreferredWidth(125);
         columnModel.getColumn(2).setPreferredWidth(175);
-        columnModel.getColumn(3).setPreferredWidth(150);
-        columnModel.getColumn(4).setPreferredWidth(300);
+        columnModel.getColumn(3).setPreferredWidth(250);
 
         javax.swing.GroupLayout userMgmtPanelLayout = new javax.swing.GroupLayout(userMgmtPanel);
         userMgmtPanel.setLayout(userMgmtPanelLayout);
@@ -384,7 +378,18 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void searchUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserBtnActionPerformed
+        // Get Table Model
+        DefaultTableModel userTable = (DefaultTableModel) displayUserTable.getModel();
+        userTable.setRowCount(0);
         
+        // OOP Method - Get User Data into Multidimensional Array
+        String[][] allUserArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
+        
+        // Loop all data except password to the table
+        for (String[] userArr : allUserArr) {
+            String[] userDataArr = new String[] {userArr[0], userArr[2], userArr[3], userArr[4]};
+            userTable.addRow(userDataArr);
+        }
     }//GEN-LAST:event_searchUserBtnActionPerformed
 
     /**
