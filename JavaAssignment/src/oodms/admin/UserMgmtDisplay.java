@@ -35,7 +35,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         backgroundPanel1 = new javax.swing.JPanel();
         searchUserIDLabel = new javax.swing.JLabel();
         inputUserID = new javax.swing.JTextField();
-        searchUserIDBtn = new javax.swing.JButton();
+        searchUserBtn = new javax.swing.JButton();
         detailLabel = new javax.swing.JLabel();
         backgroundPanel2 = new javax.swing.JPanel();
         usernameLabel = new javax.swing.JLabel();
@@ -78,10 +78,15 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         inputUserID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputUserID.setForeground(new java.awt.Color(76, 43, 24));
 
-        searchUserIDBtn.setBackground(new java.awt.Color(184, 145, 104));
-        searchUserIDBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        searchUserIDBtn.setForeground(new java.awt.Color(76, 43, 24));
-        searchUserIDBtn.setText("Search");
+        searchUserBtn.setBackground(new java.awt.Color(184, 145, 104));
+        searchUserBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        searchUserBtn.setForeground(new java.awt.Color(76, 43, 24));
+        searchUserBtn.setText("Search");
+        searchUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchUserBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
@@ -93,7 +98,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(inputUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(searchUserIDBtn)
+                .addComponent(searchUserBtn)
                 .addGap(16, 16, 16))
         );
         backgroundPanel1Layout.setVerticalGroup(
@@ -103,7 +108,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchUserIDLabel)
                     .addComponent(inputUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchUserIDBtn))
+                    .addComponent(searchUserBtn))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -254,6 +259,11 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         backBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         backBtn.setForeground(new java.awt.Color(76, 43, 24));
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         displayUserTable.setBackground(new java.awt.Color(230, 207, 201));
         displayUserTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -261,17 +271,15 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         displayUserTable.setForeground(new java.awt.Color(76, 43, 24));
         displayUserTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"C0001", "John Doe", "johndoe@example.com", "0123456789", "29, King Street, Queen Lane, 56A7U, London, UK."},
-                {"C0002", "Alvin Doe", "alvindoe@contoh.com", "0198765432", "10, Bishop Lane, Castle Road, 16Y4, London, UK"},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "User ID", "Username", "Email Address", "Contact Number", "Address"
+                "Username", "Email Address", "Contact Number", "Address"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -370,6 +378,15 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteBtnActionPerformed
 
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        new AdminDashboard().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void searchUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserBtnActionPerformed
+        
+    }//GEN-LAST:event_searchUserBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -427,7 +444,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel listUserLabel;
     private javax.swing.JButton saveBtn;
-    private javax.swing.JButton searchUserIDBtn;
+    private javax.swing.JButton searchUserBtn;
     private javax.swing.JLabel searchUserIDLabel;
     private javax.swing.JLabel searchUserLabel;
     private javax.swing.JLabel userMgmtLabel;

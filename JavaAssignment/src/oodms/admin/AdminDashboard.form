@@ -203,6 +203,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="User Management"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="userMgmtBtnMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="catMgmtBtn">
               <Properties>
@@ -214,6 +217,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Category Management"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="catMgmtBtnMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="feedbackMgmtBtn">
               <Properties>
@@ -225,6 +231,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Feedback Management"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="feedbackMgmtBtnMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="itemMgmtBtn">
               <Properties>
@@ -236,6 +245,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Item Management"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="itemMgmtBtnMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="deliveryMgmtBtn">
               <Properties>
@@ -247,6 +259,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Delivery Management"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deliveryMgmtBtnMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -304,6 +319,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Order Management"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="orderMgmtBtnMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="paymentMgmtBtn">
               <Properties>
@@ -315,6 +333,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Payment Management"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="paymentMgmtBtnMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

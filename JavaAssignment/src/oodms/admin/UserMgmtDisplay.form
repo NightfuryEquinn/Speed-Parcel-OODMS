@@ -134,7 +134,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="inputUserID" min="-2" pref="143" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="searchUserIDBtn" min="-2" max="-2" attributes="0"/>
+                      <Component id="searchUserBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -146,7 +146,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="searchUserIDLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="inputUserID" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="searchUserIDBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="searchUserBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="15" max="32767" attributes="0"/>
                   </Group>
@@ -178,7 +178,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="searchUserIDBtn">
+            <Component class="javax.swing.JButton" name="searchUserBtn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="68" green="91" red="b8" type="rgb"/>
@@ -191,6 +191,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Search"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchUserBtnActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -485,6 +488,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Back"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backBtnActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
@@ -510,37 +516,11 @@
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="5" rowCount="4">
-                    <Column editable="true" title="User ID" type="java.lang.String">
-                      <Data value="C0001"/>
-                      <Data value="C0002"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Username" type="java.lang.String">
-                      <Data value="John Doe"/>
-                      <Data value="Alvin Doe"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Email Address" type="java.lang.String">
-                      <Data value="johndoe@example.com"/>
-                      <Data value="alvindoe@contoh.com"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Contact Number" type="java.lang.String">
-                      <Data value="0123456789"/>
-                      <Data value="0198765432"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Address" type="java.lang.String">
-                      <Data value="29, King Street, Queen Lane, 56A7U, London, UK."/>
-                      <Data value="10, Bishop Lane, Castle Road, 16Y4, London, UK"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
+                  <Table columnCount="4" rowCount="2">
+                    <Column editable="true" title="Username" type="java.lang.String"/>
+                    <Column editable="true" title="Email Address" type="java.lang.String"/>
+                    <Column editable="true" title="Contact Number" type="java.lang.String"/>
+                    <Column editable="true" title="Address" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

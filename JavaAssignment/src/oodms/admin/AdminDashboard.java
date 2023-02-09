@@ -76,22 +76,47 @@ public class AdminDashboard extends javax.swing.JFrame {
         userMgmtBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         userMgmtBtn.setForeground(new java.awt.Color(76, 43, 24));
         userMgmtBtn.setText("User Management");
+        userMgmtBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userMgmtBtnMouseClicked(evt);
+            }
+        });
 
         catMgmtBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         catMgmtBtn.setForeground(new java.awt.Color(76, 43, 24));
         catMgmtBtn.setText("Category Management");
+        catMgmtBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                catMgmtBtnMouseClicked(evt);
+            }
+        });
 
         feedbackMgmtBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         feedbackMgmtBtn.setForeground(new java.awt.Color(76, 43, 24));
         feedbackMgmtBtn.setText("Feedback Management");
+        feedbackMgmtBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                feedbackMgmtBtnMouseClicked(evt);
+            }
+        });
 
         itemMgmtBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         itemMgmtBtn.setForeground(new java.awt.Color(76, 43, 24));
         itemMgmtBtn.setText("Item Management");
+        itemMgmtBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                itemMgmtBtnMouseClicked(evt);
+            }
+        });
 
         deliveryMgmtBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         deliveryMgmtBtn.setForeground(new java.awt.Color(76, 43, 24));
         deliveryMgmtBtn.setText("Delivery Management");
+        deliveryMgmtBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deliveryMgmtBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
@@ -132,10 +157,20 @@ public class AdminDashboard extends javax.swing.JFrame {
         orderMgmtBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         orderMgmtBtn.setForeground(new java.awt.Color(76, 43, 24));
         orderMgmtBtn.setText("Order Management");
+        orderMgmtBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                orderMgmtBtnMouseClicked(evt);
+            }
+        });
 
         paymentMgmtBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         paymentMgmtBtn.setForeground(new java.awt.Color(76, 43, 24));
         paymentMgmtBtn.setText("Payment Management");
+        paymentMgmtBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                paymentMgmtBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
@@ -319,6 +354,41 @@ public class AdminDashboard extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null, "You have logged out.", "Logout Successful", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_logoutBtnActionPerformed
+
+    private void userMgmtBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMgmtBtnMouseClicked
+        new UserMgmtDisplay().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_userMgmtBtnMouseClicked
+
+    private void catMgmtBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_catMgmtBtnMouseClicked
+        new CategoryMgmtDisplay().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_catMgmtBtnMouseClicked
+
+    private void itemMgmtBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemMgmtBtnMouseClicked
+        new ItemMgmtDisplay().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_itemMgmtBtnMouseClicked
+
+    private void deliveryMgmtBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deliveryMgmtBtnMouseClicked
+        new DeliveryMgmtDisplay().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_deliveryMgmtBtnMouseClicked
+
+    private void feedbackMgmtBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feedbackMgmtBtnMouseClicked
+        new FeedbackMgmtDisplay().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_feedbackMgmtBtnMouseClicked
+
+    private void orderMgmtBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderMgmtBtnMouseClicked
+        new OrderMgmtDisplay().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_orderMgmtBtnMouseClicked
+
+    private void paymentMgmtBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentMgmtBtnMouseClicked
+        new PaymentMgmtDisplay().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_paymentMgmtBtnMouseClicked
 
     /**
      * @param args the command line arguments
