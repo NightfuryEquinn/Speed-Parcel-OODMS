@@ -132,7 +132,7 @@
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Component id="searchUserIDLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="inputUserID" min="-2" pref="143" max="-2" attributes="0"/>
+                      <Component id="inputSearchUsername" min="-2" pref="143" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="searchUserBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -145,7 +145,7 @@
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="searchUserIDLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputUserID" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputSearchUsername" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="searchUserBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="15" max="32767" attributes="0"/>
@@ -165,7 +165,7 @@
                 <Property name="text" type="java.lang.String" value="Enter Name:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="inputUserID">
+            <Component class="javax.swing.JTextField" name="inputSearchUsername">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="68" green="91" red="b8" type="rgb"/>

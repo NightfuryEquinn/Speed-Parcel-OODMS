@@ -5,6 +5,7 @@ import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.Create3DArray;
+import oodms.oop.SearchFileData;
 
 public class UserMgmtDisplay extends javax.swing.JFrame {
 
@@ -29,7 +30,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         searchUserLabel = new javax.swing.JLabel();
         backgroundPanel1 = new javax.swing.JPanel();
         searchUserIDLabel = new javax.swing.JLabel();
-        inputUserID = new javax.swing.JTextField();
+        inputSearchUsername = new javax.swing.JTextField();
         searchUserBtn = new javax.swing.JButton();
         detailLabel = new javax.swing.JLabel();
         backgroundPanel2 = new javax.swing.JPanel();
@@ -69,9 +70,9 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         searchUserIDLabel.setForeground(new java.awt.Color(76, 43, 24));
         searchUserIDLabel.setText("Enter Name:");
 
-        inputUserID.setBackground(new java.awt.Color(184, 145, 104));
-        inputUserID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputUserID.setForeground(new java.awt.Color(76, 43, 24));
+        inputSearchUsername.setBackground(new java.awt.Color(184, 145, 104));
+        inputSearchUsername.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputSearchUsername.setForeground(new java.awt.Color(76, 43, 24));
 
         searchUserBtn.setBackground(new java.awt.Color(184, 145, 104));
         searchUserBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -91,7 +92,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(searchUserIDLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputSearchUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(searchUserBtn)
                 .addGap(16, 16, 16))
@@ -102,7 +103,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchUserIDLabel)
-                    .addComponent(inputUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputSearchUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchUserBtn))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -382,14 +383,30 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         DefaultTableModel userTable = (DefaultTableModel) displayUserTable.getModel();
         userTable.setRowCount(0);
         
-        // OOP Method - Get User Data into Multidimensional Array
-        String[][] allUserArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
-        
         // Loop all data except password to the table
-        for (String[] userArr : allUserArr) {
-            String[] userDataArr = new String[] {userArr[0], userArr[2], userArr[3], userArr[4]};
-            userTable.addRow(userDataArr);
+        // Get Search Input
+        String getKeyword = inputSearchUsername.getText()
+                ;
+        if(getKeyword.isBlank()) {
+            // OOP Method - Get User Data into Multidimensional Array
+            String[][] allUserArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
+            
+            // Loop all data
+            for (String[] userArr : allUserArr) {
+                String[] userDataArr = new String[] {userArr[0], userArr[2], userArr[3], userArr[4]};
+                userTable.addRow(userDataArr);
+            }
+        } else {
+            // OOP Method - Get Searched User Data into Multidimensional Array
+            String[][] searchedAllUserArr = new SearchFileData().searchUsername(getKeyword, "/oodms/database/credentials.txt");
+            
+            // Loop all data
+            for (String[] searchedUserArr : searchedAllUserArr) {
+                String[] searchedUserDataArr = new String[] {searchedUserArr[0], searchedUserArr[2], searchedUserArr[3], searchedUserArr[4]};
+                userTable.addRow(searchedUserDataArr);
+            }
         }
+        
     }//GEN-LAST:event_searchUserBtnActionPerformed
 
     /**
@@ -443,7 +460,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JTextArea inputAddress;
     private javax.swing.JTextField inputContact;
     private javax.swing.JTextField inputEmail;
-    private javax.swing.JTextField inputUserID;
+    private javax.swing.JTextField inputSearchUsername;
     private javax.swing.JTextField inputUsername;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
