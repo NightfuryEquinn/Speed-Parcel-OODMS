@@ -1,7 +1,6 @@
 package oodms.admin;
 
 import java.awt.Font;
-import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.Create3DArray;
@@ -14,6 +13,12 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
      */
     public UserMgmtDisplay() {
         initComponents();
+        
+        // Disable button by default
+        addBtn.setEnabled(false);
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
     }
 
     /**
@@ -47,6 +52,10 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         editBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
+        ageLabel = new javax.swing.JLabel();
+        genderLabel = new javax.swing.JLabel();
+        inputAge = new javax.swing.JSpinner();
+        inputGender = new javax.swing.JComboBox<>();
         listUserLabel = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -130,6 +139,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         addressLabel.setForeground(new java.awt.Color(76, 43, 24));
         addressLabel.setText("Address:");
 
+        inputAddress.setEditable(false);
         inputAddress.setBackground(new java.awt.Color(184, 145, 104));
         inputAddress.setColumns(20);
         inputAddress.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
@@ -138,14 +148,17 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         inputAddress.setRows(5);
         jScrollPane1.setViewportView(inputAddress);
 
+        inputUsername.setEditable(false);
         inputUsername.setBackground(new java.awt.Color(184, 145, 104));
         inputUsername.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputUsername.setForeground(new java.awt.Color(76, 43, 24));
 
+        inputEmail.setEditable(false);
         inputEmail.setBackground(new java.awt.Color(184, 145, 104));
         inputEmail.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputEmail.setForeground(new java.awt.Color(76, 43, 24));
 
+        inputContact.setEditable(false);
         inputContact.setBackground(new java.awt.Color(184, 145, 104));
         inputContact.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputContact.setForeground(new java.awt.Color(76, 43, 24));
@@ -190,6 +203,21 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
             }
         });
 
+        ageLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        ageLabel.setForeground(new java.awt.Color(76, 43, 24));
+        ageLabel.setText("Age:");
+
+        genderLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        genderLabel.setForeground(new java.awt.Color(76, 43, 24));
+        genderLabel.setText("Gender:");
+
+        inputAge.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputAge.setModel(new javax.swing.SpinnerNumberModel());
+
+        inputGender.setBackground(new java.awt.Color(184, 145, 104));
+        inputGender.setForeground(new java.awt.Color(76, 43, 24));
+        inputGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Others" }));
+
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
         backgroundPanel2Layout.setHorizontalGroup(
@@ -210,13 +238,18 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                             .addComponent(contactLabel)
                             .addComponent(emailLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addressLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(addressLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ageLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(genderLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(inputUsername)
                             .addComponent(inputEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                             .addComponent(inputContact)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(inputGender, javax.swing.GroupLayout.Alignment.LEADING, 0, 100, Short.MAX_VALUE)
+                                .addComponent(inputAge, javax.swing.GroupLayout.Alignment.LEADING)))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         backgroundPanel2Layout.setVerticalGroup(
@@ -238,7 +271,15 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addressLabel)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGap(13, 13, 13)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ageLabel)
+                    .addComponent(inputAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(genderLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn)
                     .addComponent(editBtn)
@@ -267,25 +308,37 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         displayUserTable.setForeground(new java.awt.Color(76, 43, 24));
         displayUserTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Username", "Email Address", "Contact Number", "Address"
+                "Username", "Email Address", "Contact Number", "Address", "Age", "Gender"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         displayUserTable.setGridColor(new java.awt.Color(230, 207, 201));
         displayUserTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
         displayUserTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
         displayUserTable.setShowVerticalLines(true);
+        displayUserTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                displayUserTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(displayUserTable);
         // Change Table Header Font
         displayUserTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
@@ -294,7 +347,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         TableColumnModel columnModel = displayUserTable.getColumnModel();
 
         columnModel.getColumn(0).setPreferredWidth(125);
-        columnModel.getColumn(1).setPreferredWidth(125);
+        columnModel.getColumn(1).setPreferredWidth(150);
         columnModel.getColumn(2).setPreferredWidth(175);
         columnModel.getColumn(3).setPreferredWidth(250);
 
@@ -334,11 +387,13 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(detailLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18))
+                    .addGroup(userMgmtPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)))
                 .addComponent(backBtn)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -358,19 +413,25 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        // TODO add your handling code here:
+        // Enable editing
+        inputUsername.setEditable(true);
+        inputEmail.setEditable(true);
+        inputContact.setEditable(true);
+        inputAddress.setEditable(true);
+        inputAge.setEnabled(true);
+        inputGender.setEditable(true);
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -379,6 +440,20 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void searchUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserBtnActionPerformed
+        // Disable button
+        addBtn.setEnabled(false);
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+        
+        // Disable editing
+        inputUsername.setEditable(false);
+        inputEmail.setEditable(false);
+        inputContact.setEditable(false);
+        inputAddress.setEditable(false);
+        inputAge.setEnabled(false);
+        inputGender.setEditable(false);
+
         // Get Table Model
         DefaultTableModel userTable = (DefaultTableModel) displayUserTable.getModel();
         userTable.setRowCount(0);
@@ -393,7 +468,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
             
             // Loop all data
             for (String[] userArr : allUserArr) {
-                String[] userDataArr = new String[] {userArr[0], userArr[2], userArr[3], userArr[4]};
+                String[] userDataArr = new String[] {userArr[0], userArr[2], userArr[3], userArr[4], userArr[5], userArr[6]};
                 userTable.addRow(userDataArr);
             }
         } else {
@@ -402,12 +477,41 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
             
             // Loop all data
             for (String[] searchedUserArr : searchedAllUserArr) {
-                String[] searchedUserDataArr = new String[] {searchedUserArr[0], searchedUserArr[2], searchedUserArr[3], searchedUserArr[4]};
+                String[] searchedUserDataArr = new String[] {searchedUserArr[0], searchedUserArr[2], searchedUserArr[3], searchedUserArr[4], searchedUserArr[5], searchedUserArr[6]};
                 userTable.addRow(searchedUserDataArr);
             }
         }
-        
     }//GEN-LAST:event_searchUserBtnActionPerformed
+
+    private void displayUserTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayUserTableMouseClicked
+        // Enable button
+        addBtn.setEnabled(true);
+        editBtn.setEnabled(true);
+        saveBtn.setEnabled(true);
+        deleteBtn.setEnabled(true);
+
+        // Disable editing
+        inputUsername.setEditable(false);
+        inputEmail.setEditable(false);
+        inputContact.setEditable(false);
+        inputAddress.setEditable(false);
+        inputAge.setEnabled(false);
+        inputGender.setEditable(false);
+
+        // Get the selected row number
+        int selectedRow = displayUserTable.getSelectedRow();
+        
+        // Setting the JTextField and JTextArea
+        inputUsername.setText((String) displayUserTable.getValueAt(selectedRow, 0));
+        inputEmail.setText((String) displayUserTable.getValueAt(selectedRow, 1));
+        inputContact.setText((String) displayUserTable.getValueAt(selectedRow, 2));
+        inputAddress.setText((String) displayUserTable.getValueAt(selectedRow, 3));
+        
+        int getInputAge = Integer.parseInt((String) displayUserTable.getValueAt(selectedRow, 4));
+        inputAge.setValue(getInputAge);
+        
+        inputGender.setSelectedItem(displayUserTable.getValueAt(selectedRow, 5));
+    }//GEN-LAST:event_displayUserTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -448,6 +552,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
     private javax.swing.JLabel addressLabel;
+    private javax.swing.JLabel ageLabel;
     private javax.swing.JButton backBtn;
     private javax.swing.JPanel backgroundPanel1;
     private javax.swing.JPanel backgroundPanel2;
@@ -457,9 +562,12 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JTable displayUserTable;
     private javax.swing.JButton editBtn;
     private javax.swing.JLabel emailLabel;
+    private javax.swing.JLabel genderLabel;
     private javax.swing.JTextArea inputAddress;
+    private javax.swing.JSpinner inputAge;
     private javax.swing.JTextField inputContact;
     private javax.swing.JTextField inputEmail;
+    private javax.swing.JComboBox<String> inputGender;
     private javax.swing.JTextField inputSearchUsername;
     private javax.swing.JTextField inputUsername;
     private javax.swing.JScrollPane jScrollPane1;

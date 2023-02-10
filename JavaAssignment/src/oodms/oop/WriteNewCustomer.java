@@ -6,12 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriteNewCustomer {
-    public void newCustomer(String username, String password, String email, String contact, String address) {   
+    public void newCustomer(String username, String password, String email, String contact, String address, String age, String gender) {   
         // OOP Method - Get Multidimensional Array
         String[][] credentialsArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
 
         // New Customer Array
-        String[] newCustomerArr = {username, password, email, contact, address};
+        String[] newCustomerArr = {username, password, email, contact, address, age, gender};
 
         // Write file
         credentialsArr = addNewCustomer(credentialsArr, newCustomerArr);

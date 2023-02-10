@@ -2,7 +2,7 @@ package oodms.oop;
 
 public class CheckUsernamePassword {
 
-    public boolean credentialsChecker(String username, String password, String confirmPassword, String email, String contact, String address) {
+    public boolean credentialsChecker(String username, String password, String confirmPassword) {
         // Declare variable to check for similarity in username and password confirmation
         boolean checkSimilarity = false;
         
