@@ -358,10 +358,8 @@ public class WelcomePage extends javax.swing.JFrame {
                     dispose();
                 } else if(getUsername.toLowerCase().startsWith("delivery")) {
                     System.out.println("You are delivery staff.");
-                    
                 } else {
                     System.out.println("You are customer.");
-                    
                 }
             } else {
                 // Create a popup dialog mesage box
@@ -407,7 +405,6 @@ public class WelcomePage extends javax.swing.JFrame {
             } else {
                 // Create a popup dialog message box
                 JOptionPane.showMessageDialog(null, "Account existed. Please check your username and password are correct. Username can't start with Admin or Delivery.", "Error", JOptionPane.ERROR_MESSAGE);
-                
             }
         }
     }//GEN-LAST:event_proceedBtnActionPerformed

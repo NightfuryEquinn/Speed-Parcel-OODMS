@@ -2,7 +2,7 @@ package oodms.oop;
 
 public class DeleteSelected {
 
-    public String[][] deleteUsername(String selectedUsername, String fileDirectory) {
+    public String[][] deleteSelected(String selected, String fileDirectory) {
         // OOP Method - Get Multidimensional Array
         String[][] deleteFileArr = new Create3DArray().create3D(fileDirectory);
         
@@ -15,7 +15,7 @@ public class DeleteSelected {
         for(int i = 0; i < deleteFileArr.length; i++) {
             String[] deleteUserArr = deleteFileArr[i];
             
-            if(deleteUserArr[0].equals(selectedUsername)) {
+            if(deleteUserArr[0].equals(selected)) {
                 indexToDelete = i;
                 break;
             }

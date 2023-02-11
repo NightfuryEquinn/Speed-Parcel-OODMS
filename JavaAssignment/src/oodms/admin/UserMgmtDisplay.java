@@ -1,12 +1,14 @@
 package oodms.admin;
 
 import java.awt.Font;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.Create3DArray;
 import oodms.oop.DeleteSelected;
 import oodms.oop.FlushAndWrite;
+import oodms.oop.SaveSelected;
 import oodms.oop.SearchFileData;
 
 public class UserMgmtDisplay extends javax.swing.JFrame {
@@ -431,7 +433,25 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        // Get Text Field value
+        String getUsername = inputUsername.getText();
+        String getEmail = inputEmail.getText();
+        String getContact = inputContact.getText();
+        String getAddress = inputAddress.getText();
+        String getAge = inputAge.getValue().toString();
+        String getGender = inputGender.getSelectedItem().toString();
         
+        // Write into an array
+        String[] newChangesArr = new String[] {getUsername, getEmail, getContact, getAddress, getAge, getGender};
+        
+        // Get old username from table to compare with existing username in text file
+        String getOldUsername = displayUserTable.getValueAt(displayUserTable.getSelectedRow(), 0).toString();
+        
+        // Save changes into text file
+        SaveSelected ss = new SaveSelected();
+        String[][] newChangesArrToSave = ss.saveUsername(newChangesArr, getOldUsername, "/oodms/database/credentials.txt");
+        
+        // Confirm save changes
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -452,7 +472,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 String selectedRowUsername = (String) displayUserTable.getValueAt(selectedRowIndex, 0);
                 
                 // Return a multidimensional of excluded selected row
-                String[][] ds = new DeleteSelected().deleteUsername(selectedRowUsername, "/oodms/database/credentials.txt");
+                String[][] ds = new DeleteSelected().deleteSelected(selectedRowUsername, "/oodms/database/credentials.txt");
                 
                 // Flush and Write
                 FlushAndWrite faw = new FlushAndWrite();
