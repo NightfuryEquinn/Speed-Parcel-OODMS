@@ -78,10 +78,8 @@
                               <Component id="inputConfirmPassword" alignment="0" max="32767" attributes="0"/>
                               <Component id="inputAddressScrollPanel" max="32767" attributes="0"/>
                               <Component id="inputUsername" alignment="0" max="32767" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="inputGender" alignment="0" pref="121" max="32767" attributes="0"/>
-                                  <Component id="inputAge" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="inputGender" alignment="0" max="32767" attributes="0"/>
+                              <Component id="inputAge" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

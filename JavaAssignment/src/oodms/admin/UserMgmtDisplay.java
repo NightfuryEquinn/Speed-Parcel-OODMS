@@ -1,9 +1,12 @@
 package oodms.admin;
 
 import java.awt.Font;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.Create3DArray;
+import oodms.oop.DeleteSelected;
+import oodms.oop.FlushAndWrite;
 import oodms.oop.SearchFileData;
 
 public class UserMgmtDisplay extends javax.swing.JFrame {
@@ -213,10 +216,12 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
 
         inputAge.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputAge.setModel(new javax.swing.SpinnerNumberModel());
+        inputAge.setEnabled(false);
 
         inputGender.setBackground(new java.awt.Color(184, 145, 104));
         inputGender.setForeground(new java.awt.Color(76, 43, 24));
         inputGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Others" }));
+        inputGender.setEnabled(false);
 
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
@@ -247,9 +252,8 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                             .addComponent(inputEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                             .addComponent(inputContact)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(inputGender, javax.swing.GroupLayout.Alignment.LEADING, 0, 100, Short.MAX_VALUE)
-                                .addComponent(inputAge, javax.swing.GroupLayout.Alignment.LEADING)))))
+                            .addComponent(inputGender, 0, 208, Short.MAX_VALUE)
+                            .addComponent(inputAge))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         backgroundPanel2Layout.setVerticalGroup(
@@ -423,7 +427,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         inputContact.setEditable(true);
         inputAddress.setEditable(true);
         inputAge.setEnabled(true);
-        inputGender.setEditable(true);
+        inputGender.setEnabled(true);
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
@@ -431,7 +435,59 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // Confirm Message
+        String confirmMessage = "Are you sure to delete user " + inputUsername.getText() + "?";
+        int result = JOptionPane.showConfirmDialog(null, confirmMessage, "Confirm Delete?", JOptionPane.YES_NO_OPTION);
         
+        // Information Message
+        String infoMessage = "User " + inputUsername.getText() + " has been successfully deleted.";
+        
+        switch (result) {
+            // Delete the selected user
+            case JOptionPane.YES_OPTION -> {
+                // Get the selected row
+                int selectedRowIndex = displayUserTable.getSelectedRow();
+                
+                // Get the username of selected row
+                String selectedRowUsername = (String) displayUserTable.getValueAt(selectedRowIndex, 0);
+                
+                // Return a multidimensional of excluded selected row
+                String[][] ds = new DeleteSelected().deleteUsername(selectedRowUsername, "/oodms/database/credentials.txt");
+                
+                // Flush and Write
+                FlushAndWrite faw = new FlushAndWrite();
+                faw.flushAndWrite(ds, "src/oodms/database/credentials.txt");
+                
+                // Reset Search and Details fields
+                inputSearchUsername.setText("");
+                
+                inputUsername.setText("");
+                inputEmail.setText("");
+                inputContact.setText("");
+                inputAddress.setText("");
+                inputAge.setValue(0);
+                inputGender.setSelectedItem("Male");
+                
+                // Disable buttons
+                addBtn.setEnabled(false);
+                editBtn.setEnabled(false);
+                saveBtn.setEnabled(false);
+                deleteBtn.setEnabled(false);
+                
+                // Clear table
+                DefaultTableModel model = (DefaultTableModel) displayUserTable.getModel();
+                model.setRowCount(0);
+                
+                // Information Message
+                JOptionPane.showMessageDialog(null, infoMessage, "Delete Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+            // Do Nothing
+            case JOptionPane.NO_OPTION -> System.out.println("Do nothing");
+            
+            // Default
+            default -> System.out.println("Closed and do nothing");
+        }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -452,7 +508,15 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         inputContact.setEditable(false);
         inputAddress.setEditable(false);
         inputAge.setEnabled(false);
-        inputGender.setEditable(false);
+        inputGender.setEnabled(false);
+        
+        // Reset Search and Details fields
+        inputUsername.setText("");
+        inputEmail.setText("");
+        inputContact.setText("");
+        inputAddress.setText("");
+        inputAge.setValue(0);
+        inputGender.setSelectedItem("Male");
 
         // Get Table Model
         DefaultTableModel userTable = (DefaultTableModel) displayUserTable.getModel();
