@@ -450,8 +450,9 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         String getGender = inputGender.getSelectedItem().toString();
 
         // Assume password and confirm password are the same
+        // Check for username and email uniqueness
         CheckUsernamePassword checkNewUser = new CheckUsernamePassword();
-        boolean credentialsAdminChecker = checkNewUser.credentialsAdminChecker(getUsername);
+        boolean credentialsAdminChecker = checkNewUser.credentialsAdminChecker(getUsername, getEmail);
         
         // Enable the fields first
         if(inputUsername.isEditable()) {
@@ -546,42 +547,49 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 // Write into an array
                 String[] newChangesArr = new String[] {getUsername, getEmail, getContact, getAddress, getAge, getGender};
 
-                // Save changes into text file
-                SaveSelected ss = new SaveSelected();
-                String[][] newChangesArrToSave = ss.saveUsername(newChangesArr, getOldUsername, "/oodms/database/credentials.txt");
+                // Check for username and email uniqueness
+                boolean credentialsAdminChecker = new CheckUsernamePassword().credentialsAdminChecker(getUsername, getEmail);
+                
+                if(!credentialsAdminChecker) {
+                    // Save changes into text file
+                    SaveSelected ss = new SaveSelected();
+                    String[][] newChangesArrToSave = ss.saveUsername(newChangesArr, getOldUsername, "/oodms/database/credentials.txt");
 
-                // Confirm save changes
-                new FlushAndWrite().flushAndWrite(newChangesArrToSave, "src/oodms/database/credentials.txt");
-                
-                // Reset Search and Details fields
-                inputSearchUsername.setText("");
-                
-                inputUsername.setText("");
-                inputEmail.setText("");
-                inputContact.setText("");
-                inputAddress.setText("");
-                inputAge.setValue(0);
-                inputGender.setSelectedItem("Male");
-                
-                // Disable editing
-                inputUsername.setEditable(false);
-                inputEmail.setEditable(false);
-                inputContact.setEditable(false);
-                inputAddress.setEditable(false);
-                inputAge.setEnabled(false);
-                inputGender.setEnabled(false);
-                
-                // Disable buttons
-                editBtn.setEnabled(false);
-                saveBtn.setEnabled(false);
-                deleteBtn.setEnabled(false);
-                
-                // Clear table
-                DefaultTableModel model = (DefaultTableModel) displayUserTable.getModel();
-                model.setRowCount(0);
-                
-                // Information message
-                JOptionPane.showMessageDialog(null, "Changes has been saved.", "Save Successful", JOptionPane.INFORMATION_MESSAGE);
+                    // Confirm save changes
+                    new FlushAndWrite().flushAndWrite(newChangesArrToSave, "src/oodms/database/credentials.txt");
+
+                    // Reset Search and Details fields
+                    inputSearchUsername.setText("");
+
+                    inputUsername.setText("");
+                    inputEmail.setText("");
+                    inputContact.setText("");
+                    inputAddress.setText("");
+                    inputAge.setValue(0);
+                    inputGender.setSelectedItem("Male");
+
+                    // Disable editing
+                    inputUsername.setEditable(false);
+                    inputEmail.setEditable(false);
+                    inputContact.setEditable(false);
+                    inputAddress.setEditable(false);
+                    inputAge.setEnabled(false);
+                    inputGender.setEnabled(false);
+
+                    // Disable buttons
+                    editBtn.setEnabled(false);
+                    saveBtn.setEnabled(false);
+                    deleteBtn.setEnabled(false);
+
+                    // Clear table
+                    DefaultTableModel model = (DefaultTableModel) displayUserTable.getModel();
+                    model.setRowCount(0);
+
+                    // Information message
+                    JOptionPane.showMessageDialog(null, "Changes has been saved.", "Save Successful", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username or email existed. Please change username or email.", "Username or Email Existed", JOptionPane.ERROR_MESSAGE);
+                }
             }
             
             // Do nothing

@@ -25,8 +25,8 @@ public class CheckUsernamePassword {
         return checkSimilarity;
     }
     
-    // For admin use
-    public boolean credentialsAdminChecker(String username) {
+    // For admin use to check username
+    public boolean credentialsAdminChecker(String username, String email) {
         // Declare variable to check for similarity in username and password confirmation
         boolean checkSimilarity = false;
         
@@ -35,7 +35,7 @@ public class CheckUsernamePassword {
 
         // Check for similarity in Username and Password confirmation
         for(String[] singleData : credentialsArr) {
-            if(singleData[0].equalsIgnoreCase(username)) {
+            if((singleData[0].equalsIgnoreCase(username)) || (singleData[2].equalsIgnoreCase(email))) {
                 checkSimilarity = true;
                 break;
             }
