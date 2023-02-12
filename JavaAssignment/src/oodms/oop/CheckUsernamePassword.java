@@ -2,6 +2,7 @@ package oodms.oop;
 
 public class CheckUsernamePassword {
 
+    // For public use
     public boolean credentialsChecker(String username, String password, String confirmPassword) {
         // Declare variable to check for similarity in username and password confirmation
         boolean checkSimilarity = false;
@@ -24,6 +25,26 @@ public class CheckUsernamePassword {
         return checkSimilarity;
     }
     
+    // For admin use
+    public boolean credentialsAdminChecker(String username) {
+        // Declare variable to check for similarity in username and password confirmation
+        boolean checkSimilarity = false;
+        
+        // OOP Method - Get Multidimensional Array
+        String[][] credentialsArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
+
+        // Check for similarity in Username and Password confirmation
+        for(String[] singleData : credentialsArr) {
+            if(singleData[0].equalsIgnoreCase(username)) {
+                checkSimilarity = true;
+                break;
+            }
+        }
+        
+        return checkSimilarity;
+    }
+    
+    // Check user login
     public boolean loginChecker(String username, String password) {
         // Declare variable to validate existing username and password
         boolean checkUserPass = false;

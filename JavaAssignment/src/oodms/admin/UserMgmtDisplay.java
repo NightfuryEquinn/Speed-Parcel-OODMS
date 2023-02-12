@@ -1,10 +1,11 @@
 package oodms.admin;
 
 import java.awt.Font;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import oodms.oop.AddNewCustomer;
+import oodms.oop.CheckUsernamePassword;
 import oodms.oop.Create3DArray;
 import oodms.oop.DeleteSelected;
 import oodms.oop.FlushAndWrite;
@@ -18,12 +19,6 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
      */
     public UserMgmtDisplay() {
         initComponents();
-        
-        // Disable button by default
-        addBtn.setEnabled(false);
-        editBtn.setEnabled(false);
-        saveBtn.setEnabled(false);
-        deleteBtn.setEnabled(false);
     }
 
     /**
@@ -61,6 +56,8 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         genderLabel = new javax.swing.JLabel();
         inputAge = new javax.swing.JSpinner();
         inputGender = new javax.swing.JComboBox<>();
+        passwordLabel = new javax.swing.JLabel();
+        inputPassword = new javax.swing.JTextField();
         listUserLabel = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -182,6 +179,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         editBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         editBtn.setForeground(new java.awt.Color(76, 43, 24));
         editBtn.setText("Edit");
+        editBtn.setEnabled(false);
         editBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editBtnActionPerformed(evt);
@@ -192,6 +190,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         saveBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         saveBtn.setForeground(new java.awt.Color(76, 43, 24));
         saveBtn.setText("Save");
+        saveBtn.setEnabled(false);
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveBtnActionPerformed(evt);
@@ -202,6 +201,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         deleteBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         deleteBtn.setForeground(new java.awt.Color(76, 43, 24));
         deleteBtn.setText("Delete");
+        deleteBtn.setEnabled(false);
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
@@ -225,6 +225,15 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         inputGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Others" }));
         inputGender.setEnabled(false);
 
+        passwordLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        passwordLabel.setForeground(new java.awt.Color(76, 43, 24));
+        passwordLabel.setText("Password:");
+
+        inputPassword.setEditable(false);
+        inputPassword.setBackground(new java.awt.Color(184, 145, 104));
+        inputPassword.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputPassword.setForeground(new java.awt.Color(76, 43, 24));
+
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
         backgroundPanel2Layout.setHorizontalGroup(
@@ -247,15 +256,17 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                             .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(addressLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(ageLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(genderLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(genderLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(inputUsername)
-                            .addComponent(inputEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                            .addComponent(inputEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                             .addComponent(inputContact)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(inputGender, 0, 208, Short.MAX_VALUE)
-                            .addComponent(inputAge))))
+                            .addComponent(inputAge)
+                            .addComponent(inputPassword))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         backgroundPanel2Layout.setVerticalGroup(
@@ -265,6 +276,10 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usernameLabel)
                     .addComponent(inputUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passwordLabel)
+                    .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailLabel)
@@ -419,7 +434,84 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        // Set input from user
+        String getUsername = inputUsername.getText();
+
+        String getPassword = inputPassword.getText();
+
+        String getEmail = inputEmail.getText();
+
+        String getContact = inputContact.getText();
+
+        String getAddress = inputAddress.getText();
+
+        String getAge = inputAge.getValue().toString();
+
+        String getGender = inputGender.getSelectedItem().toString();
+
+        // Assume password and confirm password are the same
+        CheckUsernamePassword checkNewUser = new CheckUsernamePassword();
+        boolean credentialsAdminChecker = checkNewUser.credentialsAdminChecker(getUsername);
         
+        // Enable the fields first
+        if(inputUsername.isEditable()) {
+            // Check for empty text field
+            if((!getUsername.equals("")) && (!getPassword.equals("")) && (!getEmail.equals("")) && (!getContact.equals("")) && (!getAddress.equals(""))) {
+                if(!credentialsAdminChecker) {
+                    System.out.println("Added new user");
+
+                    // Create a popup dialog message box
+                    JOptionPane.showMessageDialog(null, "New account has been created", "Account Created", JOptionPane.INFORMATION_MESSAGE);
+
+                    AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress, getAge, getGender);
+                
+                    // Reset Search and Details fields
+                    inputUsername.setText("");
+                    inputPassword.setText("");
+                    inputEmail.setText("");
+                    inputContact.setText("");
+                    inputAddress.setText("");
+                    inputAge.setValue(0);
+                    inputGender.setSelectedItem("Male");
+
+                    // Disable editing
+                    inputUsername.setEditable(false);
+                    inputPassword.setEditable(false);
+                    inputEmail.setEditable(false);
+                    inputContact.setEditable(false);
+                    inputAddress.setEditable(false);
+                    inputAge.setEnabled(false);
+                    inputGender.setEnabled(false);
+
+                    // Disable buttons
+                    editBtn.setEnabled(false);
+                    saveBtn.setEnabled(false);
+                    deleteBtn.setEnabled(false);
+                } else {
+                    // Create a popup dialog message box
+                    JOptionPane.showMessageDialog(null, "Account existed.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Some fields are empty or no values.", "Error creating new account", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            // Clear all values of text field and make it editable
+            inputUsername.setText("");
+            inputPassword.setText("");
+            inputEmail.setText("");
+            inputContact.setText("");
+            inputAddress.setText("");
+            inputAge.setValue(0);
+            inputGender.setSelectedItem("Male");
+                    
+            inputUsername.setEditable(true);
+            inputPassword.setEditable(true);
+            inputEmail.setEditable(true);
+            inputContact.setEditable(true);
+            inputAddress.setEditable(true);
+            inputAge.setEnabled(true);
+            inputGender.setEnabled(true);
+        }
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
@@ -433,25 +525,71 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // Get Text Field value
-        String getUsername = inputUsername.getText();
-        String getEmail = inputEmail.getText();
-        String getContact = inputContact.getText();
-        String getAddress = inputAddress.getText();
-        String getAge = inputAge.getValue().toString();
-        String getGender = inputGender.getSelectedItem().toString();
-        
-        // Write into an array
-        String[] newChangesArr = new String[] {getUsername, getEmail, getContact, getAddress, getAge, getGender};
-        
         // Get old username from table to compare with existing username in text file
         String getOldUsername = displayUserTable.getValueAt(displayUserTable.getSelectedRow(), 0).toString();
         
-        // Save changes into text file
-        SaveSelected ss = new SaveSelected();
-        String[][] newChangesArrToSave = ss.saveUsername(newChangesArr, getOldUsername, "/oodms/database/credentials.txt");
-        
-        // Confirm save changes
+        // Confirm Message
+        String confirmMessage = "Save changes of user " + getOldUsername + " ?";
+        int result = JOptionPane.showConfirmDialog(null, confirmMessage, "Confirm Save?", JOptionPane.YES_NO_OPTION);
+
+        switch (result) {
+            // Save Changes
+            case JOptionPane.YES_OPTION -> {
+                // Get Text Field value
+                String getUsername = inputUsername.getText();
+                String getEmail = inputEmail.getText();
+                String getContact = inputContact.getText();
+                String getAddress = inputAddress.getText();
+                String getAge = inputAge.getValue().toString();
+                String getGender = inputGender.getSelectedItem().toString();
+
+                // Write into an array
+                String[] newChangesArr = new String[] {getUsername, getEmail, getContact, getAddress, getAge, getGender};
+
+                // Save changes into text file
+                SaveSelected ss = new SaveSelected();
+                String[][] newChangesArrToSave = ss.saveUsername(newChangesArr, getOldUsername, "/oodms/database/credentials.txt");
+
+                // Confirm save changes
+                new FlushAndWrite().flushAndWrite(newChangesArrToSave, "src/oodms/database/credentials.txt");
+                
+                // Reset Search and Details fields
+                inputSearchUsername.setText("");
+                
+                inputUsername.setText("");
+                inputEmail.setText("");
+                inputContact.setText("");
+                inputAddress.setText("");
+                inputAge.setValue(0);
+                inputGender.setSelectedItem("Male");
+                
+                // Disable editing
+                inputUsername.setEditable(false);
+                inputEmail.setEditable(false);
+                inputContact.setEditable(false);
+                inputAddress.setEditable(false);
+                inputAge.setEnabled(false);
+                inputGender.setEnabled(false);
+                
+                // Disable buttons
+                editBtn.setEnabled(false);
+                saveBtn.setEnabled(false);
+                deleteBtn.setEnabled(false);
+                
+                // Clear table
+                DefaultTableModel model = (DefaultTableModel) displayUserTable.getModel();
+                model.setRowCount(0);
+                
+                // Information message
+                JOptionPane.showMessageDialog(null, "Changes has been saved.", "Save Successful", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+            // Do nothing
+            case JOptionPane.NO_OPTION -> System.out.println("Do nothing");
+            
+            // Default
+            default -> System.out.println("Closed and do nothing");
+        }
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -488,15 +626,22 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 inputAge.setValue(0);
                 inputGender.setSelectedItem("Male");
                 
+                // Disable editing
+                inputUsername.setEditable(false);
+                inputEmail.setEditable(false);
+                inputContact.setEditable(false);
+                inputAddress.setEditable(false);
+                inputAge.setEnabled(false);
+                inputGender.setEnabled(false);
+                
                 // Disable buttons
-                addBtn.setEnabled(false);
                 editBtn.setEnabled(false);
                 saveBtn.setEnabled(false);
                 deleteBtn.setEnabled(false);
                 
                 // Clear table
-                DefaultTableModel model = (DefaultTableModel) displayUserTable.getModel();
-                model.setRowCount(0);
+                DefaultTableModel userTable = (DefaultTableModel) displayUserTable.getModel();
+                userTable.setRowCount(0);
                 
                 // Information Message
                 JOptionPane.showMessageDialog(null, infoMessage, "Delete Success", JOptionPane.INFORMATION_MESSAGE);
@@ -517,7 +662,6 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
 
     private void searchUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserBtnActionPerformed
         // Disable button
-        addBtn.setEnabled(false);
         editBtn.setEnabled(false);
         saveBtn.setEnabled(false);
         deleteBtn.setEnabled(false);
@@ -538,7 +682,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         inputAge.setValue(0);
         inputGender.setSelectedItem("Male");
 
-        // Get Table Model
+        // Clear table
         DefaultTableModel userTable = (DefaultTableModel) displayUserTable.getModel();
         userTable.setRowCount(0);
         
@@ -569,7 +713,6 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
 
     private void displayUserTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayUserTableMouseClicked
         // Enable button
-        addBtn.setEnabled(true);
         editBtn.setEnabled(true);
         saveBtn.setEnabled(true);
         deleteBtn.setEnabled(true);
@@ -652,11 +795,13 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JTextField inputContact;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JComboBox<String> inputGender;
+    private javax.swing.JTextField inputPassword;
     private javax.swing.JTextField inputSearchUsername;
     private javax.swing.JTextField inputUsername;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel listUserLabel;
+    private javax.swing.JLabel passwordLabel;
     private javax.swing.JButton saveBtn;
     private javax.swing.JButton searchUserBtn;
     private javax.swing.JLabel searchUserIDLabel;
