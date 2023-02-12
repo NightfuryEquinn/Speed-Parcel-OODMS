@@ -4,6 +4,7 @@ import oodms.oop.AddNewCustomer;
 import oodms.oop.CheckUsernamePassword;
 import javax.swing.JOptionPane;
 import oodms.admin.AdminDashboard;
+import oodms.deliver.staffDashboard;
 
 public class WelcomePage extends javax.swing.JFrame {
 
@@ -346,10 +347,6 @@ public class WelcomePage extends javax.swing.JFrame {
             if(loginChecker) {
                 System.out.println("Login successful");
                 
-                // Create a popup dialog message box
-                String message = String.join("", "Welcome back, ", String.valueOf(getUsername));
-                JOptionPane.showMessageDialog(null, message, "Login Successful", JOptionPane.INFORMATION_MESSAGE);
-                
                 // Decide which dashboard to setVisible
                 if(getUsername.toLowerCase().startsWith("admin")) {
                     System.out.println("You are admin.");
@@ -358,9 +355,17 @@ public class WelcomePage extends javax.swing.JFrame {
                     dispose();
                 } else if(getUsername.toLowerCase().startsWith("delivery")) {
                     System.out.println("You are delivery staff.");
+                    
+                    new staffDashboard().setVisible(true);
+                    dispose();
                 } else {
                     System.out.println("You are customer.");
                 }
+                
+                // Create a popup dialog message box
+                String message = String.join("", "Welcome back, ", String.valueOf(getUsername));
+                JOptionPane.showMessageDialog(null, message, "Login Successful", JOptionPane.INFORMATION_MESSAGE);
+                
             } else {
                 // Create a popup dialog mesage box
                 JOptionPane.showMessageDialog(null, "Either username or password is incorrect. Please try again", "Error", JOptionPane.ERROR_MESSAGE);

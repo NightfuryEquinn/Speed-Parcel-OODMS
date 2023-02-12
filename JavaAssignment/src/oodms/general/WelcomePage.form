@@ -76,7 +76,7 @@
                               <Component id="inputContact" alignment="1" max="32767" attributes="0"/>
                               <Component id="inputPassword" alignment="0" max="32767" attributes="0"/>
                               <Component id="inputConfirmPassword" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputAddressScrollPanel" max="32767" attributes="0"/>
+                              <Component id="inputAddressScrollPanel" pref="274" max="32767" attributes="0"/>
                               <Component id="inputUsername" alignment="0" max="32767" attributes="0"/>
                               <Component id="inputGender" alignment="0" max="32767" attributes="0"/>
                               <Component id="inputAge" alignment="0" max="32767" attributes="0"/>
