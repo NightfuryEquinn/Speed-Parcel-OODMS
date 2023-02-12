@@ -6,24 +6,28 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class Create3DArray {
-    public String[][] create3D() {
+    public String[][] create3D(String fileDirectory) {
         // Declare for multidimensional array
         String[][] credentialsArr = null;
         
         try {
             // Get file from another package
-            InputStream dataFile = Create3DArray.class.getResourceAsStream("/oodms/database/credentials.txt");
+            InputStream dataFile = Create3DArray.class.getResourceAsStream(fileDirectory);
 
             // Read file
             BufferedReader br = new BufferedReader(new InputStreamReader(dataFile));
 
             // OOP Method - Get .txt file line number
-            FileLineNumber lineLength = new FileLineNumber();
-            int lineCount = lineLength.countFileLineNumber("/oodms/database/credentials.txt");
+            FileRowColumn rowLength = new FileRowColumn();
+            int rowCount = rowLength.countFileRowNumber(fileDirectory);
+            
+            // OOP Method - Get .txt file column number
+            FileRowColumn columnLength = new FileRowColumn();
+            int colCount = columnLength.countFileColumnNumber(fileDirectory);
 
             // Create Array in Array
             String[] credentialsData;
-            credentialsArr = new String[lineCount][5];
+            credentialsArr = new String[rowCount][colCount];
 
             String line;
             int pass = 0;
