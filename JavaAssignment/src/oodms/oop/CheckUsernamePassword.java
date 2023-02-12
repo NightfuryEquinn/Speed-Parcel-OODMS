@@ -2,12 +2,13 @@ package oodms.oop;
 
 public class CheckUsernamePassword {
 
-    public boolean credentialsChecker(String username, String password, String confirmPassword, String email, String contact, String address) {
+    // For public use
+    public boolean credentialsChecker(String username, String password, String confirmPassword) {
         // Declare variable to check for similarity in username and password confirmation
         boolean checkSimilarity = false;
         
         // OOP Method - Get Multidimensional Array
-        String[][] credentialsArr = new Create3DArray().create3D();
+        String[][] credentialsArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
 
         // Check for similarity in Username and Password confirmation
         for(String[] singleData : credentialsArr) {
@@ -24,12 +25,32 @@ public class CheckUsernamePassword {
         return checkSimilarity;
     }
     
+    // For admin use to check username
+    public boolean credentialsAdminChecker(String username, String email) {
+        // Declare variable to check for similarity in username and password confirmation
+        boolean checkSimilarity = false;
+        
+        // OOP Method - Get Multidimensional Array
+        String[][] credentialsArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
+
+        // Check for similarity in Username and Password confirmation
+        for(String[] singleData : credentialsArr) {
+            if((singleData[0].equalsIgnoreCase(username)) || (singleData[2].equalsIgnoreCase(email))) {
+                checkSimilarity = true;
+                break;
+            }
+        }
+        
+        return checkSimilarity;
+    }
+    
+    // Check user login
     public boolean loginChecker(String username, String password) {
         // Declare variable to validate existing username and password
         boolean checkUserPass = false;
         
         // OOP Method - Get Multidimensional Array
-        String[][] credentialsArr = new Create3DArray().create3D();
+        String[][] credentialsArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
         
         // Check for user input and actual data
         for(String[] singleData : credentialsArr) {
