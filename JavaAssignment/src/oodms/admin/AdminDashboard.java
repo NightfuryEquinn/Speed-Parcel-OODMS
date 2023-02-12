@@ -120,7 +120,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addComponent(deliveryMgmtBtn)
                 .addGap(27, 27, 27)
                 .addComponent(feedbackMgmtBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         customerLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
