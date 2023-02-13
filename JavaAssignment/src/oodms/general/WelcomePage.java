@@ -369,6 +369,10 @@ public class WelcomePage extends javax.swing.JFrame {
             } else {
                 // Create a popup dialog mesage box
                 JOptionPane.showMessageDialog(null, "Either username or password is incorrect. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+            
+                // Clear text field
+                inputUsername.setText("");
+                inputPassword.setText("");
             }
             
         } else {
@@ -401,26 +405,28 @@ public class WelcomePage extends javax.swing.JFrame {
                 getEmail
             );
             
-            if(!credentialsChecker) {
-                System.out.println("Added new user");
-                
-                // Create a popup dialog message box
-                JOptionPane.showMessageDialog(null, "Your account has been created. Please login.", "Account Created", JOptionPane.INFORMATION_MESSAGE);
-                
-                AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress, getAge, getGender);
-            
-                // Clear text field
-                inputUsername.setText("");
-                inputPassword.setText("");
-                inputConfirmPassword.setText("");
-                inputEmail.setText("");
-                inputContact.setText("");
-                inputAddress.setText("");
-                inputAge.setValue(0);
-                inputGender.setSelectedItem("Male");
+            if((!getUsername.equals("")) && (!getPassword.equals("")) && (!getConfirmPassword.equals("")) && (!getEmail.equals("")) && (!getContact.equals("")) && (!getAddress.equals(""))) {
+                if(!credentialsChecker) {
+                    System.out.println("Added new user");
+
+                    // Create a popup dialog message box
+                    JOptionPane.showMessageDialog(null, "Your account has been created. Please login.", "Account Created", JOptionPane.INFORMATION_MESSAGE);
+
+                    AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress, getAge, getGender);
+
+                    // Clear text field
+                    inputUsername.setText("");
+                    inputPassword.setText("");
+                    inputConfirmPassword.setText("");
+                    inputEmail.setText("");
+                    inputContact.setText("");
+                    inputAddress.setText("");
+                    inputAge.setValue(0);
+                    inputGender.setSelectedItem("Male");
+                }
             } else {
                 // Create a popup dialog message box
-                JOptionPane.showMessageDialog(null, "Account existed. Please check your username and password are correct. Username can't start with Admin or Delivery.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Account with this username or email existed. Username can't start with Admin or Delivery. Ensure your password are the same.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_proceedBtnActionPerformed

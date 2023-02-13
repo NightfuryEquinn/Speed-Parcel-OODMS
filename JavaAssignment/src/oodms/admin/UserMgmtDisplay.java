@@ -434,6 +434,14 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        // Unselect Row
+        displayUserTable.clearSelection();
+        
+        // Disable button
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+
         // Set input from user
         String getUsername = inputUsername.getText();
 
@@ -455,7 +463,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         boolean credentialsAdminChecker = checkNewUser.credentialsAdminChecker(getUsername, getEmail);
         
         // Enable the fields first
-        if(inputUsername.isEditable()) {
+        if(inputPassword.isEditable()) {
             // Check for empty text field
             if((!getUsername.equals("")) && (!getPassword.equals("")) && (!getEmail.equals("")) && (!getContact.equals("")) && (!getAddress.equals(""))) {
                 if(!credentialsAdminChecker) {
@@ -518,11 +526,16 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         // Enable editing
         inputUsername.setEditable(true);
+        inputPassword.setText("");
+        inputPassword.setEditable(false);
         inputEmail.setEditable(true);
         inputContact.setEditable(true);
         inputAddress.setEditable(true);
         inputAge.setEnabled(true);
         inputGender.setEnabled(true);
+        
+        // Enable button
+        saveBtn.setEnabled(true);
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
@@ -562,6 +575,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                     inputSearchUsername.setText("");
 
                     inputUsername.setText("");
+                    inputPassword.setText("");
                     inputEmail.setText("");
                     inputContact.setText("");
                     inputAddress.setText("");
@@ -570,6 +584,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
 
                     // Disable editing
                     inputUsername.setEditable(false);
+                    inputPassword.setEditable(false);
                     inputEmail.setEditable(false);
                     inputContact.setEditable(false);
                     inputAddress.setEditable(false);
@@ -628,6 +643,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 inputSearchUsername.setText("");
                 
                 inputUsername.setText("");
+                inputPassword.setText("");
                 inputEmail.setText("");
                 inputContact.setText("");
                 inputAddress.setText("");
@@ -636,6 +652,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 
                 // Disable editing
                 inputUsername.setEditable(false);
+                inputPassword.setEditable(false);
                 inputEmail.setEditable(false);
                 inputContact.setEditable(false);
                 inputAddress.setEditable(false);
@@ -676,6 +693,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         
         // Disable editing
         inputUsername.setEditable(false);
+        inputPassword.setEditable(false);
         inputEmail.setEditable(false);
         inputContact.setEditable(false);
         inputAddress.setEditable(false);
@@ -684,6 +702,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         
         // Reset Search and Details fields
         inputUsername.setText("");
+        inputPassword.setText("");
         inputEmail.setText("");
         inputContact.setText("");
         inputAddress.setText("");
@@ -722,16 +741,19 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     private void displayUserTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayUserTableMouseClicked
         // Enable button
         editBtn.setEnabled(true);
-        saveBtn.setEnabled(true);
         deleteBtn.setEnabled(true);
+        
+        // Disbale button
+        saveBtn.setEnabled(false);
 
         // Disable editing
         inputUsername.setEditable(false);
+        inputPassword.setEditable(false);
         inputEmail.setEditable(false);
         inputContact.setEditable(false);
         inputAddress.setEditable(false);
         inputAge.setEnabled(false);
-        inputGender.setEditable(false);
+        inputGender.setEnabled(false);
 
         // Get the selected row number
         int selectedRow = displayUserTable.getSelectedRow();
