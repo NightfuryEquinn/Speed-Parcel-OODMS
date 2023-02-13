@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.AddNewCustomer;
-import oodms.oop.CheckUsernamePassword;
+import oodms.oop.CheckSimilarity;
 import oodms.oop.Create3DArray;
 import oodms.oop.DeleteSelected;
 import oodms.oop.FlushAndWrite;
@@ -451,7 +451,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
 
         // Assume password and confirm password are the same
         // Check for username and email uniqueness
-        CheckUsernamePassword checkNewUser = new CheckUsernamePassword();
+        CheckSimilarity checkNewUser = new CheckSimilarity();
         boolean credentialsAdminChecker = checkNewUser.credentialsAdminChecker(getUsername, getEmail);
         
         // Enable the fields first
@@ -548,12 +548,12 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 String[] newChangesArr = new String[] {getUsername, getEmail, getContact, getAddress, getAge, getGender};
 
                 // Check for username and email uniqueness
-                boolean credentialsAdminChecker = new CheckUsernamePassword().credentialsAdminChecker(getUsername, getEmail);
+                boolean credentialsAdminChecker = new CheckSimilarity().credentialsAdminChecker(getUsername, getEmail);
                 
                 if(!credentialsAdminChecker) {
                     // Save changes into text file
                     SaveSelected ss = new SaveSelected();
-                    String[][] newChangesArrToSave = ss.saveUsername(newChangesArr, getOldUsername, "/oodms/database/credentials.txt");
+                    String[][] newChangesArrToSave = ss.saveUsername(newChangesArr, getOldUsername);
 
                     // Confirm save changes
                     new FlushAndWrite().flushAndWrite(newChangesArrToSave, "src/oodms/database/credentials.txt");
@@ -709,7 +709,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
             }
         } else {
             // OOP Method - Get Searched User Data into Multidimensional Array
-            String[][] searchedAllUserArr = new SearchFileData().searchUsername(getKeyword, "/oodms/database/credentials.txt");
+            String[][] searchedAllUserArr = new SearchFileData().searchData(getKeyword, "/oodms/database/credentials.txt");
             
             // Loop all data
             for (String[] searchedUserArr : searchedAllUserArr) {

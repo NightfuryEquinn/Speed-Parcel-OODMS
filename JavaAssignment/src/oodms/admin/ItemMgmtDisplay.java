@@ -40,7 +40,6 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         backgroundPanel2 = new javax.swing.JPanel();
         itemNameLabel = new javax.swing.JLabel();
         priceLabel = new javax.swing.JLabel();
-        insertImageLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inputDescription = new javax.swing.JTextArea();
@@ -50,7 +49,6 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         editBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
-        insertImageBtn = new javax.swing.JButton();
         itemCategoryLabel = new javax.swing.JLabel();
         inputItemCategory = new javax.swing.JComboBox<>();
         backBtn = new javax.swing.JButton();
@@ -123,10 +121,6 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         priceLabel.setForeground(new java.awt.Color(76, 43, 24));
         priceLabel.setText("Price (RM):");
 
-        insertImageLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        insertImageLabel.setForeground(new java.awt.Color(76, 43, 24));
-        insertImageLabel.setText("Insert Image:");
-
         descriptionLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         descriptionLabel.setForeground(new java.awt.Color(76, 43, 24));
         descriptionLabel.setText("Description:");
@@ -187,16 +181,6 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
             }
         });
 
-        insertImageBtn.setBackground(new java.awt.Color(184, 145, 104));
-        insertImageBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        insertImageBtn.setForeground(new java.awt.Color(76, 43, 24));
-        insertImageBtn.setText("Add Image");
-        insertImageBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertImageBtnActionPerformed(evt);
-            }
-        });
-
         itemCategoryLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         itemCategoryLabel.setForeground(new java.awt.Color(76, 43, 24));
         itemCategoryLabel.setText("Category:");
@@ -222,17 +206,16 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(deleteBtn))
                     .addGroup(backgroundPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(priceLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(itemNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(descriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(insertImageLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(itemCategoryLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(inputPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(insertImageBtn)
                             .addComponent(inputItemName)
                             .addComponent(inputItemCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(14, Short.MAX_VALUE))
@@ -253,23 +236,16 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
                     .addComponent(itemCategoryLabel)
                     .addComponent(inputItemCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(insertImageLabel)
-                    .addComponent(insertImageBtn))
-                .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                        .addComponent(descriptionLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addBtn)
-                            .addComponent(editBtn)
-                            .addComponent(saveBtn)
-                            .addComponent(deleteBtn))
-                        .addGap(14, 14, 14))
-                    .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(93, Short.MAX_VALUE))))
+                    .addComponent(descriptionLabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addBtn)
+                    .addComponent(editBtn)
+                    .addComponent(saveBtn)
+                    .addComponent(deleteBtn))
+                .addGap(14, 14, 14))
         );
 
         backBtn.setBackground(new java.awt.Color(184, 145, 104));
@@ -287,17 +263,17 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         displayItemTable.setForeground(new java.awt.Color(76, 43, 24));
         displayItemTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"AC0001", "Fountain Pen", "Accessory", null, "High-class fountain pen. Black ink.",  new Integer(599)},
-                {"FB0001", "Premium Abalone", "Food & Beverages", null, "Imported from Shandong, China.",  new Integer(79)},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {"Fountain Pen",  new Integer(599), "Accessory", "High-class fountain pen. Black ink."},
+                {"Premium Abalone",  new Integer(79), "Food & Beverages", "Imported from Shandong, China."},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Item ID", "Item Name", "Category", "Image", "Description", "Price"
+                "Item Name", "Price", "Category", "Description"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -315,12 +291,10 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         // Change Table Column Width
         TableColumnModel columnModel = displayItemTable.getColumnModel();
 
-        columnModel.getColumn(0).setPreferredWidth(100);
-        columnModel.getColumn(1).setPreferredWidth(150);
+        columnModel.getColumn(0).setPreferredWidth(150);
+        columnModel.getColumn(1).setPreferredWidth(75);
         columnModel.getColumn(2).setPreferredWidth(200);
-        columnModel.getColumn(3).setPreferredWidth(100);
-        columnModel.getColumn(4).setPreferredWidth(275);
-        columnModel.getColumn(5).setPreferredWidth(75);
+        columnModel.getColumn(3).setPreferredWidth(275);
 
         javax.swing.GroupLayout itemMgmtPanelLayout = new javax.swing.GroupLayout(itemMgmtPanel);
         itemMgmtPanel.setLayout(itemMgmtPanelLayout);
@@ -396,10 +370,6 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteBtnActionPerformed
 
-    private void insertImageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertImageBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_insertImageBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -450,8 +420,6 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JTextField inputItemID;
     private javax.swing.JTextField inputItemName;
     private javax.swing.JTextField inputPrice;
-    private javax.swing.JButton insertImageBtn;
-    private javax.swing.JLabel insertImageLabel;
     private javax.swing.JLabel itemCategoryLabel;
     private javax.swing.JLabel itemMgmtLabel;
     private javax.swing.JPanel itemMgmtPanel;

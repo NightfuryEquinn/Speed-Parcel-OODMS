@@ -1,7 +1,7 @@
 package oodms.general;
 
 import oodms.oop.AddNewCustomer;
-import oodms.oop.CheckUsernamePassword;
+import oodms.oop.CheckSimilarity;
 import javax.swing.JOptionPane;
 import oodms.admin.AdminDashboard;
 import oodms.deliver.staffDashboard;
@@ -338,7 +338,7 @@ public class WelcomePage extends javax.swing.JFrame {
             char[] targetPassword = inputPassword.getPassword();
             String getPassword = new String(targetPassword);
             
-            CheckUsernamePassword checkExistingUser = new CheckUsernamePassword();
+            CheckSimilarity checkExistingUser = new CheckSimilarity();
             boolean loginChecker = checkExistingUser.loginChecker(
                 getUsername, 
                 getPassword
@@ -393,11 +393,12 @@ public class WelcomePage extends javax.swing.JFrame {
             
             String getGender = inputGender.getSelectedItem().toString();
             
-            CheckUsernamePassword checkNewUser = new CheckUsernamePassword();
+            CheckSimilarity checkNewUser = new CheckSimilarity();
             boolean credentialsChecker = checkNewUser.credentialsChecker(
                 getUsername, 
                 getPassword, 
-                getConfirmPassword
+                getConfirmPassword,
+                getEmail
             );
             
             if(!credentialsChecker) {
@@ -407,6 +408,16 @@ public class WelcomePage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Your account has been created. Please login.", "Account Created", JOptionPane.INFORMATION_MESSAGE);
                 
                 AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress, getAge, getGender);
+            
+                // Clear text field
+                inputUsername.setText("");
+                inputPassword.setText("");
+                inputConfirmPassword.setText("");
+                inputEmail.setText("");
+                inputContact.setText("");
+                inputAddress.setText("");
+                inputAge.setValue(0);
+                inputGender.setSelectedItem("Male");
             } else {
                 // Create a popup dialog message box
                 JOptionPane.showMessageDialog(null, "Account existed. Please check your username and password are correct. Username can't start with Admin or Delivery.", "Error", JOptionPane.ERROR_MESSAGE);

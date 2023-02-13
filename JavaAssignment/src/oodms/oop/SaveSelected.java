@@ -1,10 +1,12 @@
 package oodms.oop;
 
+import java.util.Arrays;
+
 public class SaveSelected {
 
-    public String[][] saveUsername(String[] newChangesArr, String compareOldUsername, String fileDirectory) {
+    public String[][] saveUsername(String[] newChangesArr, String compareOldUsername) {
         // OOP Method - Get multidimensional array
-        String[][] saveFileArr = new Create3DArray().create3D(fileDirectory);
+        String[][] saveFileArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
 
         // Compare value of text field with value of text file
         for(int i = 0; i < saveFileArr.length; i++) {
@@ -13,6 +15,28 @@ public class SaveSelected {
                 System.arraycopy(newChangesArr, 1, saveFileArr[i], 2, 5);
             }
         }
+        
+        return saveFileArr;
+    }
+    
+    public String[][] saveCategory(String[] newChangesArr, String compareOldCategory) {
+        String[][] saveFileArr = new Create3DArray().create3D("/oodms/database/category.txt");
+        String[][] itemFileArr = new Create3DArray().create3D("/oodms/database/item.txt");
+        
+        for(int i = 0; i < saveFileArr.length; i++) {
+            if(saveFileArr[i][0].equalsIgnoreCase(compareOldCategory)) {
+                System.arraycopy(newChangesArr, 0, saveFileArr[i], 0, 1);
+            }
+        }
+        
+        // Change item category related
+        for(int i = 0; i < itemFileArr.length; i++) {
+            if(itemFileArr[i][2].equalsIgnoreCase(compareOldCategory)) {
+                itemFileArr[i][2] = newChangesArr[0];
+            }
+        }
+        
+        new FlushAndWrite().flushAndWrite(itemFileArr, "src/oodms/database/item.txt");
         
         return saveFileArr;
     }

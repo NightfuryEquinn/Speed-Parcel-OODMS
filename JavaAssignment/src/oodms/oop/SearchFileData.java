@@ -2,7 +2,7 @@ package oodms.oop;
 
 public class SearchFileData {
 
-    public String[][] searchUsername(String keyword, String fileDirectory) {
+    public String[][] searchData(String keyword, String fileDirectory) {
         String[][] returnSearchArr;
         
         // OOP Method - Get Multidimensional Array
@@ -11,7 +11,7 @@ public class SearchFileData {
         int countCol = new FileRowColumn().countFileColumnNumber(fileDirectory);
         int countReturnRow = 0;
 
-        // Search Username Function
+        // Search Function
         for(String[] dataArr : searchFileArr) {
             if(dataArr[0].startsWith(keyword)) {
                 countReturnRow++;
