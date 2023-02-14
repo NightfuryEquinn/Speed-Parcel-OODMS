@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class CountChildren {
 
-    public String[][] getCountChildren(String fileDirectory) {
+    public String[][] getCountChildren(String fileDirectory, int parentPositionInFile) {
         String[][] parentChildrenCountArr;
         
         String[][] getItemArr = new Create3DArray().create3D(fileDirectory);
@@ -15,7 +15,7 @@ public class CountChildren {
         String[] childrenCatArr = new String[getItemArr.length];
         
         for(int i = 0; i < childrenCatArr.length; i++) {
-            childrenCatArr[i] = getItemArr[i][2];
+            childrenCatArr[i] = getItemArr[i][parentPositionInFile];
         }
         
         // Count the appearance of each category using HashMap

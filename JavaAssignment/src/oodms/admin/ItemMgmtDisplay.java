@@ -1,16 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package oodms.admin;
 
 import java.awt.Font;
+import java.util.Arrays;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import oodms.oop.CountChildren;
+import oodms.oop.Create3DArray;
+import oodms.oop.FileRowColumn;
+import oodms.oop.SearchFileData;
 
-/**
- *
- * @author User
- */
 public class ItemMgmtDisplay extends javax.swing.JFrame {
 
     /**
@@ -18,6 +16,18 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
      */
     public ItemMgmtDisplay() {
         initComponents();
+        
+        // Setup category for filter category and item category
+        String[][] getCategoryAvailable = new CountChildren().getCountChildren("/oodms/database/item.txt", 2);
+        
+        // Include a default no category
+        inputFilterCat.addItem("");
+        inputItemCategory.addItem("");
+        
+        for(String[] getCategory : getCategoryAvailable) {
+            inputFilterCat.addItem(getCategory[0]);
+            inputItemCategory.addItem(getCategory[0]);
+        }
     }
 
     /**
@@ -34,8 +44,10 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         searchItemLabel = new javax.swing.JLabel();
         backgroundPanel1 = new javax.swing.JPanel();
         searchItemIDLabel = new javax.swing.JLabel();
-        inputItemID = new javax.swing.JTextField();
-        searchItemIDBtn = new javax.swing.JButton();
+        inputSearchItem = new javax.swing.JTextField();
+        searchItemBtn = new javax.swing.JButton();
+        filterCatLabel = new javax.swing.JLabel();
+        inputFilterCat = new javax.swing.JComboBox<>();
         detailLabel = new javax.swing.JLabel();
         backgroundPanel2 = new javax.swing.JPanel();
         itemNameLabel = new javax.swing.JLabel();
@@ -72,16 +84,29 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
 
         searchItemIDLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         searchItemIDLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchItemIDLabel.setText("Enter ID:");
+        searchItemIDLabel.setText("Enter Item:");
 
-        inputItemID.setBackground(new java.awt.Color(184, 145, 104));
-        inputItemID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputItemID.setForeground(new java.awt.Color(76, 43, 24));
+        inputSearchItem.setBackground(new java.awt.Color(184, 145, 104));
+        inputSearchItem.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputSearchItem.setForeground(new java.awt.Color(76, 43, 24));
 
-        searchItemIDBtn.setBackground(new java.awt.Color(184, 145, 104));
-        searchItemIDBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        searchItemIDBtn.setForeground(new java.awt.Color(76, 43, 24));
-        searchItemIDBtn.setText("Search");
+        searchItemBtn.setBackground(new java.awt.Color(184, 145, 104));
+        searchItemBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        searchItemBtn.setForeground(new java.awt.Color(76, 43, 24));
+        searchItemBtn.setText("Search");
+        searchItemBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchItemBtnActionPerformed(evt);
+            }
+        });
+
+        filterCatLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        filterCatLabel.setForeground(new java.awt.Color(76, 43, 24));
+        filterCatLabel.setText("Filter Category:");
+
+        inputFilterCat.setBackground(new java.awt.Color(184, 145, 104));
+        inputFilterCat.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputFilterCat.setForeground(new java.awt.Color(76, 43, 24));
 
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
@@ -89,12 +114,19 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(searchItemIDLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputItemID, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(searchItemIDBtn)
-                .addGap(16, 16, 16))
+                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                        .addComponent(filterCatLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(inputFilterCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                        .addComponent(searchItemIDLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(inputSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchItemBtn)
+                        .addGap(16, 16, 16))))
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,8 +134,12 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchItemIDLabel)
-                    .addComponent(inputItemID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchItemIDBtn))
+                    .addComponent(inputSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchItemBtn))
+                .addGap(18, 18, 18)
+                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(filterCatLabel)
+                    .addComponent(inputFilterCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -125,6 +161,7 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         descriptionLabel.setForeground(new java.awt.Color(76, 43, 24));
         descriptionLabel.setText("Description:");
 
+        inputDescription.setEditable(false);
         inputDescription.setBackground(new java.awt.Color(184, 145, 104));
         inputDescription.setColumns(20);
         inputDescription.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
@@ -133,10 +170,12 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         inputDescription.setRows(5);
         jScrollPane1.setViewportView(inputDescription);
 
+        inputItemName.setEditable(false);
         inputItemName.setBackground(new java.awt.Color(184, 145, 104));
         inputItemName.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputItemName.setForeground(new java.awt.Color(76, 43, 24));
 
+        inputPrice.setEditable(false);
         inputPrice.setBackground(new java.awt.Color(184, 145, 104));
         inputPrice.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputPrice.setForeground(new java.awt.Color(76, 43, 24));
@@ -155,6 +194,7 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         editBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         editBtn.setForeground(new java.awt.Color(76, 43, 24));
         editBtn.setText("Edit");
+        editBtn.setEnabled(false);
         editBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editBtnActionPerformed(evt);
@@ -165,6 +205,7 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         saveBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         saveBtn.setForeground(new java.awt.Color(76, 43, 24));
         saveBtn.setText("Save");
+        saveBtn.setEnabled(false);
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveBtnActionPerformed(evt);
@@ -175,6 +216,7 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         deleteBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         deleteBtn.setForeground(new java.awt.Color(76, 43, 24));
         deleteBtn.setText("Delete");
+        deleteBtn.setEnabled(false);
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
@@ -188,7 +230,7 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         inputItemCategory.setBackground(new java.awt.Color(184, 145, 104));
         inputItemCategory.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputItemCategory.setForeground(new java.awt.Color(76, 43, 24));
-        inputItemCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accessory", "Food & Beverages" }));
+        inputItemCategory.setEnabled(false);
 
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
@@ -263,8 +305,6 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         displayItemTable.setForeground(new java.awt.Color(76, 43, 24));
         displayItemTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Fountain Pen",  new Integer(599), "Accessory", "High-class fountain pen. Black ink."},
-                {"Premium Abalone",  new Integer(79), "Food & Beverages", "Imported from Shandong, China."},
                 {null, null, null, null},
                 {null, null, null, null}
             },
@@ -284,6 +324,11 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         displayItemTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
         displayItemTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
         displayItemTable.setShowVerticalLines(true);
+        displayItemTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                displayItemTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(displayItemTable);
         // Change Table Header Font
         displayItemTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
@@ -301,43 +346,41 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         itemMgmtPanelLayout.setHorizontalGroup(
             itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemMgmtPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(detailLabel)
-                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(backBtn))
-                    .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(itemMgmtLabel)
-                        .addComponent(searchItemLabel)
-                        .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20)
+                .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(itemMgmtLabel)
+                    .addComponent(searchItemLabel)
+                    .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(detailLabel)
+                    .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(listItemLabel)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44))
+                .addGap(43, 43, 43))
         );
         itemMgmtPanelLayout.setVerticalGroup(
             itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemMgmtPanelLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+            .addGroup(itemMgmtPanelLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addComponent(itemMgmtLabel)
                 .addGap(14, 14, 14)
                 .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchItemLabel)
                     .addComponent(listItemLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(itemMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(itemMgmtPanelLayout.createSequentialGroup()
                         .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(detailLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(backBtn)
-                .addGap(18, 18, 18))
+                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(backBtn))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -369,6 +412,93 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void displayItemTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayItemTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_displayItemTableMouseClicked
+
+    private void searchItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchItemBtnActionPerformed
+        // Disable text field
+        inputItemName.setEditable(false);
+        inputPrice.setEditable(false);
+        inputItemCategory.setEnabled(false);
+        inputDescription.setEditable(false);
+        
+        // Disable button
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+        
+        // Reset text field
+        inputItemName.setText("");
+        inputPrice.setText("");
+        inputItemCategory.setSelectedIndex(0);
+        inputDescription.setText("");
+        
+        // Clear Table
+        DefaultTableModel itemTable = (DefaultTableModel) displayItemTable.getModel();
+        itemTable.setRowCount(0);
+        
+        // Get search keyword
+        String getSearchItem = inputSearchItem.getText();
+        String getSearchCategory = inputFilterCat.getSelectedItem().toString();
+        
+        // Search with category
+        if((getSearchItem.isBlank()) && (!getSearchCategory.equals(""))) {
+            String[][] getSearchAllCategoryArr = new SearchFileData().searchData(getSearchCategory, 2, "/oodms/database/item.txt");
+            
+            for(String[] getSearchAllCategoryData : getSearchAllCategoryArr) {
+                itemTable.addRow(getSearchAllCategoryData);
+            } 
+            
+        // Search with name
+        } else if((!getSearchItem.isBlank()) && (getSearchCategory.equals(""))) {
+            String[][] getSearchAllItemArr = new SearchFileData().searchData(getSearchItem, 0, "/oodms/database/item.txt");
+            
+            for(String[] getSearchAllItemData : getSearchAllItemArr) {
+                itemTable.addRow(getSearchAllItemData);
+            }
+        
+        // Search with both name and category
+        } else if((!getSearchItem.isBlank()) && (!getSearchCategory.equals(""))) {
+            String[][] getSearchBothItemArr = new SearchFileData().searchData(getSearchItem, 0, "/oodms/database/item.txt");
+            String[][] getSearchBothCatArr = new SearchFileData().searchData(getSearchCategory, 2, "/oodms/database/item.txt");
+            
+            // Get File Row and Column
+            FileRowColumn frc = new FileRowColumn();
+            int countRow = frc.countFileRowNumber("/oodms/database/item.txt");
+            int countCol = frc.countFileColumnNumber("/oodms/database/item.txt");
+            
+            String[][] getSearchBothArr = new String[countRow][countCol];
+            
+            // Filter repeated data
+            for(int i = 0; i < getSearchBothItemArr.length; i++) {
+                for(int j = 0; j < getSearchBothItemArr[i].length; j++) {
+                    if(getSearchBothArr[i][j] == null) {
+                        getSearchBothArr[i][j] = getSearchBothItemArr[i][j];
+                    }
+                }
+            }
+            
+            for(int i = 0; i < getSearchBothCatArr.length; i++) {
+                for(int j = 0; j < getSearchBothCatArr[i].length; j++) {
+                    
+                }
+            }
+            
+            for(String[] getSearchBothData : getSearchBothArr) {
+                itemTable.addRow(getSearchBothData);
+            }
+            
+        // Search all
+        } else if((getSearchItem.isBlank()) && (getSearchCategory.equals(""))) {
+            String[][] getAllItemArr = new Create3DArray().create3D("/oodms/database/item.txt");
+            
+            for(String[] getAllItemData : getAllItemArr) {
+                itemTable.addRow(getAllItemData);
+            }
+        }
+    }//GEN-LAST:event_searchItemBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -415,11 +545,13 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JLabel detailLabel;
     private javax.swing.JTable displayItemTable;
     private javax.swing.JButton editBtn;
+    private javax.swing.JLabel filterCatLabel;
     private javax.swing.JTextArea inputDescription;
+    private javax.swing.JComboBox<String> inputFilterCat;
     private javax.swing.JComboBox<String> inputItemCategory;
-    private javax.swing.JTextField inputItemID;
     private javax.swing.JTextField inputItemName;
     private javax.swing.JTextField inputPrice;
+    private javax.swing.JTextField inputSearchItem;
     private javax.swing.JLabel itemCategoryLabel;
     private javax.swing.JLabel itemMgmtLabel;
     private javax.swing.JPanel itemMgmtPanel;
@@ -429,7 +561,7 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JLabel listItemLabel;
     private javax.swing.JLabel priceLabel;
     private javax.swing.JButton saveBtn;
-    private javax.swing.JButton searchItemIDBtn;
+    private javax.swing.JButton searchItemBtn;
     private javax.swing.JLabel searchItemIDLabel;
     private javax.swing.JLabel searchItemLabel;
     // End of variables declaration//GEN-END:variables

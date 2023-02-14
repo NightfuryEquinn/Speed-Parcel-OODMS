@@ -728,7 +728,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
             }
         } else {
             // OOP Method - Get Searched User Data into Multidimensional Array
-            String[][] searchedAllUserArr = new SearchFileData().searchData(getKeyword, "/oodms/database/credentials.txt");
+            String[][] searchedAllUserArr = new SearchFileData().searchData(getKeyword, 0, "/oodms/database/credentials.txt");
             
             // Loop all data
             for (String[] searchedUserArr : searchedAllUserArr) {

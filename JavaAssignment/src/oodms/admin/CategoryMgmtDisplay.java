@@ -334,6 +334,9 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        // Unselect Row
+        displayCatTable.clearSelection();
+
         // Get value from user
         inputCatName.setEditable(true);
         inputDescription.setEditable(true);
@@ -420,7 +423,7 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
             String[][] allCatArr = new Create3DArray().create3D("/oodms/database/category.txt");
             
             // Count the number of children of each category
-            String[][] getCountChildren = new CountChildren().getCountChildren("/oodms/database/item.txt");
+            String[][] getCountChildren = new CountChildren().getCountChildren("/oodms/database/item.txt", 2);
             
             // Loop all data
             for(String[] catArr : allCatArr) {
@@ -432,9 +435,9 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
                 }
             }
         } else {
-            String[][] allSearchCatArr = new SearchFileData().searchData(getSearchCat, "/oodms/database/category.txt");
+            String[][] allSearchCatArr = new SearchFileData().searchData(getSearchCat, 0, "/oodms/database/category.txt");
             
-            String[][] getSearchCountChildren = new CountChildren().getCountChildren("/oodms/database/item.txt");
+            String[][] getSearchCountChildren = new CountChildren().getCountChildren("/oodms/database/item.txt", 2);
             
             for(String[] searchCatArr : allSearchCatArr) {
                 for(String[] getSearchCountChildrenData : getSearchCountChildren) {
