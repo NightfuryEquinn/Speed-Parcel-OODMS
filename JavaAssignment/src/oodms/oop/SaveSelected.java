@@ -40,4 +40,16 @@ public class SaveSelected {
         
         return saveFileArr;
     }
+    
+    public String[][] saveItem(String[] newChangesArr, String compareOldItem) {
+        String[][] saveItemArr = new Create3DArray().create3D("/oodms/database/item.txt");
+        
+        for(int i = 0; i < saveItemArr.length; i++) {
+            if(saveItemArr[i][0].equalsIgnoreCase(compareOldItem)) {
+                System.arraycopy(newChangesArr, 0, saveItemArr[i], 0, 1);
+            }
+        }
+        
+        return saveItemArr;
+    }
 }

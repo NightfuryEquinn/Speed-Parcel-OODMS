@@ -375,6 +375,23 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
             
             new FlushAndWrite().flushAndWrite(newChangesArrToSave, "src/oodms/database/category.txt");
         }
+        
+        // Reset text fields and button
+        inputSearchCatName.setText("");
+        
+        inputCatName.setText("");
+        inputDescription.setText("");
+        
+        inputCatName.setEditable(false);
+        inputDescription.setEditable(false);
+        
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+        
+        // Clear Table
+        DefaultTableModel catTable = (DefaultTableModel) displayCatTable.getModel();
+        catTable.setRowCount(0);
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed

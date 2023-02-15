@@ -78,4 +78,20 @@ public class CheckSimilarity {
         
         return checkSimilarity;
     }
+    
+    // Check item name
+    public boolean itemChecker(String item) {
+        boolean checkSimilarity = false;
+        
+        String[][] itemArr = new Create3DArray().create3D("/oodms/database/item.txt");
+        
+        for(String[] singleItem : itemArr) {
+            if(singleItem[0].equalsIgnoreCase(item)) {
+                checkSimilarity = true;
+                break;
+            }
+        }
+        
+        return checkSimilarity;
+    }
 }

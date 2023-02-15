@@ -4,9 +4,13 @@ import java.awt.Font;
 import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import oodms.oop.AddNewItem;
+import oodms.oop.CheckSimilarity;
 import oodms.oop.CountChildren;
 import oodms.oop.Create3DArray;
-import oodms.oop.FileRowColumn;
+import oodms.oop.DeleteSelected;
+import oodms.oop.FlushAndWrite;
+import oodms.oop.SaveSelected;
 import oodms.oop.SearchFileData;
 
 public class ItemMgmtDisplay extends javax.swing.JFrame {
@@ -18,7 +22,7 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         initComponents();
         
         // Setup category for filter category and item category
-        String[][] getCategoryAvailable = new CountChildren().getCountChildren("/oodms/database/item.txt", 2);
+        String[][] getCategoryAvailable = new CountChildren().getCountChildren("/oodms/database/category.txt", 0);
         
         // Include a default no category
         inputFilterCat.addItem("");
@@ -398,23 +402,134 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        // TODO add your handling code here:
+        // Unselect Row
+        displayItemTable.clearSelection();
+
+        // Get value from user
+        inputItemName.setEditable(true);
+        inputPrice.setEditable(true);
+        inputItemCategory.setEnabled(true);
+        inputDescription.setEditable(true);
+        
+        String getItemName = inputItemName.getText();
+        String getPrice = inputPrice.getText();
+        String getItemCategory = inputItemCategory.getSelectedItem().toString();
+        String getDescription = inputDescription.getText();
+        
+        boolean checkItem = new CheckSimilarity().itemChecker(getItemName);
+        
+        if(!checkItem) {
+            AddNewItem item = new AddNewItem(getItemName, getPrice, getItemCategory, getDescription);
+        }
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        // TODO add your handling code here:
+        // Enable text fields
+        inputItemName.setEditable(true);
+        inputPrice.setEditable(true);
+        inputItemCategory.setEnabled(true);
+        inputDescription.setEditable(true);
+
+        // Enable button
+        saveBtn.setEnabled(true);
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // TODO add your handling code here:
+        String getOldItemName = (String) displayItemTable.getValueAt(displayItemTable.getSelectedRow(), 0);
+        
+        String getItemName = inputItemName.getText();
+        String getPrice = inputPrice.getText();
+        String getItemCategory = inputItemCategory.getSelectedItem().toString();
+        String getDescription = inputDescription.getText();
+        
+        String[] newChangesArr = new String[] {getItemName, getPrice, getItemCategory, getDescription};
+        
+        boolean itemChecker = new CheckSimilarity().itemChecker(getItemName);
+        
+        if(!itemChecker) {
+            SaveSelected ss = new SaveSelected();
+            String[][] newChangesArrToSave = ss.saveItem(newChangesArr, getOldItemName);
+            
+            new FlushAndWrite().flushAndWrite(newChangesArrToSave, "src/oodms/database/item.txt");
+        }
+        
+        // Reset text field and button
+        inputSearchItem.setText("");
+        
+        inputItemName.setText("");
+        inputPrice.setText("");
+        inputItemCategory.setSelectedIndex(0);
+        inputDescription.setText("");
+        
+        inputItemName.setEditable(false);
+        inputPrice.setEditable(false);
+        inputItemCategory.setEnabled(false);
+        inputDescription.setEditable(false);
+        
+        // Disable button
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+        
+        // Clear table
+        DefaultTableModel itemTable = (DefaultTableModel) displayItemTable.getModel();
+        itemTable.setRowCount(0);
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = displayItemTable.getSelectedRow();
+        
+        String selectedRowItem = (String) displayItemTable.getValueAt(selectedRow, 0);
+        
+        String[][] ds = new DeleteSelected().deleteSelected(selectedRowItem, "/oodms/database/item.txt");
+        
+        FlushAndWrite faw = new FlushAndWrite();
+        faw.flushAndWrite(ds, "src/oodms/database/item.txt");
+        
+        // Reset text field and button
+        inputSearchItem.setText("");
+        
+        inputItemName.setText("");
+        inputPrice.setText("");
+        inputItemCategory.setSelectedIndex(0);
+        inputDescription.setText("");
+        
+        inputItemName.setEditable(false);
+        inputPrice.setEditable(false);
+        inputItemCategory.setEnabled(false);
+        inputDescription.setEditable(false);
+        
+        // Disable button
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+        
+        // Clear table
+        DefaultTableModel itemTable = (DefaultTableModel) displayItemTable.getModel();
+        itemTable.setRowCount(0);
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void displayItemTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayItemTableMouseClicked
-        // TODO add your handling code here:
+        // Enable buttons
+        editBtn.setEnabled(true);
+        deleteBtn.setEnabled(true);
+        
+        // Disable buttons
+        saveBtn.setEnabled(false);
+        
+        // Disable text field
+        inputItemName.setEditable(false);
+        inputPrice.setEditable(false);
+        inputItemCategory.setEnabled(false);
+        inputDescription.setEditable(false);
+        
+        // Get the selected row number
+        int selectedRow = displayItemTable.getSelectedRow();
+        
+        inputItemName.setText((String) displayItemTable.getValueAt(selectedRow, 0));
+        inputPrice.setText((String) displayItemTable.getValueAt(selectedRow, 1));
+        inputItemCategory.setSelectedItem((String) displayItemTable.getValueAt(selectedRow, 2));
+        inputDescription.setText((String) displayItemTable.getValueAt(selectedRow, 3));
     }//GEN-LAST:event_displayItemTableMouseClicked
 
     private void searchItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchItemBtnActionPerformed
@@ -464,25 +579,27 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
             String[][] getSearchBothItemArr = new SearchFileData().searchData(getSearchItem, 0, "/oodms/database/item.txt");
             String[][] getSearchBothCatArr = new SearchFileData().searchData(getSearchCategory, 2, "/oodms/database/item.txt");
             
-            // Get File Row and Column
-            FileRowColumn frc = new FileRowColumn();
-            int countRow = frc.countFileRowNumber("/oodms/database/item.txt");
-            int countCol = frc.countFileColumnNumber("/oodms/database/item.txt");
+            int newArrCount = 0;
             
-            String[][] getSearchBothArr = new String[countRow][countCol];
-            
-            // Filter repeated data
+            // Count the number of similar array into both array
             for(int i = 0; i < getSearchBothItemArr.length; i++) {
-                for(int j = 0; j < getSearchBothItemArr[i].length; j++) {
-                    if(getSearchBothArr[i][j] == null) {
-                        getSearchBothArr[i][j] = getSearchBothItemArr[i][j];
+                for(int j = 0; j < getSearchBothCatArr.length; j++) {
+                    if(Arrays.equals(getSearchBothItemArr[i], getSearchBothCatArr[j])) {
+                        newArrCount++;
                     }
                 }
             }
             
-            for(int i = 0; i < getSearchBothCatArr.length; i++) {
-                for(int j = 0; j < getSearchBothCatArr[i].length; j++) {
-                    
+            // Write the similar array into a new array
+            String[][] getSearchBothArr = new String[newArrCount][getSearchBothItemArr[0].length];
+            
+            int newArrIndex = 0;
+            
+            for(int i = 0; i < getSearchBothItemArr.length; i++) {
+                for(int j = 0; j < getSearchBothCatArr.length; j++) {
+                    if(Arrays.equals(getSearchBothItemArr[i], getSearchBothCatArr[j])) {
+                        getSearchBothArr[newArrIndex] = getSearchBothItemArr[i];
+                    }
                 }
             }
             
