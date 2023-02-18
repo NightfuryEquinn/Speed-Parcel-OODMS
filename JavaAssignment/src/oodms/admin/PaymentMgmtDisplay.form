@@ -93,11 +93,11 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jScrollPane2" min="-2" pref="464" max="-2" attributes="0"/>
-                          <EmptySpace pref="9" max="32767" attributes="0"/>
+                          <EmptySpace pref="10" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="backBtn" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -148,7 +148,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="inputSearchCustomerName" min="-2" pref="143" max="-2" attributes="0"/>
+                              <Component id="inputSearchCustomer" min="-2" pref="143" max="-2" attributes="0"/>
                               <EmptySpace pref="29" max="32767" attributes="0"/>
                               <Component id="searchPaymentBtn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -163,7 +163,7 @@
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="searchCustomerNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputSearchCustomerName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputSearchCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="searchPaymentBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -188,7 +188,7 @@
                 <Property name="text" type="java.lang.String" value="Enter Name:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="inputSearchCustomerName">
+            <Component class="javax.swing.JTextField" name="inputSearchCustomer">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="68" green="91" red="b8" type="rgb"/>
@@ -241,12 +241,7 @@
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -276,46 +271,45 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="amountPayableLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="totalPriceLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="shippingLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="processFeeLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="customerNameLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="filterPaidLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="orderIDLabel" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="shippingLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="customerNameLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="filterPaidLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="orderIDLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="totalPriceLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="paymentIDLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="paymentIDLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="processFeeLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="inputPaymentID" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
-                          <Component id="inputOrderID" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Component id="inputCustomerName" min="-2" pref="208" max="-2" attributes="0"/>
-                              <Component id="inputFilterPaid" min="-2" pref="208" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="inputProcessFee" alignment="1" max="32767" attributes="0"/>
-                              <Component id="inputShipping" alignment="1" max="32767" attributes="0"/>
-                              <Component id="inputTotalPrice" alignment="1" max="32767" attributes="0"/>
-                              <Component id="inputAmountPayable" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="inputProcessFee" max="32767" attributes="0"/>
+                          <Component id="inputTotalPrice" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputPaymentID" pref="208" max="32767" attributes="0"/>
+                          <Component id="inputOrderID" pref="208" max="32767" attributes="0"/>
+                          <Component id="inputCustomerName" alignment="0" pref="208" max="32767" attributes="0"/>
+                          <Component id="inputFilterPaid" alignment="0" pref="208" max="32767" attributes="0"/>
+                          <Component id="inputShipping" alignment="1" max="32767" attributes="0"/>
+                          <Component id="inputAmountPayable" alignment="0" pref="208" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="19" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -344,8 +338,8 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="inputProcessFee" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="processFeeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="totalPriceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputTotalPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -354,15 +348,15 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="totalPriceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputTotalPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputProcessFee" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="processFeeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="amountPayableLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="inputAmountPayable" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -417,31 +411,6 @@
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="RM5"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="totalPriceLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Karla" size="14" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="18" green="2b" red="4c" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Total Price (RM):"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="inputTotalPrice">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="68" green="91" red="b8" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Karla" size="14" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="18" green="2b" red="4c" type="rgb"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="amountPayableLabel">
@@ -567,6 +536,31 @@
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Process Fee (4%):"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="totalPriceLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Karla" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="18" green="2b" red="4c" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Total Price (RM):"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="inputTotalPrice">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="68" green="91" red="b8" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Karla" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="18" green="2b" red="4c" type="rgb"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>

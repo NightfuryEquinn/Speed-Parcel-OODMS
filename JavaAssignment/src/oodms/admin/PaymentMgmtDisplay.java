@@ -1,16 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package oodms.admin;
 
 import java.awt.Font;
+import java.util.Arrays;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import oodms.oop.Create3DArray;
+import oodms.oop.SearchFileData;
 
-/**
- *
- * @author User
- */
 public class PaymentMgmtDisplay extends javax.swing.JFrame {
 
     /**
@@ -18,6 +14,11 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
      */
     public PaymentMgmtDisplay() {
         initComponents();
+        
+        // Include a default no category
+        inputSearchFilterPaid.addItem("");
+        inputSearchFilterPaid.addItem("Pending");
+        inputSearchFilterPaid.addItem("Paid");
     }
 
     /**
@@ -34,7 +35,7 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
         searchPaymentLabel = new javax.swing.JLabel();
         backgroundPanel1 = new javax.swing.JPanel();
         searchCustomerNameLabel = new javax.swing.JLabel();
-        inputSearchCustomerName = new javax.swing.JTextField();
+        inputSearchCustomer = new javax.swing.JTextField();
         searchPaymentBtn = new javax.swing.JButton();
         searchFilterPaidLabel = new javax.swing.JLabel();
         inputSearchFilterPaid = new javax.swing.JComboBox<>();
@@ -44,8 +45,6 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
         inputPaymentID = new javax.swing.JTextField();
         shippingLabel = new javax.swing.JLabel();
         inputShipping = new javax.swing.JTextField();
-        totalPriceLabel = new javax.swing.JLabel();
-        inputTotalPrice = new javax.swing.JTextField();
         amountPayableLabel = new javax.swing.JLabel();
         inputAmountPayable = new javax.swing.JTextField();
         orderIDLabel = new javax.swing.JLabel();
@@ -56,6 +55,8 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
         inputFilterPaid = new javax.swing.JTextField();
         inputProcessFee = new javax.swing.JTextField();
         processFeeLabel = new javax.swing.JLabel();
+        totalPriceLabel = new javax.swing.JLabel();
+        inputTotalPrice = new javax.swing.JTextField();
         backBtn = new javax.swing.JButton();
         listPaymentLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -79,9 +80,9 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
         searchCustomerNameLabel.setForeground(new java.awt.Color(76, 43, 24));
         searchCustomerNameLabel.setText("Enter Name:");
 
-        inputSearchCustomerName.setBackground(new java.awt.Color(184, 145, 104));
-        inputSearchCustomerName.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputSearchCustomerName.setForeground(new java.awt.Color(76, 43, 24));
+        inputSearchCustomer.setBackground(new java.awt.Color(184, 145, 104));
+        inputSearchCustomer.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputSearchCustomer.setForeground(new java.awt.Color(76, 43, 24));
 
         searchPaymentBtn.setBackground(new java.awt.Color(184, 145, 104));
         searchPaymentBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -100,7 +101,6 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
         inputSearchFilterPaid.setBackground(new java.awt.Color(184, 145, 104));
         inputSearchFilterPaid.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputSearchFilterPaid.setForeground(new java.awt.Color(76, 43, 24));
-        inputSearchFilterPaid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
@@ -117,7 +117,7 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
                         .addComponent(inputSearchFilterPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addComponent(inputSearchCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addComponent(searchPaymentBtn)
                         .addGap(16, 16, 16))))
@@ -128,7 +128,7 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchCustomerNameLabel)
-                    .addComponent(inputSearchCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchPaymentBtn))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -161,15 +161,6 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
         inputShipping.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputShipping.setForeground(new java.awt.Color(76, 43, 24));
         inputShipping.setText("RM5");
-
-        totalPriceLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        totalPriceLabel.setForeground(new java.awt.Color(76, 43, 24));
-        totalPriceLabel.setText("Total Price (RM):");
-
-        inputTotalPrice.setEditable(false);
-        inputTotalPrice.setBackground(new java.awt.Color(184, 145, 104));
-        inputTotalPrice.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputTotalPrice.setForeground(new java.awt.Color(76, 43, 24));
 
         amountPayableLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         amountPayableLabel.setForeground(new java.awt.Color(76, 43, 24));
@@ -216,6 +207,15 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
         processFeeLabel.setForeground(new java.awt.Color(76, 43, 24));
         processFeeLabel.setText("Process Fee (4%):");
 
+        totalPriceLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        totalPriceLabel.setForeground(new java.awt.Color(76, 43, 24));
+        totalPriceLabel.setText("Total Price (RM):");
+
+        inputTotalPrice.setEditable(false);
+        inputTotalPrice.setBackground(new java.awt.Color(184, 145, 104));
+        inputTotalPrice.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputTotalPrice.setForeground(new java.awt.Color(76, 43, 24));
+
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
         backgroundPanel2Layout.setHorizontalGroup(
@@ -226,31 +226,31 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
                         .addGroup(backgroundPanel2Layout.createSequentialGroup()
                             .addGap(20, 20, 20)
                             .addComponent(amountPayableLabel))
-                        .addComponent(totalPriceLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(shippingLabel)
-                            .addComponent(processFeeLabel)
-                            .addComponent(customerNameLabel)
-                            .addComponent(filterPaidLabel)
-                            .addComponent(orderIDLabel)))
+                        .addGroup(backgroundPanel2Layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(shippingLabel)
+                                .addComponent(customerNameLabel)
+                                .addComponent(filterPaidLabel)
+                                .addComponent(orderIDLabel)
+                                .addComponent(totalPriceLabel)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(paymentIDLabel)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(paymentIDLabel)))
+                        .addComponent(processFeeLabel)))
                 .addGap(18, 18, 18)
-                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(inputPaymentID, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inputOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(inputCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(inputFilterPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(inputProcessFee, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(inputShipping, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(inputTotalPrice, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(inputAmountPayable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(inputProcessFee)
+                    .addComponent(inputTotalPrice, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inputPaymentID, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(inputOrderID, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(inputCustomerName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(inputFilterPaid, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(inputShipping)
+                    .addComponent(inputAmountPayable, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         backgroundPanel2Layout.setVerticalGroup(
             backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,21 +273,21 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
                     .addComponent(inputFilterPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputProcessFee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(processFeeLabel))
+                    .addComponent(totalPriceLabel)
+                    .addComponent(inputTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputShipping, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(shippingLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalPriceLabel)
-                    .addComponent(inputTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(inputProcessFee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(processFeeLabel))
+                .addGap(12, 12, 12)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(amountPayableLabel)
                     .addComponent(inputAmountPayable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         backBtn.setBackground(new java.awt.Color(184, 145, 104));
@@ -399,9 +399,9 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
                         .addGap(18, 18, 18))
                     .addGroup(paymentMgmtPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)))
                 .addComponent(backBtn)
-                .addGap(20, 20, 20))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -419,11 +419,90 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchPaymentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchPaymentBtnActionPerformed
-        // TODO add your handling code here:
+        // Clear Text Field
+        inputPaymentID.setText("");
+        inputOrderID.setText("");
+        inputCustomerName.setText("");
+        inputFilterPaid.setText("");
+        inputTotalPrice.setText("");
+        inputAmountPayable.setText("");
+        
+        // Clear table
+        DefaultTableModel paymentTable = (DefaultTableModel) displayPaymentTable.getModel();
+        paymentTable.setRowCount(0);
+        
+        // Get search keyword and filter
+        String getSearchCustomer = inputSearchCustomer.getText();
+        String getSearchFilterPaid = inputSearchFilterPaid.getSelectedItem().toString();
+        
+        // Search customer
+        if((!getSearchCustomer.isBlank()) && (getSearchFilterPaid.equals(""))) {
+            String[][] getSearchCustomerArr = new SearchFileData().searchData(getSearchCustomer, 2, "/oodms/database/payment.txt");
+            
+            for(String[] getSearchCustomerData : getSearchCustomerArr) {
+                paymentTable.addRow(getSearchCustomerData);
+            }
+        // Search paid
+        } else if((getSearchCustomer.isBlank()) && (!getSearchFilterPaid.equals(""))) {
+            String[][] getSearchPaidArr = new SearchFileData().searchData(getSearchFilterPaid, 3, "/oodms/database/payment.txt");
+            
+            for(String[] getSearchPaidData : getSearchPaidArr) {
+                paymentTable.addRow(getSearchPaidData);
+            }
+        // Search both customer and paid
+        } else if((!getSearchCustomer.isBlank()) && (!getSearchFilterPaid.equals(""))) {
+            String[][] getBothCustomerArr = new SearchFileData().searchData(getSearchCustomer, 2, "/oodms/database/payment.txt");
+            String[][] getBothPaidArr = new SearchFileData().searchData(getSearchFilterPaid, 3, "/oodms/database/payment.txt");
+            
+            int newArrCount = 0;
+            
+            for(int i = 0; i < getBothCustomerArr.length; i++) {
+                for(int j = 0; j < getBothPaidArr.length; j++) {
+                    if(Arrays.equals(getBothCustomerArr[i], getBothPaidArr[j])) {
+                        newArrCount++;
+                    }
+                }
+            }
+            
+           String[][] getSearchBothArr = new String[newArrCount][getBothCustomerArr[0].length];
+           
+           int newArrIndex = 0;
+           
+           for(int i = 0; i < getBothCustomerArr.length; i++) {
+                for(int j = 0; j < getBothPaidArr.length; j++) {
+                    if(Arrays.equals(getBothCustomerArr[i], getBothPaidArr[j])) {
+                        getSearchBothArr[newArrIndex++] = getBothCustomerArr[i];
+                    }
+                }
+            }
+           
+           for(String[] getSearchBothData : getSearchBothArr) {
+               paymentTable.addRow(getSearchBothData);
+           }
+        // Search all data
+        } else {
+            String[][] getAllPayment = new Create3DArray().create3D("/oodms/database/payment.txt");
+            
+            for(String[] getAllPaymentData : getAllPayment) {
+                paymentTable.addRow(getAllPaymentData);
+            }
+        }
     }//GEN-LAST:event_searchPaymentBtnActionPerformed
 
     private void displayPaymentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayPaymentTableMouseClicked
-        // TODO add your handling code here:
+        int selectedRow = displayPaymentTable.getSelectedRow();
+        
+        inputPaymentID.setText((String) displayPaymentTable.getValueAt(selectedRow, 0));
+        inputOrderID.setText((String) displayPaymentTable.getValueAt(selectedRow, 1));
+        inputCustomerName.setText((String) displayPaymentTable.getValueAt(selectedRow, 2));
+        inputFilterPaid.setText((String) displayPaymentTable.getValueAt(selectedRow, 3));
+        inputTotalPrice.setText((String) displayPaymentTable.getValueAt(selectedRow, 4));
+        
+        double getProcessFee = Double.parseDouble(inputTotalPrice.getText());
+        getProcessFee = getProcessFee * 1.04;
+        inputProcessFee.setText(String.valueOf(getProcessFee));
+        
+        inputAmountPayable.setText((String) displayPaymentTable.getValueAt(selectedRow, 5));
     }//GEN-LAST:event_displayPaymentTableMouseClicked
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -481,7 +560,7 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JTextField inputOrderID;
     private javax.swing.JTextField inputPaymentID;
     private javax.swing.JTextField inputProcessFee;
-    private javax.swing.JTextField inputSearchCustomerName;
+    private javax.swing.JTextField inputSearchCustomer;
     private javax.swing.JComboBox<String> inputSearchFilterPaid;
     private javax.swing.JTextField inputShipping;
     private javax.swing.JTextField inputTotalPrice;

@@ -456,7 +456,7 @@ public class FeedbackMgmtDisplay extends javax.swing.JFrame {
             for(int i = 0; i < getSearchBothRatingArr.length; i++) {
                 for(int j = 0; j < getSearchBothCustomerArr.length; j++) {
                     if(Arrays.equals(getSearchBothRatingArr[i], getSearchBothCustomerArr[j])) {
-                        getSearchBothArr[newArrIndex] = getSearchBothRatingArr[i];
+                        getSearchBothArr[newArrIndex++] = getSearchBothRatingArr[i];
                     }
                 }
             }

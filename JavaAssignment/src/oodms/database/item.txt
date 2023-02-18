@@ -4,3 +4,4 @@ Polo Shirt | 89.90 | Clothes | Free size Polo shirt for men
 Black Skirt | 69.90 | Clothes | A full body skirt for women
 Wooden Phone Stand | 39.90 | Accessories | An ergonomic phone stand suitable for your workspace
 Blueberry | 5.90 | Food and Beverages | Organic from New Zealand
+Blackberry | 7.90 | Food and Beverages | Organic from Japan

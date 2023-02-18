@@ -598,7 +598,7 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
             for(int i = 0; i < getSearchBothItemArr.length; i++) {
                 for(int j = 0; j < getSearchBothCatArr.length; j++) {
                     if(Arrays.equals(getSearchBothItemArr[i], getSearchBothCatArr[j])) {
-                        getSearchBothArr[newArrIndex] = getSearchBothItemArr[i];
+                        getSearchBothArr[newArrIndex++] = getSearchBothItemArr[i];
                     }
                 }
             }
