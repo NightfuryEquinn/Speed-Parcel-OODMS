@@ -1,16 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package oodms.admin;
 
 import java.awt.Font;
+import java.util.Arrays;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import oodms.oop.Create3DArray;
+import oodms.oop.SearchFileData;
 
-/**
- *
- * @author User
- */
 public class OrderMgmtDisplay extends javax.swing.JFrame {
 
     /**
@@ -18,6 +14,13 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
      */
     public OrderMgmtDisplay() {
         initComponents();
+        
+        // Include a default no category
+        inputSearchStatus.addItem("");
+        
+        inputSearchStatus.addItem("Unassigned");
+        inputSearchStatus.addItem("Ongoing");
+        inputSearchStatus.addItem("Delivered");
     }
 
     /**
@@ -33,23 +36,29 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
         orderMgmtLabel = new javax.swing.JLabel();
         searchOrderLabel = new javax.swing.JLabel();
         backgroundPanel1 = new javax.swing.JPanel();
-        searchCustomerNameLabel = new javax.swing.JLabel();
-        inputCustomerName = new javax.swing.JTextField();
+        searchCustomerLabel = new javax.swing.JLabel();
+        inputSearchCustomer = new javax.swing.JTextField();
         searchOrderBtn = new javax.swing.JButton();
         searchOrderStatusLabel = new javax.swing.JLabel();
-        inputOrderStatus = new javax.swing.JComboBox<>();
+        inputSearchStatus = new javax.swing.JComboBox<>();
         detailLabel = new javax.swing.JLabel();
         backgroundPanel2 = new javax.swing.JPanel();
         itemNameLabel = new javax.swing.JLabel();
         quantityLabel = new javax.swing.JLabel();
         inputItemName = new javax.swing.JTextField();
         inputQuantity = new javax.swing.JTextField();
-        priceLabel = new javax.swing.JLabel();
-        inputPrice = new javax.swing.JTextField();
+        itemPriceLabel = new javax.swing.JLabel();
+        inputItemPrice = new javax.swing.JTextField();
         totalPriceLabel = new javax.swing.JLabel();
         inputTotalPrice = new javax.swing.JTextField();
         orderDateLabel = new javax.swing.JLabel();
         inputOrderDate = new javax.swing.JTextField();
+        orderStatusLabel = new javax.swing.JLabel();
+        inputOrderStatus = new javax.swing.JTextField();
+        orderIDLabel = new javax.swing.JLabel();
+        inputOrderID = new javax.swing.JTextField();
+        customerLabel = new javax.swing.JLabel();
+        inputCustomer = new javax.swing.JTextField();
         backBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         displayOrderTable = new javax.swing.JTable();
@@ -69,27 +78,31 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
 
         backgroundPanel1.setBackground(new java.awt.Color(230, 207, 201));
 
-        searchCustomerNameLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        searchCustomerNameLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchCustomerNameLabel.setText("Enter Customer Name:");
+        searchCustomerLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        searchCustomerLabel.setForeground(new java.awt.Color(76, 43, 24));
+        searchCustomerLabel.setText("Enter Name:");
 
-        inputCustomerName.setBackground(new java.awt.Color(184, 145, 104));
-        inputCustomerName.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputCustomerName.setForeground(new java.awt.Color(76, 43, 24));
+        inputSearchCustomer.setBackground(new java.awt.Color(184, 145, 104));
+        inputSearchCustomer.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputSearchCustomer.setForeground(new java.awt.Color(76, 43, 24));
 
         searchOrderBtn.setBackground(new java.awt.Color(184, 145, 104));
         searchOrderBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         searchOrderBtn.setForeground(new java.awt.Color(76, 43, 24));
         searchOrderBtn.setText("Search");
+        searchOrderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchOrderBtnActionPerformed(evt);
+            }
+        });
 
         searchOrderStatusLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         searchOrderStatusLabel.setForeground(new java.awt.Color(76, 43, 24));
         searchOrderStatusLabel.setText("Order Status:");
 
-        inputOrderStatus.setBackground(new java.awt.Color(184, 145, 104));
-        inputOrderStatus.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputOrderStatus.setForeground(new java.awt.Color(76, 43, 24));
-        inputOrderStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Assigned", "Pending", "Accepted", "Out of Delivery", "Completed" }));
+        inputSearchStatus.setBackground(new java.awt.Color(184, 145, 104));
+        inputSearchStatus.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputSearchStatus.setForeground(new java.awt.Color(76, 43, 24));
 
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
@@ -98,17 +111,17 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(searchCustomerNameLabel)
+                    .addComponent(searchCustomerLabel)
                     .addComponent(searchOrderStatusLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addComponent(inputCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                         .addComponent(searchOrderBtn)
                         .addGap(16, 16, 16))
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addComponent(inputOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputSearchStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         backgroundPanel1Layout.setVerticalGroup(
@@ -116,13 +129,13 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchCustomerNameLabel)
-                    .addComponent(inputCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchCustomerLabel)
+                    .addComponent(inputSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchOrderBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchOrderStatusLabel)
-                    .addComponent(inputOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputSearchStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -150,14 +163,14 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
         inputQuantity.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputQuantity.setForeground(new java.awt.Color(76, 43, 24));
 
-        priceLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        priceLabel.setForeground(new java.awt.Color(76, 43, 24));
-        priceLabel.setText("Price (RM):");
+        itemPriceLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        itemPriceLabel.setForeground(new java.awt.Color(76, 43, 24));
+        itemPriceLabel.setText("Price (RM):");
 
-        inputPrice.setEditable(false);
-        inputPrice.setBackground(new java.awt.Color(184, 145, 104));
-        inputPrice.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputPrice.setForeground(new java.awt.Color(76, 43, 24));
+        inputItemPrice.setEditable(false);
+        inputItemPrice.setBackground(new java.awt.Color(184, 145, 104));
+        inputItemPrice.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputItemPrice.setForeground(new java.awt.Color(76, 43, 24));
 
         totalPriceLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         totalPriceLabel.setForeground(new java.awt.Color(76, 43, 24));
@@ -177,43 +190,83 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
         inputOrderDate.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputOrderDate.setForeground(new java.awt.Color(76, 43, 24));
 
+        orderStatusLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        orderStatusLabel.setForeground(new java.awt.Color(76, 43, 24));
+        orderStatusLabel.setText("Order Status:");
+
+        inputOrderStatus.setEditable(false);
+        inputOrderStatus.setBackground(new java.awt.Color(184, 145, 104));
+        inputOrderStatus.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputOrderStatus.setForeground(new java.awt.Color(76, 43, 24));
+
+        orderIDLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        orderIDLabel.setForeground(new java.awt.Color(76, 43, 24));
+        orderIDLabel.setText("Order ID:");
+
+        inputOrderID.setEditable(false);
+        inputOrderID.setBackground(new java.awt.Color(184, 145, 104));
+        inputOrderID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputOrderID.setForeground(new java.awt.Color(76, 43, 24));
+
+        customerLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        customerLabel.setForeground(new java.awt.Color(76, 43, 24));
+        customerLabel.setText("Customer Name:");
+
+        inputCustomer.setEditable(false);
+        inputCustomer.setBackground(new java.awt.Color(184, 145, 104));
+        inputCustomer.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputCustomer.setForeground(new java.awt.Color(76, 43, 24));
+
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
         backgroundPanel2Layout.setHorizontalGroup(
             backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(orderDateLabel)
-                    .addComponent(totalPriceLabel)
-                    .addComponent(priceLabel)
-                    .addComponent(itemNameLabel)
-                    .addComponent(quantityLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(15, 15, 15)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(inputPrice, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(inputItemName, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(inputQuantity, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(inputTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(inputOrderDate, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(customerLabel)
+                    .addComponent(orderIDLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(itemNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(quantityLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(itemPriceLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(totalPriceLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(orderDateLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(orderStatusLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(inputOrderID, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                    .addComponent(inputCustomer)
+                    .addComponent(inputItemName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inputQuantity, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inputItemPrice, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inputTotalPrice, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inputOrderDate, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inputOrderStatus))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         backgroundPanel2Layout.setVerticalGroup(
             backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(itemNameLabel)
-                    .addComponent(inputItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(orderIDLabel)
+                    .addComponent(inputOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(customerLabel)
+                    .addComponent(inputCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(itemNameLabel))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(quantityLabel)
                     .addComponent(inputQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(priceLabel)
-                    .addComponent(inputPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(itemPriceLabel)
+                    .addComponent(inputItemPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalPriceLabel)
@@ -222,13 +275,22 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(orderDateLabel)
                     .addComponent(inputOrderDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(orderStatusLabel)
+                    .addComponent(inputOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         backBtn.setBackground(new java.awt.Color(184, 145, 104));
         backBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         backBtn.setForeground(new java.awt.Color(76, 43, 24));
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         displayOrderTable.setBackground(new java.awt.Color(230, 207, 201));
         displayOrderTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -236,27 +298,37 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
         displayOrderTable.setForeground(new java.awt.Color(76, 43, 24));
         displayOrderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"OR0001", "Fountain Pen",  new Integer(2),  new Integer(1198), "28-01-2023"},
-                {"OR0002", "Premium Abalone",  new Integer(10),  new Integer(700), "13-01-2023"},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Item Name", "Quantity", "Price (RM)", "Order Date"
+                "Order ID", "Customer Name", "Item Name", "Quantity", "Item Price (RM)", "Total Price (RM)", "Order Date", "Order Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         displayOrderTable.setGridColor(new java.awt.Color(230, 207, 201));
         displayOrderTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
         displayOrderTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
         displayOrderTable.setShowVerticalLines(true);
+        displayOrderTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                displayOrderTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(displayOrderTable);
         // Change Table Header Font
         displayOrderTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
@@ -264,11 +336,14 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
         // Change Table Column Width
         TableColumnModel columnModel = displayOrderTable.getColumnModel();
 
-        columnModel.getColumn(0).setPreferredWidth(100);
-        columnModel.getColumn(1).setPreferredWidth(175);
-        columnModel.getColumn(2).setPreferredWidth(75);
-        columnModel.getColumn(3).setPreferredWidth(75);
-        columnModel.getColumn(4).setPreferredWidth(150);
+        columnModel.getColumn(0).setPreferredWidth(75);
+        columnModel.getColumn(1).setPreferredWidth(125);
+        columnModel.getColumn(2).setPreferredWidth(100);
+        columnModel.getColumn(3).setPreferredWidth(100);
+        columnModel.getColumn(4).setPreferredWidth(125);
+        columnModel.getColumn(5).setPreferredWidth(125);
+        columnModel.getColumn(6).setPreferredWidth(100);
+        columnModel.getColumn(7).setPreferredWidth(125);
 
         listOrderLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         listOrderLabel.setForeground(new java.awt.Color(76, 43, 24));
@@ -283,24 +358,20 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
                 .addGroup(orderMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(orderMgmtPanelLayout.createSequentialGroup()
                         .addGroup(orderMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(orderMgmtPanelLayout.createSequentialGroup()
-                                .addComponent(backBtn)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(orderMgmtPanelLayout.createSequentialGroup()
-                                .addGroup(orderMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(detailLabel)
-                                    .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(24, 24, 24))
+                            .addComponent(backBtn)
+                            .addComponent(orderMgmtLabel))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(orderMgmtPanelLayout.createSequentialGroup()
                         .addGroup(orderMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchOrderLabel)
-                            .addComponent(orderMgmtLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(listOrderLabel)
-                        .addGap(577, 577, 577))))
+                            .addComponent(detailLabel)
+                            .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchOrderLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addGroup(orderMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(listOrderLabel)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(33, Short.MAX_VALUE))))
         );
         orderMgmtPanelLayout.setVerticalGroup(
             orderMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,10 +390,10 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
                         .addComponent(detailLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(backBtn)
-                .addGap(18, 18, 18))
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -338,6 +409,95 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchOrderBtnActionPerformed
+        // Clear text field
+        inputOrderID.setText("");
+        inputCustomer.setText("");
+        inputItemName.setText("");
+        inputQuantity.setText("");
+        inputItemPrice.setText("");
+        inputTotalPrice.setText("");
+        inputOrderDate.setText("");
+        inputOrderStatus.setText("");
+        
+        DefaultTableModel orderTable = (DefaultTableModel) displayOrderTable.getModel();
+        orderTable.setRowCount(0);
+        
+        String getCustomer = inputSearchCustomer.getText();
+        String getStatus = inputSearchStatus.getSelectedItem().toString();
+        
+        // Search with customer
+        if((!getCustomer.isBlank()) && (getStatus.equals(""))) {
+            String[][] getSearchCustomerArr = new SearchFileData().searchData(getCustomer, 1, "/oodms/database/order.txt");
+            
+            for(String[] getSearchCustomerData : getSearchCustomerArr) {
+                orderTable.addRow(getSearchCustomerData);
+            }
+        // Search with order status
+        } else if((getCustomer.isBlank()) && (!getStatus.equals(""))) {
+            String[][] getSearchStatusArr = new SearchFileData().searchData(getStatus, 7, "/oodms/database/order.txt");
+            
+            for(String[] getSearchStatusData : getSearchStatusArr) {
+                orderTable.addRow(getSearchStatusData);
+            }
+        // Search both customer and order status
+        } else if((!getCustomer.isBlank()) && (!getStatus.equals(""))) {
+            String[][] getSearchCustomerArr = new SearchFileData().searchData(getCustomer, 1, "/oodms/database/order.txt");
+            String[][] getSearchStatusArr = new SearchFileData().searchData(getStatus, 7, "/oodms/database/order.txt");
+            
+            int newArrCount = 0;
+            
+            for(int i = 0; i < getSearchCustomerArr.length; i++) {
+                for(int j = 0; j < getSearchStatusArr.length; j++) {
+                    if(Arrays.equals(getSearchCustomerArr[i], getSearchStatusArr[j])) {
+                        newArrCount++;
+                    }
+                }
+            }
+            
+            String[][] getBothSearchArr = new String[newArrCount][getSearchCustomerArr[0].length];
+            
+            int newArrIndex = 0;
+            
+            for(int i = 0; i < getSearchCustomerArr.length; i++) {
+                for(int j = 0; j < getSearchStatusArr.length; j++) {
+                    if(Arrays.equals(getSearchCustomerArr[i], getSearchStatusArr[j])) {
+                        getBothSearchArr[newArrIndex++] = getSearchCustomerArr[i];
+                    }
+                }
+            }
+            
+            for(String[] getBothSearchData : getBothSearchArr) {
+                orderTable.addRow(getBothSearchData);
+            }
+        // Search All
+        } else {
+            String[][] getAllOrderArr = new Create3DArray().create3D("/oodms/database/order.txt");
+            
+            for(String[] getAllOrderData : getAllOrderArr) {
+                orderTable.addRow(getAllOrderData);
+            }
+        }
+    }//GEN-LAST:event_searchOrderBtnActionPerformed
+
+    private void displayOrderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayOrderTableMouseClicked
+        int selectedRow = displayOrderTable.getSelectedRow();
+
+        inputOrderID.setText((String) displayOrderTable.getValueAt(selectedRow, 0));
+        inputCustomer.setText((String) displayOrderTable.getValueAt(selectedRow, 1));
+        inputItemName.setText((String) displayOrderTable.getValueAt(selectedRow, 2));
+        inputQuantity.setText((String) displayOrderTable.getValueAt(selectedRow, 3));
+        inputItemPrice.setText((String) displayOrderTable.getValueAt(selectedRow, 4));
+        inputTotalPrice.setText((String) displayOrderTable.getValueAt(selectedRow, 5));
+        inputOrderDate.setText((String) displayOrderTable.getValueAt(selectedRow, 6));
+        inputOrderStatus.setText((String) displayOrderTable.getValueAt(selectedRow, 7));
+    }//GEN-LAST:event_displayOrderTableMouseClicked
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        new AdminDashboard().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,24 +538,30 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JButton backBtn;
     private javax.swing.JPanel backgroundPanel1;
     private javax.swing.JPanel backgroundPanel2;
+    private javax.swing.JLabel customerLabel;
     private javax.swing.JLabel detailLabel;
     private javax.swing.JTable displayOrderTable;
-    private javax.swing.JTextField inputCustomerName;
+    private javax.swing.JTextField inputCustomer;
     private javax.swing.JTextField inputItemName;
+    private javax.swing.JTextField inputItemPrice;
     private javax.swing.JTextField inputOrderDate;
-    private javax.swing.JComboBox<String> inputOrderStatus;
-    private javax.swing.JTextField inputPrice;
+    private javax.swing.JTextField inputOrderID;
+    private javax.swing.JTextField inputOrderStatus;
     private javax.swing.JTextField inputQuantity;
+    private javax.swing.JTextField inputSearchCustomer;
+    private javax.swing.JComboBox<String> inputSearchStatus;
     private javax.swing.JTextField inputTotalPrice;
     private javax.swing.JLabel itemNameLabel;
+    private javax.swing.JLabel itemPriceLabel;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel listOrderLabel;
     private javax.swing.JLabel orderDateLabel;
+    private javax.swing.JLabel orderIDLabel;
     private javax.swing.JLabel orderMgmtLabel;
     private javax.swing.JPanel orderMgmtPanel;
-    private javax.swing.JLabel priceLabel;
+    private javax.swing.JLabel orderStatusLabel;
     private javax.swing.JLabel quantityLabel;
-    private javax.swing.JLabel searchCustomerNameLabel;
+    private javax.swing.JLabel searchCustomerLabel;
     private javax.swing.JButton searchOrderBtn;
     private javax.swing.JLabel searchOrderLabel;
     private javax.swing.JLabel searchOrderStatusLabel;
