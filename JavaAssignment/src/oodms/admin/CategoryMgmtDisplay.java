@@ -354,6 +354,8 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         inputCatName.setEditable(true);
         inputDescription.setEditable(true);
+        
+        saveBtn.setEnabled(true);
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
@@ -475,7 +477,7 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         
         // Enable buttons
         editBtn.setEnabled(true);
-        saveBtn.setEnabled(true);
+        saveBtn.setEnabled(false);
         deleteBtn.setEnabled(true);
         
         int selectedRow = displayCatTable.getSelectedRow();

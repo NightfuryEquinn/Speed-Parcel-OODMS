@@ -1,16 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package oodms.admin;
 
 import java.awt.Font;
+import java.util.Arrays;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import oodms.oop.Create3DArray;
+import oodms.oop.FlushAndWrite;
+import oodms.oop.SaveSelected;
+import oodms.oop.SearchFileData;
 
-/**
- *
- * @author User
- */
 public class DeliveryMgmtDisplay extends javax.swing.JFrame {
 
     /**
@@ -18,6 +16,22 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
      */
     public DeliveryMgmtDisplay() {
         initComponents();
+        
+        // Include a default no category
+        inputFilterStatus.addItem("");
+        
+        inputFilterStatus.addItem("Unassigned");
+        inputFilterStatus.addItem("Ongoing");
+        inputFilterStatus.addItem("Completed");
+        
+        // Find all delivery staffs
+        String[][] getAllStaffArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
+
+        for(String[] getAllStaffData : getAllStaffArr) {
+            if(getAllStaffData[0].toLowerCase().startsWith("delivery")) {
+                inputDeliveryStaff.addItem(getAllStaffData[0]);
+            }
+        }
     }
 
     /**
@@ -43,7 +57,6 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         orderStatusLabel = new javax.swing.JLabel();
         editBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
-        dismissBtn = new javax.swing.JButton();
         inputDeliveryStaff = new javax.swing.JComboBox<>();
         inputOrderStatus = new javax.swing.JComboBox<>();
         inputOrderID = new javax.swing.JTextField();
@@ -98,9 +111,9 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
                 .addComponent(filterStatusLabel)
                 .addGap(18, 18, 18)
                 .addComponent(inputFilterStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(searchFilterStatus)
-                .addGap(16, 16, 16))
+                .addGap(27, 27, 27))
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,17 +166,6 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
             }
         });
 
-        dismissBtn.setBackground(new java.awt.Color(184, 145, 104));
-        dismissBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        dismissBtn.setForeground(new java.awt.Color(76, 43, 24));
-        dismissBtn.setText("Dismiss");
-        dismissBtn.setEnabled(false);
-        dismissBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dismissBtnActionPerformed(evt);
-            }
-        });
-
         inputDeliveryStaff.setBackground(new java.awt.Color(184, 145, 104));
         inputDeliveryStaff.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputDeliveryStaff.setForeground(new java.awt.Color(76, 43, 24));
@@ -172,7 +174,7 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         inputOrderStatus.setBackground(new java.awt.Color(184, 145, 104));
         inputOrderStatus.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputOrderStatus.setForeground(new java.awt.Color(76, 43, 24));
-        inputOrderStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unassigned", "Ongoing" }));
+        inputOrderStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unassigned", "Ongoing", "Delivered" }));
         inputOrderStatus.setEnabled(false);
 
         inputOrderID.setEditable(false);
@@ -207,16 +209,13 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         backgroundPanel2Layout.setHorizontalGroup(
             backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(10, 10, 10)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
                         .addComponent(editBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(saveBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dismissBtn))
+                        .addComponent(saveBtn))
                     .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(customerAddressLabel)
                             .addComponent(orderIDLabel)
@@ -230,7 +229,7 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(inputCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(inputOrderID))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         backgroundPanel2Layout.setVerticalGroup(
             backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,12 +254,11 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(customerAddressLabel)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editBtn)
-                    .addComponent(saveBtn)
-                    .addComponent(dismissBtn))
-                .addGap(14, 14, 14))
+                    .addComponent(saveBtn))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         backBtn.setBackground(new java.awt.Color(184, 145, 104));
@@ -335,16 +333,16 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(detailLabel)
-                    .addComponent(backgroundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(backBtn)
                     .addComponent(searchDeliveryLabel)
                     .addComponent(deliveryMgmtLabel)
-                    .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                    .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(backgroundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(listDeliveryLabel))
-                .addGap(31, 31, 31))
+                    .addComponent(listDeliveryLabel)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         deliveryMgmtPanelLayout.setVerticalGroup(
             deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,27 +384,96 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        // TODO add your handling code here:
+        // Enable button
+        saveBtn.setEnabled(true);
+        
+        // Enable text field
+        inputDeliveryStaff.setEnabled(true);
+        inputOrderStatus.setEnabled(true);
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // TODO add your handling code here:
+        // Get Order ID to change the staff or status or both
+        String getOldOrderID = (String) displayDeliveryTable.getValueAt(displayDeliveryTable.getSelectedRow(), 1);
+        
+        String getDeliveryStaff = inputDeliveryStaff.getSelectedItem().toString();
+        String getOrderID = inputOrderID.getText();
+        String getOrderStatus = inputOrderStatus.getSelectedItem().toString();
+        String getCustomer = inputCustomer.getText();
+        String getCustomerAddress = inputCustomerAddress.getText();
+        
+        String[] newChangesArr = new String[] {getDeliveryStaff, getOrderID, getOrderStatus, getCustomer, getCustomerAddress};
+        
+        SaveSelected ss = new SaveSelected();
+        String[][] newChangesArrToSave = ss.saveDelivery(newChangesArr, getOldOrderID);
+        
+        FlushAndWrite faw = new FlushAndWrite();
+        faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/delivery.txt");
+        
+        // Disable Button and Text field
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        
+        inputDeliveryStaff.setEnabled(false);
+        inputOrderStatus.setEnabled(false);
+        
+        // Clear table
+        DefaultTableModel deliveryTable = (DefaultTableModel) displayDeliveryTable.getModel();
+        deliveryTable.setRowCount(0);
     }//GEN-LAST:event_saveBtnActionPerformed
 
-    private void dismissBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dismissBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dismissBtnActionPerformed
-
     private void searchFilterStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFilterStatusActionPerformed
-        // TODO add your handling code here:
+        // Disable text field
+        inputDeliveryStaff.setEnabled(false);
+        inputOrderStatus.setEnabled(false);
+        
+        // Disable button
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        
+        // Clear Table
+        DefaultTableModel deliveryTable = (DefaultTableModel) displayDeliveryTable.getModel();
+        deliveryTable.setRowCount(0);
+        
+        String getFilterStatus = inputFilterStatus.getSelectedItem().toString();
+        
+        if(getFilterStatus.equals("")) {
+            String[][] getAllDeliveryArr = new Create3DArray().create3D("/oodms/database/delivery.txt");
+            
+            for(String[] getAllDeliveryData : getAllDeliveryArr) {
+                deliveryTable.addRow(getAllDeliveryData);
+            }
+        } else {
+            String[][] getSearchDeliveryArr = new SearchFileData().searchData(getFilterStatus, 2, "/oodms/database/delivery.txt");
+            
+            for(String[] getSearchDeliveryData : getSearchDeliveryArr) {
+                deliveryTable.addRow(getSearchDeliveryData);
+            }
+        }
     }//GEN-LAST:event_searchFilterStatusActionPerformed
 
     private void displayDeliveryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayDeliveryTableMouseClicked
-        // TODO add your handling code here:
+        // Enable button
+        editBtn.setEnabled(true);
+        
+        // Disable button and text field
+        saveBtn.setEnabled(false);
+        
+        inputDeliveryStaff.setEnabled(false);
+        inputOrderStatus.setEnabled(false);
+
+        int selectedRow = displayDeliveryTable.getSelectedRow();
+        
+        inputDeliveryStaff.setSelectedItem((String) displayDeliveryTable.getValueAt(selectedRow, 0));
+        inputOrderID.setText((String) displayDeliveryTable.getValueAt(selectedRow, 1));
+        inputOrderStatus.setSelectedItem((String) displayDeliveryTable.getValueAt(selectedRow, 2));
+        inputCustomer.setText((String) displayDeliveryTable.getValueAt(selectedRow, 3));
+        inputCustomerAddress.setText((String) displayDeliveryTable.getValueAt(selectedRow, 4));
     }//GEN-LAST:event_displayDeliveryTableMouseClicked
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        // TODO add your handling code here:
+        new AdminDashboard().setVisible(true);
+        dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
     /**
@@ -454,7 +521,6 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JPanel deliveryMgmtPanel;
     private javax.swing.JLabel deliveryStaffLabel;
     private javax.swing.JLabel detailLabel;
-    private javax.swing.JButton dismissBtn;
     private javax.swing.JTable displayDeliveryTable;
     private javax.swing.JButton editBtn;
     private javax.swing.JLabel filterStatusLabel;

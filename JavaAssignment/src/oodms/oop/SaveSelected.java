@@ -1,7 +1,5 @@
 package oodms.oop;
 
-import java.util.Arrays;
-
 public class SaveSelected {
 
     public String[][] saveUsername(String[] newChangesArr, String compareOldUsername) {
@@ -51,5 +49,17 @@ public class SaveSelected {
         }
         
         return saveItemArr;
+    }
+    
+    public String[][] saveDelivery(String[] newChangesArr, String findTheRow) {
+        String[][] saveDeliveryArr = new Create3DArray().create3D("/oodms/database/delivery.txt");
+        
+        for(int i = 0; i < saveDeliveryArr.length; i++) {
+            if(saveDeliveryArr[i][1].equals(findTheRow)) {
+                System.arraycopy(newChangesArr, 0, saveDeliveryArr[i], 0, 5);
+            }
+        }
+        
+        return saveDeliveryArr;
     }
 }
