@@ -48,18 +48,33 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="welcomeLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="310" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="proceedBtn" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                          <Component id="guestBtn" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="273" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
                           <Component id="loginBtn" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                           <Component id="signupBtn" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="210" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="173" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                   <Component id="confirmPasswordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="usernameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="passwordLabel" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -79,26 +94,11 @@
                               <Component id="inputAddressScrollPanel" max="32767" attributes="0"/>
                               <Component id="inputUsername" alignment="0" max="32767" attributes="0"/>
                               <Component id="inputGender" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputAge" alignment="0" max="32767" attributes="0"/>
+                              <Component id="inputAge" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="178" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="welcomeLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="310" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="proceedBtn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                          <Component id="guestBtn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="273" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <EmptySpace pref="215" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -112,7 +112,7 @@
                       <Component id="loginBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="signupBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="usernameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="inputUsername" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -152,7 +152,7 @@
                       <Component id="genderLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="inputGender" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="proceedBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="guestBtn" alignment="3" min="-2" max="-2" attributes="0"/>

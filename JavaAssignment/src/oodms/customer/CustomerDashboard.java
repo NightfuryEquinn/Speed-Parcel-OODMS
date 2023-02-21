@@ -293,7 +293,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_profileMgmtBtnMouseClicked
 
     private void cartMgmtBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartMgmtBtnMouseClicked
-        new CartMgmtDisplay().setVisible(true);
+        new CartMgmtDisplay(acceptCustomerUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_cartMgmtBtnMouseClicked
 

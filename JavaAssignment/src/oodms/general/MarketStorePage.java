@@ -1,7 +1,14 @@
 package oodms.general;
 
 import java.awt.Font;
+import java.util.Arrays;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import oodms.customer.CustomerDashboard;
+import oodms.oop.AddNewItemToCart;
+import oodms.oop.CountChildren;
+import oodms.oop.Create3DArray;
+import oodms.oop.SearchFileData;
 
 
 public class MarketStorePage extends javax.swing.JFrame {
@@ -17,6 +24,16 @@ public class MarketStorePage extends javax.swing.JFrame {
         initComponents();
         
         MarketStorePage.acceptCustomerUsername = acceptCustomerUsername;
+        
+        // Setup category for filter category and item category
+        String[][] getCategoryAvailable = new CountChildren().getCountChildren("/oodms/database/category.txt", 0);
+        
+        // Include a default no category
+        inputFilterCat.addItem("");
+        
+        for(String[] getCategory : getCategoryAvailable) {
+            inputFilterCat.addItem(getCategory[0]);
+        }
     }
 
     /**
@@ -28,15 +45,15 @@ public class MarketStorePage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        feedbackMgmtPanel = new javax.swing.JPanel();
-        feedbackMgmtLabel = new javax.swing.JLabel();
-        searchFeedbackLabel = new javax.swing.JLabel();
+        onlineSpeedMallPanel = new javax.swing.JPanel();
+        onlineSpeedMallLabel = new javax.swing.JLabel();
+        searchLabel = new javax.swing.JLabel();
         backgroundPanel1 = new javax.swing.JPanel();
-        searchCustomerLabel = new javax.swing.JLabel();
-        inputSearchCustomer = new javax.swing.JTextField();
-        searchFeedbackBtn = new javax.swing.JButton();
-        filterRatingLabel = new javax.swing.JLabel();
-        filterRating = new javax.swing.JComboBox<>();
+        searchItemLabel = new javax.swing.JLabel();
+        inputSearchItem = new javax.swing.JTextField();
+        searchItemBtn = new javax.swing.JButton();
+        filterCatLabel = new javax.swing.JLabel();
+        inputFilterCat = new javax.swing.JComboBox<>();
         detailLabel = new javax.swing.JLabel();
         backgroundPanel2 = new javax.swing.JPanel();
         priceLabel = new javax.swing.JLabel();
@@ -52,43 +69,48 @@ public class MarketStorePage extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         displayMarketTable = new javax.swing.JTable();
-        listFeedbackLabel = new javax.swing.JLabel();
+        listLabel = new javax.swing.JLabel();
         captionLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        feedbackMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
+        onlineSpeedMallPanel.setBackground(new java.awt.Color(250, 242, 224));
 
-        feedbackMgmtLabel.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
-        feedbackMgmtLabel.setForeground(new java.awt.Color(76, 43, 24));
-        feedbackMgmtLabel.setText("Online Speed Mall");
+        onlineSpeedMallLabel.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
+        onlineSpeedMallLabel.setForeground(new java.awt.Color(76, 43, 24));
+        onlineSpeedMallLabel.setText("Online Speed Mall");
 
-        searchFeedbackLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        searchFeedbackLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchFeedbackLabel.setText("Search");
+        searchLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        searchLabel.setForeground(new java.awt.Color(76, 43, 24));
+        searchLabel.setText("Search");
 
         backgroundPanel1.setBackground(new java.awt.Color(230, 207, 201));
 
-        searchCustomerLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        searchCustomerLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchCustomerLabel.setText("Enter Name:");
+        searchItemLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        searchItemLabel.setForeground(new java.awt.Color(76, 43, 24));
+        searchItemLabel.setText("Enter Name:");
 
-        inputSearchCustomer.setBackground(new java.awt.Color(184, 145, 104));
-        inputSearchCustomer.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputSearchCustomer.setForeground(new java.awt.Color(76, 43, 24));
+        inputSearchItem.setBackground(new java.awt.Color(184, 145, 104));
+        inputSearchItem.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputSearchItem.setForeground(new java.awt.Color(76, 43, 24));
 
-        searchFeedbackBtn.setBackground(new java.awt.Color(184, 145, 104));
-        searchFeedbackBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        searchFeedbackBtn.setForeground(new java.awt.Color(76, 43, 24));
-        searchFeedbackBtn.setText("Search");
+        searchItemBtn.setBackground(new java.awt.Color(184, 145, 104));
+        searchItemBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        searchItemBtn.setForeground(new java.awt.Color(76, 43, 24));
+        searchItemBtn.setText("Search");
+        searchItemBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchItemBtnActionPerformed(evt);
+            }
+        });
 
-        filterRatingLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        filterRatingLabel.setForeground(new java.awt.Color(76, 43, 24));
-        filterRatingLabel.setText("Filter Category:");
+        filterCatLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        filterCatLabel.setForeground(new java.awt.Color(76, 43, 24));
+        filterCatLabel.setText("Filter Category:");
 
-        filterRating.setBackground(new java.awt.Color(184, 145, 104));
-        filterRating.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        filterRating.setForeground(new java.awt.Color(76, 43, 24));
+        inputFilterCat.setBackground(new java.awt.Color(184, 145, 104));
+        inputFilterCat.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputFilterCat.setForeground(new java.awt.Color(76, 43, 24));
 
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
@@ -98,16 +120,16 @@ public class MarketStorePage extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addComponent(filterRatingLabel)
+                        .addComponent(filterCatLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(filterRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputFilterCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(backgroundPanel1Layout.createSequentialGroup()
-                        .addComponent(searchCustomerLabel)
+                        .addComponent(searchItemLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(inputSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addComponent(searchFeedbackBtn)
+                        .addComponent(searchItemBtn)
                         .addGap(16, 16, 16))))
         );
         backgroundPanel1Layout.setVerticalGroup(
@@ -115,13 +137,13 @@ public class MarketStorePage extends javax.swing.JFrame {
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchCustomerLabel)
-                    .addComponent(inputSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchFeedbackBtn))
+                    .addComponent(searchItemLabel)
+                    .addComponent(inputSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchItemBtn))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(filterRatingLabel)
-                    .addComponent(filterRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(filterCatLabel)
+                    .addComponent(inputFilterCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -158,6 +180,11 @@ public class MarketStorePage extends javax.swing.JFrame {
         addToCartBtn.setForeground(new java.awt.Color(76, 43, 24));
         addToCartBtn.setText("Add To Cart");
         addToCartBtn.setEnabled(false);
+        addToCartBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addToCartBtnActionPerformed(evt);
+            }
+        });
 
         itemNameLaebl.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         itemNameLaebl.setForeground(new java.awt.Color(76, 43, 24));
@@ -173,6 +200,7 @@ public class MarketStorePage extends javax.swing.JFrame {
         quantityLabel.setText("Quantity:");
 
         inputQuantity.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputQuantity.setEnabled(false);
 
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
@@ -231,6 +259,11 @@ public class MarketStorePage extends javax.swing.JFrame {
         backBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         backBtn.setForeground(new java.awt.Color(76, 43, 24));
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         displayMarketTable.setBackground(new java.awt.Color(230, 207, 201));
         displayMarketTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -242,7 +275,7 @@ public class MarketStorePage extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Item Name", "Price (RM)", "Description", "Quantity"
+                "Item Name", "Price (RM)", "Category", "Description"
             }
         ) {
             Class[] types = new Class [] {
@@ -264,6 +297,11 @@ public class MarketStorePage extends javax.swing.JFrame {
         displayMarketTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
         displayMarketTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
         displayMarketTable.setShowVerticalLines(true);
+        displayMarketTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                displayMarketTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(displayMarketTable);
         // Change Table Header Font
         displayMarketTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
@@ -272,65 +310,65 @@ public class MarketStorePage extends javax.swing.JFrame {
         TableColumnModel columnModel = displayMarketTable.getColumnModel();
 
         columnModel.getColumn(0).setPreferredWidth(150);
-        columnModel.getColumn(1).setPreferredWidth(75);
+        columnModel.getColumn(1).setPreferredWidth(100);
         columnModel.getColumn(2).setPreferredWidth(200);
         columnModel.getColumn(3).setPreferredWidth(275);
 
-        listFeedbackLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        listFeedbackLabel.setForeground(new java.awt.Color(76, 43, 24));
-        listFeedbackLabel.setText("List");
+        listLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        listLabel.setForeground(new java.awt.Color(76, 43, 24));
+        listLabel.setText("List");
 
         captionLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         captionLabel.setForeground(new java.awt.Color(76, 43, 24));
         captionLabel.setText("Great deals always come with great delivery speed");
 
-        javax.swing.GroupLayout feedbackMgmtPanelLayout = new javax.swing.GroupLayout(feedbackMgmtPanel);
-        feedbackMgmtPanel.setLayout(feedbackMgmtPanelLayout);
-        feedbackMgmtPanelLayout.setHorizontalGroup(
-            feedbackMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(feedbackMgmtPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout onlineSpeedMallPanelLayout = new javax.swing.GroupLayout(onlineSpeedMallPanel);
+        onlineSpeedMallPanel.setLayout(onlineSpeedMallPanelLayout);
+        onlineSpeedMallPanelLayout.setHorizontalGroup(
+            onlineSpeedMallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(onlineSpeedMallPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(feedbackMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(feedbackMgmtPanelLayout.createSequentialGroup()
+                .addGroup(onlineSpeedMallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(onlineSpeedMallPanelLayout.createSequentialGroup()
                         .addComponent(captionLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(feedbackMgmtPanelLayout.createSequentialGroup()
-                        .addComponent(feedbackMgmtLabel)
+                    .addGroup(onlineSpeedMallPanelLayout.createSequentialGroup()
+                        .addComponent(onlineSpeedMallLabel)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(feedbackMgmtPanelLayout.createSequentialGroup()
-                        .addGroup(feedbackMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, feedbackMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(onlineSpeedMallPanelLayout.createSequentialGroup()
+                        .addGroup(onlineSpeedMallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, onlineSpeedMallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(backgroundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(backBtn)
                                 .addComponent(detailLabel))
-                            .addComponent(searchFeedbackLabel)
+                            .addComponent(searchLabel)
                             .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
-                        .addGroup(feedbackMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(listFeedbackLabel)
+                        .addGroup(onlineSpeedMallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(listLabel)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39))))
         );
-        feedbackMgmtPanelLayout.setVerticalGroup(
-            feedbackMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(feedbackMgmtPanelLayout.createSequentialGroup()
+        onlineSpeedMallPanelLayout.setVerticalGroup(
+            onlineSpeedMallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(onlineSpeedMallPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(feedbackMgmtLabel)
+                .addComponent(onlineSpeedMallLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(captionLabel)
                 .addGap(29, 29, 29)
-                .addGroup(feedbackMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchFeedbackLabel)
-                    .addComponent(listFeedbackLabel))
+                .addGroup(onlineSpeedMallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchLabel)
+                    .addComponent(listLabel))
                 .addGap(18, 18, 18)
-                .addGroup(feedbackMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(feedbackMgmtPanelLayout.createSequentialGroup()
+                .addGroup(onlineSpeedMallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(onlineSpeedMallPanelLayout.createSequentialGroup()
                         .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
                         .addComponent(detailLabel)
                         .addGap(18, 18, 18)
                         .addComponent(backgroundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(feedbackMgmtPanelLayout.createSequentialGroup()
+                    .addGroup(onlineSpeedMallPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 9, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
@@ -342,15 +380,123 @@ public class MarketStorePage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(feedbackMgmtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(onlineSpeedMallPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(feedbackMgmtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(onlineSpeedMallPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchItemBtnActionPerformed
+        inputQuantity.setEnabled(false);
+        addToCartBtn.setEnabled(false);
+        
+        DefaultTableModel marketTable = (DefaultTableModel) displayMarketTable.getModel();
+        marketTable.setRowCount(0);
+        
+        String getSearchItem = inputSearchItem.getText();
+        String getSearchCategory = inputFilterCat.getSelectedItem().toString();
+        
+        // Search with category
+        if((getSearchItem.isBlank()) && (!getSearchCategory.equals(""))) {
+            String[][] getSearchAllCategoryArr = new SearchFileData().searchData(getSearchCategory, 2, "/oodms/database/item.txt");
+            
+            for(String[] getSearchAllCategoryData : getSearchAllCategoryArr) {
+                marketTable.addRow(getSearchAllCategoryData);
+            } 
+            
+        // Search with name
+        } else if((!getSearchItem.isBlank()) && (getSearchCategory.equals(""))) {
+            String[][] getSearchAllItemArr = new SearchFileData().searchData(getSearchItem, 0, "/oodms/database/item.txt");
+            
+            for(String[] getSearchAllItemData : getSearchAllItemArr) {
+                marketTable.addRow(getSearchAllItemData);
+            }
+        
+        // Search with both name and category
+        } else if((!getSearchItem.isBlank()) && (!getSearchCategory.equals(""))) {
+            String[][] getSearchBothItemArr = new SearchFileData().searchData(getSearchItem, 0, "/oodms/database/item.txt");
+            String[][] getSearchBothCatArr = new SearchFileData().searchData(getSearchCategory, 2, "/oodms/database/item.txt");
+            
+            int newArrCount = 0;
+            
+            // Count the number of similar array into both array
+            for(int i = 0; i < getSearchBothItemArr.length; i++) {
+                for(int j = 0; j < getSearchBothCatArr.length; j++) {
+                    if(Arrays.equals(getSearchBothItemArr[i], getSearchBothCatArr[j])) {
+                        newArrCount++;
+                    }
+                }
+            }
+            
+            // Write the similar array into a new array
+            String[][] getSearchBothArr = new String[newArrCount][getSearchBothItemArr[0].length];
+            
+            int newArrIndex = 0;
+            
+            for(int i = 0; i < getSearchBothItemArr.length; i++) {
+                for(int j = 0; j < getSearchBothCatArr.length; j++) {
+                    if(Arrays.equals(getSearchBothItemArr[i], getSearchBothCatArr[j])) {
+                        getSearchBothArr[newArrIndex++] = getSearchBothItemArr[i];
+                    }
+                }
+            }
+            
+            for(String[] getSearchBothData : getSearchBothArr) {
+                marketTable.addRow(getSearchBothData);
+            }
+            
+        // Search all
+        } else if((getSearchItem.isBlank()) && (getSearchCategory.equals(""))) {
+            String[][] getAllItemArr = new Create3DArray().create3D("/oodms/database/item.txt");
+            
+            for(String[] getAllItemData : getAllItemArr) {
+                marketTable.addRow(getAllItemData);
+            }
+        }
+    }//GEN-LAST:event_searchItemBtnActionPerformed
+
+    private void displayMarketTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayMarketTableMouseClicked
+        inputQuantity.setEnabled(true);
+        addToCartBtn.setEnabled(true);
+        
+        int selectedRow = displayMarketTable.getSelectedRow();
+        
+        inputItemName.setText((String) displayMarketTable.getValueAt(selectedRow, 0));
+        inputPrice.setText((String) displayMarketTable.getValueAt(selectedRow, 1));
+        inputDescription.setText((String) displayMarketTable.getValueAt(selectedRow, 3));
+    }//GEN-LAST:event_displayMarketTableMouseClicked
+
+    private void addToCartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToCartBtnActionPerformed
+        if(acceptCustomerUsername != null) {
+            String getItem = inputItemName.getText();
+            String getPrice = inputPrice.getText();
+            String getQuantity = inputQuantity.getValue().toString();
+            
+            double countPrice = Double.parseDouble(inputPrice.getText());
+            double countQuantity = Double.parseDouble(inputQuantity.getValue().toString());
+            double countTotalPrice = countPrice * countQuantity;
+            
+            String getTotalPrice = String.valueOf(countTotalPrice);
+            
+            AddNewItemToCart newToCart = new AddNewItemToCart(acceptCustomerUsername, getItem, getPrice, getQuantity, getTotalPrice);
+        } else {
+            System.out.println("Log In or Sign Up to purchase items");
+        }
+    }//GEN-LAST:event_addToCartBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        if(acceptCustomerUsername != null) {
+            new CustomerDashboard(acceptCustomerUsername).setVisible(true);
+            dispose();
+        } else {
+            new WelcomePage().setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -397,23 +543,23 @@ public class MarketStorePage extends javax.swing.JFrame {
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel detailLabel;
     private javax.swing.JTable displayMarketTable;
-    private javax.swing.JLabel feedbackMgmtLabel;
-    private javax.swing.JPanel feedbackMgmtPanel;
-    private javax.swing.JComboBox<String> filterRating;
-    private javax.swing.JLabel filterRatingLabel;
+    private javax.swing.JLabel filterCatLabel;
     private javax.swing.JTextArea inputDescription;
+    private javax.swing.JComboBox<String> inputFilterCat;
     private javax.swing.JTextField inputItemName;
     private javax.swing.JTextField inputPrice;
     private javax.swing.JSpinner inputQuantity;
-    private javax.swing.JTextField inputSearchCustomer;
+    private javax.swing.JTextField inputSearchItem;
     private javax.swing.JLabel itemNameLaebl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel listFeedbackLabel;
+    private javax.swing.JLabel listLabel;
+    private javax.swing.JLabel onlineSpeedMallLabel;
+    private javax.swing.JPanel onlineSpeedMallPanel;
     private javax.swing.JLabel priceLabel;
     private javax.swing.JLabel quantityLabel;
-    private javax.swing.JLabel searchCustomerLabel;
-    private javax.swing.JButton searchFeedbackBtn;
-    private javax.swing.JLabel searchFeedbackLabel;
+    private javax.swing.JButton searchItemBtn;
+    private javax.swing.JLabel searchItemLabel;
+    private javax.swing.JLabel searchLabel;
     // End of variables declaration//GEN-END:variables
 }
