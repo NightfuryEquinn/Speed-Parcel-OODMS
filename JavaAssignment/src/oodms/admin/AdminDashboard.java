@@ -38,6 +38,9 @@ public class AdminDashboard extends javax.swing.JFrame {
         paymentMgmtBtn = new javax.swing.JLabel();
         reportLabel = new javax.swing.JLabel();
         backgroundPanel3 = new javax.swing.JPanel();
+        monthSalesBtn = new javax.swing.JLabel();
+        userGenderBtn = new javax.swing.JLabel();
+        userAgeBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -182,7 +185,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addComponent(orderMgmtBtn)
                 .addGap(28, 28, 28)
                 .addComponent(paymentMgmtBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
 
         reportLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
@@ -191,15 +194,55 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         backgroundPanel3.setBackground(new java.awt.Color(230, 207, 201));
 
+        monthSalesBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        monthSalesBtn.setForeground(new java.awt.Color(76, 43, 24));
+        monthSalesBtn.setText("Monthly Sales Report");
+        monthSalesBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                monthSalesBtnMouseClicked(evt);
+            }
+        });
+
+        userGenderBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        userGenderBtn.setForeground(new java.awt.Color(76, 43, 24));
+        userGenderBtn.setText("User Gender Report");
+        userGenderBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userGenderBtnMouseClicked(evt);
+            }
+        });
+
+        userAgeBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        userAgeBtn.setForeground(new java.awt.Color(76, 43, 24));
+        userAgeBtn.setText("User Age Report");
+        userAgeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userAgeBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout backgroundPanel3Layout = new javax.swing.GroupLayout(backgroundPanel3);
         backgroundPanel3.setLayout(backgroundPanel3Layout);
         backgroundPanel3Layout.setHorizontalGroup(
             backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGroup(backgroundPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(userAgeBtn)
+                    .addComponent(userGenderBtn)
+                    .addComponent(monthSalesBtn))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         backgroundPanel3Layout.setVerticalGroup(
             backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 326, Short.MAX_VALUE)
+            .addGroup(backgroundPanel3Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(monthSalesBtn)
+                .addGap(29, 29, 29)
+                .addComponent(userGenderBtn)
+                .addGap(29, 29, 29)
+                .addComponent(userAgeBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout AdminPanelLayout = new javax.swing.GroupLayout(AdminPanel);
@@ -227,7 +270,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                         .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(reportLabel)
                             .addComponent(backgroundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         AdminPanelLayout.setVerticalGroup(
             AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,6 +354,18 @@ public class AdminDashboard extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_paymentMgmtBtnMouseClicked
 
+    private void monthSalesBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_monthSalesBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_monthSalesBtnMouseClicked
+
+    private void userGenderBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userGenderBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userGenderBtnMouseClicked
+
+    private void userAgeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userAgeBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userAgeBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -360,10 +415,13 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel functionLabel;
     private javax.swing.JLabel itemMgmtBtn;
     private javax.swing.JButton logoutBtn;
+    private javax.swing.JLabel monthSalesBtn;
     private javax.swing.JLabel orderMgmtBtn;
     private javax.swing.JLabel paymentMgmtBtn;
     private javax.swing.JLabel profileIconLabel;
     private javax.swing.JLabel reportLabel;
+    private javax.swing.JLabel userAgeBtn;
+    private javax.swing.JLabel userGenderBtn;
     private javax.swing.JLabel userMgmtBtn;
     private javax.swing.JLabel welcomeBackLabel;
     // End of variables declaration//GEN-END:variables

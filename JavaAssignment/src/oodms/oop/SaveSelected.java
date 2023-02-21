@@ -62,4 +62,17 @@ public class SaveSelected {
         
         return saveDeliveryArr;
     }
+    
+    public String[][] saveCustomerProfile(String[] newChangesArr, String findTheUsername) {
+        String[][] saveCustomerProfileArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
+        
+        for(int i = 0; i < saveCustomerProfileArr.length; i++) {
+            if(saveCustomerProfileArr[i][0].equalsIgnoreCase(findTheUsername)) {
+                System.arraycopy(newChangesArr, 0, saveCustomerProfileArr[i], 1, 1);
+                System.arraycopy(newChangesArr, 1, saveCustomerProfileArr[i], 3, 4);
+            }
+        }
+        
+        return saveCustomerProfileArr;
+    }
 }

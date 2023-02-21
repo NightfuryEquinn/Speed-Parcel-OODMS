@@ -4,6 +4,7 @@ import oodms.oop.AddNewCustomer;
 import oodms.oop.CheckSimilarity;
 import javax.swing.JOptionPane;
 import oodms.admin.AdminDashboard;
+import oodms.customer.CustomerDashboard;
 import oodms.deliver.staffDashboard;
 
 public class WelcomePage extends javax.swing.JFrame {
@@ -20,6 +21,9 @@ public class WelcomePage extends javax.swing.JFrame {
      */
     // Boolean for login or signup
     boolean checkLogin = false;
+    
+    // Send customer username
+    private String sendCustomerUsername;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -360,6 +364,11 @@ public class WelcomePage extends javax.swing.JFrame {
                     dispose();
                 } else {
                     System.out.println("You are customer.");
+                    
+                    sendCustomerUsername = getUsername;
+                    
+                    new CustomerDashboard(sendCustomerUsername).setVisible(true);
+                    dispose();
                 }
                 
                 // Create a popup dialog message box
