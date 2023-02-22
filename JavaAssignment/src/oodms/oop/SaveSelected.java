@@ -75,4 +75,18 @@ public class SaveSelected {
         
         return saveCustomerProfileArr;
     }
+    
+    public String[][] saveCart(String[] newChangesArr, String findTheID, String findTheItem) {
+        String[][] saveCartArr = new Create3DArray().create3D("/oodms/database/cart.txt");
+        
+        for(int i = 0; i < saveCartArr.length; i++) {
+            if(saveCartArr[i][0].equals(findTheID)) {
+                if(saveCartArr[i][2].equals(findTheItem)) {
+                    System.arraycopy(newChangesArr, 0, saveCartArr[i], 0, 6);
+                }
+            }
+        }
+        
+        return saveCartArr;
+    }
 }

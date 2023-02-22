@@ -4,6 +4,9 @@ import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.Create3DArray;
+import oodms.oop.DeleteSelected;
+import oodms.oop.FlushAndWrite;
+import oodms.oop.SaveSelected;
 import oodms.oop.SearchFileData;
 
 public class CartMgmtDisplay extends javax.swing.JFrame {
@@ -50,6 +53,8 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
         inputQuantity = new javax.swing.JSpinner();
         itemNameLabel = new javax.swing.JLabel();
         inputItemName = new javax.swing.JTextField();
+        cartIDLabel = new javax.swing.JLabel();
+        inputCartID = new javax.swing.JTextField();
         listLabel = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -186,20 +191,26 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
         inputItemName.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputItemName.setForeground(new java.awt.Color(76, 43, 24));
 
+        cartIDLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        cartIDLabel.setForeground(new java.awt.Color(76, 43, 24));
+        cartIDLabel.setText("Cart ID:");
+
+        inputCartID.setEditable(false);
+        inputCartID.setBackground(new java.awt.Color(184, 145, 104));
+        inputCartID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputCartID.setForeground(new java.awt.Color(76, 43, 24));
+
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
         backgroundPanel2Layout.setHorizontalGroup(
             backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(21, 21, 21)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(editBtn)
+                        .addComponent(cartIDLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(saveBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deleteBtn))
+                        .addComponent(inputCartID, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgroundPanel2Layout.createSequentialGroup()
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(totalPriceLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -208,16 +219,26 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
                             .addComponent(itemNameLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inputPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                            .addComponent(inputPrice, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(inputTotalPrice)
                             .addComponent(inputQuantity)
-                            .addComponent(inputItemName))))
+                            .addComponent(inputItemName, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(backgroundPanel2Layout.createSequentialGroup()
+                        .addComponent(editBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(saveBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(deleteBtn)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         backgroundPanel2Layout.setVerticalGroup(
             backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cartIDLabel)
+                    .addComponent(inputCartID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(itemNameLabel)
                     .addComponent(inputItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -233,7 +254,7 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalPriceLabel)
                     .addComponent(inputTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editBtn)
                     .addComponent(saveBtn)
@@ -261,18 +282,18 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
         displayCartTable.setForeground(new java.awt.Color(76, 43, 24));
         displayCartTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Item Name", "Price (RM)", "Quantity", "Total Price (RM)"
+                "Cart ID", "Item Name", "Price (RM)", "Quantity", "Total Price (RM)"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -299,10 +320,11 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
         // Change Table Column Width
         TableColumnModel columnModel = displayCartTable.getColumnModel();
 
-        columnModel.getColumn(0).setPreferredWidth(125);
-        columnModel.getColumn(1).setPreferredWidth(150);
-        columnModel.getColumn(2).setPreferredWidth(125);
-        columnModel.getColumn(3).setPreferredWidth(250);
+        columnModel.getColumn(0).setPreferredWidth(75);
+        columnModel.getColumn(1).setPreferredWidth(125);
+        columnModel.getColumn(2).setPreferredWidth(150);
+        columnModel.getColumn(3).setPreferredWidth(125);
+        columnModel.getColumn(4).setPreferredWidth(250);
 
         purchaseBtn.setBackground(new java.awt.Color(184, 145, 104));
         purchaseBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -393,8 +415,8 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
             String[][] allCartArr = new Create3DArray().create3D("/oodms/database/cart.txt");
             
             for(String[] allCartData : allCartArr) {
-                if(allCartData[0].equals(acceptCustomerUsername)) {
-                    String[] theUserCartData = new String[] {allCartData[1], allCartData[2], allCartData[3], allCartData[4]};
+                if(allCartData[1].equals(acceptCustomerUsername)) {
+                    String[] theUserCartData = new String[] {allCartData[0], allCartData[2], allCartData[3], allCartData[4], allCartData[5]};
                     cartTable.addRow(theUserCartData);
                 }
             }
@@ -402,8 +424,8 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
             String[][] searchAllCartArr = new SearchFileData().searchData(getSearchItem, 1, "/oodms/database/cart.txt");
             
             for(String[] searchAllCartData : searchAllCartArr) {
-                if(searchAllCartData[0].equals(acceptCustomerUsername)) {
-                    String[] theUserCartData = new String[] {searchAllCartData[1], searchAllCartData[2], searchAllCartData[3], searchAllCartData[4]};
+                if(searchAllCartData[1].equals(acceptCustomerUsername)) {
+                    String[] theUserCartData = new String[] {searchAllCartData[0], searchAllCartData[2], searchAllCartData[3], searchAllCartData[4], searchAllCartData[5]};
                     cartTable.addRow(theUserCartData);
                 }
             }
@@ -420,10 +442,11 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
         
         int selectedRow = displayCartTable.getSelectedRow();
         
-        inputItemName.setText((String) displayCartTable.getValueAt(selectedRow, 0));
-        inputPrice.setText((String) displayCartTable.getValueAt(selectedRow, 1));
-        inputQuantity.setValue(Integer.valueOf((String) displayCartTable.getValueAt(selectedRow, 2)));
-        inputTotalPrice.setText((String) displayCartTable.getValueAt(selectedRow, 3));
+        inputCartID.setText((String) displayCartTable.getValueAt(selectedRow, 0));
+        inputItemName.setText((String) displayCartTable.getValueAt(selectedRow, 1));
+        inputPrice.setText((String) displayCartTable.getValueAt(selectedRow, 2));
+        inputQuantity.setValue(Integer.valueOf((String) displayCartTable.getValueAt(selectedRow, 3)));
+        inputTotalPrice.setText((String) displayCartTable.getValueAt(selectedRow, 4));
     }//GEN-LAST:event_displayCartTableMouseClicked
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
@@ -434,14 +457,110 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        String getCartID = inputCartID.getText();
+        String getItemName = inputItemName.getText();
+        String getPrice = inputPrice.getText();
+        String getQuantity = inputQuantity.getValue().toString();
         
+        double countPrice = Double.parseDouble(getPrice);
+        double countQuantity = Double.parseDouble(getQuantity);
+        double countTotalPrice = countPrice * countQuantity;
+            
+        String getTotalPrice = String.format("%.2f", countTotalPrice);
+        
+        String[] newChangesArr = new String[] {getCartID, acceptCustomerUsername, getItemName, getPrice, getQuantity, getTotalPrice};
+        
+        SaveSelected ss = new SaveSelected();
+        String[][] newChangesArrToSave = ss.saveCart(newChangesArr, getCartID, getItemName);
+        
+        FlushAndWrite faw = new FlushAndWrite();
+        faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/cart.txt");
+        
+        // Reset Search and Details fields
+        inputSearchItem.setText("");
+        
+        inputItemName.setText("");
+        inputPrice.setText("");
+        inputQuantity.setValue(0);
+        inputTotalPrice.setText("");
+
+        // Disable editing
+        inputQuantity.setEnabled(false);
+
+        // Disable buttons
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+        
+        purchaseBtn.setEnabled(false);
+
+        // Clear table
+        DefaultTableModel userTable = (DefaultTableModel) displayCartTable.getModel();
+        userTable.setRowCount(0);
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // Get the selected row
+        int selectedRowIndex = displayCartTable.getSelectedRow();
+
+        String selectedRowCart = (String) displayCartTable.getValueAt(selectedRowIndex, 0);
+
+        // Return a multidimensional of excluded selected row
+        String[][] ds = new DeleteSelected().deleteSelected(selectedRowCart, "/oodms/database/cart.txt");
+
+        // Flush and Write
+        FlushAndWrite faw = new FlushAndWrite();
+        faw.flushAndWrite(ds, "src/oodms/database/cart.txt");
+
+        // Reset Search and Details fields
+        inputSearchItem.setText("");
         
+        inputItemName.setText("");
+        inputPrice.setText("");
+        inputQuantity.setValue(0);
+        inputTotalPrice.setText("");
+
+        // Disable editing
+        inputQuantity.setEnabled(false);
+
+        // Disable buttons
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+        
+        purchaseBtn.setEnabled(false);
+
+        // Clear table
+        DefaultTableModel userTable = (DefaultTableModel) displayCartTable.getModel();
+        userTable.setRowCount(0);
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void purchaseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseBtnActionPerformed
+        int selectedRow = displayCartTable.getSelectedRow();
+        
+        /**
+         * Get the item data that is purchased before deleting from cart text file
+         */
+        String[] getItemToPurchaseData = new String[] {
+           (String) displayCartTable.getValueAt(selectedRow, 0),
+            acceptCustomerUsername,
+           (String) displayCartTable.getValueAt(selectedRow, 1),
+           (String) displayCartTable.getValueAt(selectedRow, 2),
+           (String) displayCartTable.getValueAt(selectedRow, 3),
+           (String) displayCartTable.getValueAt(selectedRow, 4),
+        };
+        
+        // Delete item that is purchased from cart text file
+        String selectedRowCart = (String) displayCartTable.getValueAt(selectedRow, 0);
+
+        // Return a multidimensional of excluded selected row
+        String[][] ds = new DeleteSelected().deleteSelected(selectedRowCart, "/oodms/database/cart.txt");
+
+        // Flush and Write
+        FlushAndWrite faw = new FlushAndWrite();
+        faw.flushAndWrite(ds, "src/oodms/database/cart.txt");
+        
+        // Write into order, payment, delivery text file
         
     }//GEN-LAST:event_purchaseBtnActionPerformed
 
@@ -492,12 +611,14 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JButton backBtn;
     private javax.swing.JPanel backgroundPanel1;
     private javax.swing.JPanel backgroundPanel2;
+    private javax.swing.JLabel cartIDLabel;
     private javax.swing.JLabel cartMgmtLabel;
     private javax.swing.JPanel cartMgmtPanel;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel detailLabel;
     private javax.swing.JTable displayCartTable;
     private javax.swing.JButton editBtn;
+    private javax.swing.JTextField inputCartID;
     private javax.swing.JTextField inputItemName;
     private javax.swing.JTextField inputPrice;
     private javax.swing.JSpinner inputQuantity;
