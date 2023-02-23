@@ -1,6 +1,7 @@
 package oodms.customer;
 
 import java.awt.Font;
+import java.util.Random;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.Create3DArray;
@@ -8,6 +9,9 @@ import oodms.oop.DeleteSelected;
 import oodms.oop.FlushAndWrite;
 import oodms.oop.SaveSelected;
 import oodms.oop.SearchFileData;
+import oodms.oop.UpdatePurchasedItemInDelivery;
+import oodms.oop.UpdatePurchasedItemInOrder;
+import oodms.oop.UpdatePurchasedItemInPayment;
 
 public class CartMgmtDisplay extends javax.swing.JFrame {
 
@@ -560,8 +564,25 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
         FlushAndWrite faw = new FlushAndWrite();
         faw.flushAndWrite(ds, "src/oodms/database/cart.txt");
         
-        // Write into order, payment, delivery text file
+        /**
+         * Write into order, payment, delivery text file
+         */
+        // Random generate an order ID
+        Random random = new Random();
+        int getOrderID = random.nextInt(1000000) + 15000000;
+        String randomOrderID = String.valueOf(getOrderID);
         
+        // To Order text file
+        UpdatePurchasedItemInOrder upiio = new UpdatePurchasedItemInOrder();
+        upiio.updatePurchasedItemData(getItemToPurchaseData, randomOrderID);
+        
+        // To Delivery text file
+        UpdatePurchasedItemInDelivery upiid = new UpdatePurchasedItemInDelivery();
+        upiid.updatePurchasedItemData(getItemToPurchaseData, randomOrderID);
+        
+        // To Payment text file
+        UpdatePurchasedItemInPayment upiip = new UpdatePurchasedItemInPayment();
+        upiip.updatePurchasedItemData(getItemToPurchaseData, randomOrderID);
     }//GEN-LAST:event_purchaseBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

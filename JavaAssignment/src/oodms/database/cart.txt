@@ -1,4 +1,3 @@
 3023400 | User | Cranberry | 4.90 | 5 | 24.50
 3022345 | User | Blackberry | 7.90 | 3 | 23.70
-3024567 | QWER | Blueberry | 5.90 | 3 | 17.70
 3023432 | QWER | Strawberry | 3.90 | 7 | 27.30
