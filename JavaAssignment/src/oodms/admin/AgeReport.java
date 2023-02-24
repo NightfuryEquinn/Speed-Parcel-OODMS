@@ -2,25 +2,28 @@ package oodms.admin;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.text.DecimalFormat;
-import oodms.oop.CountChildren;
+import oodms.oop.Create3DArray;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
-import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
-import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RectangleInsets;
 
-public class GenderReport extends javax.swing.JFrame {
+public class AgeReport extends javax.swing.JFrame {
 
     /**
      * Creates new form GenderReport
      */
-    public GenderReport() {
+    public AgeReport() {
         initComponents();
     }
 
@@ -70,33 +73,63 @@ public class GenderReport extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // Count gender
-        String[][] countGender = new CountChildren().getCountChildren("/oodms/database/credentials.txt", 6);
+        // Age Distribution
+        String[] ageDistribution = new String[] {"0-15", "16-30", "31-45", "46-60", "60++"};
+
+        int[] countAgeDistribution = new int[5];
+        
+        // Loop only age
+        String[][] countAge = new Create3DArray().create3D("/oodms/database/credentials.txt");
+        
+        int[] ageArr = new int[countAge.length];
+        
+        for(int i = 0; i < countAge.length; i++) {
+            ageArr[i] = Integer.parseInt(countAge[i][5]);
+        }
+        
+        // Count number of users depends on age group
+        for(int age : ageArr) {
+            if(age <= 15) {
+                countAgeDistribution[0]++;
+            } else if(age <= 30) {
+                countAgeDistribution[1]++;
+            } else if(age <= 45) {
+                countAgeDistribution[2]++;
+            } else if(age <= 60) {
+                countAgeDistribution[3]++;
+            } else {
+                countAgeDistribution[4]++;
+            }
+        }
         
         /**
          * Generate the Pie Chart
          */
         // Create dataset
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        for(String[] gender : countGender) {
-            dataset.setValue(gender[0], Integer.valueOf(gender[1]));
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(int i = 0; i < ageDistribution.length; i++) {
+            dataset.addValue(countAgeDistribution[i], "Age Group", ageDistribution[i]);
         }
 
         // Create pie chart
-        JFreeChart chart = ChartFactory.createPieChart(
-            "Gender Distribution of Registered Customer in Speed Parcel", // Chart title
-            dataset, // Data
-            false, // Include legend
-            true, // Tooltips
-            false // URLs
+        JFreeChart chart = ChartFactory.createBarChart(
+            "Age Distribution in Speed Parcel", // chart title
+            "Age Group", // x axis label
+            "Count", // y axis label
+            dataset, // data
+            PlotOrientation.VERTICAL, // orientation
+            false, // include legend
+            true, // tooltips
+            false // urls
         );
+        
+        ChartPanel chartPanel = new ChartPanel(chart);
         
         // Set background color
         Color brown = new Color(184,145,104);
-        
-        ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setBackground(brown);
-        
+        chartPanel.setPreferredSize(new Dimension(500, 300));       
+
         // Set the font for the chart title
         Font titleFont = new Font("Montserrat", Font.BOLD, 24);
         TextTitle title = chart.getTitle();
@@ -107,14 +140,22 @@ public class GenderReport extends javax.swing.JFrame {
         
         // Set the font for the pie section labels
         Font labelFont = new Font("Karla", Font.PLAIN, 14);
-        PiePlot plot = (PiePlot) chart.getPlot();
-        StandardPieSectionLabelGenerator labelGenerator = new StandardPieSectionLabelGenerator(
-            "{0} ({1})", new DecimalFormat("0"), new DecimalFormat("0%")
-        );
-        plot.setLabelGenerator(labelGenerator);
-        plot.setLabelFont(labelFont);
+
+        CategoryPlot plot = chart.getCategoryPlot();
         
-        // Set the insets of the chart's plot to add padding
+        // Set label font
+        CategoryAxis xAxis = plot.getDomainAxis();
+        ValueAxis yAxis = plot.getRangeAxis();
+        
+        xAxis.setTickLabelFont(labelFont);
+        yAxis.setTickLabelFont(labelFont);
+        
+        BarRenderer renderer = new BarRenderer();
+        
+        // Set bar color
+        renderer.setSeriesPaint(0, new Color(76,43,24)); 
+        
+        plot.setRenderer(renderer);
         plot.setInsets(new RectangleInsets(50, 50, 50, 50)); 
 
         // Change to BorderLayout because the library can't work on default FlowLayout
@@ -143,20 +184,21 @@ public class GenderReport extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GenderReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgeReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GenderReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgeReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GenderReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgeReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GenderReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgeReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GenderReport().setVisible(true);
+                new AgeReport().setVisible(true);
             }
         });
     }

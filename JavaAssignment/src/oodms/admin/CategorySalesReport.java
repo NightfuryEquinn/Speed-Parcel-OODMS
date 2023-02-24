@@ -3,8 +3,14 @@ package oodms.admin;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.List;
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import oodms.oop.CountChildren;
+import oodms.oop.Create3DArray;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -15,12 +21,12 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.ui.RectangleInsets;
 
-public class GenderReport extends javax.swing.JFrame {
+public class CategorySalesReport extends javax.swing.JFrame {
 
     /**
      * Creates new form GenderReport
      */
-    public GenderReport() {
+    public CategorySalesReport() {
         initComponents();
     }
 
@@ -70,21 +76,71 @@ public class GenderReport extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // Count gender
-        String[][] countGender = new CountChildren().getCountChildren("/oodms/database/credentials.txt", 6);
+        /**
+         * Filter through data to get only item name, the item category and amount payable
+         */
+        String[][] getOrderArr = new Create3DArray().create3D("/oodms/database/order.txt");
+        String[][] getItemArr = new Create3DArray().create3D("/oodms/database/item.txt");
+        
+        String[][] soldItemArr = new String[getOrderArr.length][3];
+
+        for (int i = 0; i < getOrderArr.length; i++) {
+            String itemName = getOrderArr[i][2];
+            
+            Double totalPrice = Double.valueOf(getOrderArr[i][5]);
+            Double countAmountPayable = totalPrice * 1.04 + 5;
+            String amountPayable = String.format("%.2f", countAmountPayable);
+            
+            String itemCategory = "";
+            for (int j = 0; j < getItemArr.length; j++) {
+                if (getItemArr[j][0].equals(itemName)) {
+                    itemCategory = getItemArr[j][2];
+                    break;
+                }
+            }
+            
+            soldItemArr[i][0] = itemName;
+            soldItemArr[i][1] = itemCategory;
+            soldItemArr[i][2] = amountPayable;
+        }
         
         /**
+         * Calculate the total sales of each category
+         */
+         String[][] getCategoryAvailable = new CountChildren().getCountChildren("/oodms/database/category.txt", 0);
+         
+         String[][] getCategoryTotalSales = new String[getCategoryAvailable.length][2];
+         
+         for(int i = 0; i < getCategoryAvailable.length; i++) {
+             for(int j = 0; j < soldItemArr.length; j++) {
+                 if(soldItemArr[j][1].equals(getCategoryAvailable[i][0])) {
+                     getCategoryTotalSales[i][0] = getCategoryAvailable[i][0];
+                     
+                     if(getCategoryTotalSales[i][1] == null) {
+                         getCategoryTotalSales[i][1] = soldItemArr[j][2];
+                     } else {
+                         Double changedSales = Double.valueOf(getCategoryTotalSales[i][1]);
+                         Double incomingSales = Double.valueOf(soldItemArr[j][2]);
+                         Double newTotalCategorySales = changedSales + incomingSales;
+                         
+                         getCategoryTotalSales[i][1] = String.valueOf(newTotalCategorySales);
+                     }
+                 }
+             }
+         }
+        
+         /**
          * Generate the Pie Chart
          */
         // Create dataset
         DefaultPieDataset dataset = new DefaultPieDataset();
-        for(String[] gender : countGender) {
-            dataset.setValue(gender[0], Integer.valueOf(gender[1]));
+        for(String[] categorySales : getCategoryTotalSales) {
+            dataset.setValue(categorySales[0], Double.valueOf(categorySales[1]));
         }
-
+        
         // Create pie chart
         JFreeChart chart = ChartFactory.createPieChart(
-            "Gender Distribution of Registered Customer in Speed Parcel", // Chart title
+            "Total Sales for Each Category in Speed Parcel (in RM)", // Chart title
             dataset, // Data
             false, // Include legend
             true, // Tooltips
@@ -92,7 +148,7 @@ public class GenderReport extends javax.swing.JFrame {
         );
         
         // Set background color
-        Color brown = new Color(184,145,104);
+        Color brown = new Color(184, 145, 104);
         
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setBackground(brown);
@@ -143,20 +199,21 @@ public class GenderReport extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GenderReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategorySalesReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GenderReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategorySalesReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GenderReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategorySalesReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GenderReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategorySalesReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GenderReport().setVisible(true);
+                new CategorySalesReport().setVisible(true);
             }
         });
     }

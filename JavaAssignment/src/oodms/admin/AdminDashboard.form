@@ -71,7 +71,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="32" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -365,7 +365,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="userAgeBtn" min="-2" max="-2" attributes="0"/>
                           <Component id="userGenderBtn" min="-2" max="-2" attributes="0"/>
-                          <Component id="monthSalesBtn" min="-2" max="-2" attributes="0"/>
+                          <Component id="categorySalesBtn" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="103" max="32767" attributes="0"/>
                   </Group>
@@ -375,7 +375,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="monthSalesBtn" min="-2" max="-2" attributes="0"/>
+                      <Component id="categorySalesBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Component id="userGenderBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -386,7 +386,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="monthSalesBtn">
+            <Component class="javax.swing.JLabel" name="categorySalesBtn">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Karla" size="14" style="0"/>
@@ -394,10 +394,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Monthly Sales Report"/>
+                <Property name="text" type="java.lang.String" value="Category Sales Report"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="monthSalesBtnMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="categorySalesBtnMouseClicked"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="userGenderBtn">

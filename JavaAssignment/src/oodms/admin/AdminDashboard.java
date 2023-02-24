@@ -38,7 +38,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         paymentMgmtBtn = new javax.swing.JLabel();
         reportLabel = new javax.swing.JLabel();
         backgroundPanel3 = new javax.swing.JPanel();
-        monthSalesBtn = new javax.swing.JLabel();
+        categorySalesBtn = new javax.swing.JLabel();
         userGenderBtn = new javax.swing.JLabel();
         userAgeBtn = new javax.swing.JLabel();
 
@@ -194,12 +194,12 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         backgroundPanel3.setBackground(new java.awt.Color(230, 207, 201));
 
-        monthSalesBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        monthSalesBtn.setForeground(new java.awt.Color(76, 43, 24));
-        monthSalesBtn.setText("Monthly Sales Report");
-        monthSalesBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        categorySalesBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        categorySalesBtn.setForeground(new java.awt.Color(76, 43, 24));
+        categorySalesBtn.setText("Category Sales Report");
+        categorySalesBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                monthSalesBtnMouseClicked(evt);
+                categorySalesBtnMouseClicked(evt);
             }
         });
 
@@ -230,14 +230,14 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGroup(backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(userAgeBtn)
                     .addComponent(userGenderBtn)
-                    .addComponent(monthSalesBtn))
+                    .addComponent(categorySalesBtn))
                 .addContainerGap(103, Short.MAX_VALUE))
         );
         backgroundPanel3Layout.setVerticalGroup(
             backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel3Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(monthSalesBtn)
+                .addComponent(categorySalesBtn)
                 .addGap(29, 29, 29)
                 .addComponent(userGenderBtn)
                 .addGap(29, 29, 29)
@@ -270,7 +270,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                         .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(reportLabel)
                             .addComponent(backgroundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         AdminPanelLayout.setVerticalGroup(
             AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,16 +354,16 @@ public class AdminDashboard extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_paymentMgmtBtnMouseClicked
 
-    private void monthSalesBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_monthSalesBtnMouseClicked
-        
-    }//GEN-LAST:event_monthSalesBtnMouseClicked
+    private void categorySalesBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categorySalesBtnMouseClicked
+        new CategorySalesReport().setVisible(true);
+    }//GEN-LAST:event_categorySalesBtnMouseClicked
 
     private void userGenderBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userGenderBtnMouseClicked
         new GenderReport().setVisible(true);
     }//GEN-LAST:event_userGenderBtnMouseClicked
 
     private void userAgeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userAgeBtnMouseClicked
-        
+        new AgeReport().setVisible(true);
     }//GEN-LAST:event_userAgeBtnMouseClicked
 
     /**
@@ -409,13 +409,13 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel backgroundPanel2;
     private javax.swing.JPanel backgroundPanel3;
     private javax.swing.JLabel catMgmtBtn;
+    private javax.swing.JLabel categorySalesBtn;
     private javax.swing.JLabel customerLabel;
     private javax.swing.JLabel deliveryMgmtBtn;
     private javax.swing.JLabel feedbackMgmtBtn;
     private javax.swing.JLabel functionLabel;
     private javax.swing.JLabel itemMgmtBtn;
     private javax.swing.JButton logoutBtn;
-    private javax.swing.JLabel monthSalesBtn;
     private javax.swing.JLabel orderMgmtBtn;
     private javax.swing.JLabel paymentMgmtBtn;
     private javax.swing.JLabel profileIconLabel;
