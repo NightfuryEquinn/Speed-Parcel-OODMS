@@ -355,15 +355,15 @@ public class AdminDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_paymentMgmtBtnMouseClicked
 
     private void monthSalesBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_monthSalesBtnMouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_monthSalesBtnMouseClicked
 
     private void userGenderBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userGenderBtnMouseClicked
-        // TODO add your handling code here:
+        new GenderReport().setVisible(true);
     }//GEN-LAST:event_userGenderBtnMouseClicked
 
     private void userAgeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userAgeBtnMouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_userAgeBtnMouseClicked
 
     /**
