@@ -2,8 +2,10 @@ package oodms.customer;
 
 import java.awt.Font;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import oodms.general.MarketStorePage;
 import oodms.general.WelcomePage;
+import oodms.oop.SearchFileData;
 
 public class CustomerDashboard extends javax.swing.JFrame {
 
@@ -51,6 +53,11 @@ public class CustomerDashboard extends javax.swing.JFrame {
         displayShippingTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         AdminPanel.setBackground(new java.awt.Color(250, 242, 224));
 
@@ -172,9 +179,24 @@ public class CustomerDashboard extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Order ID", "Item Name", "Purchase Date", "Status"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(displayDeliveringTable);
         // Change Table Header Font
         displayDeliveringTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
@@ -190,9 +212,24 @@ public class CustomerDashboard extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Order ID", "Item Name", "Purchase Date", "Status"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(displayShippingTable);
         // Change Table Header Font
         displayShippingTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
@@ -298,14 +335,48 @@ public class CustomerDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_cartMgmtBtnMouseClicked
 
     private void orderHistoryBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderHistoryBtnMouseClicked
-        new OrderHistoryDisplay().setVisible(true);
+        new OrderHistoryDisplay(acceptCustomerUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_orderHistoryBtnMouseClicked
 
     private void feedbackHistoryBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feedbackHistoryBtnMouseClicked
-        new FeedbackHistoryDisplay().setVisible(true);
+        new FeedbackHistoryDisplay(acceptCustomerUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_feedbackHistoryBtnMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        String[][] getUserAllOrderArr = new SearchFileData().searchData(acceptCustomerUsername, 1, "/oodms/database/order.txt");
+        
+        DefaultTableModel shippingTable = (DefaultTableModel) displayShippingTable.getModel();
+        DefaultTableModel deliveringTable = (DefaultTableModel) displayDeliveringTable.getModel();
+        
+        shippingTable.setRowCount(0);
+        deliveringTable.setRowCount(0);
+        
+        for(String[] getUserAllOrder : getUserAllOrderArr) {
+            if(getUserAllOrder[7].equals("Unassigned")) {
+                String[] forShipping = new String[] {
+                    getUserAllOrder[0],
+                    getUserAllOrder[2],
+                    getUserAllOrder[6],
+                    getUserAllOrder[7]
+                };
+                
+                shippingTable.addRow(forShipping);
+            } else if(getUserAllOrder[7].equals("Ongoing")) {
+                String[] forDelivering = new String[] {
+                    getUserAllOrder[0],
+                    getUserAllOrder[2],
+                    getUserAllOrder[6],
+                    getUserAllOrder[7]
+                };
+                
+                deliveringTable.addRow(forDelivering);
+            } else {
+                System.out.println("No orders");
+            }
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

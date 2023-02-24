@@ -1,20 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package oodms.customer;
 
-/**
- *
- * @author User
- */
+import java.awt.Font;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import oodms.oop.FeedbackRating;
+import oodms.oop.FlushAndWrite;
+import oodms.oop.SaveSelected;
+import oodms.oop.SearchFileData;
+
 public class FeedbackHistoryDisplay extends javax.swing.JFrame {
 
+    // Accept customer username
+    private static String acceptCustomerUsername;
+    
     /**
      * Creates new form FeedbackMgmtDisplay
+     * @param acceptCustomerUsername
      */
-    public FeedbackHistoryDisplay() {
+    public FeedbackHistoryDisplay(String acceptCustomerUsername) {
         initComponents();
+        
+        FeedbackHistoryDisplay.acceptCustomerUsername = acceptCustomerUsername;
     }
 
     /**
@@ -26,21 +32,328 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        feedbackHistoryLabel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        ratingLabel = new javax.swing.JLabel();
+        ratingSlider = new javax.swing.JSlider();
+        feedbackLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        inputFeedback = new javax.swing.JTextArea();
+        submitBtn = new javax.swing.JButton();
+        ratingName = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        displayFeedbackTable = new javax.swing.JTable();
+        backBtn = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(250, 242, 224));
+
+        feedbackHistoryLabel.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
+        feedbackHistoryLabel.setForeground(new java.awt.Color(76, 43, 24));
+        feedbackHistoryLabel.setText("Feedback History");
+
+        jPanel2.setBackground(new java.awt.Color(230, 207, 201));
+
+        ratingLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        ratingLabel.setForeground(new java.awt.Color(76, 43, 24));
+        ratingLabel.setText("Rating:");
+
+        ratingSlider.setMaximum(5);
+        ratingSlider.setMinimum(1);
+        ratingSlider.setValue(1);
+        ratingSlider.setEnabled(false);
+        ratingSlider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ratingSliderMouseReleased(evt);
+            }
+        });
+
+        feedbackLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        feedbackLabel.setForeground(new java.awt.Color(76, 43, 24));
+        feedbackLabel.setText("Feedback:");
+
+        inputFeedback.setEditable(false);
+        inputFeedback.setBackground(new java.awt.Color(184, 145, 104));
+        inputFeedback.setColumns(20);
+        inputFeedback.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputFeedback.setForeground(new java.awt.Color(76, 43, 24));
+        inputFeedback.setLineWrap(true);
+        inputFeedback.setRows(5);
+        jScrollPane1.setViewportView(inputFeedback);
+
+        submitBtn.setBackground(new java.awt.Color(184, 145, 104));
+        submitBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        submitBtn.setForeground(new java.awt.Color(76, 43, 24));
+        submitBtn.setText("Submit");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
+
+        ratingName.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        ratingName.setForeground(new java.awt.Color(76, 43, 24));
+        ratingName.setText("Extremely Poor");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(ratingLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(ratingSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(251, 251, 251))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(169, 169, 169)
+                                .addComponent(feedbackLabel)
+                                .addGap(18, 18, 18)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(ratingName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(submitBtn)))
+                .addGap(25, 25, 25))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ratingLabel)
+                    .addComponent(ratingSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ratingName)
+                .addGap(36, 36, 36))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(feedbackLabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(submitBtn)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        displayFeedbackTable.setBackground(new java.awt.Color(230, 207, 201));
+        displayFeedbackTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        displayFeedbackTable.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        displayFeedbackTable.setForeground(new java.awt.Color(76, 43, 24));
+        displayFeedbackTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Order ID", "Item Name", "Amount Paid", "Purchase Date", "Rating", "Your Feedback"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        displayFeedbackTable.setGridColor(new java.awt.Color(230, 207, 201));
+        displayFeedbackTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
+        displayFeedbackTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
+        displayFeedbackTable.setShowVerticalLines(true);
+        displayFeedbackTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                displayFeedbackTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(displayFeedbackTable);
+        // Change Table Header Font
+        displayFeedbackTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
+
+        // Change Table Column Width
+        TableColumnModel columnModel = displayFeedbackTable.getColumnModel();
+
+        columnModel.getColumn(0).setPreferredWidth(75);
+        columnModel.getColumn(1).setPreferredWidth(125);
+        columnModel.getColumn(2).setPreferredWidth(150);
+        columnModel.getColumn(3).setPreferredWidth(125);
+        columnModel.getColumn(4).setPreferredWidth(250);
+
+        backBtn.setBackground(new java.awt.Color(184, 145, 104));
+        backBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(76, 43, 24));
+        backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(feedbackHistoryLabel)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane2)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(37, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(backBtn)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(feedbackHistoryLabel)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(backBtn)
+                .addGap(21, 21, 21))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void displayFeedbackTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayFeedbackTableMouseClicked
+        int selectedRow = displayFeedbackTable.getSelectedRow();
+        
+        String checkRating = (String) displayFeedbackTable.getValueAt(selectedRow, 4);
+        
+        if((checkRating == null) || (checkRating.equals("")) || (checkRating.isBlank())) {
+            ratingSlider.setValue(1);
+            inputFeedback.setText("");
+            
+            ratingSlider.setEnabled(true);
+            inputFeedback.setEditable(true);
+            
+            submitBtn.setEnabled(true);
+        } else {
+            ratingSlider.setValue(1);
+            inputFeedback.setText("");
+            
+            ratingSlider.setEnabled(false);
+            inputFeedback.setEditable(false);
+            
+            submitBtn.setEnabled(false);
+        }
+    }//GEN-LAST:event_displayFeedbackTableMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        ratingSlider.setValue(1);
+        inputFeedback.setText("");
+
+        ratingSlider.setEnabled(false);
+        inputFeedback.setEditable(false);
+
+        submitBtn.setEnabled(false);
+        
+        DefaultTableModel feedbackTable = (DefaultTableModel) displayFeedbackTable.getModel();
+        feedbackTable.setRowCount(0);
+        
+        String orderID, itemName, amountPaid, purchaseDate, rating, feedback;
+        
+        String[][] getUserOrderData = new SearchFileData().searchData(acceptCustomerUsername, 1, "/oodms/database/order.txt");
+        String[][] getUserPaymentData = new SearchFileData().searchData(acceptCustomerUsername, 2, "/oodms/database/payment.txt");
+        String[][] getUserFeedbackData = new SearchFileData().searchData(acceptCustomerUsername, 1, "/oodms/database/feedback.txt");
+        
+        for(int i = 0; i < getUserOrderData.length; i++) {
+            // Order
+            orderID = getUserOrderData[i][0];
+            itemName = getUserOrderData[i][2];
+            purchaseDate = getUserOrderData[i][6];
+            
+            // Payment
+            amountPaid = getUserPaymentData[i][5];
+            
+            // Feedback
+            rating = getUserFeedbackData[i][2];
+            feedback = getUserFeedbackData[i][3];
+            
+            String[] feedbackHistoryArr = new String[] {orderID, itemName, amountPaid, purchaseDate, rating, feedback};
+            feedbackTable.addRow(feedbackHistoryArr);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        int selectedRow = displayFeedbackTable.getSelectedRow();
+        
+        String getOrderID = (String) displayFeedbackTable.getValueAt(selectedRow, 0);
+        
+        String[] newChangesArr = new String[] {
+            getOrderID,
+            acceptCustomerUsername,
+            ratingName.getText(),
+            inputFeedback.getText()
+        };
+        
+        SaveSelected ss = new SaveSelected();
+        String[][] newChangesArrToSave = ss.saveFeedback(newChangesArr, getOrderID, acceptCustomerUsername);
+        
+        FlushAndWrite faw = new FlushAndWrite();
+        faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/feedback.txt");
+        
+        ratingSlider.setValue(1);
+        inputFeedback.setText("");
+
+        ratingSlider.setEnabled(false);
+        inputFeedback.setEditable(false);
+
+        submitBtn.setEnabled(false);
+    }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        new CustomerDashboard(acceptCustomerUsername).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void ratingSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ratingSliderMouseReleased
+        int getRatingValue = ratingSlider.getValue();
+        
+        FeedbackRating displayRating = new FeedbackRating();
+        ratingName.setText(displayRating.getRating(getRatingValue));
+    }//GEN-LAST:event_ratingSliderMouseReleased
 
     /**
      * @param args the command line arguments
@@ -73,11 +386,24 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FeedbackHistoryDisplay().setVisible(true);
+                new FeedbackHistoryDisplay(acceptCustomerUsername).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
+    private javax.swing.JTable displayFeedbackTable;
+    private javax.swing.JLabel feedbackHistoryLabel;
+    private javax.swing.JLabel feedbackLabel;
+    private javax.swing.JTextArea inputFeedback;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel ratingLabel;
+    private javax.swing.JLabel ratingName;
+    private javax.swing.JSlider ratingSlider;
+    private javax.swing.JButton submitBtn;
     // End of variables declaration//GEN-END:variables
 }

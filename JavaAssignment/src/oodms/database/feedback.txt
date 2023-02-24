@@ -2,4 +2,4 @@
 15001500 | User | Below Average | Still ok but take a while to receive
 15030200 | User | Mediocre | Average delivery service
 15031400 | QWER | Good | Quite nice service, can improve
-15432000 | QWER | Excellent | Recommended, exceptional service and delivery
+15432000 | QWER | Excellent | Very nice delivery

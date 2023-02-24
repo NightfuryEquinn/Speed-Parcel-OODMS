@@ -89,4 +89,18 @@ public class SaveSelected {
         
         return saveCartArr;
     }
+    
+    public String[][] saveFeedback(String[] newChangesArr, String findTheID, String findTheUsername) {
+        String[][] saveFeedbackArr = new Create3DArray().create3D("/oodms/database/feedback.txt");
+        
+        for(int i = 0; i < saveFeedbackArr.length; i++) {
+            if(saveFeedbackArr[i][0].equals(findTheID)) {
+                if(saveFeedbackArr[i][1].equals(findTheUsername)) {
+                    System.arraycopy(newChangesArr, 0, saveFeedbackArr[i], 0, 4);
+                }
+            }
+        }
+        
+        return saveFeedbackArr;
+    }
 }
