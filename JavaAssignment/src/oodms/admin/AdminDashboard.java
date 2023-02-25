@@ -1,7 +1,9 @@
 package oodms.admin;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import oodms.general.WelcomePage;
+import oodms.oop.MouseHover;
 
 public class AdminDashboard extends javax.swing.JFrame {
 
@@ -10,6 +12,25 @@ public class AdminDashboard extends javax.swing.JFrame {
      */
     public AdminDashboard() {
         initComponents();
+
+        // Add mouse hover event
+        String[] componentTexts = new String[] {
+            "User Management",
+            "Item Management",
+            "Category Management",
+            "Delivery Management",
+            "Feedback Management",
+            "Order Management",
+            "Payment Management",
+            "Category Sales Report",
+            "User Gender Report",
+            "User Age Report"
+        };
+        
+        JPanel[] allJPanel = new JPanel[] {backgroundPanel1, backgroundPanel2, backgroundPanel3};
+        
+        MouseHover mh = new MouseHover();
+        mh.mouseHoverEffect(componentTexts, allJPanel);
     }
 
     /**
@@ -36,16 +57,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         backgroundPanel2 = new javax.swing.JPanel();
         orderMgmtBtn = new javax.swing.JLabel();
         paymentMgmtBtn = new javax.swing.JLabel();
-        searchLabel = new javax.swing.JLabel();
+        reportLabel = new javax.swing.JLabel();
         backgroundPanel3 = new javax.swing.JPanel();
-        customerOrderLabel = new javax.swing.JLabel();
-        searchCustomerOrderLabel = new javax.swing.JLabel();
-        inputCustomerOrder = new javax.swing.JTextField();
-        searchCustomerOrderBtn = new javax.swing.JButton();
-        customerPaymentLabel = new javax.swing.JLabel();
-        searchCustomerPaymentLabel = new javax.swing.JLabel();
-        inputCustomerPayment = new javax.swing.JTextField();
-        searchCustomerPaymentBtn = new javax.swing.JButton();
+        categorySalesBtn = new javax.swing.JLabel();
+        userGenderBtn = new javax.swing.JLabel();
+        userAgeBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,7 +146,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addComponent(feedbackMgmtBtn)
                     .addComponent(catMgmtBtn)
                     .addComponent(userMgmtBtn))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,95 +206,64 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addComponent(orderMgmtBtn)
                 .addGap(28, 28, 28)
                 .addComponent(paymentMgmtBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
 
-        searchLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        searchLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchLabel.setText("Search");
+        reportLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        reportLabel.setForeground(new java.awt.Color(76, 43, 24));
+        reportLabel.setText("Report");
 
         backgroundPanel3.setBackground(new java.awt.Color(230, 207, 201));
 
-        customerOrderLabel.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        customerOrderLabel.setForeground(new java.awt.Color(76, 43, 24));
-        customerOrderLabel.setText("Customer Order");
+        categorySalesBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        categorySalesBtn.setForeground(new java.awt.Color(76, 43, 24));
+        categorySalesBtn.setText("Category Sales Report");
+        categorySalesBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                categorySalesBtnMouseClicked(evt);
+            }
+        });
 
-        searchCustomerOrderLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        searchCustomerOrderLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchCustomerOrderLabel.setText("Search ID:");
+        userGenderBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        userGenderBtn.setForeground(new java.awt.Color(76, 43, 24));
+        userGenderBtn.setText("User Gender Report");
+        userGenderBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userGenderBtnMouseClicked(evt);
+            }
+        });
 
-        inputCustomerOrder.setBackground(new java.awt.Color(184, 145, 104));
-        inputCustomerOrder.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputCustomerOrder.setForeground(new java.awt.Color(76, 43, 24));
-
-        searchCustomerOrderBtn.setBackground(new java.awt.Color(184, 145, 104));
-        searchCustomerOrderBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        searchCustomerOrderBtn.setForeground(new java.awt.Color(76, 43, 24));
-        searchCustomerOrderBtn.setText("Search");
-
-        customerPaymentLabel.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        customerPaymentLabel.setForeground(new java.awt.Color(76, 43, 24));
-        customerPaymentLabel.setText("Customer Payment");
-
-        searchCustomerPaymentLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        searchCustomerPaymentLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchCustomerPaymentLabel.setText("Search ID:");
-
-        inputCustomerPayment.setBackground(new java.awt.Color(184, 145, 104));
-        inputCustomerPayment.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputCustomerPayment.setForeground(new java.awt.Color(76, 43, 24));
-
-        searchCustomerPaymentBtn.setBackground(new java.awt.Color(184, 145, 104));
-        searchCustomerPaymentBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        searchCustomerPaymentBtn.setForeground(new java.awt.Color(76, 43, 24));
-        searchCustomerPaymentBtn.setText("Search");
+        userAgeBtn.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        userAgeBtn.setForeground(new java.awt.Color(76, 43, 24));
+        userAgeBtn.setText("User Age Report");
+        userAgeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userAgeBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout backgroundPanel3Layout = new javax.swing.GroupLayout(backgroundPanel3);
         backgroundPanel3.setLayout(backgroundPanel3Layout);
         backgroundPanel3Layout.setHorizontalGroup(
             backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backgroundPanel3Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(backgroundPanel3Layout.createSequentialGroup()
-                                .addComponent(searchCustomerPaymentLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(inputCustomerPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(backgroundPanel3Layout.createSequentialGroup()
-                                .addComponent(searchCustomerOrderLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(inputCustomerOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(customerOrderLabel)
-                            .addGroup(backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(searchCustomerOrderBtn)
-                                .addComponent(customerPaymentLabel))))
-                    .addGroup(backgroundPanel3Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(searchCustomerPaymentBtn)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(userAgeBtn)
+                    .addComponent(userGenderBtn)
+                    .addComponent(categorySalesBtn))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         backgroundPanel3Layout.setVerticalGroup(
             backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel3Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(customerOrderLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchCustomerOrderLabel)
-                    .addComponent(inputCustomerOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(searchCustomerOrderBtn)
-                .addGap(57, 57, 57)
-                .addComponent(customerPaymentLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchCustomerPaymentLabel)
-                    .addComponent(inputCustomerPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(searchCustomerPaymentBtn)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(categorySalesBtn)
+                .addGap(29, 29, 29)
+                .addComponent(userGenderBtn)
+                .addGap(29, 29, 29)
+                .addComponent(userAgeBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout AdminPanelLayout = new javax.swing.GroupLayout(AdminPanel);
@@ -304,9 +289,9 @@ public class AdminDashboard extends javax.swing.JFrame {
                             .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchLabel)
+                            .addComponent(reportLabel)
                             .addComponent(backgroundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         AdminPanelLayout.setVerticalGroup(
             AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,7 +307,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(functionLabel)
                     .addComponent(customerLabel)
-                    .addComponent(searchLabel))
+                    .addComponent(reportLabel))
                 .addGap(18, 18, 18)
                 .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(backgroundPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -390,6 +375,18 @@ public class AdminDashboard extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_paymentMgmtBtnMouseClicked
 
+    private void categorySalesBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categorySalesBtnMouseClicked
+        new CategorySalesReport().setVisible(true);
+    }//GEN-LAST:event_categorySalesBtnMouseClicked
+
+    private void userGenderBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userGenderBtnMouseClicked
+        new GenderReport().setVisible(true);
+    }//GEN-LAST:event_userGenderBtnMouseClicked
+
+    private void userAgeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userAgeBtnMouseClicked
+        new AgeReport().setVisible(true);
+    }//GEN-LAST:event_userAgeBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -433,24 +430,19 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel backgroundPanel2;
     private javax.swing.JPanel backgroundPanel3;
     private javax.swing.JLabel catMgmtBtn;
+    private javax.swing.JLabel categorySalesBtn;
     private javax.swing.JLabel customerLabel;
-    private javax.swing.JLabel customerOrderLabel;
-    private javax.swing.JLabel customerPaymentLabel;
     private javax.swing.JLabel deliveryMgmtBtn;
     private javax.swing.JLabel feedbackMgmtBtn;
     private javax.swing.JLabel functionLabel;
-    private javax.swing.JTextField inputCustomerOrder;
-    private javax.swing.JTextField inputCustomerPayment;
     private javax.swing.JLabel itemMgmtBtn;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel orderMgmtBtn;
     private javax.swing.JLabel paymentMgmtBtn;
     private javax.swing.JLabel profileIconLabel;
-    private javax.swing.JButton searchCustomerOrderBtn;
-    private javax.swing.JLabel searchCustomerOrderLabel;
-    private javax.swing.JButton searchCustomerPaymentBtn;
-    private javax.swing.JLabel searchCustomerPaymentLabel;
-    private javax.swing.JLabel searchLabel;
+    private javax.swing.JLabel reportLabel;
+    private javax.swing.JLabel userAgeBtn;
+    private javax.swing.JLabel userGenderBtn;
     private javax.swing.JLabel userMgmtBtn;
     private javax.swing.JLabel welcomeBackLabel;
     // End of variables declaration//GEN-END:variables

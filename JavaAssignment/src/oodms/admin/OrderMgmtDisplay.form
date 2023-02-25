@@ -46,32 +46,26 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="backBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="detailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="backgroundPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="backgroundPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace pref="36" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane2" min="-2" pref="587" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="searchOrderLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="backBtn" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="orderMgmtLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="listOrderLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="577" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="detailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="backgroundPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="backgroundPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="searchOrderLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="40" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="listOrderLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="870" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="33" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -96,11 +90,11 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="backgroundPanel2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="515" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="29" max="32767" attributes="0"/>
                   <Component id="backBtn" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -141,19 +135,19 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="searchCustomerNameLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="searchCustomerLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="searchOrderStatusLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="inputCustomerName" min="-2" pref="143" max="-2" attributes="0"/>
+                              <Component id="inputSearchCustomer" min="-2" pref="143" max="-2" attributes="0"/>
                               <EmptySpace pref="25" max="32767" attributes="0"/>
                               <Component id="searchOrderBtn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="inputOrderStatus" min="-2" max="-2" attributes="0"/>
+                              <Component id="inputSearchStatus" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -165,14 +159,14 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="searchCustomerNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputCustomerName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="searchCustomerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputSearchCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="searchOrderBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="searchOrderStatusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputOrderStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputSearchStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
@@ -180,7 +174,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="searchCustomerNameLabel">
+            <Component class="javax.swing.JLabel" name="searchCustomerLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Karla" size="14" style="0"/>
@@ -188,10 +182,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Enter Customer Name:"/>
+                <Property name="text" type="java.lang.String" value="Enter Name:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="inputCustomerName">
+            <Component class="javax.swing.JTextField" name="inputSearchCustomer">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="68" green="91" red="b8" type="rgb"/>
@@ -217,6 +211,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Search"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchOrderBtnActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="searchOrderStatusLabel">
               <Properties>
@@ -229,7 +226,7 @@
                 <Property name="text" type="java.lang.String" value="Order Status:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="inputOrderStatus">
+            <Component class="javax.swing.JComboBox" name="inputSearchStatus">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="68" green="91" red="b8" type="rgb"/>
@@ -241,13 +238,7 @@
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
-                    <StringItem index="0" value="Assigned"/>
-                    <StringItem index="1" value="Pending"/>
-                    <StringItem index="2" value="Accepted"/>
-                    <StringItem index="3" value="Out of Delivery"/>
-                    <StringItem index="4" value="Completed"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -278,35 +269,49 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="orderDateLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="totalPriceLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="priceLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="customerLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="orderIDLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="itemNameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="quantityLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="itemPriceLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="totalPriceLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="orderDateLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="orderStatusLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="inputPrice" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputItemName" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputQuantity" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputTotalPrice" min="-2" pref="208" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="inputOrderDate" min="-2" pref="208" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="inputOrderID" pref="230" max="32767" attributes="0"/>
+                          <Component id="inputCustomer" max="32767" attributes="0"/>
+                          <Component id="inputItemName" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputQuantity" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputItemPrice" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputTotalPrice" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputOrderDate" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputOrderStatus" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="itemNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="orderIDLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputOrderID" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="customerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="inputItemName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="itemNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -315,8 +320,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="priceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="itemPriceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputItemPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -328,7 +333,12 @@
                           <Component id="orderDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="inputOrderDate" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="79" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="orderStatusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputOrderStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="55" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -384,7 +394,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="priceLabel">
+            <Component class="javax.swing.JLabel" name="itemPriceLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Karla" size="14" style="0"/>
@@ -395,7 +405,7 @@
                 <Property name="text" type="java.lang.String" value="Price (RM):"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="inputPrice">
+            <Component class="javax.swing.JTextField" name="inputItemPrice">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -459,6 +469,81 @@
                 </Property>
               </Properties>
             </Component>
+            <Component class="javax.swing.JLabel" name="orderStatusLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Karla" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="18" green="2b" red="4c" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Order Status:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="inputOrderStatus">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="68" green="91" red="b8" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Karla" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="18" green="2b" red="4c" type="rgb"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="orderIDLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Karla" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="18" green="2b" red="4c" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Order ID:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="inputOrderID">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="68" green="91" red="b8" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Karla" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="18" green="2b" red="4c" type="rgb"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="customerLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Karla" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="18" green="2b" red="4c" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Customer Name:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="inputCustomer">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="68" green="91" red="b8" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Karla" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="18" green="2b" red="4c" type="rgb"/>
+                </Property>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JButton" name="backBtn">
@@ -474,6 +559,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Back"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backBtnActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
@@ -499,37 +587,15 @@
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="5" rowCount="4">
-                    <Column editable="true" title="Order ID" type="java.lang.String">
-                      <Data value="OR0001"/>
-                      <Data value="OR0002"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Item Name" type="java.lang.String">
-                      <Data value="Fountain Pen"/>
-                      <Data value="Premium Abalone"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Quantity" type="java.lang.Integer">
-                      <Data value="2"/>
-                      <Data value="10"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Price (RM)" type="java.lang.Integer">
-                      <Data value="1198"/>
-                      <Data value="700"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Order Date" type="java.lang.String">
-                      <Data value="28-01-2023"/>
-                      <Data value="13-01-2023"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
+                  <Table columnCount="8" rowCount="2">
+                    <Column editable="false" title="Order ID" type="java.lang.String"/>
+                    <Column editable="false" title="Customer Name" type="java.lang.String"/>
+                    <Column editable="false" title="Item Name" type="java.lang.String"/>
+                    <Column editable="false" title="Quantity" type="java.lang.String"/>
+                    <Column editable="false" title="Item Price (RM)" type="java.lang.String"/>
+                    <Column editable="false" title="Total Price (RM)" type="java.lang.String"/>
+                    <Column editable="false" title="Order Date" type="java.lang.String"/>
+                    <Column editable="false" title="Order Status" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -546,8 +612,11 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="displayOrderTableMouseClicked"/>
+              </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="// Change Table Header Font&#xa;displayOrderTable.getTableHeader().setFont(new Font(&quot;Karla&quot;, Font.PLAIN, 14));&#xa;&#xa;// Change Table Column Width&#xa;TableColumnModel columnModel = displayOrderTable.getColumnModel();&#xa;&#xa;columnModel.getColumn(0).setPreferredWidth(100);&#xa;columnModel.getColumn(1).setPreferredWidth(175);&#xa;columnModel.getColumn(2).setPreferredWidth(75);&#xa;columnModel.getColumn(3).setPreferredWidth(75);&#xa;columnModel.getColumn(4).setPreferredWidth(150);"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="// Change Table Header Font&#xa;displayOrderTable.getTableHeader().setFont(new Font(&quot;Karla&quot;, Font.PLAIN, 14));&#xa;&#xa;// Change Table Column Width&#xa;TableColumnModel columnModel = displayOrderTable.getColumnModel();&#xa;&#xa;columnModel.getColumn(0).setPreferredWidth(75);&#xa;columnModel.getColumn(1).setPreferredWidth(125);&#xa;columnModel.getColumn(2).setPreferredWidth(100);&#xa;columnModel.getColumn(3).setPreferredWidth(100);&#xa;columnModel.getColumn(4).setPreferredWidth(125);&#xa;columnModel.getColumn(5).setPreferredWidth(125);&#xa;columnModel.getColumn(6).setPreferredWidth(100);&#xa;columnModel.getColumn(7).setPreferredWidth(125);"/>
               </AuxValues>
             </Component>
           </SubComponents>

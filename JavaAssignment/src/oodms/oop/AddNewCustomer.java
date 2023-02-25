@@ -1,13 +1,13 @@
 package oodms.oop;
 
 public class AddNewCustomer {
-    private String username;
-    private String password;
-    private String email;
-    private String contact;
-    private String address;
-    private String age;
-    private String gender;
+    private final String username;
+    private final String password;
+    private final String email;
+    private final String contact;
+    private final String address;
+    private final String age;
+    private final String gender;
     
     public AddNewCustomer(String username, String password, String email, String contact, String address, String age, String gender) {
         this.username = username;

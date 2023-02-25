@@ -1,16 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package oodms.admin;
 
 import java.awt.Font;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import oodms.oop.AddNewCategory;
+import oodms.oop.CheckSimilarity;
+import oodms.oop.CountChildren;
+import oodms.oop.Create3DArray;
+import oodms.oop.DeleteSelected;
+import oodms.oop.FlushAndWrite;
+import oodms.oop.SaveSelected;
+import oodms.oop.SearchFileData;
 
-/**
- *
- * @author User
- */
 public class CategoryMgmtDisplay extends javax.swing.JFrame {
 
     /**
@@ -34,23 +36,19 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         searchCategoryLabel = new javax.swing.JLabel();
         backgroundPanel1 = new javax.swing.JPanel();
         searchCatIDLabel = new javax.swing.JLabel();
-        inputCatID = new javax.swing.JTextField();
+        inputSearchCatName = new javax.swing.JTextField();
         searchCatIDBtn = new javax.swing.JButton();
         detailLabel = new javax.swing.JLabel();
         backgroundPanel2 = new javax.swing.JPanel();
         catNameLabel = new javax.swing.JLabel();
-        childrenItemLabel = new javax.swing.JLabel();
-        insertImageLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inputDescription = new javax.swing.JTextArea();
         inputCatName = new javax.swing.JTextField();
-        inputChildrenItem = new javax.swing.JTextField();
         addBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
-        insertImageBtn = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
         listCatLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -72,16 +70,21 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
 
         searchCatIDLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         searchCatIDLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchCatIDLabel.setText("Enter ID:");
+        searchCatIDLabel.setText("Enter Name:");
 
-        inputCatID.setBackground(new java.awt.Color(184, 145, 104));
-        inputCatID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputCatID.setForeground(new java.awt.Color(76, 43, 24));
+        inputSearchCatName.setBackground(new java.awt.Color(184, 145, 104));
+        inputSearchCatName.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputSearchCatName.setForeground(new java.awt.Color(76, 43, 24));
 
         searchCatIDBtn.setBackground(new java.awt.Color(184, 145, 104));
         searchCatIDBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         searchCatIDBtn.setForeground(new java.awt.Color(76, 43, 24));
         searchCatIDBtn.setText("Search");
+        searchCatIDBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchCatIDBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
@@ -90,9 +93,9 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(searchCatIDLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputCatID, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(inputSearchCatName, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(searchCatIDBtn)
                 .addGap(16, 16, 16))
         );
@@ -102,7 +105,7 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchCatIDLabel)
-                    .addComponent(inputCatID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputSearchCatName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchCatIDBtn))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -117,18 +120,11 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         catNameLabel.setForeground(new java.awt.Color(76, 43, 24));
         catNameLabel.setText("Category Name:");
 
-        childrenItemLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        childrenItemLabel.setForeground(new java.awt.Color(76, 43, 24));
-        childrenItemLabel.setText("Children Items:");
-
-        insertImageLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        insertImageLabel.setForeground(new java.awt.Color(76, 43, 24));
-        insertImageLabel.setText("Insert Image:");
-
         descriptionLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         descriptionLabel.setForeground(new java.awt.Color(76, 43, 24));
         descriptionLabel.setText("Description:");
 
+        inputDescription.setEditable(false);
         inputDescription.setBackground(new java.awt.Color(184, 145, 104));
         inputDescription.setColumns(20);
         inputDescription.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
@@ -137,13 +133,10 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         inputDescription.setRows(5);
         jScrollPane1.setViewportView(inputDescription);
 
+        inputCatName.setEditable(false);
         inputCatName.setBackground(new java.awt.Color(184, 145, 104));
         inputCatName.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputCatName.setForeground(new java.awt.Color(76, 43, 24));
-
-        inputChildrenItem.setBackground(new java.awt.Color(184, 145, 104));
-        inputChildrenItem.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputChildrenItem.setForeground(new java.awt.Color(76, 43, 24));
 
         addBtn.setBackground(new java.awt.Color(184, 145, 104));
         addBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -159,6 +152,7 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         editBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         editBtn.setForeground(new java.awt.Color(76, 43, 24));
         editBtn.setText("Edit");
+        editBtn.setEnabled(false);
         editBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editBtnActionPerformed(evt);
@@ -169,6 +163,7 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         saveBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         saveBtn.setForeground(new java.awt.Color(76, 43, 24));
         saveBtn.setText("Save");
+        saveBtn.setEnabled(false);
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveBtnActionPerformed(evt);
@@ -179,19 +174,10 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         deleteBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         deleteBtn.setForeground(new java.awt.Color(76, 43, 24));
         deleteBtn.setText("Delete");
+        deleteBtn.setEnabled(false);
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
-            }
-        });
-
-        insertImageBtn.setBackground(new java.awt.Color(184, 145, 104));
-        insertImageBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        insertImageBtn.setForeground(new java.awt.Color(76, 43, 24));
-        insertImageBtn.setText("Add Image");
-        insertImageBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertImageBtnActionPerformed(evt);
             }
         });
 
@@ -212,38 +198,26 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
                         .addComponent(deleteBtn))
                     .addGroup(backgroundPanel2Layout.createSequentialGroup()
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(childrenItemLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(catNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(descriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(insertImageLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(descriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(inputCatName)
-                            .addComponent(inputChildrenItem, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(insertImageBtn))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         backgroundPanel2Layout.setVerticalGroup(
             backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addGap(19, 19, 19)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(catNameLabel)
                     .addComponent(inputCatName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(childrenItemLabel)
-                    .addComponent(inputChildrenItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(insertImageLabel)
-                    .addComponent(insertImageBtn))
-                .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(descriptionLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn)
                     .addComponent(editBtn)
@@ -267,17 +241,15 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         displayCatTable.setForeground(new java.awt.Color(76, 43, 24));
         displayCatTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"CAT0001", "Accessory",  new Integer(5), null, "Random Accessories Available"},
-                {"CAT0002", "Food & Beverage",  new Integer(8), null, "Random Food and Beverages Available"},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Category ID", "Category Name", "Children Items", "Image", "Description"
+                "Category Name", "Children Items", "Description"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Long.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -288,6 +260,11 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         displayCatTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
         displayCatTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
         displayCatTable.setShowVerticalLines(true);
+        displayCatTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                displayCatTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(displayCatTable);
         // Change Table Header Font
         displayCatTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
@@ -297,9 +274,7 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
 
         columnModel.getColumn(0).setPreferredWidth(125);
         columnModel.getColumn(1).setPreferredWidth(150);
-        columnModel.getColumn(2).setPreferredWidth(175);
-        columnModel.getColumn(3).setPreferredWidth(100);
-        columnModel.getColumn(4).setPreferredWidth(275);
+        columnModel.getColumn(2).setPreferredWidth(275);
 
         javax.swing.GroupLayout categoryMgmtPanelLayout = new javax.swing.GroupLayout(categoryMgmtPanel);
         categoryMgmtPanel.setLayout(categoryMgmtPanelLayout);
@@ -307,20 +282,18 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
             categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(categoryMgmtPanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(detailLabel)
-                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(backBtn))
-                    .addGroup(categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(categoryMgmtLabel)
-                        .addComponent(searchCategoryLabel)
-                        .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
+                .addGroup(categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(categoryMgmtLabel)
+                    .addComponent(searchCategoryLabel)
+                    .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(detailLabel)
+                    .addComponent(backBtn)
+                    .addComponent(backgroundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(listCatLabel)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(listCatLabel))
+                .addGap(26, 26, 26))
         );
         categoryMgmtPanelLayout.setVerticalGroup(
             categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,15 +307,17 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(categoryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(categoryMgmtPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(categoryMgmtPanelLayout.createSequentialGroup()
                         .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                         .addComponent(detailLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(backBtn)
-                .addContainerGap(8, Short.MAX_VALUE))
+                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(backBtn)
+                        .addGap(19, 19, 19))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -360,24 +335,181 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        // TODO add your handling code here:
+        // Unselect Row
+        displayCatTable.clearSelection();
+
+        // Get value from user
+        inputCatName.setEditable(true);
+        inputDescription.setEditable(true);
+        
+        String getCatName = inputCatName.getText();
+        String getDescription = inputDescription.getText();
+        
+        boolean checkCat = new CheckSimilarity().catChecker(getCatName);
+        
+        if((!inputDescription.getText().equals("")) && (!inputCatName.getText().equals(""))) {
+            if(!checkCat) {
+                AddNewCategory category = new AddNewCategory(getCatName, getDescription);
+
+                JOptionPane.showMessageDialog(null, "New category added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Category exists.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please fill up the empty fields", "Empty fields", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        // TODO add your handling code here:
+        inputCatName.setEditable(true);
+        inputDescription.setEditable(true);
+        
+        saveBtn.setEnabled(true);
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // TODO add your handling code here:
+        // Get old category
+        String getOldCatName = (String) displayCatTable.getValueAt(displayCatTable.getSelectedRow(), 0);
+
+        // Get Text Field value
+        String getCatName = (String) inputCatName.getText();
+        String getDescription = (String) inputDescription.getText();
+        
+        // Write into an array
+        String[] newChangesArr = new String[] {getCatName, getDescription};
+        
+        boolean checkCat = new CheckSimilarity().catChecker(getCatName);
+        
+        if((!inputDescription.getText().equals("")) && (!inputCatName.getText().equals(""))) {
+            if(!checkCat) {
+                SaveSelected ss = new SaveSelected();
+                String[][] newChangesArrToSave = ss.saveCategory(newChangesArr, getOldCatName);
+
+                new FlushAndWrite().flushAndWrite(newChangesArrToSave, "src/oodms/database/category.txt");
+
+                JOptionPane.showMessageDialog(null, "Content saved. Please refresh the table again.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to save. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please fill up the empty fields", "Empty fields", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        // Reset text fields and button
+        inputSearchCatName.setText("");
+        
+        inputCatName.setText("");
+        inputDescription.setText("");
+        
+        inputCatName.setEditable(false);
+        inputDescription.setEditable(false);
+        
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+        
+        // Clear Table
+        DefaultTableModel catTable = (DefaultTableModel) displayCatTable.getModel();
+        catTable.setRowCount(0);
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = displayCatTable.getSelectedRow();
+        
+        String selectedCatName = (String) displayCatTable.getValueAt(selectedRow, 0);
+        
+        int confirmDelete = JOptionPane.showConfirmDialog(null, "Are you sure to delete this category? This action can't be undone.", "Confirm delete?", JOptionPane.YES_NO_OPTION);
+        
+        if(confirmDelete == JOptionPane.YES_OPTION) {
+            String[][] ds = new DeleteSelected().deleteSelected(selectedCatName, "/oodms/database/category.txt");
+        
+            FlushAndWrite faw = new FlushAndWrite();
+            faw.flushAndWrite(ds, "src/oodms/database/category.txt");
+        
+            JOptionPane.showMessageDialog(null, "Category deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            System.out.println("Do nothing.");
+        }
+        
+        // Reset text field and button
+        inputSearchCatName.setText("");
+        
+        inputCatName.setText("");
+        inputDescription.setText("");
+        
+        inputCatName.setEditable(false);
+        inputDescription.setEditable(false);
+        
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+        
+        // Clear Table
+        DefaultTableModel catTable = (DefaultTableModel) displayCatTable.getModel();
+        catTable.setRowCount(0);
     }//GEN-LAST:event_deleteBtnActionPerformed
 
-    private void insertImageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertImageBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_insertImageBtnActionPerformed
+    private void searchCatIDBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchCatIDBtnActionPerformed
+        // Disable text field and button
+        inputCatName.setEditable(false);
+        inputDescription.setEditable(false);
+        
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+        
+        DefaultTableModel catTable = (DefaultTableModel) displayCatTable.getModel();
+        catTable.setRowCount(0);
+        
+        String getSearchCat = inputSearchCatName.getText();
+        
+        if(getSearchCat.isBlank()) {
+            String[][] allCatArr = new Create3DArray().create3D("/oodms/database/category.txt");
+            
+            // Count the number of children of each category
+            String[][] getCountChildren = new CountChildren().getCountChildren("/oodms/database/item.txt", 2);
+            
+            // Loop all data
+            for(String[] catArr : allCatArr) {
+                for(String[] getCountChildrenData : getCountChildren) {
+                    if(getCountChildrenData[0].equals(catArr[0])) {
+                        String[] catDataArr = new String[] {catArr[0], getCountChildrenData[1], catArr[1]};
+                        catTable.addRow(catDataArr);
+                    }
+                }
+            }
+        } else {
+            String[][] allSearchCatArr = new SearchFileData().searchData(getSearchCat, 0, "/oodms/database/category.txt");
+            
+            String[][] getSearchCountChildren = new CountChildren().getCountChildren("/oodms/database/item.txt", 2);
+            
+            for(String[] searchCatArr : allSearchCatArr) {
+                for(String[] getSearchCountChildrenData : getSearchCountChildren) {
+                    if(getSearchCountChildrenData[0].equals(searchCatArr[0])) {
+                        String[] searchCatDataArr = new String[] {searchCatArr[0], getSearchCountChildrenData[1], searchCatArr[1]};
+                        catTable.addRow(searchCatDataArr);
+                    }
+                }
+            }
+            
+        }
+    }//GEN-LAST:event_searchCatIDBtnActionPerformed
+
+    private void displayCatTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayCatTableMouseClicked
+        // Disable text field and button
+        inputCatName.setEditable(false);
+        inputDescription.setEditable(false);
+        
+        // Enable buttons
+        editBtn.setEnabled(true);
+        saveBtn.setEnabled(false);
+        deleteBtn.setEnabled(true);
+        
+        int selectedRow = displayCatTable.getSelectedRow();
+        
+        inputCatName.setText((String) displayCatTable.getValueAt(selectedRow, 0));
+        inputDescription.setText((String) displayCatTable.getValueAt(selectedRow, 2));
+    }//GEN-LAST:event_displayCatTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -422,18 +554,14 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
     private javax.swing.JLabel catNameLabel;
     private javax.swing.JLabel categoryMgmtLabel;
     private javax.swing.JPanel categoryMgmtPanel;
-    private javax.swing.JLabel childrenItemLabel;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel detailLabel;
     private javax.swing.JTable displayCatTable;
     private javax.swing.JButton editBtn;
-    private javax.swing.JTextField inputCatID;
     private javax.swing.JTextField inputCatName;
-    private javax.swing.JTextField inputChildrenItem;
     private javax.swing.JTextArea inputDescription;
-    private javax.swing.JButton insertImageBtn;
-    private javax.swing.JLabel insertImageLabel;
+    private javax.swing.JTextField inputSearchCatName;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel listCatLabel;

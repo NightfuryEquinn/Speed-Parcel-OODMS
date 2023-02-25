@@ -1,9 +1,12 @@
 package oodms.general;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import oodms.oop.AddNewCustomer;
-import oodms.oop.CheckUsernamePassword;
+import oodms.oop.CheckSimilarity;
 import javax.swing.JOptionPane;
 import oodms.admin.AdminDashboard;
+import oodms.customer.CustomerDashboard;
 import oodms.deliver.staffDashboard;
 
 public class WelcomePage extends javax.swing.JFrame {
@@ -20,6 +23,9 @@ public class WelcomePage extends javax.swing.JFrame {
      */
     // Boolean for login or signup
     boolean checkLogin = false;
+    
+    // Send customer username
+    private String sendCustomerUsername;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,11 +134,21 @@ public class WelcomePage extends javax.swing.JFrame {
         inputEmail.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputEmail.setForeground(new java.awt.Color(76, 43, 24));
         inputEmail.setMinimumSize(new java.awt.Dimension(274, 23));
+        inputEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputEmailFocusLost(evt);
+            }
+        });
 
         inputContact.setBackground(new java.awt.Color(230, 207, 201));
         inputContact.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputContact.setForeground(new java.awt.Color(76, 43, 24));
         inputContact.setMinimumSize(new java.awt.Dimension(274, 23));
+        inputContact.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputContactFocusLost(evt);
+            }
+        });
 
         inputPassword.setBackground(new java.awt.Color(230, 207, 201));
         inputPassword.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
@@ -180,6 +196,17 @@ public class WelcomePage extends javax.swing.JFrame {
         welcomePanel.setLayout(welcomePanelLayout);
         welcomePanelLayout.setHorizontalGroup(
             welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcomePanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcomePanelLayout.createSequentialGroup()
+                        .addComponent(welcomeLabel)
+                        .addGap(310, 310, 310))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcomePanelLayout.createSequentialGroup()
+                        .addComponent(proceedBtn)
+                        .addGap(77, 77, 77)
+                        .addComponent(guestBtn)
+                        .addGap(273, 273, 273))))
             .addGroup(welcomePanelLayout.createSequentialGroup()
                 .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(welcomePanelLayout.createSequentialGroup()
@@ -188,7 +215,7 @@ public class WelcomePage extends javax.swing.JFrame {
                         .addGap(80, 80, 80)
                         .addComponent(signupBtn))
                     .addGroup(welcomePanelLayout.createSequentialGroup()
-                        .addGap(210, 210, 210)
+                        .addGap(173, 173, 173)
                         .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(confirmPasswordLabel)
@@ -208,19 +235,8 @@ public class WelcomePage extends javax.swing.JFrame {
                             .addComponent(inputAddressScrollPanel)
                             .addComponent(inputUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(inputGender, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(inputAge))))
-                .addContainerGap(178, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcomePanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcomePanelLayout.createSequentialGroup()
-                        .addComponent(welcomeLabel)
-                        .addGap(310, 310, 310))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcomePanelLayout.createSequentialGroup()
-                        .addComponent(proceedBtn)
-                        .addGap(77, 77, 77)
-                        .addComponent(guestBtn)
-                        .addGap(273, 273, 273))))
+                            .addComponent(inputAge, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         welcomePanelLayout.setVerticalGroup(
             welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +247,7 @@ public class WelcomePage extends javax.swing.JFrame {
                 .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginBtn)
                     .addComponent(signupBtn))
-                .addGap(53, 53, 53)
+                .addGap(54, 54, 54)
                 .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usernameLabel)
                     .addComponent(inputUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -263,7 +279,7 @@ public class WelcomePage extends javax.swing.JFrame {
                 .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(genderLabel)
                     .addComponent(inputGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(84, 84, 84)
+                .addGap(83, 83, 83)
                 .addGroup(welcomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(proceedBtn)
                     .addComponent(guestBtn))
@@ -338,7 +354,7 @@ public class WelcomePage extends javax.swing.JFrame {
             char[] targetPassword = inputPassword.getPassword();
             String getPassword = new String(targetPassword);
             
-            CheckUsernamePassword checkExistingUser = new CheckUsernamePassword();
+            CheckSimilarity checkExistingUser = new CheckSimilarity();
             boolean loginChecker = checkExistingUser.loginChecker(
                 getUsername, 
                 getPassword
@@ -360,6 +376,11 @@ public class WelcomePage extends javax.swing.JFrame {
                     dispose();
                 } else {
                     System.out.println("You are customer.");
+                    
+                    sendCustomerUsername = getUsername;
+                    
+                    new CustomerDashboard(sendCustomerUsername).setVisible(true);
+                    dispose();
                 }
                 
                 // Create a popup dialog message box
@@ -369,6 +390,10 @@ public class WelcomePage extends javax.swing.JFrame {
             } else {
                 // Create a popup dialog mesage box
                 JOptionPane.showMessageDialog(null, "Either username or password is incorrect. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+            
+                // Clear text field
+                inputUsername.setText("");
+                inputPassword.setText("");
             }
             
         } else {
@@ -393,30 +418,71 @@ public class WelcomePage extends javax.swing.JFrame {
             
             String getGender = inputGender.getSelectedItem().toString();
             
-            CheckUsernamePassword checkNewUser = new CheckUsernamePassword();
+            CheckSimilarity checkNewUser = new CheckSimilarity();
             boolean credentialsChecker = checkNewUser.credentialsChecker(
                 getUsername, 
                 getPassword, 
-                getConfirmPassword
+                getConfirmPassword,
+                getEmail
             );
             
-            if(!credentialsChecker) {
-                System.out.println("Added new user");
-                
-                // Create a popup dialog message box
-                JOptionPane.showMessageDialog(null, "Your account has been created. Please login.", "Account Created", JOptionPane.INFORMATION_MESSAGE);
-                
-                AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress, getAge, getGender);
+            if((!getUsername.equals("")) && (!getPassword.equals("")) && (!getConfirmPassword.equals("")) && (!getEmail.equals("")) && (!getContact.equals("")) && (!getAddress.equals(""))) {
+                if(!credentialsChecker) {
+                    System.out.println("Added new user");
+
+                    // Create a popup dialog message box
+                    JOptionPane.showMessageDialog(null, "Your account has been created. Please login.", "Account Created", JOptionPane.INFORMATION_MESSAGE);
+
+                    AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress, getAge, getGender);
+
+                    // Clear text field
+                    inputUsername.setText("");
+                    inputPassword.setText("");
+                    inputConfirmPassword.setText("");
+                    inputEmail.setText("");
+                    inputContact.setText("");
+                    inputAddress.setText("");
+                    inputAge.setValue(0);
+                    inputGender.setSelectedItem("Male");
+                }
             } else {
                 // Create a popup dialog message box
-                JOptionPane.showMessageDialog(null, "Account existed. Please check your username and password are correct. Username can't start with Admin or Delivery.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Account with this username or email existed. Username can't start with Admin or Delivery. Ensure your password are the same.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_proceedBtnActionPerformed
 
     private void guestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guestBtnActionPerformed
         System.out.println("You are now a guest.");
+        
+        new MarketStorePage(null).setVisible(true);
+        dispose();
     }//GEN-LAST:event_guestBtnActionPerformed
+
+    private void inputEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusLost
+        if((!inputEmail.getText().contains("@")) || (!inputEmail.getText().contains("."))) {
+            JOptionPane.showMessageDialog(null, "Please input a valid email address.", "Invalid email address", JOptionPane.ERROR_MESSAGE);
+            
+            inputEmail.setText("");
+        }
+    }//GEN-LAST:event_inputEmailFocusLost
+
+    private void inputContactFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputContactFocusLost
+        // Define a regular expression pattern for the contact number format
+        String contactNumberPattern = "\\d{10}|\\d{11}";
+        Pattern pattern = Pattern.compile(contactNumberPattern);
+
+        String contactNumber = inputContact.getText();
+
+         // Use the regular expression to match the contact number
+        Matcher matcher = pattern.matcher(contactNumber);
+        
+        if (!matcher.matches()) {
+            JOptionPane.showMessageDialog(null, "Please enter the correct contact number format. Examples:\n012xxx1234\nor\n011xxxx1234", "Invalid contact number", JOptionPane.ERROR_MESSAGE);
+        
+            inputContact.setText("");
+        }
+    }//GEN-LAST:event_inputContactFocusLost
 
     /**
      * @param args the command line arguments

@@ -66,12 +66,12 @@
                           </Group>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="searchLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="reportLabel" min="-2" max="-2" attributes="0"/>
                               <Component id="backgroundPanel3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="50" max="32767" attributes="0"/>
+                  <EmptySpace pref="32" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -91,7 +91,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="functionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="customerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="searchLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reportLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -170,7 +170,7 @@
                           <Component id="catMgmtBtn" min="-2" max="-2" attributes="0"/>
                           <Component id="userMgmtBtn" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="47" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -303,7 +303,7 @@
                       <Component id="orderMgmtBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="paymentMgmtBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="233" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -339,7 +339,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="searchLabel">
+        <Component class="javax.swing.JLabel" name="reportLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat" size="18" style="1"/>
@@ -347,7 +347,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="18" green="2b" red="4c" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Search"/>
+            <Property name="text" type="java.lang.String" value="Report"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="backgroundPanel3">
@@ -360,76 +360,33 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="searchCustomerPaymentLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="inputCustomerPayment" min="-2" pref="120" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="searchCustomerOrderLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="inputCustomerOrder" min="-2" pref="120" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="customerOrderLabel" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="searchCustomerOrderBtn" min="-2" max="-2" attributes="0"/>
-                                      <Component id="customerPaymentLabel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                              <Component id="searchCustomerPaymentBtn" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="userAgeBtn" min="-2" max="-2" attributes="0"/>
+                          <Component id="userGenderBtn" min="-2" max="-2" attributes="0"/>
+                          <Component id="categorySalesBtn" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="33" max="32767" attributes="0"/>
+                      <EmptySpace pref="103" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="customerOrderLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="searchCustomerOrderLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputCustomerOrder" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="searchCustomerOrderBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Component id="customerPaymentLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="searchCustomerPaymentLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputCustomerPayment" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="searchCustomerPaymentBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="49" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="categorySalesBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="userGenderBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="userAgeBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="customerOrderLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Montserrat" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="18" green="2b" red="4c" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Customer Order"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="searchCustomerOrderLabel">
+            <Component class="javax.swing.JLabel" name="categorySalesBtn">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Karla" size="14" style="0"/>
@@ -437,48 +394,13 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Search ID:"/>
+                <Property name="text" type="java.lang.String" value="Category Sales Report"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="categorySalesBtnMouseClicked"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="inputCustomerOrder">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="68" green="91" red="b8" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Karla" size="14" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="18" green="2b" red="4c" type="rgb"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="searchCustomerOrderBtn">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="68" green="91" red="b8" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Montserrat" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="18" green="2b" red="4c" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Search"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="customerPaymentLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Montserrat" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="18" green="2b" red="4c" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Customer Payment"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="searchCustomerPaymentLabel">
+            <Component class="javax.swing.JLabel" name="userGenderBtn">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Karla" size="14" style="0"/>
@@ -486,35 +408,25 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Search ID:"/>
+                <Property name="text" type="java.lang.String" value="User Gender Report"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="userGenderBtnMouseClicked"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="inputCustomerPayment">
+            <Component class="javax.swing.JLabel" name="userAgeBtn">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="68" green="91" red="b8" type="rgb"/>
-                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Karla" size="14" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="User Age Report"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="searchCustomerPaymentBtn">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="68" green="91" red="b8" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Montserrat" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="18" green="2b" red="4c" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Search"/>
-              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="userAgeBtnMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

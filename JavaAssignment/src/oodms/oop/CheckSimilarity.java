@@ -1,9 +1,9 @@
 package oodms.oop;
 
-public class CheckUsernamePassword {
+public class CheckSimilarity {
 
     // For public use
-    public boolean credentialsChecker(String username, String password, String confirmPassword) {
+    public boolean credentialsChecker(String username, String password, String confirmPassword, String email) {
         // Declare variable to check for similarity in username and password confirmation
         boolean checkSimilarity = false;
         
@@ -12,7 +12,7 @@ public class CheckUsernamePassword {
 
         // Check for similarity in Username and Password confirmation
         for(String[] singleData : credentialsArr) {
-            if((singleData[0].equalsIgnoreCase(username)) || (username.toLowerCase().startsWith("delivery")) || (username.toLowerCase().startsWith("admin"))) {
+            if((singleData[0].equalsIgnoreCase(username)) || (username.toLowerCase().startsWith("delivery")) || (username.toLowerCase().startsWith("admin")) || (singleData[2].toLowerCase().equalsIgnoreCase(email))) {
                 checkSimilarity = true;
                 break;
             }
@@ -61,5 +61,37 @@ public class CheckUsernamePassword {
         }
         
         return checkUserPass;
+    }
+    
+    // Check category name
+    public boolean catChecker(String category) {
+        boolean checkSimilarity = false;
+        
+        String[][] catArr = new Create3DArray().create3D("/oodms/database/category.txt");
+        
+        for(String[] singleCat : catArr) {
+            if(singleCat[0].equalsIgnoreCase(category)) {
+                checkSimilarity = true;
+                break;
+            }
+        }
+        
+        return checkSimilarity;
+    }
+    
+    // Check item name
+    public boolean itemChecker(String item) {
+        boolean checkSimilarity = false;
+        
+        String[][] itemArr = new Create3DArray().create3D("/oodms/database/item.txt");
+        
+        for(String[] singleItem : itemArr) {
+            if(singleItem[0].equalsIgnoreCase(item)) {
+                checkSimilarity = true;
+                break;
+            }
+        }
+        
+        return checkSimilarity;
     }
 }

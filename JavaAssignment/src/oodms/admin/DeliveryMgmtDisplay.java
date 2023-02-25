@@ -1,16 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package oodms.admin;
 
 import java.awt.Font;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import oodms.oop.Create3DArray;
+import oodms.oop.FlushAndWrite;
+import oodms.oop.SaveSelected;
+import oodms.oop.SearchFileData;
 
-/**
- *
- * @author User
- */
 public class DeliveryMgmtDisplay extends javax.swing.JFrame {
 
     /**
@@ -18,6 +16,22 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
      */
     public DeliveryMgmtDisplay() {
         initComponents();
+        
+        // Include a default no category
+        inputFilterStatus.addItem("");
+        
+        inputFilterStatus.addItem("Unassigned");
+        inputFilterStatus.addItem("Ongoing");
+        inputFilterStatus.addItem("Completed");
+        
+        // Find all delivery staffs
+        String[][] getAllStaffArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
+
+        for(String[] getAllStaffData : getAllStaffArr) {
+            if(getAllStaffData[0].toLowerCase().startsWith("delivery")) {
+                inputDeliveryStaff.addItem(getAllStaffData[0]);
+            }
+        }
     }
 
     /**
@@ -33,21 +47,24 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         deliveryMgmtLabel = new javax.swing.JLabel();
         searchDeliveryLabel = new javax.swing.JLabel();
         backgroundPanel1 = new javax.swing.JPanel();
-        searchDeliveryIDLabel = new javax.swing.JLabel();
-        inputDeliveryID = new javax.swing.JTextField();
-        searchDeliveryIDBtn = new javax.swing.JButton();
+        filterStatusLabel = new javax.swing.JLabel();
+        searchFilterStatus = new javax.swing.JButton();
+        inputFilterStatus = new javax.swing.JComboBox<>();
         detailLabel = new javax.swing.JLabel();
         backgroundPanel2 = new javax.swing.JPanel();
         deliveryStaffLabel = new javax.swing.JLabel();
         orderIDLabel = new javax.swing.JLabel();
         orderStatusLabel = new javax.swing.JLabel();
-        assignBtn = new javax.swing.JButton();
-        modifyBtn = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
-        dismissBtn = new javax.swing.JButton();
         inputDeliveryStaff = new javax.swing.JComboBox<>();
-        inputOrderID = new javax.swing.JComboBox<>();
-        inputOrderID1 = new javax.swing.JComboBox<>();
+        inputOrderStatus = new javax.swing.JComboBox<>();
+        inputOrderID = new javax.swing.JTextField();
+        customerAddressLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        inputCustomerAddress = new javax.swing.JTextArea();
+        customerLabel = new javax.swing.JLabel();
+        inputCustomer = new javax.swing.JTextField();
         backBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         displayDeliveryTable = new javax.swing.JTable();
@@ -67,18 +84,23 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
 
         backgroundPanel1.setBackground(new java.awt.Color(230, 207, 201));
 
-        searchDeliveryIDLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        searchDeliveryIDLabel.setForeground(new java.awt.Color(76, 43, 24));
-        searchDeliveryIDLabel.setText("Enter ID:");
+        filterStatusLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        filterStatusLabel.setForeground(new java.awt.Color(76, 43, 24));
+        filterStatusLabel.setText("Filter Status:");
 
-        inputDeliveryID.setBackground(new java.awt.Color(184, 145, 104));
-        inputDeliveryID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputDeliveryID.setForeground(new java.awt.Color(76, 43, 24));
+        searchFilterStatus.setBackground(new java.awt.Color(184, 145, 104));
+        searchFilterStatus.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        searchFilterStatus.setForeground(new java.awt.Color(76, 43, 24));
+        searchFilterStatus.setText("Search");
+        searchFilterStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFilterStatusActionPerformed(evt);
+            }
+        });
 
-        searchDeliveryIDBtn.setBackground(new java.awt.Color(184, 145, 104));
-        searchDeliveryIDBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        searchDeliveryIDBtn.setForeground(new java.awt.Color(76, 43, 24));
-        searchDeliveryIDBtn.setText("Search");
+        inputFilterStatus.setBackground(new java.awt.Color(184, 145, 104));
+        inputFilterStatus.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputFilterStatus.setForeground(new java.awt.Color(76, 43, 24));
 
         javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
         backgroundPanel1.setLayout(backgroundPanel1Layout);
@@ -86,21 +108,21 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(searchDeliveryIDLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputDeliveryID, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(searchDeliveryIDBtn)
-                .addGap(16, 16, 16))
+                .addComponent(filterStatusLabel)
+                .addGap(18, 18, 18)
+                .addComponent(inputFilterStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(searchFilterStatus)
+                .addGap(27, 27, 27))
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchDeliveryIDLabel)
-                    .addComponent(inputDeliveryID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchDeliveryIDBtn))
+                    .addComponent(filterStatusLabel)
+                    .addComponent(searchFilterStatus)
+                    .addComponent(inputFilterStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -122,23 +144,14 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         orderStatusLabel.setForeground(new java.awt.Color(76, 43, 24));
         orderStatusLabel.setText("Order Status:");
 
-        assignBtn.setBackground(new java.awt.Color(184, 145, 104));
-        assignBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        assignBtn.setForeground(new java.awt.Color(76, 43, 24));
-        assignBtn.setText("Assign");
-        assignBtn.addActionListener(new java.awt.event.ActionListener() {
+        editBtn.setBackground(new java.awt.Color(184, 145, 104));
+        editBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        editBtn.setForeground(new java.awt.Color(76, 43, 24));
+        editBtn.setText("Edit");
+        editBtn.setEnabled(false);
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignBtnActionPerformed(evt);
-            }
-        });
-
-        modifyBtn.setBackground(new java.awt.Color(184, 145, 104));
-        modifyBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        modifyBtn.setForeground(new java.awt.Color(76, 43, 24));
-        modifyBtn.setText("Modify");
-        modifyBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modifyBtnActionPerformed(evt);
+                editBtnActionPerformed(evt);
             }
         });
 
@@ -146,68 +159,82 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         saveBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         saveBtn.setForeground(new java.awt.Color(76, 43, 24));
         saveBtn.setText("Save");
+        saveBtn.setEnabled(false);
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveBtnActionPerformed(evt);
             }
         });
 
-        dismissBtn.setBackground(new java.awt.Color(184, 145, 104));
-        dismissBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        dismissBtn.setForeground(new java.awt.Color(76, 43, 24));
-        dismissBtn.setText("Dismiss");
-        dismissBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dismissBtnActionPerformed(evt);
-            }
-        });
-
         inputDeliveryStaff.setBackground(new java.awt.Color(184, 145, 104));
         inputDeliveryStaff.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputDeliveryStaff.setForeground(new java.awt.Color(76, 43, 24));
-        inputDeliveryStaff.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Staff 1", "Staff 2", "Staff 3", "Staff 4" }));
+        inputDeliveryStaff.setEnabled(false);
 
+        inputOrderStatus.setBackground(new java.awt.Color(184, 145, 104));
+        inputOrderStatus.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputOrderStatus.setForeground(new java.awt.Color(76, 43, 24));
+        inputOrderStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unassigned", "Ongoing", "Delivered" }));
+        inputOrderStatus.setEnabled(false);
+
+        inputOrderID.setEditable(false);
         inputOrderID.setBackground(new java.awt.Color(184, 145, 104));
         inputOrderID.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputOrderID.setForeground(new java.awt.Color(76, 43, 24));
-        inputOrderID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Order 1", "Order 2", "Order 3" }));
 
-        inputOrderID1.setBackground(new java.awt.Color(184, 145, 104));
-        inputOrderID1.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        inputOrderID1.setForeground(new java.awt.Color(76, 43, 24));
-        inputOrderID1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Assigned", "Pending", "Accepted", "Out of Delivery", "Completed" }));
+        customerAddressLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        customerAddressLabel.setForeground(new java.awt.Color(76, 43, 24));
+        customerAddressLabel.setText("Customer Address:");
+
+        inputCustomerAddress.setEditable(false);
+        inputCustomerAddress.setBackground(new java.awt.Color(184, 145, 104));
+        inputCustomerAddress.setColumns(20);
+        inputCustomerAddress.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputCustomerAddress.setForeground(new java.awt.Color(76, 43, 24));
+        inputCustomerAddress.setLineWrap(true);
+        inputCustomerAddress.setRows(5);
+        jScrollPane1.setViewportView(inputCustomerAddress);
+
+        customerLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        customerLabel.setForeground(new java.awt.Color(76, 43, 24));
+        customerLabel.setText("Customer Name:");
+
+        inputCustomer.setEditable(false);
+        inputCustomer.setBackground(new java.awt.Color(184, 145, 104));
+        inputCustomer.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputCustomer.setForeground(new java.awt.Color(76, 43, 24));
 
         javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
         backgroundPanel2.setLayout(backgroundPanel2Layout);
         backgroundPanel2Layout.setHorizontalGroup(
             backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(10, 10, 10)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                        .addComponent(assignBtn)
+                        .addComponent(editBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(modifyBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(saveBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dismissBtn))
+                        .addComponent(saveBtn))
                     .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                        .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(customerAddressLabel)
+                            .addComponent(orderIDLabel)
+                            .addComponent(deliveryStaffLabel)
                             .addComponent(orderStatusLabel)
-                            .addComponent(orderIDLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(deliveryStaffLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(customerLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(inputDeliveryStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputOrderID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                            .addComponent(inputOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(inputCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(inputOrderID))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         backgroundPanel2Layout.setVerticalGroup(
             backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundPanel2Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addGap(20, 20, 20)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deliveryStaffLabel)
                     .addComponent(inputDeliveryStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -218,20 +245,31 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(orderStatusLabel)
-                    .addComponent(inputOrderID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                    .addComponent(inputOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(assignBtn)
-                    .addComponent(modifyBtn)
-                    .addComponent(saveBtn)
-                    .addComponent(dismissBtn))
-                .addGap(14, 14, 14))
+                    .addComponent(customerLabel)
+                    .addComponent(inputCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(customerAddressLabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editBtn)
+                    .addComponent(saveBtn))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         backBtn.setBackground(new java.awt.Color(184, 145, 104));
         backBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         backBtn.setForeground(new java.awt.Color(76, 43, 24));
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         displayDeliveryTable.setBackground(new java.awt.Color(230, 207, 201));
         displayDeliveryTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -239,27 +277,37 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         displayDeliveryTable.setForeground(new java.awt.Color(76, 43, 24));
         displayDeliveryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"D0001", "John Doe", "Order 2", "Pending"},
-                {"D0002", "Alvin Doe", "Order 1", "Assigned"},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Delivery ID", "Delivery Staff", "Order ID", "Order Status"
+                "Delivery Staff", "Order ID", "Order Status", "Customer Name", "Customer Address"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         displayDeliveryTable.setGridColor(new java.awt.Color(230, 207, 201));
         displayDeliveryTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
         displayDeliveryTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
         displayDeliveryTable.setShowVerticalLines(true);
+        displayDeliveryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                displayDeliveryTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(displayDeliveryTable);
         // Change Table Header Font
         displayDeliveryTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
@@ -267,10 +315,11 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         // Change Table Column Width
         TableColumnModel columnModel = displayDeliveryTable.getColumnModel();
 
-        columnModel.getColumn(0).setPreferredWidth(150);
-        columnModel.getColumn(1).setPreferredWidth(150);
-        columnModel.getColumn(2).setPreferredWidth(150);
-        columnModel.getColumn(3).setPreferredWidth(150);
+        columnModel.getColumn(0).setPreferredWidth(125);
+        columnModel.getColumn(1).setPreferredWidth(100);
+        columnModel.getColumn(2).setPreferredWidth(100);
+        columnModel.getColumn(3).setPreferredWidth(125);
+        columnModel.getColumn(4).setPreferredWidth(200);
 
         listDeliveryLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         listDeliveryLabel.setForeground(new java.awt.Color(76, 43, 24));
@@ -284,16 +333,16 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(detailLabel)
-                    .addComponent(backgroundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(backBtn)
                     .addComponent(searchDeliveryLabel)
                     .addComponent(deliveryMgmtLabel)
-                    .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                    .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(backgroundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(listDeliveryLabel))
-                .addGap(31, 31, 31))
+                    .addComponent(listDeliveryLabel)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         deliveryMgmtPanelLayout.setVerticalGroup(
             deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,16 +355,15 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
                         .addComponent(searchDeliveryLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(detailLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(deliveryMgmtPanelLayout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(listDeliveryLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 4, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(backBtn)
                 .addGap(21, 21, 21))
@@ -335,21 +383,110 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void assignBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_assignBtnActionPerformed
-
-    private void modifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_modifyBtnActionPerformed
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        // Enable button
+        saveBtn.setEnabled(true);
+        
+        // Enable text field
+        inputDeliveryStaff.setEnabled(true);
+        inputOrderStatus.setEnabled(true);
+    }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // TODO add your handling code here:
+        // Get Order ID to change the staff or status or both
+        String getOldOrderID = (String) displayDeliveryTable.getValueAt(displayDeliveryTable.getSelectedRow(), 1);
+        
+        String getDeliveryStaff = inputDeliveryStaff.getSelectedItem().toString();
+        String getOrderID = inputOrderID.getText();
+        String getOrderStatus = inputOrderStatus.getSelectedItem().toString();
+        String getCustomer = inputCustomer.getText();
+        String getCustomerAddress = inputCustomerAddress.getText();
+        
+        String[] newChangesArr = new String[] {getDeliveryStaff, getOrderID, getOrderStatus, getCustomer, getCustomerAddress};
+
+        int confirmSave = JOptionPane.showConfirmDialog(null, "Are you sure to assign this order to the selected delivery staff? Delivery staff is required to accept the order.", "Confirm assign?", JOptionPane.YES_NO_OPTION);
+        
+        if(!getDeliveryStaff.equals("Unknown")) {
+            if(confirmSave == JOptionPane.YES_OPTION) {
+                SaveSelected ss = new SaveSelected();
+                String[][] newChangesArrToSave = ss.saveDelivery(newChangesArr, getOldOrderID);
+
+                FlushAndWrite faw = new FlushAndWrite();
+                faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/delivery.txt");
+                
+                JOptionPane.showMessageDialog(null, "Order assigned. Waitng for deliver staff to confirm", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                System.out.println("Do nothing");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "There is no such delivery staff.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        // Disable Button and Text field
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        
+        inputDeliveryStaff.setEnabled(false);
+        inputOrderStatus.setEnabled(false);
+        
+        // Clear table
+        DefaultTableModel deliveryTable = (DefaultTableModel) displayDeliveryTable.getModel();
+        deliveryTable.setRowCount(0);
     }//GEN-LAST:event_saveBtnActionPerformed
 
-    private void dismissBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dismissBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dismissBtnActionPerformed
+    private void searchFilterStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFilterStatusActionPerformed
+        // Disable text field
+        inputDeliveryStaff.setEnabled(false);
+        inputOrderStatus.setEnabled(false);
+        
+        // Disable button
+        editBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
+        
+        // Clear Table
+        DefaultTableModel deliveryTable = (DefaultTableModel) displayDeliveryTable.getModel();
+        deliveryTable.setRowCount(0);
+        
+        String getFilterStatus = inputFilterStatus.getSelectedItem().toString();
+        
+        if(getFilterStatus.equals("")) {
+            String[][] getAllDeliveryArr = new Create3DArray().create3D("/oodms/database/delivery.txt");
+            
+            for(String[] getAllDeliveryData : getAllDeliveryArr) {
+                deliveryTable.addRow(getAllDeliveryData);
+            }
+        } else {
+            String[][] getSearchDeliveryArr = new SearchFileData().searchData(getFilterStatus, 2, "/oodms/database/delivery.txt");
+            
+            for(String[] getSearchDeliveryData : getSearchDeliveryArr) {
+                deliveryTable.addRow(getSearchDeliveryData);
+            }
+        }
+    }//GEN-LAST:event_searchFilterStatusActionPerformed
+
+    private void displayDeliveryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayDeliveryTableMouseClicked
+        // Enable button
+        editBtn.setEnabled(true);
+        
+        // Disable button and text field
+        saveBtn.setEnabled(false);
+        
+        inputDeliveryStaff.setEnabled(false);
+        inputOrderStatus.setEnabled(false);
+
+        int selectedRow = displayDeliveryTable.getSelectedRow();
+        
+        inputDeliveryStaff.setSelectedItem((String) displayDeliveryTable.getValueAt(selectedRow, 0));
+        inputOrderID.setText((String) displayDeliveryTable.getValueAt(selectedRow, 1));
+        inputOrderStatus.setSelectedItem((String) displayDeliveryTable.getValueAt(selectedRow, 2));
+        inputCustomer.setText((String) displayDeliveryTable.getValueAt(selectedRow, 3));
+        inputCustomerAddress.setText((String) displayDeliveryTable.getValueAt(selectedRow, 4));
+    }//GEN-LAST:event_displayDeliveryTableMouseClicked
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        new AdminDashboard().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,28 +524,31 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton assignBtn;
     private javax.swing.JButton backBtn;
     private javax.swing.JPanel backgroundPanel1;
     private javax.swing.JPanel backgroundPanel2;
+    private javax.swing.JLabel customerAddressLabel;
+    private javax.swing.JLabel customerLabel;
     private javax.swing.JLabel deliveryMgmtLabel;
     private javax.swing.JPanel deliveryMgmtPanel;
     private javax.swing.JLabel deliveryStaffLabel;
     private javax.swing.JLabel detailLabel;
-    private javax.swing.JButton dismissBtn;
     private javax.swing.JTable displayDeliveryTable;
-    private javax.swing.JTextField inputDeliveryID;
+    private javax.swing.JButton editBtn;
+    private javax.swing.JLabel filterStatusLabel;
+    private javax.swing.JTextField inputCustomer;
+    private javax.swing.JTextArea inputCustomerAddress;
     private javax.swing.JComboBox<String> inputDeliveryStaff;
-    private javax.swing.JComboBox<String> inputOrderID;
-    private javax.swing.JComboBox<String> inputOrderID1;
+    private javax.swing.JComboBox<String> inputFilterStatus;
+    private javax.swing.JTextField inputOrderID;
+    private javax.swing.JComboBox<String> inputOrderStatus;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel listDeliveryLabel;
-    private javax.swing.JButton modifyBtn;
     private javax.swing.JLabel orderIDLabel;
     private javax.swing.JLabel orderStatusLabel;
     private javax.swing.JButton saveBtn;
-    private javax.swing.JButton searchDeliveryIDBtn;
-    private javax.swing.JLabel searchDeliveryIDLabel;
     private javax.swing.JLabel searchDeliveryLabel;
+    private javax.swing.JButton searchFilterStatus;
     // End of variables declaration//GEN-END:variables
 }
