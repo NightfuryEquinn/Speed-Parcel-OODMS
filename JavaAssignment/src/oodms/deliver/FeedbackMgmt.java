@@ -4,8 +4,10 @@
  */
 package oodms.deliver;
 
-import java.awt.Font;
-import javax.swing.table.TableColumnModel;
+import java.util.Arrays;
+import javax.swing.table.DefaultTableModel;
+import oodms.oop.Create3DArray;
+import oodms.oop.SearchFileData;
 
 /**
  *
@@ -31,10 +33,14 @@ public class FeedbackMgmt extends javax.swing.JFrame {
 
         deliveryMgmtPanel = new javax.swing.JPanel();
         FeedbackMgmtLabel = new javax.swing.JLabel();
-        backBT = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         FeedbackTable = new javax.swing.JTable();
         FeedbackLB = new javax.swing.JLabel();
+        backgroundPanel5 = new javax.swing.JPanel();
+        searchCustomerNameLabel4 = new javax.swing.JLabel();
+        inputCustomerName = new javax.swing.JTextField();
+        searchOrderBtn4 = new javax.swing.JButton();
+        backBT = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -49,34 +55,24 @@ public class FeedbackMgmt extends javax.swing.JFrame {
         FeedbackMgmtLabel.setForeground(new java.awt.Color(76, 43, 24));
         FeedbackMgmtLabel.setText("Feedbacks Management");
 
-        backBT.setBackground(new java.awt.Color(184, 145, 104));
-        backBT.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        backBT.setForeground(new java.awt.Color(76, 43, 24));
-        backBT.setText("Back");
-        backBT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backBTActionPerformed(evt);
-            }
-        });
-
         FeedbackTable.setBackground(new java.awt.Color(230, 207, 201));
         FeedbackTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         FeedbackTable.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         FeedbackTable.setForeground(new java.awt.Color(76, 43, 24));
         FeedbackTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Delivery ID", "Username", "Feedbacks"
+                "Delivery ID", "Username", "Status", "Feedbacks"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -97,26 +93,87 @@ public class FeedbackMgmt extends javax.swing.JFrame {
         FeedbackLB.setForeground(new java.awt.Color(76, 43, 24));
         FeedbackLB.setText("Delivery Feedbacks");
 
+        backgroundPanel5.setBackground(new java.awt.Color(230, 207, 201));
+
+        searchCustomerNameLabel4.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        searchCustomerNameLabel4.setForeground(new java.awt.Color(76, 43, 24));
+        searchCustomerNameLabel4.setText("Enter Customer Name:");
+
+        inputCustomerName.setBackground(new java.awt.Color(184, 145, 104));
+        inputCustomerName.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        inputCustomerName.setForeground(new java.awt.Color(76, 43, 24));
+
+        searchOrderBtn4.setBackground(new java.awt.Color(184, 145, 104));
+        searchOrderBtn4.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        searchOrderBtn4.setForeground(new java.awt.Color(76, 43, 24));
+        searchOrderBtn4.setText("Search");
+        searchOrderBtn4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchOrderBtn4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout backgroundPanel5Layout = new javax.swing.GroupLayout(backgroundPanel5);
+        backgroundPanel5.setLayout(backgroundPanel5Layout);
+        backgroundPanel5Layout.setHorizontalGroup(
+            backgroundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundPanel5Layout.createSequentialGroup()
+                .addGroup(backgroundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backgroundPanel5Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(searchCustomerNameLabel4)
+                        .addGap(22, 22, 22)
+                        .addComponent(inputCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(backgroundPanel5Layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(searchOrderBtn4)))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        backgroundPanel5Layout.setVerticalGroup(
+            backgroundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundPanel5Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(backgroundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchCustomerNameLabel4)
+                    .addComponent(inputCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(searchOrderBtn4)
+                .addGap(14, 14, 14))
+        );
+
+        backBT.setBackground(new java.awt.Color(184, 145, 104));
+        backBT.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        backBT.setForeground(new java.awt.Color(76, 43, 24));
+        backBT.setText("Back");
+        backBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBTActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout deliveryMgmtPanelLayout = new javax.swing.GroupLayout(deliveryMgmtPanel);
         deliveryMgmtPanel.setLayout(deliveryMgmtPanelLayout);
         deliveryMgmtPanelLayout.setHorizontalGroup(
             deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(deliveryMgmtPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(deliveryMgmtPanelLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(10, 10, 10)
+                        .addComponent(FeedbackLB)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(deliveryMgmtPanelLayout.createSequentialGroup()
+                        .addComponent(FeedbackMgmtLabel)
+                        .addGap(45, 511, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deliveryMgmtPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FeedbackMgmtLabel)
                             .addGroup(deliveryMgmtPanelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(FeedbackLB))))
-                    .addGroup(deliveryMgmtPanelLayout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(deliveryMgmtPanelLayout.createSequentialGroup()
-                        .addGap(355, 355, 355)
-                        .addComponent(backBT)))
-                .addContainerGap(98, Short.MAX_VALUE))
+                                .addComponent(backgroundPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(101, 101, 101)
+                                .addComponent(backBT))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60))))
         );
         deliveryMgmtPanelLayout.setVerticalGroup(
             deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,11 +182,17 @@ public class FeedbackMgmt extends javax.swing.JFrame {
                 .addComponent(FeedbackMgmtLabel)
                 .addGap(27, 27, 27)
                 .addComponent(FeedbackLB)
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(backBT)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGroup(deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(deliveryMgmtPanelLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addComponent(backgroundPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deliveryMgmtPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(backBT)
+                        .addGap(52, 52, 52))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,14 +212,48 @@ public class FeedbackMgmt extends javax.swing.JFrame {
     private void backBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTActionPerformed
         // Back button
         
-        // Back to History page
-        new HistoryMgmt().setVisible(true);
+        // Back to Dashboard page
+        new staffDashboard().setVisible(true);
         dispose();
     }//GEN-LAST:event_backBTActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+        // When window open
+        // Clear JPanel from table
+        DefaultTableModel feedbackTable = (DefaultTableModel) FeedbackTable.getModel();
+        feedbackTable.setRowCount(0);
+        
+        // Read text file
+        String[][] deliveryArr = new Create3DArray().create3D("/oodms/database/deliveryData.txt");
+        
+        System.out.println(Arrays.deepToString(deliveryArr));
+        
+        // Display on table
+        for (String[] infoArr : deliveryArr) {
+            if(infoArr[4].equals("Out of Delivery")) {
+                String[] DLArr = new String[] {infoArr[1], infoArr[2],infoArr[4], infoArr[5]};
+                feedbackTable.addRow(DLArr);
+            }
+        }
     }//GEN-LAST:event_formWindowOpened
+
+    private void searchOrderBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchOrderBtn4ActionPerformed
+        // Get Search Input
+        String getKeyword = inputCustomerName.getText();
+
+        // Clear table
+        DefaultTableModel feedbackTable = (DefaultTableModel) FeedbackTable.getModel();
+        feedbackTable.setRowCount(0);
+
+        // OOP Method - Get Searched User Data into Multidimensional Array
+        String[][] UserArr = new SearchFileData().searchUsername(getKeyword, "/oodms/database/deliveryData.txt");
+
+        // Loop all data
+        for (String[] infoArr : UserArr) {
+            String[] DLArr = new String[] {infoArr[1], infoArr[2], infoArr[4], infoArr[5]};
+            feedbackTable.addRow(DLArr);
+        }
+    }//GEN-LAST:event_searchOrderBtn4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,7 +295,11 @@ public class FeedbackMgmt extends javax.swing.JFrame {
     private javax.swing.JLabel FeedbackMgmtLabel;
     private javax.swing.JTable FeedbackTable;
     private javax.swing.JButton backBT;
+    private javax.swing.JPanel backgroundPanel5;
     private javax.swing.JPanel deliveryMgmtPanel;
+    private javax.swing.JTextField inputCustomerName;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel searchCustomerNameLabel4;
+    private javax.swing.JButton searchOrderBtn4;
     // End of variables declaration//GEN-END:variables
 }

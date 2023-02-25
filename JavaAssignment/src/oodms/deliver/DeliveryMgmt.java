@@ -4,8 +4,12 @@
  */
 package oodms.deliver;
 
-import java.awt.Font;
-import javax.swing.table.TableColumnModel;
+import java.util.Arrays;
+import javax.swing.table.DefaultTableModel;
+import oodms.oop.Create3DArray;
+import oodms.oop.FlushAndWrite;
+import oodms.oop.SaveSelected;
+import oodms.oop.SearchFileData;
 
 /**
  *
@@ -31,30 +35,25 @@ public class DeliveryMgmt extends javax.swing.JFrame {
 
         deliveryMgmtPanel = new javax.swing.JPanel();
         deliveryMgmtLabel = new javax.swing.JLabel();
-        backBT = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         DeliveryTable = new javax.swing.JTable();
         listDeliveryLabel = new javax.swing.JLabel();
+        backgroundPanel1 = new javax.swing.JPanel();
         AcceptBT = new javax.swing.JButton();
-        RefreshBT = new javax.swing.JButton();
+        backBT = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         deliveryMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
 
         deliveryMgmtLabel.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
         deliveryMgmtLabel.setForeground(new java.awt.Color(76, 43, 24));
         deliveryMgmtLabel.setText("Delivery Management");
-
-        backBT.setBackground(new java.awt.Color(184, 145, 104));
-        backBT.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        backBT.setForeground(new java.awt.Color(76, 43, 24));
-        backBT.setText("Back");
-        backBT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backBTActionPerformed(evt);
-            }
-        });
 
         DeliveryTable.setBackground(new java.awt.Color(230, 207, 201));
         DeliveryTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -94,25 +93,48 @@ public class DeliveryMgmt extends javax.swing.JFrame {
         listDeliveryLabel.setForeground(new java.awt.Color(76, 43, 24));
         listDeliveryLabel.setText("Delivery List");
 
+        backgroundPanel1.setBackground(new java.awt.Color(230, 207, 201));
+
         AcceptBT.setBackground(new java.awt.Color(184, 145, 104));
         AcceptBT.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         AcceptBT.setForeground(new java.awt.Color(76, 43, 24));
-        AcceptBT.setText("Accept");
+        AcceptBT.setText("Accept Order");
         AcceptBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AcceptBTActionPerformed(evt);
             }
         });
 
-        RefreshBT.setBackground(new java.awt.Color(184, 145, 104));
-        RefreshBT.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        RefreshBT.setForeground(new java.awt.Color(76, 43, 24));
-        RefreshBT.setText("Refresh");
-        RefreshBT.addActionListener(new java.awt.event.ActionListener() {
+        backBT.setBackground(new java.awt.Color(184, 145, 104));
+        backBT.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        backBT.setForeground(new java.awt.Color(76, 43, 24));
+        backBT.setText("Back");
+        backBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RefreshBTActionPerformed(evt);
+                backBTActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout backgroundPanel1Layout = new javax.swing.GroupLayout(backgroundPanel1);
+        backgroundPanel1.setLayout(backgroundPanel1Layout);
+        backgroundPanel1Layout.setHorizontalGroup(
+            backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(AcceptBT)
+                .addGap(58, 58, 58)
+                .addComponent(backBT)
+                .addContainerGap(114, Short.MAX_VALUE))
+        );
+        backgroundPanel1Layout.setVerticalGroup(
+            backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AcceptBT)
+                    .addComponent(backBT))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout deliveryMgmtPanelLayout = new javax.swing.GroupLayout(deliveryMgmtPanel);
         deliveryMgmtPanel.setLayout(deliveryMgmtPanelLayout);
@@ -128,43 +150,32 @@ public class DeliveryMgmt extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(listDeliveryLabel))))
                     .addGroup(deliveryMgmtPanelLayout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(56, 56, 56)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(deliveryMgmtPanelLayout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(RefreshBT)
-                        .addGap(109, 109, 109)
-                        .addComponent(AcceptBT)
-                        .addGap(131, 131, 131)
-                        .addComponent(backBT)))
-                .addContainerGap(98, Short.MAX_VALUE))
+                        .addGap(178, 178, 178)
+                        .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         deliveryMgmtPanelLayout.setVerticalGroup(
             deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(deliveryMgmtPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(deliveryMgmtLabel)
-                .addGroup(deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(deliveryMgmtPanelLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(listDeliveryLabel)
-                        .addGap(33, 33, 33)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(153, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deliveryMgmtPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(deliveryMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(backBT)
-                            .addComponent(AcceptBT)
-                            .addComponent(RefreshBT))
-                        .addGap(63, 63, 63))))
+                .addGap(27, 27, 27)
+                .addComponent(listDeliveryLabel)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(deliveryMgmtPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(deliveryMgmtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,27 +185,71 @@ public class DeliveryMgmt extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RefreshBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBTActionPerformed
-        // Refresh Button
-        
-        // Read File
-        
-    }//GEN-LAST:event_RefreshBTActionPerformed
-
     private void AcceptBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptBTActionPerformed
-        // Accept Button
+        // Read text file
+        String[][] deliveryArr = new Create3DArray().create3D("/oodms/database/deliveryData.txt");
+
+        for (String[] infoArr : deliveryArr) {
+            // Update delivery status
+            String previousStatus = DeliveryTable.getValueAt(DeliveryTable.getSelectedRow(), 3).toString();
         
-        // Accept order to delivery
+            // Get update status
+            String getOrderID = infoArr[0];
+            String getDeliveryID = DeliveryTable.getValueAt(DeliveryTable.getSelectedRow(), 0).toString();
+            String getUsername = DeliveryTable.getValueAt(DeliveryTable.getSelectedRow(), 1).toString();
+            String getAddress = DeliveryTable.getValueAt(DeliveryTable.getSelectedRow(), 2).toString();
+            String getStatus = infoArr[4] = "Accepted";
         
+            // Rewrite array
+            String[] newStatus = new String[] {getOrderID, getDeliveryID, getUsername, getAddress, getStatus};
+        
+            // Save to txt file
+            SaveSelected ss = new SaveSelected();
+            String[][] statusArr = ss.saveStatus(newStatus, previousStatus, "/oodms/database/deliveryData.txt");
+            new FlushAndWrite().flushAndWrite(statusArr, "src/oodms/database/deliveryData.txt");
+        
+            System.out.println(Arrays.deepToString(statusArr));
+        }
+        
+        // Clear JPanel from table
+        DefaultTableModel deliveryTable = (DefaultTableModel) DeliveryTable.getModel();
+        deliveryTable.setRowCount(0);
+        
+        // Display on table
+        for (String[] infoArr : deliveryArr) {
+            if(infoArr[4].equals("Pending")) {
+                String[] DLArr = new String[] {infoArr[1], infoArr[2], infoArr[3], infoArr[4]};
+                deliveryTable.addRow(DLArr);
+            }
+        }
     }//GEN-LAST:event_AcceptBTActionPerformed
 
     private void backBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTActionPerformed
         // Back button
-        
         // Back to Dashboard page
         new staffDashboard().setVisible(true);
         dispose();
     }//GEN-LAST:event_backBTActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // When window open
+        // Clear JPanel from table
+        DefaultTableModel deliveryTable = (DefaultTableModel) DeliveryTable.getModel();
+        deliveryTable.setRowCount(0);
+        
+        // Read text file
+        String[][] deliveryArr = new Create3DArray().create3D("/oodms/database/deliveryData.txt");
+        
+        System.out.println(Arrays.deepToString(deliveryArr));
+        
+        // Display on table
+        for (String[] infoArr : deliveryArr) {
+            if(infoArr[4].equals("Pending")) {
+                String[] DLArr = new String[] {infoArr[1], infoArr[2], infoArr[3], infoArr[4]};
+                deliveryTable.addRow(DLArr);
+            }
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -234,8 +289,8 @@ public class DeliveryMgmt extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AcceptBT;
     private javax.swing.JTable DeliveryTable;
-    private javax.swing.JButton RefreshBT;
     private javax.swing.JButton backBT;
+    private javax.swing.JPanel backgroundPanel1;
     private javax.swing.JLabel deliveryMgmtLabel;
     private javax.swing.JPanel deliveryMgmtPanel;
     private javax.swing.JScrollPane jScrollPane2;
