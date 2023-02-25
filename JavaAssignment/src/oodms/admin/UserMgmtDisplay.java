@@ -816,7 +816,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         inputPassword.setEditable(false);
         inputEmail.setEditable(false);
         inputContact.setEditable(false);
-        inputAddress.setEditable(false);
+        inputAddress.setEditable(false); 
         inputAge.setEnabled(false);
         inputGender.setEnabled(false);
 

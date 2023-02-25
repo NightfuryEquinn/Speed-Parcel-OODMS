@@ -5,9 +5,13 @@
 package oodms.deliver;
 
 import java.awt.Font;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.DefaultTableModel;
 import oodms.general.WelcomePage;
+import oodms.oop.Create3DArray;
+import oodms.oop.FlushAndWrite;
+import oodms.oop.SaveSelected;
 
 /**
  *
@@ -37,12 +41,16 @@ public class staffDashboard extends javax.swing.JFrame {
         functionLabel = new javax.swing.JLabel();
         backgroundPanel1 = new javax.swing.JPanel();
         DeliveryBT = new javax.swing.JLabel();
-        HistoryBT = new javax.swing.JLabel();
+        FeedbackBT = new javax.swing.JLabel();
         infoLB = new javax.swing.JLabel();
         backgroundPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         DeliveryTable = new javax.swing.JTable();
         logoutBtn = new javax.swing.JButton();
+        backgroundPanel2 = new javax.swing.JPanel();
+        deliveryStatusLabel = new javax.swing.JLabel();
+        updateBT = new javax.swing.JButton();
+        statusLB = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -74,12 +82,12 @@ public class staffDashboard extends javax.swing.JFrame {
             }
         });
 
-        HistoryBT.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
-        HistoryBT.setForeground(new java.awt.Color(76, 43, 24));
-        HistoryBT.setText("History Management");
-        HistoryBT.addMouseListener(new java.awt.event.MouseAdapter() {
+        FeedbackBT.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        FeedbackBT.setForeground(new java.awt.Color(76, 43, 24));
+        FeedbackBT.setText("Feedback Management");
+        FeedbackBT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                HistoryBTMouseClicked(evt);
+                FeedbackBTMouseClicked(evt);
             }
         });
 
@@ -90,7 +98,7 @@ public class staffDashboard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanel1Layout.createSequentialGroup()
                 .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(HistoryBT)
+                    .addComponent(FeedbackBT)
                     .addComponent(DeliveryBT))
                 .addGap(35, 35, 35))
         );
@@ -100,7 +108,7 @@ public class staffDashboard extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(DeliveryBT)
                 .addGap(18, 18, 18)
-                .addComponent(HistoryBT)
+                .addComponent(FeedbackBT)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -141,25 +149,24 @@ public class staffDashboard extends javax.swing.JFrame {
         DeliveryTable.setGridColor(new java.awt.Color(230, 207, 201));
         DeliveryTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
         DeliveryTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
+        DeliveryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeliveryTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(DeliveryTable);
         // Change Table Header Font
         DeliveryTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
 
         // Change Table Column Width
-        TableColumnModel columnModel = DeliveryTable.getColumnModel();
-
-        columnModel.getColumn(0).setPreferredWidth(150);
-        columnModel.getColumn(1).setPreferredWidth(150);
-        columnModel.getColumn(2).setPreferredWidth(150);
-        columnModel.getColumn(3).setPreferredWidth(150);
 
         javax.swing.GroupLayout backgroundPanel3Layout = new javax.swing.GroupLayout(backgroundPanel3);
         backgroundPanel3.setLayout(backgroundPanel3Layout);
         backgroundPanel3Layout.setHorizontalGroup(
             backgroundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         backgroundPanel3Layout.setVerticalGroup(
@@ -180,36 +187,83 @@ public class staffDashboard extends javax.swing.JFrame {
             }
         });
 
+        backgroundPanel2.setBackground(new java.awt.Color(230, 207, 201));
+
+        deliveryStatusLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        deliveryStatusLabel.setForeground(new java.awt.Color(76, 43, 24));
+        deliveryStatusLabel.setText("Delivery Status:");
+
+        updateBT.setBackground(new java.awt.Color(184, 145, 104));
+        updateBT.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        updateBT.setForeground(new java.awt.Color(76, 43, 24));
+        updateBT.setText("Update");
+        updateBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBTActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout backgroundPanel2Layout = new javax.swing.GroupLayout(backgroundPanel2);
+        backgroundPanel2.setLayout(backgroundPanel2Layout);
+        backgroundPanel2Layout.setHorizontalGroup(
+            backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(deliveryStatusLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(statusLB, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanel2Layout.createSequentialGroup()
+                .addContainerGap(117, Short.MAX_VALUE)
+                .addComponent(updateBT)
+                .addGap(94, 94, 94))
+        );
+        backgroundPanel2Layout.setVerticalGroup(
+            backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(backgroundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deliveryStatusLabel)
+                    .addComponent(statusLB, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addComponent(updateBT)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout AdminPanelLayout = new javax.swing.GroupLayout(AdminPanel);
         AdminPanel.setLayout(AdminPanelLayout);
         AdminPanelLayout.setHorizontalGroup(
             AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdminPanelLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(backgroundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 86, Short.MAX_VALUE))
-            .addGroup(AdminPanelLayout.createSequentialGroup()
                 .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AdminPanelLayout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(logoutBtn))
-                    .addGroup(AdminPanelLayout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(infoLB))
+                        .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AdminPanelLayout.createSequentialGroup()
+                                .addGap(191, 191, 191)
+                                .addComponent(logoutBtn))
+                            .addGroup(AdminPanelLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(profileIconLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(welcomeBackLabel)))
+                        .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AdminPanelLayout.createSequentialGroup()
+                                .addGap(130, 130, 130)
+                                .addComponent(functionLabel))
+                            .addGroup(AdminPanelLayout.createSequentialGroup()
+                                .addGap(116, 116, 116)
+                                .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(AdminPanelLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(profileIconLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(welcomeBackLabel)))
-                .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(infoLB)
+                            .addGroup(AdminPanelLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(backgroundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(AdminPanelLayout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(functionLabel)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(218, 218, 218))))
+                        .addGap(243, 243, 243)
+                        .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         AdminPanelLayout.setVerticalGroup(
             AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,26 +277,33 @@ public class staffDashboard extends javax.swing.JFrame {
                             .addGroup(AdminPanelLayout.createSequentialGroup()
                                 .addGap(29, 29, 29)
                                 .addComponent(functionLabel)))
-                        .addGap(32, 32, 32)
                         .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(logoutBtn)
-                            .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(AdminPanelLayout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(logoutBtn))
+                            .addGroup(AdminPanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(infoLB)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(backgroundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(111, 111, 111))
+                .addGap(18, 18, 18)
+                .addComponent(backgroundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(AdminPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(AdminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(AdminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 541, Short.MAX_VALUE)
+            .addComponent(AdminPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -260,26 +321,82 @@ public class staffDashboard extends javax.swing.JFrame {
 
     private void DeliveryBTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeliveryBTMouseClicked
         // Delivery Label
-        
         // Go to Delivery page
         new DeliveryMgmt().setVisible(true);
         dispose();
     }//GEN-LAST:event_DeliveryBTMouseClicked
 
-    private void HistoryBTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HistoryBTMouseClicked
+    private void FeedbackBTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FeedbackBTMouseClicked
         // History Label
-        
-        // Go to History page
-        new HistoryMgmt().setVisible(true);
+        // Go to Feedback page
+        new FeedbackMgmt().setVisible(true);
         dispose();
-    }//GEN-LAST:event_HistoryBTMouseClicked
+    }//GEN-LAST:event_FeedbackBTMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // When window open
-
-        // Import text file to table
+        // Clear JPanel from table
+        DefaultTableModel deliveryTable = (DefaultTableModel) DeliveryTable.getModel();
+        deliveryTable.setRowCount(0);
         
+        // Read text file
+        String[][] deliveryArr = new Create3DArray().create3D("/oodms/database/deliveryData.txt");
+        
+        System.out.println(Arrays.deepToString(deliveryArr));
+        
+        // Display on table
+        for (String[] infoArr : deliveryArr) {
+            if(infoArr[4].equals("Accepted")) {
+                String[] DLArr = new String[] {infoArr[1], infoArr[2], infoArr[3], infoArr[4]};
+                deliveryTable.addRow(DLArr);
+            }
+        }
     }//GEN-LAST:event_formWindowOpened
+
+    private void updateBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBTActionPerformed
+        // Read text file
+        String[][] deliveryArr = new Create3DArray().create3D("/oodms/database/deliveryData.txt");
+
+        for (String[] infoArr : deliveryArr) {
+            // Update delivery status
+            String previousStatus = DeliveryTable.getValueAt(DeliveryTable.getSelectedRow(), 3).toString();
+        
+            // Get update status
+            String getOrderID = infoArr[0];
+            String getDeliveryID = DeliveryTable.getValueAt(DeliveryTable.getSelectedRow(), 0).toString();
+            String getUsername = DeliveryTable.getValueAt(DeliveryTable.getSelectedRow(), 1).toString();
+            String getAddress = DeliveryTable.getValueAt(DeliveryTable.getSelectedRow(), 2).toString();
+            String getStatus = infoArr[4] = "Out of Delivery";
+        
+            // Rewrite array
+            String[] newStatus = new String[] {getOrderID, getDeliveryID, getUsername, getAddress, getStatus};
+        
+            // Save to txt file
+            SaveSelected ss = new SaveSelected();
+            String[][] statusArr = ss.saveStatus(newStatus, previousStatus, "/oodms/database/deliveryData.txt");
+            new FlushAndWrite().flushAndWrite(statusArr, "src/oodms/database/deliveryData.txt");
+        
+            System.out.println(Arrays.deepToString(statusArr));
+        }
+        
+        // Clear JPanel from table
+        DefaultTableModel deliveryTable = (DefaultTableModel) DeliveryTable.getModel();
+        deliveryTable.setRowCount(0);
+        
+        // Display on table
+        for (String[] infoArr : deliveryArr) {
+            if(infoArr[4].equals("Accepted")) {
+                String[] DLArr = new String[] {infoArr[1], infoArr[2], infoArr[3], infoArr[4]};
+                deliveryTable.addRow(DLArr);
+            }
+        }
+    }//GEN-LAST:event_updateBTActionPerformed
+
+    private void DeliveryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeliveryTableMouseClicked
+        // label get text
+        String status = DeliveryTable.getValueAt(DeliveryTable.getSelectedRow(), 3).toString();
+        statusLB.setText(status);
+    }//GEN-LAST:event_DeliveryTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -321,14 +438,18 @@ public class staffDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel AdminPanel;
     private javax.swing.JLabel DeliveryBT;
     private javax.swing.JTable DeliveryTable;
-    private javax.swing.JLabel HistoryBT;
+    private javax.swing.JLabel FeedbackBT;
     private javax.swing.JPanel backgroundPanel1;
+    private javax.swing.JPanel backgroundPanel2;
     private javax.swing.JPanel backgroundPanel3;
+    private javax.swing.JLabel deliveryStatusLabel;
     private javax.swing.JLabel functionLabel;
     private javax.swing.JLabel infoLB;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel profileIconLabel;
+    private javax.swing.JLabel statusLB;
+    private javax.swing.JButton updateBT;
     private javax.swing.JLabel welcomeBackLabel;
     // End of variables declaration//GEN-END:variables
 }
