@@ -1,6 +1,7 @@
 package oodms.customer;
 
 import java.awt.Font;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.FeedbackRating;
@@ -328,11 +329,23 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
             inputFeedback.getText()
         };
         
-        SaveSelected ss = new SaveSelected();
-        String[][] newChangesArrToSave = ss.saveFeedback(newChangesArr, getOrderID, acceptCustomerUsername);
+        int confirmSubmit = JOptionPane.showConfirmDialog(null, "Are you sure to submit your feedback now? You can't change it anymore", "Confirm submit?", JOptionPane.YES_NO_OPTION);
         
-        FlushAndWrite faw = new FlushAndWrite();
-        faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/feedback.txt");
+        if(!inputFeedback.getText().equals("")) {
+            if(confirmSubmit == JOptionPane.YES_OPTION) {
+                SaveSelected ss = new SaveSelected();
+                String[][] newChangesArrToSave = ss.saveFeedback(newChangesArr, getOrderID, acceptCustomerUsername);
+
+                FlushAndWrite faw = new FlushAndWrite();
+                faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/feedback.txt");
+
+                JOptionPane.showMessageDialog(null, "Your feedback has been submitted. Please refresh the page to view it.\nNOTE: If it contains sensitive contents, admins will not hestitate to delete your feedback and take actions upon you.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                System.out.println("Do nothing");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please fill up the empty field.", "Empty fields", JOptionPane.INFORMATION_MESSAGE);
+        }   
         
         ratingSlider.setValue(1);
         inputFeedback.setText("");

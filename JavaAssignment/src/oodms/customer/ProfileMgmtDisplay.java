@@ -1,6 +1,7 @@
 package oodms.customer;
 
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 import oodms.oop.FlushAndWrite;
 import oodms.oop.SaveSelected;
 
@@ -250,30 +251,47 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
-        char[] targetPassword = inputPassword.getPassword();
-        String getPassword = new String(targetPassword);
-
-        char[] targetConfirmPassword = inputConfirmPassword.getPassword();
-        String getConfirmPassword = new String(targetConfirmPassword);
+        int confirmUpdate = JOptionPane.showConfirmDialog(null, "Are you sure to update your profile?", "Update profile?", JOptionPane.YES_NO_OPTION);
         
-        if(getPassword.equals(getConfirmPassword)) {
-            String getCustomerUsername = acceptCustomerUsername;
-                    
-            String getContact = inputContact.getText();
-            String getAddress = inputAddress.getText();
-            String getAge = inputAge.getValue().toString();
-            String getGender = inputGender.getSelectedItem().toString();
-            
-            String[] newChangesArr = new String[] {getPassword, getContact, getAddress, getAge, getGender};
-            
-            SaveSelected ss = new SaveSelected();
-            String[][] newChangesArrToSave = ss.saveCustomerProfile(newChangesArr, getCustomerUsername);
-            
-            FlushAndWrite faw = new FlushAndWrite();
-            faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/credentials.txt");
+        if(confirmUpdate == JOptionPane.YES_OPTION) {
+            char[] targetPassword = inputPassword.getPassword();
+            String getPassword = new String(targetPassword);
+
+            char[] targetConfirmPassword = inputConfirmPassword.getPassword();
+            String getConfirmPassword = new String(targetConfirmPassword);
+
+            if(getPassword.equals(getConfirmPassword)) {
+                String getCustomerUsername = acceptCustomerUsername;
+
+                String getContact = inputContact.getText();
+                String getAddress = inputAddress.getText();
+                String getAge = inputAge.getValue().toString();
+                String getGender = inputGender.getSelectedItem().toString();
+
+                String[] newChangesArr = new String[] {getPassword, getContact, getAddress, getAge, getGender};
+                
+                if(!getContact.equals("") && !getAddress.equals("") && !getAge.equals("") && !getGender.equals("")) {
+                    SaveSelected ss = new SaveSelected();
+                    String[][] newChangesArrToSave = ss.saveCustomerProfile(newChangesArr, getCustomerUsername);
+
+                    FlushAndWrite faw = new FlushAndWrite();
+                    faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/credentials.txt");
+
+                    JOptionPane.showMessageDialog(null, "Your personal information has been updated.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please fill up the empty fields.", "Empty fields", JOptionPane.ERROR_MESSAGE);
+                
+                    System.out.println("Do nothing");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Your passowrd and confirm password are not the same.", "Password Incorrect", JOptionPane.ERROR_MESSAGE);
+
+                System.out.println("Password not same");
+            }
         } else {
-            System.out.println("Password not same");
+            System.out.println("Do nothing");
         }
+            
     }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

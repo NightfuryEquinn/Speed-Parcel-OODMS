@@ -2,9 +2,11 @@ package oodms.customer;
 
 import java.awt.Font;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import oodms.general.MarketStorePage;
 import oodms.general.WelcomePage;
+import oodms.oop.MouseHover;
 import oodms.oop.SearchFileData;
 
 public class CustomerDashboard extends javax.swing.JFrame {
@@ -22,6 +24,19 @@ public class CustomerDashboard extends javax.swing.JFrame {
         CustomerDashboard.acceptCustomerUsername = acceptCustomerUsername;
         
         customerUsernameLabel.setText(acceptCustomerUsername);
+        
+        // Add mouse hover event
+        String[] componentTexts = new String[] {
+            "Profile Management",
+            "Cart Management",
+            "Order History",
+            "Feedback History"
+        };
+                
+        JPanel[] allJPanel = new JPanel[] {backgroundPanel1};
+        
+        MouseHover mh = new MouseHover();
+        mh.mouseHoverEffect(componentTexts, allJPanel);
     }
 
     /**

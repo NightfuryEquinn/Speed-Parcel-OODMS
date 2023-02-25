@@ -2,6 +2,7 @@ package oodms.customer;
 
 import java.awt.Font;
 import java.util.Random;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.Create3DArray;
@@ -480,6 +481,8 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
         FlushAndWrite faw = new FlushAndWrite();
         faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/cart.txt");
         
+        JOptionPane.showMessageDialog(null, "Changes has been saved.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        
         // Reset Search and Details fields
         inputSearchItem.setText("");
         
@@ -509,13 +512,21 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
 
         String selectedRowCart = (String) displayCartTable.getValueAt(selectedRowIndex, 0);
 
-        // Return a multidimensional of excluded selected row
-        String[][] ds = new DeleteSelected().deleteSelected(selectedRowCart, "/oodms/database/cart.txt");
+        int confirmDelete = JOptionPane.showConfirmDialog(null, "Are you sure to delete this order? This action can't be undone.", "Confirm delete?", JOptionPane.YES_NO_OPTION);
 
-        // Flush and Write
-        FlushAndWrite faw = new FlushAndWrite();
-        faw.flushAndWrite(ds, "src/oodms/database/cart.txt");
+        if(confirmDelete == JOptionPane.YES_OPTION) {
+            // Return a multidimensional of excluded selected row
+            String[][] ds = new DeleteSelected().deleteSelected(selectedRowCart, "/oodms/database/cart.txt");
 
+            // Flush and Write
+            FlushAndWrite faw = new FlushAndWrite();
+            faw.flushAndWrite(ds, "src/oodms/database/cart.txt");
+            
+            JOptionPane.showMessageDialog(null, "Your order has been deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            System.out.println("Do nothing");
+        }
+        
         // Reset Search and Details fields
         inputSearchItem.setText("");
         
@@ -542,47 +553,55 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
     private void purchaseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseBtnActionPerformed
         int selectedRow = displayCartTable.getSelectedRow();
         
-        /**
-         * Get the item data that is purchased before deleting from cart text file
-         */
-        String[] getItemToPurchaseData = new String[] {
-           (String) displayCartTable.getValueAt(selectedRow, 0),
-            acceptCustomerUsername,
-           (String) displayCartTable.getValueAt(selectedRow, 1),
-           (String) displayCartTable.getValueAt(selectedRow, 2),
-           (String) displayCartTable.getValueAt(selectedRow, 3),
-           (String) displayCartTable.getValueAt(selectedRow, 4),
-        };
+        int confirmPurchase = JOptionPane.showConfirmDialog(null, "Are you sure to place order?", "Confirm order?", JOptionPane.YES_NO_OPTION);
         
-        // Delete item that is purchased from cart text file
-        String selectedRowCart = (String) displayCartTable.getValueAt(selectedRow, 0);
+        if(confirmPurchase == JOptionPane.YES_OPTION) {
+                /**
+             * Get the item data that is purchased before deleting from cart text file
+             */
+            String[] getItemToPurchaseData = new String[] {
+               (String) displayCartTable.getValueAt(selectedRow, 0),
+                acceptCustomerUsername,
+               (String) displayCartTable.getValueAt(selectedRow, 1),
+               (String) displayCartTable.getValueAt(selectedRow, 2),
+               (String) displayCartTable.getValueAt(selectedRow, 3),
+               (String) displayCartTable.getValueAt(selectedRow, 4),
+            };
 
-        // Return a multidimensional of excluded selected row
-        String[][] ds = new DeleteSelected().deleteSelected(selectedRowCart, "/oodms/database/cart.txt");
+            // Delete item that is purchased from cart text file
+            String selectedRowCart = (String) displayCartTable.getValueAt(selectedRow, 0);
 
-        // Flush and Write
-        FlushAndWrite faw = new FlushAndWrite();
-        faw.flushAndWrite(ds, "src/oodms/database/cart.txt");
-        
-        /**
-         * Write into order, payment, delivery text file
-         */
-        // Random generate an order ID
-        Random random = new Random();
-        int getOrderID = random.nextInt(1000000) + 15000000;
-        String randomOrderID = String.valueOf(getOrderID);
-        
-        // To Order text file
-        UpdatePurchasedItemInOrder upiio = new UpdatePurchasedItemInOrder();
-        upiio.updatePurchasedItemData(getItemToPurchaseData, randomOrderID);
-        
-        // To Delivery text file
-        UpdatePurchasedItemInDelivery upiid = new UpdatePurchasedItemInDelivery();
-        upiid.updatePurchasedItemData(getItemToPurchaseData, randomOrderID);
-        
-        // To Payment text file
-        UpdatePurchasedItemInPayment upiip = new UpdatePurchasedItemInPayment();
-        upiip.updatePurchasedItemData(getItemToPurchaseData, randomOrderID);
+            // Return a multidimensional of excluded selected row
+            String[][] ds = new DeleteSelected().deleteSelected(selectedRowCart, "/oodms/database/cart.txt");
+
+            // Flush and Write
+            FlushAndWrite faw = new FlushAndWrite();
+            faw.flushAndWrite(ds, "src/oodms/database/cart.txt");
+
+            /**
+             * Write into order, payment, delivery text file
+             */
+            // Random generate an order ID
+            Random random = new Random();
+            int getOrderID = random.nextInt(1000000) + 15000000;
+            String randomOrderID = String.valueOf(getOrderID);
+
+            // To Order text file
+            UpdatePurchasedItemInOrder upiio = new UpdatePurchasedItemInOrder();
+            upiio.updatePurchasedItemData(getItemToPurchaseData, randomOrderID);
+
+            // To Delivery text file
+            UpdatePurchasedItemInDelivery upiid = new UpdatePurchasedItemInDelivery();
+            upiid.updatePurchasedItemData(getItemToPurchaseData, randomOrderID);
+
+            // To Payment text file
+            UpdatePurchasedItemInPayment upiip = new UpdatePurchasedItemInPayment();
+            upiip.updatePurchasedItemData(getItemToPurchaseData, randomOrderID);
+            
+            JOptionPane.showMessageDialog(null, "Order has been placed. Please view your purchase detail in payment history.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            System.out.println("Do nothing");
+        }
     }//GEN-LAST:event_purchaseBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

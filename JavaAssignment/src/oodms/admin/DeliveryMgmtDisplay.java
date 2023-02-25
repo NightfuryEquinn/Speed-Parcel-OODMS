@@ -403,17 +403,17 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         String getCustomerAddress = inputCustomerAddress.getText();
         
         String[] newChangesArr = new String[] {getDeliveryStaff, getOrderID, getOrderStatus, getCustomer, getCustomerAddress};
-        
-        SaveSelected ss = new SaveSelected();
-        String[][] newChangesArrToSave = ss.saveDelivery(newChangesArr, getOldOrderID);
-        
-        FlushAndWrite faw = new FlushAndWrite();
-        faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/delivery.txt");
-        
+
         int confirmSave = JOptionPane.showConfirmDialog(null, "Are you sure to assign this order to the selected delivery staff? Delivery staff is required to accept the order.", "Confirm assign?", JOptionPane.YES_NO_OPTION);
         
         if(!getDeliveryStaff.equals("Unknown")) {
             if(confirmSave == JOptionPane.YES_OPTION) {
+                SaveSelected ss = new SaveSelected();
+                String[][] newChangesArrToSave = ss.saveDelivery(newChangesArr, getOldOrderID);
+
+                FlushAndWrite faw = new FlushAndWrite();
+                faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/delivery.txt");
+                
                 JOptionPane.showMessageDialog(null, "Order assigned. Waitng for deliver staff to confirm", "Success", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 System.out.println("Do nothing");
