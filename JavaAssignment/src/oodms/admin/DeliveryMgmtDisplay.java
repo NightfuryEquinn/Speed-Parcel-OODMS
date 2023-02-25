@@ -1,6 +1,7 @@
 package oodms.admin;
 
 import java.awt.Font;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.Create3DArray;
@@ -408,6 +409,18 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         
         FlushAndWrite faw = new FlushAndWrite();
         faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/delivery.txt");
+        
+        int confirmSave = JOptionPane.showConfirmDialog(null, "Are you sure to assign this order to the selected delivery staff? Delivery staff is required to accept the order.", "Confirm assign?", JOptionPane.YES_NO_OPTION);
+        
+        if(!getDeliveryStaff.equals("Unknown")) {
+            if(confirmSave == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(null, "Order assigned. Waitng for deliver staff to confirm", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                System.out.println("Do nothing");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "There is no such delivery staff.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
         // Disable Button and Text field
         editBtn.setEnabled(false);

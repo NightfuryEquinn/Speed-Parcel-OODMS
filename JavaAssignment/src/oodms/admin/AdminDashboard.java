@@ -1,7 +1,9 @@
 package oodms.admin;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import oodms.general.WelcomePage;
+import oodms.oop.MouseHover;
 
 public class AdminDashboard extends javax.swing.JFrame {
 
@@ -10,6 +12,25 @@ public class AdminDashboard extends javax.swing.JFrame {
      */
     public AdminDashboard() {
         initComponents();
+
+        // Add mouse hover event
+        String[] componentTexts = new String[] {
+            "User Management",
+            "Item Management",
+            "Category Management",
+            "Delivery Management",
+            "Feedback Management",
+            "Order Management",
+            "Payment Management",
+            "Category Sales Report",
+            "User Gender Report",
+            "User Age Report"
+        };
+        
+        JPanel[] allJPanel = new JPanel[] {backgroundPanel1, backgroundPanel2, backgroundPanel3};
+        
+        MouseHover mh = new MouseHover();
+        mh.mouseHoverEffect(componentTexts, allJPanel);
     }
 
     /**
@@ -125,7 +146,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addComponent(feedbackMgmtBtn)
                     .addComponent(catMgmtBtn)
                     .addComponent(userMgmtBtn))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
         backgroundPanel1Layout.setVerticalGroup(
             backgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

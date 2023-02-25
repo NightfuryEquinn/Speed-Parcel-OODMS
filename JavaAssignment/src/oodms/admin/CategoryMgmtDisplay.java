@@ -1,6 +1,7 @@
 package oodms.admin;
 
 import java.awt.Font;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.AddNewCategory;
@@ -346,8 +347,16 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         
         boolean checkCat = new CheckSimilarity().catChecker(getCatName);
         
-        if(!checkCat) {
-            AddNewCategory category = new AddNewCategory(getCatName, getDescription);
+        if((!inputDescription.getText().equals("")) && (!inputCatName.getText().equals(""))) {
+            if(!checkCat) {
+                AddNewCategory category = new AddNewCategory(getCatName, getDescription);
+
+                JOptionPane.showMessageDialog(null, "New category added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Category exists.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please fill up the empty fields", "Empty fields", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_addBtnActionPerformed
 
@@ -371,11 +380,19 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         
         boolean checkCat = new CheckSimilarity().catChecker(getCatName);
         
-        if(!checkCat) {
-            SaveSelected ss = new SaveSelected();
-            String[][] newChangesArrToSave = ss.saveCategory(newChangesArr, getOldCatName);
-            
-            new FlushAndWrite().flushAndWrite(newChangesArrToSave, "src/oodms/database/category.txt");
+        if((!inputDescription.getText().equals("")) && (!inputCatName.getText().equals(""))) {
+            if(!checkCat) {
+                SaveSelected ss = new SaveSelected();
+                String[][] newChangesArrToSave = ss.saveCategory(newChangesArr, getOldCatName);
+
+                new FlushAndWrite().flushAndWrite(newChangesArrToSave, "src/oodms/database/category.txt");
+
+                JOptionPane.showMessageDialog(null, "Content saved. Please refresh the table again.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to save. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please fill up the empty fields", "Empty fields", JOptionPane.ERROR_MESSAGE);
         }
         
         // Reset text fields and button
@@ -401,10 +418,18 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         
         String selectedCatName = (String) displayCatTable.getValueAt(selectedRow, 0);
         
-        String[][] ds = new DeleteSelected().deleteSelected(selectedCatName, "/oodms/database/category.txt");
+        int confirmDelete = JOptionPane.showConfirmDialog(null, "Are you sure to delete this category? This action can't be undone.", "Confirm delete?", JOptionPane.YES_NO_OPTION);
         
-        FlushAndWrite faw = new FlushAndWrite();
-        faw.flushAndWrite(ds, "src/oodms/database/category.txt");
+        if(confirmDelete == JOptionPane.YES_OPTION) {
+            String[][] ds = new DeleteSelected().deleteSelected(selectedCatName, "/oodms/database/category.txt");
+        
+            FlushAndWrite faw = new FlushAndWrite();
+            faw.flushAndWrite(ds, "src/oodms/database/category.txt");
+        
+            JOptionPane.showMessageDialog(null, "Category deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            System.out.println("Do nothing.");
+        }
         
         // Reset text field and button
         inputSearchCatName.setText("");

@@ -2,6 +2,7 @@ package oodms.admin;
 
 import java.awt.Font;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.Create3DArray;
@@ -383,11 +384,19 @@ public class FeedbackMgmtDisplay extends javax.swing.JFrame {
         int selectedRow = displayFeedbackTable.getSelectedRow();
         
         String selectedOrderID = (String) displayFeedbackTable.getValueAt(selectedRow, 0);
+
+        int confirmDelete = JOptionPane.showConfirmDialog(null, "Are you sure to delete this feedback? This action can't be undone.", "Confirm delete?", JOptionPane.YES_NO_OPTION);
         
-        String[][] ds = new DeleteSelected().deleteSelected(selectedOrderID, "/oodms/database/feedback.txt");
+        if(confirmDelete == JOptionPane.YES_OPTION) {
+            String[][] ds = new DeleteSelected().deleteSelected(selectedOrderID, "/oodms/database/feedback.txt");
         
-        FlushAndWrite faw = new FlushAndWrite();
-        faw.flushAndWrite(ds, "src/oodms/database/feedback.txt");
+            FlushAndWrite faw = new FlushAndWrite();
+            faw.flushAndWrite(ds, "src/oodms/database/feedback.txt");
+            
+            JOptionPane.showConfirmDialog(null, "Feedback deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            System.out.println("Do nothing");
+        }
         
         // Reset text field and buttons
         inputSearchCustomer.setText("");

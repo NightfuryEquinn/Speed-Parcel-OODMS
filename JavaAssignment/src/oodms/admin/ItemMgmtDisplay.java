@@ -2,6 +2,7 @@ package oodms.admin;
 
 import java.awt.Font;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.oop.AddNewItem;
@@ -418,8 +419,16 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         
         boolean checkItem = new CheckSimilarity().itemChecker(getItemName);
         
-        if(!checkItem) {
-            AddNewItem item = new AddNewItem(getItemName, getPrice, getItemCategory, getDescription);
+        if((!getItemName.equals("")) && (!getPrice.equals("")) && (!getDescription.equals(""))) {
+            if(!checkItem) {
+                AddNewItem item = new AddNewItem(getItemName, getPrice, getItemCategory, getDescription);
+
+                JOptionPane.showMessageDialog(null, "New item added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Item exists.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please fill up the empty fields.", "Empty fields", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_addBtnActionPerformed
 
@@ -446,11 +455,19 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         
         boolean itemChecker = new CheckSimilarity().itemChecker(getItemName);
         
-        if(!itemChecker) {
-            SaveSelected ss = new SaveSelected();
-            String[][] newChangesArrToSave = ss.saveItem(newChangesArr, getOldItemName);
-            
-            new FlushAndWrite().flushAndWrite(newChangesArrToSave, "src/oodms/database/item.txt");
+        if((!getItemName.equals("")) && (!getPrice.equals("")) && (!getDescription.equals(""))) {
+            if(!itemChecker) {
+                SaveSelected ss = new SaveSelected();
+                String[][] newChangesArrToSave = ss.saveItem(newChangesArr, getOldItemName);
+
+                new FlushAndWrite().flushAndWrite(newChangesArrToSave, "src/oodms/database/item.txt");
+
+                JOptionPane.showMessageDialog(null, "Content saved. Please refresh the table again.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to save. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please fill up the empty fields.", "Empty fields", JOptionPane.ERROR_MESSAGE);
         }
         
         // Reset text field and button
@@ -481,10 +498,18 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         
         String selectedRowItem = (String) displayItemTable.getValueAt(selectedRow, 0);
         
-        String[][] ds = new DeleteSelected().deleteSelected(selectedRowItem, "/oodms/database/item.txt");
+        int confirmDelete = JOptionPane.showConfirmDialog(null, "Are you sure to delete this item? This action can't be undone.", "Confirm delete?", JOptionPane.YES_NO_OPTION);
         
-        FlushAndWrite faw = new FlushAndWrite();
-        faw.flushAndWrite(ds, "src/oodms/database/item.txt");
+        if(confirmDelete == JOptionPane.YES_OPTION) {
+            String[][] ds = new DeleteSelected().deleteSelected(selectedRowItem, "/oodms/database/item.txt");
+        
+            FlushAndWrite faw = new FlushAndWrite();
+            faw.flushAndWrite(ds, "src/oodms/database/item.txt");
+            
+            JOptionPane.showMessageDialog(null, "Item deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            System.out.println("Do nothing.");
+        }
         
         // Reset text field and button
         inputSearchItem.setText("");

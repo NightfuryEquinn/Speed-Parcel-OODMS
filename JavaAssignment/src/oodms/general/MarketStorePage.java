@@ -2,6 +2,7 @@ package oodms.general;
 
 import java.awt.Font;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import oodms.customer.CustomerDashboard;
@@ -484,7 +485,14 @@ public class MarketStorePage extends javax.swing.JFrame {
             
             AddNewItemToCart newToCart = new AddNewItemToCart(acceptCustomerUsername, getItem, getPrice, getQuantity, getTotalPrice);
         } else {
-            System.out.println("Log In or Sign Up to purchase items");
+            int redirect = JOptionPane.showConfirmDialog(null, "You haven't login yet. Please login to proceed or create a new account to purchase items from Speed Parcel. Do you want to be redirected to the login or sign up page?", "You are a guest", JOptionPane.YES_NO_OPTION);
+            
+            if(redirect == JOptionPane.YES_OPTION) {
+                new WelcomePage().setVisible(true);
+                dispose();
+            } else {
+                System.out.println("Remain");
+            }
         }
     }//GEN-LAST:event_addToCartBtnActionPerformed
 
