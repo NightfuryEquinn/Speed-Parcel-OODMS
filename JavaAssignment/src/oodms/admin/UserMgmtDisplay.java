@@ -1,6 +1,8 @@
 package oodms.admin;
 
 import java.awt.Font;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -159,11 +161,21 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         inputEmail.setBackground(new java.awt.Color(184, 145, 104));
         inputEmail.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputEmail.setForeground(new java.awt.Color(76, 43, 24));
+        inputEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputEmailFocusLost(evt);
+            }
+        });
 
         inputContact.setEditable(false);
         inputContact.setBackground(new java.awt.Color(184, 145, 104));
         inputContact.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputContact.setForeground(new java.awt.Color(76, 43, 24));
+        inputContact.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputContactFocusLost(evt);
+            }
+        });
 
         addBtn.setBackground(new java.awt.Color(184, 145, 104));
         addBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -571,6 +583,56 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
 
                         // Confirm save changes
                         new FlushAndWrite().flushAndWrite(newChangesArrToSave, "src/oodms/database/credentials.txt");
+                        
+                        /**
+                         * If is changing a customer username
+                         */
+                        if((!getOldUsername.toLowerCase().startsWith("admin")) && (!getOldUsername.toLowerCase().startsWith("delivery"))) {
+                            String[][] getCartArr = new Create3DArray().create3D("/oodms/database/cart.txt");
+                            String[][] getDeliveryArr = new Create3DArray().create3D("/oodms/database/delivery.txt");
+                            String[][] getFeedbackArr = new Create3DArray().create3D("/oodms/database/feedback.txt");
+                            String[][] getOrderArr = new Create3DArray().create3D("/oodms/database/order.txt");
+                            String[][] getPaymentArr = new Create3DArray().create3D("/oodms/database/payment.txt");
+                            
+                            // Change in cart text file
+                            for(String[] getCart : getCartArr) {
+                                if(getCart[1].toLowerCase().equalsIgnoreCase(getOldUsername)) {
+                                    getCart[1] = getUsername;
+                                }
+                            }
+                            
+                            // Change in delivery text file
+                            for(String[] getDelivery : getDeliveryArr) {
+                                if(getDelivery[3].toLowerCase().equalsIgnoreCase(getOldUsername)) {
+                                    getDelivery[3] = getUsername;
+                                    getDelivery[4] = getAddress;
+                                }
+                            }
+                            
+                            // Change in feedback text file
+                            for(String[] getFeedback : getFeedbackArr) {
+                                if(getFeedback[1].toLowerCase().equalsIgnoreCase(getOldUsername)) {
+                                    getFeedback[1] = getUsername;
+                                }
+                            }
+                            
+                            // Change in order text file
+                            for(String[] getOrder : getOrderArr) {
+                                if(getOrder[1].toLowerCase().equalsIgnoreCase(getOldUsername)) {
+                                    getOrder[1] = getUsername;
+                                }
+                            }
+                            
+                            // Change in payment text file
+                            for(String[] getPayment : getPaymentArr) {
+                                if(getPayment[2].toLowerCase().equalsIgnoreCase(getOldUsername)) {
+                                    getPayment[2] = getUsername;
+                                }
+                            }
+                            
+                            String notifyMessage = "All information related to " + getOldUsername + " has been changed to " + getUsername + ".";
+                            JOptionPane.showMessageDialog(null, notifyMessage, "Information Updated", JOptionPane.INFORMATION_MESSAGE);
+                        }
 
                         // Reset Search and Details fields
                         inputSearchUsername.setText("");
@@ -772,6 +834,31 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         
         inputGender.setSelectedItem(displayUserTable.getValueAt(selectedRow, 5));
     }//GEN-LAST:event_displayUserTableMouseClicked
+
+    private void inputEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusLost
+        if((!inputEmail.getText().contains("@")) || (!inputEmail.getText().contains("."))) {
+            JOptionPane.showMessageDialog(null, "Please input a valid email address.", "Invalid email address", JOptionPane.ERROR_MESSAGE);
+            
+            inputEmail.setText("");
+        }
+    }//GEN-LAST:event_inputEmailFocusLost
+
+    private void inputContactFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputContactFocusLost
+        // Define a regular expression pattern for the contact number format
+        String contactNumberPattern = "\\d{10}|\\d{11}";
+        Pattern pattern = Pattern.compile(contactNumberPattern);
+
+        String contactNumber = inputContact.getText();
+
+         // Use the regular expression to match the contact number
+        Matcher matcher = pattern.matcher(contactNumber);
+        
+        if (!matcher.matches()) {
+            JOptionPane.showMessageDialog(null, "Please enter the correct contact number format. Examples:\n012xxx1234\nor\n011xxxx1234", "Invalid contact number", JOptionPane.ERROR_MESSAGE);
+        
+            inputContact.setText("");
+        }
+    }//GEN-LAST:event_inputContactFocusLost
 
     /**
      * @param args the command line arguments

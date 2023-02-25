@@ -322,6 +322,9 @@
               <Dimension value="[274, 23]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="inputEmailFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="inputContact">
           <Properties>
@@ -338,6 +341,9 @@
               <Dimension value="[274, 23]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="inputContactFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="inputPassword">
           <Properties>

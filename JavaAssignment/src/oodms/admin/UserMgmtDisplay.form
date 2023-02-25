@@ -407,6 +407,9 @@
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="inputEmailFocusLost"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="inputContact">
               <Properties>
@@ -421,6 +424,9 @@
                   <Color blue="18" green="2b" red="4c" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="inputContactFocusLost"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="addBtn">
               <Properties>

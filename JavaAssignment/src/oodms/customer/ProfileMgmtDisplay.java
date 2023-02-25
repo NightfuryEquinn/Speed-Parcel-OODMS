@@ -1,7 +1,9 @@
 package oodms.customer;
 
-import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import oodms.oop.Create3DArray;
 import oodms.oop.FlushAndWrite;
 import oodms.oop.SaveSelected;
 
@@ -89,6 +91,11 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
         inputContact.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputContact.setForeground(new java.awt.Color(76, 43, 24));
         inputContact.setMinimumSize(new java.awt.Dimension(274, 23));
+        inputContact.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputContactFocusLost(evt);
+            }
+        });
 
         addressLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         addressLabel.setForeground(new java.awt.Color(76, 43, 24));
@@ -271,11 +278,23 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
                 String[] newChangesArr = new String[] {getPassword, getContact, getAddress, getAge, getGender};
                 
                 if(!getContact.equals("") && !getAddress.equals("") && !getAge.equals("") && !getGender.equals("")) {
+                    // Change in credentials text file
                     SaveSelected ss = new SaveSelected();
                     String[][] newChangesArrToSave = ss.saveCustomerProfile(newChangesArr, getCustomerUsername);
 
                     FlushAndWrite faw = new FlushAndWrite();
                     faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/credentials.txt");
+                    
+                    // Change in delivery text file
+                    String[][] getTheUserDeliveryData = new Create3DArray().create3D("/oodms/database/delivery.txt");
+                    
+                    for(String[] getTheUserDelivery : getTheUserDeliveryData) {
+                        if(getTheUserDelivery[3].equalsIgnoreCase(acceptCustomerUsername)) {
+                            getTheUserDelivery[4] = getAddress;
+                        }
+                    }
+                    
+                    faw.flushAndWrite(getTheUserDeliveryData, "src/oodms/database/delivery.txt");
 
                     JOptionPane.showMessageDialog(null, "Your personal information has been updated.", "Success", JOptionPane.INFORMATION_MESSAGE);
                 } else {
@@ -298,6 +317,23 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
         new CustomerDashboard(acceptCustomerUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void inputContactFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputContactFocusLost
+        // Define a regular expression pattern for the contact number format
+        String contactNumberPattern = "\\d{10}|\\d{11}";
+        Pattern pattern = Pattern.compile(contactNumberPattern);
+
+        String contactNumber = inputContact.getText();
+
+         // Use the regular expression to match the contact number
+        Matcher matcher = pattern.matcher(contactNumber);
+        
+        if (!matcher.matches()) {
+            JOptionPane.showMessageDialog(null, "Please enter the correct contact number format. Examples:\n012xxx1234\nor\n011xxxx1234", "Invalid contact number", JOptionPane.ERROR_MESSAGE);
+        
+            inputContact.setText("");
+        }
+    }//GEN-LAST:event_inputContactFocusLost
 
     /**
      * @param args the command line arguments

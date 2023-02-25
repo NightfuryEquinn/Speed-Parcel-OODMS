@@ -1,5 +1,7 @@
 package oodms.general;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import oodms.oop.AddNewCustomer;
 import oodms.oop.CheckSimilarity;
 import javax.swing.JOptionPane;
@@ -132,11 +134,21 @@ public class WelcomePage extends javax.swing.JFrame {
         inputEmail.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputEmail.setForeground(new java.awt.Color(76, 43, 24));
         inputEmail.setMinimumSize(new java.awt.Dimension(274, 23));
+        inputEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputEmailFocusLost(evt);
+            }
+        });
 
         inputContact.setBackground(new java.awt.Color(230, 207, 201));
         inputContact.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputContact.setForeground(new java.awt.Color(76, 43, 24));
         inputContact.setMinimumSize(new java.awt.Dimension(274, 23));
+        inputContact.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputContactFocusLost(evt);
+            }
+        });
 
         inputPassword.setBackground(new java.awt.Color(230, 207, 201));
         inputPassword.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
@@ -446,6 +458,31 @@ public class WelcomePage extends javax.swing.JFrame {
         new MarketStorePage(null).setVisible(true);
         dispose();
     }//GEN-LAST:event_guestBtnActionPerformed
+
+    private void inputEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEmailFocusLost
+        if((!inputEmail.getText().contains("@")) || (!inputEmail.getText().contains("."))) {
+            JOptionPane.showMessageDialog(null, "Please input a valid email address.", "Invalid email address", JOptionPane.ERROR_MESSAGE);
+            
+            inputEmail.setText("");
+        }
+    }//GEN-LAST:event_inputEmailFocusLost
+
+    private void inputContactFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputContactFocusLost
+        // Define a regular expression pattern for the contact number format
+        String contactNumberPattern = "\\d{10}|\\d{11}";
+        Pattern pattern = Pattern.compile(contactNumberPattern);
+
+        String contactNumber = inputContact.getText();
+
+         // Use the regular expression to match the contact number
+        Matcher matcher = pattern.matcher(contactNumber);
+        
+        if (!matcher.matches()) {
+            JOptionPane.showMessageDialog(null, "Please enter the correct contact number format. Examples:\n012xxx1234\nor\n011xxxx1234", "Invalid contact number", JOptionPane.ERROR_MESSAGE);
+        
+            inputContact.setText("");
+        }
+    }//GEN-LAST:event_inputContactFocusLost
 
     /**
      * @param args the command line arguments

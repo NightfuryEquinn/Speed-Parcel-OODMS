@@ -5,6 +5,10 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import oodms.oop.AddNewItem;
 import oodms.oop.CheckSimilarity;
 import oodms.oop.CountChildren;
@@ -184,6 +188,11 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         inputPrice.setBackground(new java.awt.Color(184, 145, 104));
         inputPrice.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
         inputPrice.setForeground(new java.awt.Color(76, 43, 24));
+        inputPrice.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputPriceFocusLost(evt);
+            }
+        });
 
         addBtn.setBackground(new java.awt.Color(184, 145, 104));
         addBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -641,6 +650,26 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_searchItemBtnActionPerformed
+
+    private void inputPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPriceFocusLost
+        ((AbstractDocument)inputPrice.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                // Only allow the insertion of numeric characters
+                if (string.matches("\\d+")) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                // Only allow the replacement of text with numeric characters
+                if (text.matches("\\d+")) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
+    }//GEN-LAST:event_inputPriceFocusLost
 
     /**
      * @param args the command line arguments
