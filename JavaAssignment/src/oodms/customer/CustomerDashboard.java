@@ -12,18 +12,18 @@ import oodms.oop.SearchFileData;
 public class CustomerDashboard extends javax.swing.JFrame {
 
     // Accept customer username
-    private static String acceptCustomerUsername;
+    private static String acceptUsername;
     
     /**
      * Creates new form AdminDashboard
-     * @param acceptCustomerUsername
+     * @param acceptUsername
      */
-    public CustomerDashboard(String acceptCustomerUsername) {
+    public CustomerDashboard(String acceptUsername) {
         initComponents();
         
-        CustomerDashboard.acceptCustomerUsername = acceptCustomerUsername;
+        CustomerDashboard.acceptUsername = acceptUsername;
         
-        customerUsernameLabel.setText(acceptCustomerUsername);
+        customerUsernameLabel.setText(acceptUsername);
         
         // Add mouse hover event
         String[] componentTexts = new String[] {
@@ -335,32 +335,32 @@ public class CustomerDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void browseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseBtnActionPerformed
-        new MarketStorePage(acceptCustomerUsername).setVisible(true);
+        new MarketStorePage(acceptUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_browseBtnActionPerformed
 
     private void profileMgmtBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMgmtBtnMouseClicked
-        new ProfileMgmtDisplay(acceptCustomerUsername).setVisible(true);
+        new ProfileMgmtDisplay(acceptUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_profileMgmtBtnMouseClicked
 
     private void cartMgmtBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartMgmtBtnMouseClicked
-        new CartMgmtDisplay(acceptCustomerUsername).setVisible(true);
+        new CartMgmtDisplay(acceptUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_cartMgmtBtnMouseClicked
 
     private void orderHistoryBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderHistoryBtnMouseClicked
-        new OrderHistoryDisplay(acceptCustomerUsername).setVisible(true);
+        new OrderHistoryDisplay(acceptUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_orderHistoryBtnMouseClicked
 
     private void feedbackHistoryBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feedbackHistoryBtnMouseClicked
-        new FeedbackHistoryDisplay(acceptCustomerUsername).setVisible(true);
+        new FeedbackHistoryDisplay(acceptUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_feedbackHistoryBtnMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        String[][] getUserAllOrderArr = new SearchFileData().searchData(acceptCustomerUsername, 1, "/oodms/database/order.txt");
+        String[][] getUserAllOrderArr = new SearchFileData().searchData(acceptUsername, 1, "/oodms/database/order.txt");
         
         DefaultTableModel shippingTable = (DefaultTableModel) displayShippingTable.getModel();
         DefaultTableModel deliveringTable = (DefaultTableModel) displayDeliveringTable.getModel();
@@ -424,7 +424,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerDashboard(acceptCustomerUsername).setVisible(true);
+                new CustomerDashboard(acceptUsername).setVisible(true);
             }
         });
         

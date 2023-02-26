@@ -104,16 +104,54 @@ public class SaveSelected {
         return saveFeedbackArr;
     }
 
-    public String[][] saveStatus(String[] statusArr, String comparePreviosStatus, String fileDirectory) {
-        // OOP Method - Get multidimensional array
-        String[][] saveFileArr = new Create3DArray().create3D(fileDirectory);
-
-        // Compare value of text field with value of text file
-        for(int i = 0; i < saveFileArr.length; i++) {
-            if(saveFileArr[i][0].equals(comparePreviosStatus)) {
-                System.arraycopy(statusArr, 0, saveFileArr[i], 0, 4);
+    public String[][] saveStatus(String changeStatus, String theStaff, String findTheID) {
+        String[][] saveStatusArr = new Create3DArray().create3D("/oodms/database/delivery.txt");
+        String[][] saveOrderStatusArr = new Create3DArray().create3D("/oodms/database/order.txt");
+        
+        for(int i = 0; i < saveStatusArr.length; i++) {
+            if(saveStatusArr[i][1].equals(findTheID)) {
+                saveStatusArr[i][0] = theStaff;
+                saveStatusArr[i][2] = changeStatus;
             }
         }
-        return saveFileArr;
+        
+        for(int i = 0; i < saveOrderStatusArr.length; i++) {
+            if(saveOrderStatusArr[i][0].equals(findTheID)) {
+                saveOrderStatusArr[i][7] = changeStatus;
+            }
+        }
+        
+        new FlushAndWrite().flushAndWrite(saveOrderStatusArr, "src/oodms/database/order.txt");
+        
+        return saveStatusArr;
+    }
+    
+    public String[][] saveConfirmDelivery(String changeStatus, String changePaymentStatus, String findTheID) {
+        String[][] saveConfirmDeliveryArr = new Create3DArray().create3D("/oodms/database/delivery.txt");
+        String[][] saveConfirmOrderDeliveryArr = new Create3DArray().create3D("/oodms/database/order.txt");
+        String[][] saveConfirmPaymentDeliveryArr = new Create3DArray().create3D("/oodms/database/payment.txt");
+        
+        for(int i = 0; i < saveConfirmDeliveryArr.length; i++) {
+            if(saveConfirmDeliveryArr[i][1].equals(findTheID)) {
+                saveConfirmDeliveryArr[i][2] = changeStatus;
+            }
+        }
+        
+        for(int i = 0; i < saveConfirmOrderDeliveryArr.length; i++) {
+            if(saveConfirmOrderDeliveryArr[i][0].equals(findTheID)) {
+                saveConfirmOrderDeliveryArr[i][7] = changeStatus;
+            }
+        }
+        
+        for(int i = 0; i < saveConfirmPaymentDeliveryArr.length; i++) {
+            if(saveConfirmPaymentDeliveryArr[i][1].equals(findTheID)) {
+                saveConfirmPaymentDeliveryArr[i][3] = changePaymentStatus;
+            }
+        }
+        
+        new FlushAndWrite().flushAndWrite(saveConfirmOrderDeliveryArr, "src/oodms/database/order.txt");
+        new FlushAndWrite().flushAndWrite(saveConfirmPaymentDeliveryArr, "src/oodms/database/payment.txt");
+        
+        return saveConfirmDeliveryArr;
     }
 }

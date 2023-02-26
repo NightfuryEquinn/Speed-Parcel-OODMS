@@ -12,16 +12,16 @@ import oodms.oop.SearchFileData;
 public class FeedbackHistoryDisplay extends javax.swing.JFrame {
 
     // Accept customer username
-    private static String acceptCustomerUsername;
+    private static String acceptUsername;
     
     /**
      * Creates new form FeedbackMgmtDisplay
-     * @param acceptCustomerUsername
+     * @param acceptUsername
      */
-    public FeedbackHistoryDisplay(String acceptCustomerUsername) {
+    public FeedbackHistoryDisplay(String acceptUsername) {
         initComponents();
         
-        FeedbackHistoryDisplay.acceptCustomerUsername = acceptCustomerUsername;
+        FeedbackHistoryDisplay.acceptUsername = acceptUsername;
     }
 
     /**
@@ -295,9 +295,9 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
         
         String orderID, itemName, amountPaid, purchaseDate, rating, feedback;
         
-        String[][] getUserOrderData = new SearchFileData().searchData(acceptCustomerUsername, 1, "/oodms/database/order.txt");
-        String[][] getUserPaymentData = new SearchFileData().searchData(acceptCustomerUsername, 2, "/oodms/database/payment.txt");
-        String[][] getUserFeedbackData = new SearchFileData().searchData(acceptCustomerUsername, 1, "/oodms/database/feedback.txt");
+        String[][] getUserOrderData = new SearchFileData().searchData(acceptUsername, 1, "/oodms/database/order.txt");
+        String[][] getUserPaymentData = new SearchFileData().searchData(acceptUsername, 2, "/oodms/database/payment.txt");
+        String[][] getUserFeedbackData = new SearchFileData().searchData(acceptUsername, 1, "/oodms/database/feedback.txt");
         
         for(int i = 0; i < getUserOrderData.length; i++) {
             // Order
@@ -324,7 +324,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
         
         String[] newChangesArr = new String[] {
             getOrderID,
-            acceptCustomerUsername,
+            acceptUsername,
             ratingName.getText(),
             inputFeedback.getText()
         };
@@ -334,7 +334,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
         if(!inputFeedback.getText().equals("")) {
             if(confirmSubmit == JOptionPane.YES_OPTION) {
                 SaveSelected ss = new SaveSelected();
-                String[][] newChangesArrToSave = ss.saveFeedback(newChangesArr, getOrderID, acceptCustomerUsername);
+                String[][] newChangesArrToSave = ss.saveFeedback(newChangesArr, getOrderID, acceptUsername);
 
                 FlushAndWrite faw = new FlushAndWrite();
                 faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/feedback.txt");
@@ -357,7 +357,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        new CustomerDashboard(acceptCustomerUsername).setVisible(true);
+        new CustomerDashboard(acceptUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -399,7 +399,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FeedbackHistoryDisplay(acceptCustomerUsername).setVisible(true);
+                new FeedbackHistoryDisplay(acceptUsername).setVisible(true);
             }
         });
     }

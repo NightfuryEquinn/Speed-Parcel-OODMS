@@ -7,7 +7,7 @@ import oodms.oop.CheckSimilarity;
 import javax.swing.JOptionPane;
 import oodms.admin.AdminDashboard;
 import oodms.customer.CustomerDashboard;
-import oodms.deliver.staffDashboard;
+import oodms.deliver.StaffDashboard;
 
 public class WelcomePage extends javax.swing.JFrame {
 
@@ -25,7 +25,7 @@ public class WelcomePage extends javax.swing.JFrame {
     boolean checkLogin = false;
     
     // Send customer username
-    private String sendCustomerUsername;
+    private String sendUsername;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -372,14 +372,16 @@ public class WelcomePage extends javax.swing.JFrame {
                 } else if(getUsername.toLowerCase().startsWith("delivery")) {
                     System.out.println("You are delivery staff.");
                     
-                    new staffDashboard().setVisible(true);
+                    sendUsername = getUsername;
+                    
+                    new StaffDashboard(sendUsername).setVisible(true);
                     dispose();
                 } else {
                     System.out.println("You are customer.");
                     
-                    sendCustomerUsername = getUsername;
+                    sendUsername = getUsername;
                     
-                    new CustomerDashboard(sendCustomerUsername).setVisible(true);
+                    new CustomerDashboard(sendUsername).setVisible(true);
                     dispose();
                 }
                 

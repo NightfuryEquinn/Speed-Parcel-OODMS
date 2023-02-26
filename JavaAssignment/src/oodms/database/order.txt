@@ -1,5 +1,5 @@
 15000100 | User | Blackberry | 5 | 7.90 | 39.50 | 2023-01-25 | Delivered
 15001500 | User | Cranberry | 6 | 4.90 | 29.40 | 2023-01-26 | Delivered
-15030200 | User | Polo Shirt | 3 | 89.90 | 269.70 | 2023-01-26 | Ongoing
+15030200 | User | Polo Shirt | 3 | 89.90 | 269.70 | 2023-01-26 | Delivered
 15031400 | QWER | Black Skirt | 1 | 69.90 | 69.90 | 2023-01-28 | Delivered
 15432000 | QWER | Wooden Phone Stand | 2 | 39.90 | 79.80 | 2023-02-02 | Delivered

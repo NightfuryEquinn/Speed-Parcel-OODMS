@@ -389,7 +389,7 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         
         // Enable text field
         inputDeliveryStaff.setEnabled(true);
-        inputOrderStatus.setEnabled(true);
+        inputOrderStatus.setEnabled(false);
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
