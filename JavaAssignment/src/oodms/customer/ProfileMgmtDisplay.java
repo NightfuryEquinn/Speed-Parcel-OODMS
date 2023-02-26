@@ -10,16 +10,16 @@ import oodms.oop.SaveSelected;
 public class ProfileMgmtDisplay extends javax.swing.JFrame {
 
     // Accept customer username
-    private static String acceptCustomerUsername;
+    private static String acceptUsername;
     
     /**
      * Creates new form ProfileMgmtDisplay
-     * @param acceptCustomerUsername
+     * @param acceptUsername
      */
-    public ProfileMgmtDisplay(String acceptCustomerUsername) {
+    public ProfileMgmtDisplay(String acceptUsername) {
         initComponents();
         
-        ProfileMgmtDisplay.acceptCustomerUsername = acceptCustomerUsername;
+        ProfileMgmtDisplay.acceptUsername = acceptUsername;
     }
 
     /**
@@ -268,7 +268,7 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
             String getConfirmPassword = new String(targetConfirmPassword);
 
             if(getPassword.equals(getConfirmPassword)) {
-                String getCustomerUsername = acceptCustomerUsername;
+                String getCustomerUsername = acceptUsername;
 
                 String getContact = inputContact.getText();
                 String getAddress = inputAddress.getText();
@@ -289,7 +289,7 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
                     String[][] getTheUserDeliveryData = new Create3DArray().create3D("/oodms/database/delivery.txt");
                     
                     for(String[] getTheUserDelivery : getTheUserDeliveryData) {
-                        if(getTheUserDelivery[3].equalsIgnoreCase(acceptCustomerUsername)) {
+                        if(getTheUserDelivery[3].equalsIgnoreCase(acceptUsername)) {
                             getTheUserDelivery[4] = getAddress;
                         }
                     }
@@ -314,7 +314,7 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        new CustomerDashboard(acceptCustomerUsername).setVisible(true);
+        new CustomerDashboard(acceptUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -365,7 +365,7 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProfileMgmtDisplay(acceptCustomerUsername).setVisible(true);
+                new ProfileMgmtDisplay(acceptUsername).setVisible(true);
             }
         });
     }

@@ -17,16 +17,16 @@ import oodms.oop.UpdatePurchasedItemInPayment;
 public class CartMgmtDisplay extends javax.swing.JFrame {
 
     // Accept customer username
-    private static String acceptCustomerUsername;
+    private static String acceptUsername;
     
     /**
      * Creates new form UserMgmtDisplayPage
-     * @param acceptCustomerUsername
+     * @param acceptUsername
      */
-    public CartMgmtDisplay(String acceptCustomerUsername) {
+    public CartMgmtDisplay(String acceptUsername) {
         initComponents();
         
-        CartMgmtDisplay.acceptCustomerUsername = acceptCustomerUsername;
+        CartMgmtDisplay.acceptUsername = acceptUsername;
     }
 
     /**
@@ -420,7 +420,7 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
             String[][] allCartArr = new Create3DArray().create3D("/oodms/database/cart.txt");
             
             for(String[] allCartData : allCartArr) {
-                if(allCartData[1].equals(acceptCustomerUsername)) {
+                if(allCartData[1].equals(acceptUsername)) {
                     String[] theUserCartData = new String[] {allCartData[0], allCartData[2], allCartData[3], allCartData[4], allCartData[5]};
                     cartTable.addRow(theUserCartData);
                 }
@@ -429,7 +429,7 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
             String[][] searchAllCartArr = new SearchFileData().searchData(getSearchItem, 1, "/oodms/database/cart.txt");
             
             for(String[] searchAllCartData : searchAllCartArr) {
-                if(searchAllCartData[1].equals(acceptCustomerUsername)) {
+                if(searchAllCartData[1].equals(acceptUsername)) {
                     String[] theUserCartData = new String[] {searchAllCartData[0], searchAllCartData[2], searchAllCartData[3], searchAllCartData[4], searchAllCartData[5]};
                     cartTable.addRow(theUserCartData);
                 }
@@ -473,7 +473,7 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
             
         String getTotalPrice = String.format("%.2f", countTotalPrice);
         
-        String[] newChangesArr = new String[] {getCartID, acceptCustomerUsername, getItemName, getPrice, getQuantity, getTotalPrice};
+        String[] newChangesArr = new String[] {getCartID, acceptUsername, getItemName, getPrice, getQuantity, getTotalPrice};
         
         SaveSelected ss = new SaveSelected();
         String[][] newChangesArrToSave = ss.saveCart(newChangesArr, getCartID, getItemName);
@@ -561,7 +561,7 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
              */
             String[] getItemToPurchaseData = new String[] {
                (String) displayCartTable.getValueAt(selectedRow, 0),
-                acceptCustomerUsername,
+                acceptUsername,
                (String) displayCartTable.getValueAt(selectedRow, 1),
                (String) displayCartTable.getValueAt(selectedRow, 2),
                (String) displayCartTable.getValueAt(selectedRow, 3),
@@ -605,7 +605,7 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_purchaseBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        new CustomerDashboard(acceptCustomerUsername).setVisible(true);
+        new CustomerDashboard(acceptUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -642,7 +642,7 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CartMgmtDisplay(acceptCustomerUsername).setVisible(true);
+                new CartMgmtDisplay(acceptUsername).setVisible(true);
             }
         });
     }

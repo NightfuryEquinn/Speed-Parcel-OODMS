@@ -1,23 +1,26 @@
 package oodms.customer;
 
 import java.awt.Font;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import oodms.oop.FlushAndWrite;
+import oodms.oop.SaveSelected;
 import oodms.oop.SearchFileData;
 
 public class OrderHistoryDisplay extends javax.swing.JFrame {
 
     // Accept customer username
-    private static String acceptCustomerUsername;
+    private static String acceptUsername;
     
     /**
      * Creates new form OrderHistoryDisplay
-     * @param acceptCustomerUsername
+     * @param acceptUsername
      */
-    public OrderHistoryDisplay(String acceptCustomerUsername) {
+    public OrderHistoryDisplay(String acceptUsername) {
         initComponents();
         
-        OrderHistoryDisplay.acceptCustomerUsername = acceptCustomerUsername;
+        OrderHistoryDisplay.acceptUsername = acceptUsername;
     }
 
     /**
@@ -29,11 +32,14 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cartMgmtPanel = new javax.swing.JPanel();
-        cartMgmtLabel = new javax.swing.JLabel();
+        orderHistoryPanel = new javax.swing.JPanel();
+        orderHistoryLabel = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         displayOrderHistoryTable = new javax.swing.JTable();
+        confirmDeliverBtn = new javax.swing.JButton();
+        confirmDeliveredLabel = new javax.swing.JLabel();
+        refreshBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -42,11 +48,11 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
             }
         });
 
-        cartMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
+        orderHistoryPanel.setBackground(new java.awt.Color(250, 242, 224));
 
-        cartMgmtLabel.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
-        cartMgmtLabel.setForeground(new java.awt.Color(76, 43, 24));
-        cartMgmtLabel.setText("Order History");
+        orderHistoryLabel.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
+        orderHistoryLabel.setForeground(new java.awt.Color(76, 43, 24));
+        orderHistoryLabel.setText("Order History");
 
         backBtn.setBackground(new java.awt.Color(184, 145, 104));
         backBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -90,6 +96,11 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
         displayOrderHistoryTable.setSelectionBackground(new java.awt.Color(184, 145, 104));
         displayOrderHistoryTable.setSelectionForeground(new java.awt.Color(76, 43, 24));
         displayOrderHistoryTable.setShowVerticalLines(true);
+        displayOrderHistoryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                displayOrderHistoryTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(displayOrderHistoryTable);
         // Change Table Header Font
         displayOrderHistoryTable.getTableHeader().setFont(new Font("Karla", Font.PLAIN, 14));
@@ -108,31 +119,67 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
         columnModel.getColumn(8).setPreferredWidth(125);
         columnModel.getColumn(9).setPreferredWidth(350);
 
-        javax.swing.GroupLayout cartMgmtPanelLayout = new javax.swing.GroupLayout(cartMgmtPanel);
-        cartMgmtPanel.setLayout(cartMgmtPanelLayout);
-        cartMgmtPanelLayout.setHorizontalGroup(
-            cartMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cartMgmtPanelLayout.createSequentialGroup()
-                .addGroup(cartMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cartMgmtPanelLayout.createSequentialGroup()
+        confirmDeliverBtn.setBackground(new java.awt.Color(184, 145, 104));
+        confirmDeliverBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        confirmDeliverBtn.setForeground(new java.awt.Color(76, 43, 24));
+        confirmDeliverBtn.setText("Confirm Delivered");
+        confirmDeliverBtn.setEnabled(false);
+        confirmDeliverBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmDeliverBtnActionPerformed(evt);
+            }
+        });
+
+        confirmDeliveredLabel.setFont(new java.awt.Font("Karla", 0, 14)); // NOI18N
+        confirmDeliveredLabel.setForeground(new java.awt.Color(76, 43, 24));
+        confirmDeliveredLabel.setText("Click this button to confirm your order has been delivered.");
+
+        refreshBtn.setBackground(new java.awt.Color(184, 145, 104));
+        refreshBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        refreshBtn.setForeground(new java.awt.Color(76, 43, 24));
+        refreshBtn.setText("Refresh");
+        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout orderHistoryPanelLayout = new javax.swing.GroupLayout(orderHistoryPanel);
+        orderHistoryPanel.setLayout(orderHistoryPanelLayout);
+        orderHistoryPanelLayout.setHorizontalGroup(
+            orderHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(orderHistoryPanelLayout.createSequentialGroup()
+                .addGroup(orderHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(orderHistoryPanelLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addGroup(cartMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cartMgmtLabel)
-                            .addComponent(backBtn)))
-                    .addGroup(cartMgmtPanelLayout.createSequentialGroup()
+                        .addGroup(orderHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(orderHistoryLabel)
+                            .addGroup(orderHistoryPanelLayout.createSequentialGroup()
+                                .addComponent(backBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(confirmDeliveredLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(confirmDeliverBtn)
+                                .addGap(21, 21, 21)
+                                .addComponent(refreshBtn))))
+                    .addGroup(orderHistoryPanelLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
-        cartMgmtPanelLayout.setVerticalGroup(
-            cartMgmtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cartMgmtPanelLayout.createSequentialGroup()
+        orderHistoryPanelLayout.setVerticalGroup(
+            orderHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(orderHistoryPanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(cartMgmtLabel)
+                .addComponent(orderHistoryLabel)
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(backBtn)
+                .addGroup(orderHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backBtn)
+                    .addComponent(confirmDeliverBtn)
+                    .addComponent(confirmDeliveredLabel)
+                    .addComponent(refreshBtn))
                 .addGap(27, 27, 27))
         );
 
@@ -140,18 +187,18 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cartMgmtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(orderHistoryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cartMgmtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(orderHistoryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        new CustomerDashboard(acceptCustomerUsername).setVisible(true);
+        new CustomerDashboard(acceptUsername).setVisible(true);
         dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -162,10 +209,10 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
         String orderID, itemName, price, quantity, totalPrice, amountPaid, purchaseDate, status, deliveredBy, feedback;
         
         // Get user purchase data
-        String[][] getUserOrderData = new SearchFileData().searchData(acceptCustomerUsername, 1, "/oodms/database/order.txt");
-        String[][] getUserDeliveryData = new SearchFileData().searchData(acceptCustomerUsername, 3, "/oodms/database/delivery.txt");
-        String[][] getUserFeedbackData = new SearchFileData().searchData(acceptCustomerUsername, 1,"/oodms/database/feedback.txt");
-        String[][] getUserPaymentData = new SearchFileData().searchData(acceptCustomerUsername, 2, "/oodms/database/payment.txt");
+        String[][] getUserOrderData = new SearchFileData().searchData(acceptUsername, 1, "/oodms/database/order.txt");
+        String[][] getUserDeliveryData = new SearchFileData().searchData(acceptUsername, 3, "/oodms/database/delivery.txt");
+        String[][] getUserFeedbackData = new SearchFileData().searchData(acceptUsername, 1,"/oodms/database/feedback.txt");
+        String[][] getUserPaymentData = new SearchFileData().searchData(acceptUsername, 2, "/oodms/database/payment.txt");
         
         // Use the length of the user order
         for(int i = 0; i < getUserOrderData.length; i++) {
@@ -192,6 +239,77 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
             orderHistoryTable.addRow(orderHistoryArr);
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void confirmDeliverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeliverBtnActionPerformed
+        int selectedRow = displayOrderHistoryTable.getSelectedRow();
+        
+        String getTheRowOrderID = (String) displayOrderHistoryTable.getValueAt(selectedRow, 0);
+        String getTheRowAmountPaid = (String) displayOrderHistoryTable.getValueAt(selectedRow, 5);
+        
+        String confirmDeliveryMessage = "Are you sure to release RM" + getTheRowAmountPaid + " to Speed Parcel? Your order will be marked as delivered successfully.\nThis action can't be undone.";
+        int confirmDelivery = JOptionPane.showConfirmDialog(null, confirmDeliveryMessage, "Confirm delivery?", JOptionPane.YES_NO_OPTION);
+        
+        if(confirmDelivery == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Your payment has been made and your order status is updated.\nHave a nice day! :smile:\n\nSpeed Parcel will be happy to serve you in the future.", "Payment Made", JOptionPane.INFORMATION_MESSAGE);
+            
+            String[][] newChangesArrToSave = new SaveSelected().saveConfirmDelivery("Delivered", "Paid", getTheRowOrderID);
+        
+            FlushAndWrite faw = new FlushAndWrite();
+            faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/delivery.txt");
+        } else {
+            JOptionPane.showMessageDialog(null, "Transaction has been cancelled by you. Please make sure your order has been received before making the payment.", "Transaction Cancelled", JOptionPane.ERROR_MESSAGE);
+        
+            System.out.println("Do noting");
+        }
+        
+        // Disable button
+        confirmDeliverBtn.setEnabled(false);
+    }//GEN-LAST:event_confirmDeliverBtnActionPerformed
+
+    private void displayOrderHistoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayOrderHistoryTableMouseClicked
+        confirmDeliverBtn.setEnabled(true);
+    }//GEN-LAST:event_displayOrderHistoryTableMouseClicked
+
+    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
+        // Disable button
+        confirmDeliverBtn.setEnabled(false);
+        
+        DefaultTableModel orderHistoryTable = (DefaultTableModel) displayOrderHistoryTable.getModel();
+        orderHistoryTable.setRowCount(0);
+        
+        String orderID, itemName, price, quantity, totalPrice, amountPaid, purchaseDate, status, deliveredBy, feedback;
+        
+        // Get user purchase data
+        String[][] getUserOrderData = new SearchFileData().searchData(acceptUsername, 1, "/oodms/database/order.txt");
+        String[][] getUserDeliveryData = new SearchFileData().searchData(acceptUsername, 3, "/oodms/database/delivery.txt");
+        String[][] getUserFeedbackData = new SearchFileData().searchData(acceptUsername, 1,"/oodms/database/feedback.txt");
+        String[][] getUserPaymentData = new SearchFileData().searchData(acceptUsername, 2, "/oodms/database/payment.txt");
+        
+        // Use the length of the user order
+        for(int i = 0; i < getUserOrderData.length; i++) {
+            // Order
+            orderID = getUserOrderData[i][0];
+            itemName = getUserOrderData[i][2];
+            price = getUserOrderData[i][4];
+            quantity = getUserOrderData[i][3];
+            totalPrice = getUserOrderData[i][5];
+            purchaseDate = getUserOrderData[i][6];
+            status = getUserOrderData[i][7];
+            
+            // Delivery
+            deliveredBy = getUserDeliveryData[i][0];
+            
+            // Feedback
+            feedback = getUserFeedbackData[i][3];
+            
+            // Payment
+            amountPaid = getUserPaymentData[i][5];
+            
+            // Write data into array of order history table
+            String[] orderHistoryArr = new String[] {orderID, itemName, price, quantity, totalPrice, amountPaid, purchaseDate, status, deliveredBy, feedback};
+            orderHistoryTable.addRow(orderHistoryArr);
+        }
+    }//GEN-LAST:event_refreshBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,16 +341,19 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OrderHistoryDisplay(acceptCustomerUsername).setVisible(true);
+                new OrderHistoryDisplay(acceptUsername).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
-    private javax.swing.JLabel cartMgmtLabel;
-    private javax.swing.JPanel cartMgmtPanel;
+    private javax.swing.JButton confirmDeliverBtn;
+    private javax.swing.JLabel confirmDeliveredLabel;
     private javax.swing.JTable displayOrderHistoryTable;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel orderHistoryLabel;
+    private javax.swing.JPanel orderHistoryPanel;
+    private javax.swing.JButton refreshBtn;
     // End of variables declaration//GEN-END:variables
 }
