@@ -1,3 +1,4 @@
 Food and Beverages | All food and beverages available in supermarket
 Clothes | All clothes available in supermarket retail store
 Accessories | All accessories available for your workspace
+Electronics | All electronics that you need daily

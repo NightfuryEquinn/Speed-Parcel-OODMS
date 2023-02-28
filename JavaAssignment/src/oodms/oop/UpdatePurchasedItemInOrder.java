@@ -1,7 +1,6 @@
 package oodms.oop;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class UpdatePurchasedItemInOrder extends UpdatePurchasedItem {
     @Override

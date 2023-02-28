@@ -1,7 +1,5 @@
 package oodms.oop;
 
-import java.util.Arrays;
-
 public class UpdatePurchasedItemInDelivery extends UpdatePurchasedItem {
     @Override
     public void updatePurchasedItemData(String[] purchasedItemData, String orderID) {

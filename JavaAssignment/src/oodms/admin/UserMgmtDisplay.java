@@ -66,6 +66,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         displayUserTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("User Management");
 
         userMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
 

@@ -78,6 +78,7 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         displayItemTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Item Management");
 
         itemMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
 
@@ -308,6 +309,11 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
         backBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         backBtn.setForeground(new java.awt.Color(76, 43, 24));
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         listItemLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         listItemLabel.setForeground(new java.awt.Color(76, 43, 24));
@@ -652,6 +658,7 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_searchItemBtnActionPerformed
 
     private void inputPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPriceFocusLost
+        // Disallow users to input letters
         ((AbstractDocument)inputPrice.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
@@ -670,6 +677,11 @@ public class ItemMgmtDisplay extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_inputPriceFocusLost
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        new AdminDashboard().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments

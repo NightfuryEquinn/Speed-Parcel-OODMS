@@ -63,6 +63,7 @@ public class PaymentMgmtDisplay extends javax.swing.JFrame {
         displayPaymentTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Payment Management");
 
         paymentMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
 

@@ -63,6 +63,7 @@ public class FeedbackMgmtDisplay extends javax.swing.JFrame {
         listFeedbackLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Feedback Management");
 
         feedbackMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
 

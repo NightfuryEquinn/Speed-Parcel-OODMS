@@ -71,6 +71,7 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         listDeliveryLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Delivery Management");
 
         deliveryMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
 

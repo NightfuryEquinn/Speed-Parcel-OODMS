@@ -1,6 +1,7 @@
 package oodms.admin;
 
 import java.awt.Font;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -55,6 +56,7 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         displayCatTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Category Management");
 
         categoryMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
 
@@ -230,6 +232,11 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         backBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         backBtn.setForeground(new java.awt.Color(76, 43, 24));
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         listCatLabel.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         listCatLabel.setForeground(new java.awt.Color(76, 43, 24));
@@ -451,6 +458,9 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
 
     private void searchCatIDBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchCatIDBtnActionPerformed
         // Disable text field and button
+        inputCatName.setText("");
+        inputDescription.setText("");
+        
         inputCatName.setEditable(false);
         inputDescription.setEditable(false);
         
@@ -510,6 +520,11 @@ public class CategoryMgmtDisplay extends javax.swing.JFrame {
         inputCatName.setText((String) displayCatTable.getValueAt(selectedRow, 0));
         inputDescription.setText((String) displayCatTable.getValueAt(selectedRow, 2));
     }//GEN-LAST:event_displayCatTableMouseClicked
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        new AdminDashboard().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments

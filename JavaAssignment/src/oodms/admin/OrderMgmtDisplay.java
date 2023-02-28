@@ -65,6 +65,7 @@ public class OrderMgmtDisplay extends javax.swing.JFrame {
         listOrderLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Order Management");
 
         orderMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
 

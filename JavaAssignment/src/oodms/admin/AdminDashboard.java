@@ -64,6 +64,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         userAgeBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Admin Dashboard");
 
         AdminPanel.setBackground(new java.awt.Color(250, 242, 224));
 

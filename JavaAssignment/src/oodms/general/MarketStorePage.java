@@ -74,6 +74,7 @@ public class MarketStorePage extends javax.swing.JFrame {
         captionLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Online Speed Mall");
 
         onlineSpeedMallPanel.setBackground(new java.awt.Color(250, 242, 224));
 
@@ -485,7 +486,7 @@ public class MarketStorePage extends javax.swing.JFrame {
             
             AddNewItemToCart newToCart = new AddNewItemToCart(acceptCustomerUsername, getItem, getPrice, getQuantity, getTotalPrice);
         } else {
-            int redirect = JOptionPane.showConfirmDialog(null, "You haven't login yet. Please login to proceed or create a new account to purchase items from Speed Parcel. Do you want to be redirected to the login or sign up page?", "You are a guest", JOptionPane.YES_NO_OPTION);
+            int redirect = JOptionPane.showConfirmDialog(null, "You haven't login yet. Please login to proceed or create a new account to purchase items from Speed Parcel.\nDo you want to be redirected to the login or sign up page?", "You are a guest", JOptionPane.YES_NO_OPTION);
             
             if(redirect == JOptionPane.YES_OPTION) {
                 new WelcomePage().setVisible(true);

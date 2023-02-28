@@ -1,10 +1,16 @@
 package oodms.general;
 
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JFormattedTextField;
 import oodms.oop.AddNewCustomer;
 import oodms.oop.CheckSimilarity;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.NumberFormatter;
 import oodms.admin.AdminDashboard;
 import oodms.customer.CustomerDashboard;
 import oodms.deliver.StaffDashboard;
@@ -63,7 +69,6 @@ public class WelcomePage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Welcome to Speed Parcel");
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(800, 800));
 
         welcomePanel.setBackground(new java.awt.Color(250, 242, 224));
 
@@ -430,26 +435,36 @@ public class WelcomePage extends javax.swing.JFrame {
             
             if((!getUsername.equals("")) && (!getPassword.equals("")) && (!getConfirmPassword.equals("")) && (!getEmail.equals("")) && (!getContact.equals("")) && (!getAddress.equals(""))) {
                 if(getPassword.equals(getConfirmPassword)) {
-                    if(!credentialsChecker) {
-                        System.out.println("Added new user");
+                    if((!(Integer.parseInt(getAge) > 100)) && (!(Integer.parseInt(getAge) < 0))) {
+                        if(!credentialsChecker) {
+                            System.out.println("Added new user");
 
-                        // Create a popup dialog message box
-                        JOptionPane.showMessageDialog(null, "Your account has been created. Please login.", "Account Created", JOptionPane.INFORMATION_MESSAGE);
+                            // Create a popup dialog message box
+                            JOptionPane.showMessageDialog(null, "Your account has been created. Please login.", "Account Created", JOptionPane.INFORMATION_MESSAGE);
 
-                        AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress, getAge, getGender);
+                            AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress, getAge, getGender);
 
-                        // Clear text field
-                        inputUsername.setText("");
-                        inputPassword.setText("");
-                        inputConfirmPassword.setText("");
-                        inputEmail.setText("");
-                        inputContact.setText("");
-                        inputAddress.setText("");
+                            // Clear text field
+                            inputUsername.setText("");
+                            inputPassword.setText("");
+                            inputConfirmPassword.setText("");
+                            inputEmail.setText("");
+                            inputContact.setText("");
+                            inputAddress.setText("");
+                            inputAge.setValue(0);
+                            inputGender.setSelectedItem("Male");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "The username has been taken.", "Existed username", JOptionPane.ERROR_MESSAGE);
+                        
+                            inputUsername.setText("");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid age from range of 0 to 100.", "Invalid age.", JOptionPane.ERROR_MESSAGE);
+                    
                         inputAge.setValue(0);
-                        inputGender.setSelectedItem("Male");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Your password doesn't match. Please re-enter");
+                    JOptionPane.showMessageDialog(null, "Your password doesn't match. Please re-enter", "Password not match", JOptionPane.ERROR_MESSAGE);
                     
                     inputPassword.setText("");
                     inputConfirmPassword.setText("");

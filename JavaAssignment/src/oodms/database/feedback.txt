@@ -1,5 +1,1 @@
-15000100 | User | Extremely Poor | Very bad delivery service
-15001500 | User | Below Average | Still ok but take a while to receive
-15030200 | User | Mediocre | Average delivery service
-15031400 | QWER | Good | Quite nice service, can improve
-15432000 | QWER | Excellent | Very nice delivery
+15000100 | UserAlpha | Extremely Poor | Very bad delivery service

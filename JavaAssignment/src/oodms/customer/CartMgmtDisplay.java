@@ -67,6 +67,7 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
         purchaseBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cart Management");
 
         cartMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
 
