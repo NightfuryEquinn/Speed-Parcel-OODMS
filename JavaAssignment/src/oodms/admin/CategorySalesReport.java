@@ -3,11 +3,7 @@ package oodms.admin;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.List;
-import java.awt.font.TextAttribute;
-import java.text.AttributedString;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import oodms.oop.CountChildren;
 import oodms.oop.Create3DArray;
@@ -16,7 +12,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.ui.RectangleInsets;
@@ -40,6 +35,7 @@ public class CategorySalesReport extends javax.swing.JFrame {
     private void initComponents() {
 
         targetPanel = new javax.swing.JPanel();
+        returnBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sales Report based on Category");
@@ -62,15 +58,33 @@ public class CategorySalesReport extends javax.swing.JFrame {
             .addGap(0, 600, Short.MAX_VALUE)
         );
 
+        returnBtn.setBackground(new java.awt.Color(184, 145, 104));
+        returnBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        returnBtn.setForeground(new java.awt.Color(76, 43, 24));
+        returnBtn.setText("Return");
+        returnBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(targetPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(returnBtn)
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(targetPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(targetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(returnBtn)
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         pack();
@@ -129,14 +143,16 @@ public class CategorySalesReport extends javax.swing.JFrame {
                  }
              }
          }
-        
+
          /**
          * Generate the Pie Chart
          */
         // Create dataset
         DefaultPieDataset dataset = new DefaultPieDataset();
         for(String[] categorySales : getCategoryTotalSales) {
-            dataset.setValue(categorySales[0], Double.valueOf(categorySales[1]));
+            if(categorySales[0] != null || categorySales[1] != null) {
+                dataset.setValue(categorySales[0], Double.valueOf(categorySales[1]));
+            }
         }
         
         // Create pie chart
@@ -183,6 +199,11 @@ public class CategorySalesReport extends javax.swing.JFrame {
         targetPanel.repaint();
     }//GEN-LAST:event_formWindowOpened
 
+    private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
+        new AdminDashboard().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_returnBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -220,6 +241,7 @@ public class CategorySalesReport extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton returnBtn;
     private javax.swing.JPanel targetPanel;
     // End of variables declaration//GEN-END:variables
 }

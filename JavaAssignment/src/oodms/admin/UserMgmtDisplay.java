@@ -479,39 +479,45 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         if(inputPassword.isEditable()) {
             // Check for empty text field
             if((!getUsername.equals("")) && (!getPassword.equals("")) && (!getEmail.equals("")) && (!getContact.equals("")) && (!getAddress.equals(""))) {
-                if(!credentialsAdminChecker) {
-                    System.out.println("Added new user");
+                if((!(Integer.parseInt(getAge) > 100)) && (!(Integer.parseInt(getAge) < 0))) {
+                    if(!credentialsAdminChecker) {
+                        System.out.println("Added new user");
 
-                    // Create a popup dialog message box
-                    JOptionPane.showMessageDialog(null, "New account has been created", "Account Created", JOptionPane.INFORMATION_MESSAGE);
+                        // Create a popup dialog message box
+                        JOptionPane.showMessageDialog(null, "New account has been created", "Account Created", JOptionPane.INFORMATION_MESSAGE);
 
-                    AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress, getAge, getGender);
-                
-                    // Reset Search and Details fields
-                    inputUsername.setText("");
-                    inputPassword.setText("");
-                    inputEmail.setText("");
-                    inputContact.setText("");
-                    inputAddress.setText("");
-                    inputAge.setValue(0);
-                    inputGender.setSelectedItem("Male");
+                        AddNewCustomer customer = new AddNewCustomer(getUsername, getPassword, getEmail, getContact, getAddress, getAge, getGender);
 
-                    // Disable editing
-                    inputUsername.setEditable(false);
-                    inputPassword.setEditable(false);
-                    inputEmail.setEditable(false);
-                    inputContact.setEditable(false);
-                    inputAddress.setEditable(false);
-                    inputAge.setEnabled(false);
-                    inputGender.setEnabled(false);
+                        // Reset Search and Details fields
+                        inputUsername.setText("");
+                        inputPassword.setText("");
+                        inputEmail.setText("");
+                        inputContact.setText("");
+                        inputAddress.setText("");
+                        inputAge.setValue(0);
+                        inputGender.setSelectedItem("Male");
 
-                    // Disable buttons
-                    editBtn.setEnabled(false);
-                    saveBtn.setEnabled(false);
-                    deleteBtn.setEnabled(false);
+                        // Disable editing
+                        inputUsername.setEditable(false);
+                        inputPassword.setEditable(false);
+                        inputEmail.setEditable(false);
+                        inputContact.setEditable(false);
+                        inputAddress.setEditable(false);
+                        inputAge.setEnabled(false);
+                        inputGender.setEnabled(false);
+
+                        // Disable buttons
+                        editBtn.setEnabled(false);
+                        saveBtn.setEnabled(false);
+                        deleteBtn.setEnabled(false);
+                    } else {
+                        // Create a popup dialog message box
+                        JOptionPane.showMessageDialog(null, "Account existed.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else {
-                    // Create a popup dialog message box
-                    JOptionPane.showMessageDialog(null, "Account existed.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Please enter a valid age from range of 0 to 100.", "Invalid age.", JOptionPane.ERROR_MESSAGE);
+                    
+                    inputAge.setValue(0);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Some fields are empty or no values.", "Error creating new account", JOptionPane.ERROR_MESSAGE);
@@ -692,50 +698,65 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         switch (result) {
             // Delete the selected user
             case JOptionPane.YES_OPTION -> {
-                // Get the selected row
-                int selectedRowIndex = displayUserTable.getSelectedRow();
+                // Check whether there is one admin left
+                String[][] checkSoleAdmin = new Create3DArray().create3D("/oodms/database/credentials.txt");
                 
-                // Get the username of selected row
-                String selectedRowUsername = (String) displayUserTable.getValueAt(selectedRowIndex, 0);
+                int adminCount = 0;
                 
-                // Return a multidimensional of excluded selected row
-                String[][] ds = new DeleteSelected().deleteSelected(selectedRowUsername, "/oodms/database/credentials.txt");
+                for(String[] checkSole : checkSoleAdmin) {
+                    if(checkSole[0].toLowerCase().startsWith("admin")) {
+                        adminCount++;
+                    }
+                }
                 
-                // Flush and Write
-                FlushAndWrite faw = new FlushAndWrite();
-                faw.flushAndWrite(ds, "src/oodms/database/credentials.txt");
-                
-                // Reset Search and Details fields
-                inputSearchUsername.setText("");
-                
-                inputUsername.setText("");
-                inputPassword.setText("");
-                inputEmail.setText("");
-                inputContact.setText("");
-                inputAddress.setText("");
-                inputAge.setValue(0);
-                inputGender.setSelectedItem("Male");
-                
-                // Disable editing
-                inputUsername.setEditable(false);
-                inputPassword.setEditable(false);
-                inputEmail.setEditable(false);
-                inputContact.setEditable(false);
-                inputAddress.setEditable(false);
-                inputAge.setEnabled(false);
-                inputGender.setEnabled(false);
-                
-                // Disable buttons
-                editBtn.setEnabled(false);
-                saveBtn.setEnabled(false);
-                deleteBtn.setEnabled(false);
-                
-                // Clear table
-                DefaultTableModel userTable = (DefaultTableModel) displayUserTable.getModel();
-                userTable.setRowCount(0);
-                
-                // Information Message
-                JOptionPane.showMessageDialog(null, infoMessage, "Delete Success", JOptionPane.INFORMATION_MESSAGE);
+                if(adminCount != 1) {
+                    // Get the selected row
+                    int selectedRowIndex = displayUserTable.getSelectedRow();
+
+                    // Get the username of selected row
+                    String selectedRowUsername = (String) displayUserTable.getValueAt(selectedRowIndex, 0);
+
+                    // Return a multidimensional of excluded selected row
+                    String[][] ds = new DeleteSelected().deleteSelected(selectedRowUsername, "/oodms/database/credentials.txt");
+
+                    // Flush and Write
+                    FlushAndWrite faw = new FlushAndWrite();
+                    faw.flushAndWrite(ds, "src/oodms/database/credentials.txt");
+
+                    // Reset Search and Details fields
+                    inputSearchUsername.setText("");
+
+                    inputUsername.setText("");
+                    inputPassword.setText("");
+                    inputEmail.setText("");
+                    inputContact.setText("");
+                    inputAddress.setText("");
+                    inputAge.setValue(0);
+                    inputGender.setSelectedItem("Male");
+
+                    // Disable editing
+                    inputUsername.setEditable(false);
+                    inputPassword.setEditable(false);
+                    inputEmail.setEditable(false);
+                    inputContact.setEditable(false);
+                    inputAddress.setEditable(false);
+                    inputAge.setEnabled(false);
+                    inputGender.setEnabled(false);
+
+                    // Disable buttons
+                    editBtn.setEnabled(false);
+                    saveBtn.setEnabled(false);
+                    deleteBtn.setEnabled(false);
+
+                    // Clear table
+                    DefaultTableModel userTable = (DefaultTableModel) displayUserTable.getModel();
+                    userTable.setRowCount(0);
+
+                    // Information Message
+                    JOptionPane.showMessageDialog(null, infoMessage, "Delete Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "There is only one admin account left.\nYou can't delete the last admin account.", "At least one admin account required.", JOptionPane.ERROR_MESSAGE);
+                }
             }
             
             // Do Nothing

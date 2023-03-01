@@ -13,7 +13,6 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RectangleInsets;
@@ -37,6 +36,7 @@ public class AgeReport extends javax.swing.JFrame {
     private void initComponents() {
 
         targetPanel = new javax.swing.JPanel();
+        returnBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Age Report");
@@ -59,15 +59,33 @@ public class AgeReport extends javax.swing.JFrame {
             .addGap(0, 600, Short.MAX_VALUE)
         );
 
+        returnBtn.setBackground(new java.awt.Color(184, 145, 104));
+        returnBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        returnBtn.setForeground(new java.awt.Color(76, 43, 24));
+        returnBtn.setText("Return");
+        returnBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(targetPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(returnBtn)
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(targetPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(targetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(returnBtn)
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,6 +186,11 @@ public class AgeReport extends javax.swing.JFrame {
         targetPanel.repaint();
     }//GEN-LAST:event_formWindowOpened
 
+    private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
+        new AdminDashboard().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_returnBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -205,6 +228,9 @@ public class AgeReport extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
+    private javax.swing.JButton backBtn1;
+    private javax.swing.JButton returnBtn;
     private javax.swing.JPanel targetPanel;
     // End of variables declaration//GEN-END:variables
 }

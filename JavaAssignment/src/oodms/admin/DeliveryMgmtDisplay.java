@@ -407,20 +407,24 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
 
         int confirmSave = JOptionPane.showConfirmDialog(null, "Are you sure to assign this order to the selected delivery staff? Delivery staff is required to accept the order.", "Confirm assign?", JOptionPane.YES_NO_OPTION);
         
-        if(!getDeliveryStaff.equals("Unknown")) {
-            if(confirmSave == JOptionPane.YES_OPTION) {
-                SaveSelected ss = new SaveSelected();
-                String[][] newChangesArrToSave = ss.saveDelivery(newChangesArr, getOldOrderID);
+        if(!getOrderStatus.equals("Delivered")) {
+            if(!getDeliveryStaff.equals("Unknown")) {
+                if(confirmSave == JOptionPane.YES_OPTION) {
+                    SaveSelected ss = new SaveSelected();
+                    String[][] newChangesArrToSave = ss.saveDelivery(newChangesArr, getOldOrderID);
 
-                FlushAndWrite faw = new FlushAndWrite();
-                faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/delivery.txt");
-                
-                JOptionPane.showMessageDialog(null, "Order assigned. Waitng for deliver staff to confirm", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    FlushAndWrite faw = new FlushAndWrite();
+                    faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/delivery.txt");
+
+                    JOptionPane.showMessageDialog(null, "Order assigned. Waitng for deliver staff to confirm", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    System.out.println("Do nothing");
+                }
             } else {
-                System.out.println("Do nothing");
+                JOptionPane.showMessageDialog(null, "There is no such delivery staff.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "There is no such delivery staff.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "This order has been delivered.", "Order delivered", JOptionPane.ERROR_MESSAGE);
         }
         
         // Disable Button and Text field
