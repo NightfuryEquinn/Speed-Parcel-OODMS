@@ -5,13 +5,15 @@ interface toCart {
 }
 
 public final class AddNewItemToCart implements toCart {
+    private final String cartID;
     private final String username;
     private final String item;
     private final String price;
     private final String quantity;
     private final String totalPrice;
     
-    public AddNewItemToCart(String username, String item, String price, String quantity, String totalPrice) {
+    public AddNewItemToCart(String cartID, String username, String item, String price, String quantity, String totalPrice) {
+        this.cartID = cartID;
         this.username = username;
         this.item = item;
         this.price = price;
@@ -20,10 +22,14 @@ public final class AddNewItemToCart implements toCart {
         
         String[][] cartArr = new Create3DArray().create3D("/oodms/database/cart.txt");
         
-        String[] newCartArr = new String[] {username, item, price, quantity, totalPrice};
+        String[] newCartArr = new String[] {cartID, username, item, price, quantity, totalPrice};
 
         cartArr = addToCart(cartArr, newCartArr);
         new FlushAndWrite().flushAndWrite(cartArr, "src/oodms/database/cart.txt");    
+    }
+    
+    public String getCartID() {
+        return cartID;
     }
     
     public String getUsername() {

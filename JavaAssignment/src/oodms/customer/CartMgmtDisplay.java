@@ -487,6 +487,7 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
         // Reset Search and Details fields
         inputSearchItem.setText("");
         
+        inputCartID.setText("");
         inputItemName.setText("");
         inputPrice.setText("");
         inputQuantity.setValue(0);

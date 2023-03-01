@@ -252,7 +252,7 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         String getTheRowCustomerAddress = (String) acceptOrderTable.getValueAt(selectedRow, 2);
         String getTheRowOrderStatus = (String) acceptOrderTable.getValueAt(selectedRow, 3);
         
-        if((!getTheRowOrderStatus.equals("Ongoing")) || (!getTheRowOrderStatus.equals("Delivered"))) {
+        if((getTheRowOrderStatus.equals("Ongoing")) || (getTheRowOrderStatus.equals("Delivered"))) {
             JOptionPane.showMessageDialog(null, "You has already accepted or delivered this order. It will remain as a part of your delivery history.", "Past Order", JOptionPane.INFORMATION_MESSAGE);
         
             System.out.println("Do nothing");
@@ -265,6 +265,8 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
                 
                 FlushAndWrite faw = new FlushAndWrite();
                 faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/delivery.txt");
+                
+                JOptionPane.showMessageDialog(null, "Please proceed to Speed Parcel warehouse to collect the parcel.\nHave a safe journey.", "Order accepted", JOptionPane.INFORMATION_MESSAGE);
                 
             } else {
                 System.out.println("Do nothing");

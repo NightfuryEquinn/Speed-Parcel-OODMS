@@ -1,1 +1,3 @@
 15000100 | UserAlpha | Extremely Poor | Very bad delivery service
+15001500 | UserAlpha | Mediocre | Average
+15118439 | UserAlpha | Good | Quite on time

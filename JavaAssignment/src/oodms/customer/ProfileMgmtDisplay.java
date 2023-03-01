@@ -1,11 +1,13 @@
 package oodms.customer;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import oodms.oop.Create3DArray;
 import oodms.oop.FlushAndWrite;
 import oodms.oop.SaveSelected;
+import oodms.oop.SearchFileData;
 
 public class ProfileMgmtDisplay extends javax.swing.JFrame {
 
@@ -55,6 +57,11 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Profile Management");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         profileMgmtPanel.setBackground(new java.awt.Color(250, 242, 224));
 
@@ -298,6 +305,10 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
                     faw.flushAndWrite(getTheUserDeliveryData, "src/oodms/database/delivery.txt");
 
                     JOptionPane.showMessageDialog(null, "Your personal information has been updated.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                
+                    // Return back to Customer Dashboard
+                    new CustomerDashboard(acceptUsername).setVisible(true);
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Please fill up the empty fields.", "Empty fields", JOptionPane.ERROR_MESSAGE);
                 
@@ -306,6 +317,9 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Your passowrd and confirm password are not the same.", "Password Incorrect", JOptionPane.ERROR_MESSAGE);
 
+                inputPassword.setText("");
+                inputConfirmPassword.setText("");
+                
                 System.out.println("Password not same");
             }
         } else {
@@ -335,6 +349,17 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
             inputContact.setText("");
         }
     }//GEN-LAST:event_inputContactFocusLost
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        String[][] getTheUser = new SearchFileData().searchData(acceptUsername, 0, "/oodms/database/credentials.txt");
+        
+        for(String[] getTheUserData : getTheUser) {
+            inputContact.setText(getTheUserData[3]);
+            inputAddress.setText(getTheUserData[4]);
+            inputAge.setValue(Integer.valueOf(getTheUserData[5]));
+            inputGender.setSelectedItem(getTheUserData[6]);
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

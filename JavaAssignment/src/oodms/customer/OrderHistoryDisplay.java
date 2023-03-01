@@ -4,6 +4,7 @@ import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import oodms.oop.AddNewFeedback;
 import oodms.oop.FlushAndWrite;
 import oodms.oop.SaveSelected;
 import oodms.oop.SearchFileData;
@@ -227,12 +228,23 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
             status = getUserOrderData[i][7];
             
             // Delivery
-            deliveredBy = getUserDeliveryData[i][0];
+            // Because delivery text file row differ with order text file
+            try {
+                deliveredBy = getUserDeliveryData[i][0];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                deliveredBy = "Unknown";
+            }
             
             // Feedback
-            feedback = getUserFeedbackData[i][3];
+            // Because feedback text file row differ with order text file
+            try {
+                feedback = getUserFeedbackData[i][3];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                feedback = "No feedback yet";
+            }
             
             // Payment
+            // Payment text file row same as order text file
             amountPaid = getUserPaymentData[i][5];
             
             // Write data into array of order history table
@@ -247,21 +259,42 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
         String getTheRowOrderID = (String) displayOrderHistoryTable.getValueAt(selectedRow, 0);
         String getTheRowAmountPaid = (String) displayOrderHistoryTable.getValueAt(selectedRow, 5);
         
+        String getTheRowOrderStatus = (String) displayOrderHistoryTable.getValueAt(selectedRow, 7);
+        
         String confirmDeliveryMessage = "Are you sure to release RM" + getTheRowAmountPaid + " to Speed Parcel? Your order will be marked as delivered successfully.\nThis action can't be undone.";
         int confirmDelivery = JOptionPane.showConfirmDialog(null, confirmDeliveryMessage, "Confirm delivery?", JOptionPane.YES_NO_OPTION);
         
-        if(confirmDelivery == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(null, "Your payment has been made and your order status is updated.\nHave a nice day! :smile:\n\nSpeed Parcel will be happy to serve you in the future.", "Payment Made", JOptionPane.INFORMATION_MESSAGE);
+        switch (getTheRowOrderStatus) {
+            case "Delivered" -> {
+                JOptionPane.showMessageDialog(null, "You have already received and paid for this order.\nThis record is saved as a part of your order history.", "Past Order", JOptionPane.INFORMATION_MESSAGE);
+            }
             
-            String[][] newChangesArrToSave = new SaveSelected().saveConfirmDelivery("Delivered", "Paid", getTheRowOrderID);
-        
-            FlushAndWrite faw = new FlushAndWrite();
-            faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/delivery.txt");
-        } else {
-            JOptionPane.showMessageDialog(null, "Transaction has been cancelled by you. Please make sure your order has been received before making the payment.", "Transaction Cancelled", JOptionPane.ERROR_MESSAGE);
-        
-            System.out.println("Do noting");
-        }
+            case "Ongoing" -> {
+                if(confirmDelivery == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, "Your payment has been made and your order status is updated.\nHave a nice day! :smile:\n\nSpeed Parcel will be happy to serve you in the future.", "Payment Made", JOptionPane.INFORMATION_MESSAGE);
+
+                    // Save to delivery text file
+                    String[][] newChangesArrToSave = new SaveSelected().saveConfirmDelivery("Delivered", "Paid", getTheRowOrderID);
+
+                    FlushAndWrite faw = new FlushAndWrite();
+                    faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/delivery.txt");
+                    
+                    // Create a new empty feedback
+                    AddNewFeedback feedback = new AddNewFeedback(getTheRowOrderID, acceptUsername, "No rating yet", "No feedback yet");
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null, "Transaction has been cancelled by you. Please make sure your order has been received before making the payment.", "Transaction Cancelled", JOptionPane.ERROR_MESSAGE);
+
+                    System.out.println("Do noting");
+                }
+            }
+                
+            case "Unassigned" -> {
+                JOptionPane.showMessageDialog(null, "The order has not been assigned to any delivery staff.\n Please wait patiently while your order is currently processing.", "Order Processing", JOptionPane.INFORMATION_MESSAGE);
+            }
+                
+            default -> System.out.println("Do nothing");
+         }
         
         // Disable button
         confirmDeliverBtn.setEnabled(false);
@@ -298,12 +331,23 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
             status = getUserOrderData[i][7];
             
             // Delivery
-            deliveredBy = getUserDeliveryData[i][0];
+            // Because delivery text file row differ with order text file
+            try {
+                deliveredBy = getUserDeliveryData[i][0];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                deliveredBy = "Unknown";
+            }
             
             // Feedback
-            feedback = getUserFeedbackData[i][3];
+            // Because feedback text file row differ with order text file
+            try {
+                feedback = getUserFeedbackData[i][3];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                feedback = "No feedback yet";
+            }
             
             // Payment
+            // Payment text file row same as order text file
             amountPaid = getUserPaymentData[i][5];
             
             // Write data into array of order history table

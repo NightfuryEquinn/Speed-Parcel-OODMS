@@ -25,15 +25,15 @@ public class CheckSimilarity {
         return checkSimilarity;
     }
     
-    // For admin use to check username
+    // For admin use to check username and email
     public boolean credentialsAdminChecker(String username, String email) {
-        // Declare variable to check for similarity in username and password confirmation
+        // Declare variable to check for similarity in username and email confirmation
         boolean checkSimilarity = false;
         
         // OOP Method - Get Multidimensional Array
         String[][] credentialsArr = new Create3DArray().create3D("/oodms/database/credentials.txt");
 
-        // Check for similarity in Username and Password confirmation
+        // Check for similarity in Username and Email confirmation
         for(String[] singleData : credentialsArr) {
             if((singleData[0].equalsIgnoreCase(username)) || (singleData[2].equalsIgnoreCase(email))) {
                 checkSimilarity = true;

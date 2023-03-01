@@ -1,16 +1,10 @@
 package oodms.general;
 
-import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.JFormattedTextField;
 import oodms.oop.AddNewCustomer;
 import oodms.oop.CheckSimilarity;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.NumberFormatter;
 import oodms.admin.AdminDashboard;
 import oodms.customer.CustomerDashboard;
 import oodms.deliver.StaffDashboard;

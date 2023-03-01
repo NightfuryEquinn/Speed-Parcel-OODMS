@@ -46,6 +46,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         displayFeedbackTable = new javax.swing.JTable();
         backBtn = new javax.swing.JButton();
+        refreshBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Feedback History");
@@ -198,7 +199,8 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
         columnModel.getColumn(1).setPreferredWidth(125);
         columnModel.getColumn(2).setPreferredWidth(150);
         columnModel.getColumn(3).setPreferredWidth(125);
-        columnModel.getColumn(4).setPreferredWidth(250);
+        columnModel.getColumn(4).setPreferredWidth(150);
+        columnModel.getColumn(5).setPreferredWidth(250);
 
         backBtn.setBackground(new java.awt.Color(184, 145, 104));
         backBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -210,6 +212,16 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
             }
         });
 
+        refreshBtn.setBackground(new java.awt.Color(184, 145, 104));
+        refreshBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        refreshBtn.setForeground(new java.awt.Color(76, 43, 24));
+        refreshBtn.setText("Refresh");
+        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout feedbackHistoryPanelLayout = new javax.swing.GroupLayout(feedbackHistoryPanel);
         feedbackHistoryPanel.setLayout(feedbackHistoryPanelLayout);
         feedbackHistoryPanelLayout.setHorizontalGroup(
@@ -218,12 +230,16 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(feedbackHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(feedbackHistoryLabel)
-                    .addGroup(feedbackHistoryPanelLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(feedbackHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2)
-                            .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(backBtn))
+                    .addGroup(feedbackHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, feedbackHistoryPanelLayout.createSequentialGroup()
+                            .addComponent(backBtn)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(refreshBtn))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, feedbackHistoryPanelLayout.createSequentialGroup()
+                            .addGap(28, 28, 28)
+                            .addGroup(feedbackHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane2)
+                                .addComponent(backgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         feedbackHistoryPanelLayout.setVerticalGroup(
@@ -236,7 +252,9 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(backBtn)
+                .addGroup(feedbackHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backBtn)
+                    .addComponent(refreshBtn))
                 .addGap(21, 21, 21))
         );
 
@@ -261,7 +279,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
         
         String checkRating = (String) displayFeedbackTable.getValueAt(selectedRow, 4);
         
-        if((checkRating == null) || (checkRating.equals("")) || (checkRating.isBlank())) {
+        if(checkRating.equals("No rating yet")) {
             ratingSlider.setValue(1);
             inputFeedback.setText("");
             
@@ -308,8 +326,13 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
             amountPaid = getUserPaymentData[i][5];
             
             // Feedback
-            rating = getUserFeedbackData[i][2];
-            feedback = getUserFeedbackData[i][3];
+            try {
+                rating = getUserFeedbackData[i][2];
+                feedback = getUserFeedbackData[i][3];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                rating = "No rating yet";
+                feedback = "No feedback yet";
+            }
             
             String[] feedbackHistoryArr = new String[] {orderID, itemName, amountPaid, purchaseDate, rating, feedback};
             feedbackTable.addRow(feedbackHistoryArr);
@@ -367,6 +390,47 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
         ratingName.setText(displayRating.getRating(getRatingValue));
     }//GEN-LAST:event_ratingSliderMouseReleased
 
+    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
+        ratingSlider.setValue(1);
+        inputFeedback.setText("");
+
+        ratingSlider.setEnabled(false);
+        inputFeedback.setEditable(false);
+
+        submitBtn.setEnabled(false);
+        
+        DefaultTableModel feedbackTable = (DefaultTableModel) displayFeedbackTable.getModel();
+        feedbackTable.setRowCount(0);
+        
+        String orderID, itemName, amountPaid, purchaseDate, rating, feedback;
+        
+        String[][] getUserOrderData = new SearchFileData().searchData(acceptUsername, 1, "/oodms/database/order.txt");
+        String[][] getUserPaymentData = new SearchFileData().searchData(acceptUsername, 2, "/oodms/database/payment.txt");
+        String[][] getUserFeedbackData = new SearchFileData().searchData(acceptUsername, 1, "/oodms/database/feedback.txt");
+        
+        for(int i = 0; i < getUserOrderData.length; i++) {
+            // Order
+            orderID = getUserOrderData[i][0];
+            itemName = getUserOrderData[i][2];
+            purchaseDate = getUserOrderData[i][6];
+            
+            // Payment
+            amountPaid = getUserPaymentData[i][5];
+            
+            // Feedback
+            try {
+                rating = getUserFeedbackData[i][2];
+                feedback = getUserFeedbackData[i][3];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                rating = "No rating yet";
+                feedback = "No feedback yet";
+            }
+            
+            String[] feedbackHistoryArr = new String[] {orderID, itemName, amountPaid, purchaseDate, rating, feedback};
+            feedbackTable.addRow(feedbackHistoryArr);
+        }
+    }//GEN-LAST:event_refreshBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -416,6 +480,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
     private javax.swing.JLabel ratingLabel;
     private javax.swing.JLabel ratingName;
     private javax.swing.JSlider ratingSlider;
+    private javax.swing.JButton refreshBtn;
     private javax.swing.JButton submitBtn;
     // End of variables declaration//GEN-END:variables
 }

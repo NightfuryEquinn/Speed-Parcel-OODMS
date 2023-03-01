@@ -2,6 +2,7 @@ package oodms.general;
 
 import java.awt.Font;
 import java.util.Arrays;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -474,6 +475,11 @@ public class MarketStorePage extends javax.swing.JFrame {
 
     private void addToCartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToCartBtnActionPerformed
         if(acceptCustomerUsername != null) {
+            // Random generate an order ID
+            Random random = new Random();
+            int getCartID = random.nextInt(1000000) + 3000000;
+            String randomCartID = String.valueOf(getCartID);
+            
             String getItem = inputItemName.getText();
             String getPrice = inputPrice.getText();
             String getQuantity = inputQuantity.getValue().toString();
@@ -484,7 +490,28 @@ public class MarketStorePage extends javax.swing.JFrame {
             
             String getTotalPrice = String.valueOf(countTotalPrice);
             
-            AddNewItemToCart newToCart = new AddNewItemToCart(acceptCustomerUsername, getItem, getPrice, getQuantity, getTotalPrice);
+            if(!getQuantity.equals("0")) {
+                AddNewItemToCart newToCart = new AddNewItemToCart(randomCartID, acceptCustomerUsername, getItem, getPrice, getQuantity, getTotalPrice);
+            
+                JOptionPane.showMessageDialog(null, "Your order has been placed. Please check your dashboard.", "Order placed.", JOptionPane.INFORMATION_MESSAGE);
+            
+                inputQuantity.setEnabled(false);
+                addToCartBtn.setEnabled(false);
+                
+                inputSearchItem.setText("");
+                inputFilterCat.setSelectedIndex(0);
+    
+                inputItemName.setText("");
+                inputPrice.setText("");
+                inputDescription.setText("");
+                
+                DefaultTableModel marketTable = (DefaultTableModel) displayMarketTable.getModel();
+                marketTable.setRowCount(0);
+            } else {
+                String noQuantityMessage = "How many " + getItem + " you want to buy? You didn't state it.";
+                
+                JOptionPane.showMessageDialog(null, noQuantityMessage, "Unknown quantity.", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             int redirect = JOptionPane.showConfirmDialog(null, "You haven't login yet. Please login to proceed or create a new account to purchase items from Speed Parcel.\nDo you want to be redirected to the login or sign up page?", "You are a guest", JOptionPane.YES_NO_OPTION);
             
