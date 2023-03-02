@@ -290,7 +290,7 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
             }
                 
             case "Unassigned" -> {
-                JOptionPane.showMessageDialog(null, "The order has not been assigned to any delivery staff.\n Please wait patiently while your order is currently processing.", "Order Processing", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "The order has not been assigned to any delivery staff or it is not out for delivery.\n Please wait patiently while your order is currently processing.", "Order Processing", JOptionPane.INFORMATION_MESSAGE);
             }
                 
             default -> System.out.println("Do nothing");
@@ -298,6 +298,10 @@ public class OrderHistoryDisplay extends javax.swing.JFrame {
         
         // Disable button
         confirmDeliverBtn.setEnabled(false);
+        
+        // Clear Table
+        DefaultTableModel orderHistoryTable = (DefaultTableModel) displayOrderHistoryTable.getModel();
+        orderHistoryTable.setRowCount(0);
     }//GEN-LAST:event_confirmDeliverBtnActionPerformed
 
     private void displayOrderHistoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayOrderHistoryTableMouseClicked

@@ -26,7 +26,7 @@ public class CheckSimilarity {
     }
     
     // For admin use to check username and email
-    public boolean credentialsAdminChecker(String username, String email) {
+    public boolean credentialsAdminChecker(String username, String email, String oldUsername, String oldEmail) {
         // Declare variable to check for similarity in username and email confirmation
         boolean checkSimilarity = false;
         
@@ -35,10 +35,15 @@ public class CheckSimilarity {
 
         // Check for similarity in Username and Email confirmation
         for(String[] singleData : credentialsArr) {
-            if((singleData[0].equalsIgnoreCase(username)) || (singleData[2].equalsIgnoreCase(email))) {
+            if((singleData[0].equalsIgnoreCase(username)) || (singleData[0].equalsIgnoreCase(email))) {
                 checkSimilarity = true;
                 break;
             }
+        }
+        
+        // Check is it the same username and email as the current username and email
+        if(username.equalsIgnoreCase(oldUsername) || email.equalsIgnoreCase(oldEmail)) {
+            checkSimilarity = false;
         }
         
         return checkSimilarity;

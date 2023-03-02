@@ -298,6 +298,10 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
             
                 FlushAndWrite faw = new FlushAndWrite();
                 faw.flushAndWrite(newChangesArrToSave, "src/oodms/database/delivery.txt");
+                
+                // Clear table
+                DefaultTableModel acceptTable = (DefaultTableModel) acceptOrderTable.getModel();
+                acceptTable.setRowCount(0);
             } else {
                 System.out.println("Do nothing");
             }
@@ -311,10 +315,6 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         // Disable button
         acceptBtn.setEnabled(false);
         rejectBtn.setEnabled(false);
-        
-        // Clear table
-        DefaultTableModel acceptTable = (DefaultTableModel) acceptOrderTable.getModel();
-        acceptTable.setRowCount(0);
     }//GEN-LAST:event_rejectBtnActionPerformed
 
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed

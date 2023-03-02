@@ -285,7 +285,7 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
 
                 String[] newChangesArr = new String[] {getPassword, getContact, getAddress, getAge, getGender};
                 
-                if(!getContact.equals("") && !getAddress.equals("") && !getAge.equals("") && !getGender.equals("")) {
+                if(!getPassword.equals("") && !getConfirmPassword.equals("") && !getContact.equals("") && !getAddress.equals("") && !getAge.equals("") && !getGender.equals("")) {
                     // Change in credentials text file
                     SaveSelected ss = new SaveSelected();
                     String[][] newChangesArrToSave = ss.saveCustomerProfile(newChangesArr, getCustomerUsername);

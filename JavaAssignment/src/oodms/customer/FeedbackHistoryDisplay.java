@@ -157,18 +157,18 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
         displayFeedbackTable.setForeground(new java.awt.Color(76, 43, 24));
         displayFeedbackTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Item Name", "Amount Paid", "Purchase Date", "Rating", "Your Feedback"
+                "Order ID", "Item Name", "Amount Paid", "Purchase Date", "Status", "Rating", "Your Feedback"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -197,10 +197,11 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
 
         columnModel.getColumn(0).setPreferredWidth(75);
         columnModel.getColumn(1).setPreferredWidth(125);
-        columnModel.getColumn(2).setPreferredWidth(150);
-        columnModel.getColumn(3).setPreferredWidth(125);
-        columnModel.getColumn(4).setPreferredWidth(150);
-        columnModel.getColumn(5).setPreferredWidth(250);
+        columnModel.getColumn(2).setPreferredWidth(125);
+        columnModel.getColumn(3).setPreferredWidth(150);
+        columnModel.getColumn(4).setPreferredWidth(100);
+        columnModel.getColumn(5).setPreferredWidth(150);
+        columnModel.getColumn(6).setPreferredWidth(250);
 
         backBtn.setBackground(new java.awt.Color(184, 145, 104));
         backBtn.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -277,24 +278,32 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
     private void displayFeedbackTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayFeedbackTableMouseClicked
         int selectedRow = displayFeedbackTable.getSelectedRow();
         
-        String checkRating = (String) displayFeedbackTable.getValueAt(selectedRow, 4);
+        String checkStatus = (String) displayFeedbackTable.getValueAt(selectedRow, 4);
+        String checkRating = (String) displayFeedbackTable.getValueAt(selectedRow, 5);
+        String checkFeedback = (String) displayFeedbackTable.getValueAt(selectedRow, 6);
         
-        if(checkRating.equals("No rating yet")) {
-            ratingSlider.setValue(1);
-            inputFeedback.setText("");
-            
-            ratingSlider.setEnabled(true);
-            inputFeedback.setEditable(true);
-            
-            submitBtn.setEnabled(true);
+        if(checkRating.equals("No rating yet") && checkFeedback.equals("No feedback yet")) {
+            if(!checkStatus.equals("Unassigned") && !checkStatus.equals("Ongoing")) {
+                ratingSlider.setValue(1);
+                inputFeedback.setText("");
+
+                ratingSlider.setEnabled(true);
+                inputFeedback.setEditable(true);
+
+                submitBtn.setEnabled(true);
+            } else {
+                ratingSlider.setValue(1);
+                inputFeedback.setText("");
+
+                ratingSlider.setEnabled(false);
+                inputFeedback.setEditable(false);
+
+                submitBtn.setEnabled(false);
+
+                JOptionPane.showMessageDialog(null, "You haven't receive your delivery order yet. Please ensure that your order has been received before giving a rating or feedback.\nPlease refer your order history to confirm delivery.", "Order not received.", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            ratingSlider.setValue(1);
-            inputFeedback.setText("");
-            
-            ratingSlider.setEnabled(false);
-            inputFeedback.setEditable(false);
-            
-            submitBtn.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "You have already given a rating and feedback for this delivery order.", "Rating and Feedback given", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_displayFeedbackTableMouseClicked
 
@@ -310,7 +319,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
         DefaultTableModel feedbackTable = (DefaultTableModel) displayFeedbackTable.getModel();
         feedbackTable.setRowCount(0);
         
-        String orderID, itemName, amountPaid, purchaseDate, rating, feedback;
+        String orderID, itemName, amountPaid, purchaseDate, status, rating, feedback;
         
         String[][] getUserOrderData = new SearchFileData().searchData(acceptUsername, 1, "/oodms/database/order.txt");
         String[][] getUserPaymentData = new SearchFileData().searchData(acceptUsername, 2, "/oodms/database/payment.txt");
@@ -321,6 +330,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
             orderID = getUserOrderData[i][0];
             itemName = getUserOrderData[i][2];
             purchaseDate = getUserOrderData[i][6];
+            status = getUserOrderData[i][7];
             
             // Payment
             amountPaid = getUserPaymentData[i][5];
@@ -334,7 +344,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
                 feedback = "No feedback yet";
             }
             
-            String[] feedbackHistoryArr = new String[] {orderID, itemName, amountPaid, purchaseDate, rating, feedback};
+            String[] feedbackHistoryArr = new String[] {orderID, itemName, amountPaid, purchaseDate, status, rating, feedback};
             feedbackTable.addRow(feedbackHistoryArr);
         }
     }//GEN-LAST:event_formWindowOpened
@@ -402,7 +412,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
         DefaultTableModel feedbackTable = (DefaultTableModel) displayFeedbackTable.getModel();
         feedbackTable.setRowCount(0);
         
-        String orderID, itemName, amountPaid, purchaseDate, rating, feedback;
+        String orderID, itemName, amountPaid, purchaseDate, status, rating, feedback;
         
         String[][] getUserOrderData = new SearchFileData().searchData(acceptUsername, 1, "/oodms/database/order.txt");
         String[][] getUserPaymentData = new SearchFileData().searchData(acceptUsername, 2, "/oodms/database/payment.txt");
@@ -413,6 +423,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
             orderID = getUserOrderData[i][0];
             itemName = getUserOrderData[i][2];
             purchaseDate = getUserOrderData[i][6];
+            status = getUserOrderData[i][7];
             
             // Payment
             amountPaid = getUserPaymentData[i][5];
@@ -426,7 +437,7 @@ public class FeedbackHistoryDisplay extends javax.swing.JFrame {
                 feedback = "No feedback yet";
             }
             
-            String[] feedbackHistoryArr = new String[] {orderID, itemName, amountPaid, purchaseDate, rating, feedback};
+            String[] feedbackHistoryArr = new String[] {orderID, itemName, amountPaid, purchaseDate, status, rating, feedback};
             feedbackTable.addRow(feedbackHistoryArr);
         }
     }//GEN-LAST:event_refreshBtnActionPerformed

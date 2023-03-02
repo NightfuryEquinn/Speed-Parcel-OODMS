@@ -532,6 +532,7 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
         // Reset Search and Details fields
         inputSearchItem.setText("");
         
+        inputCartID.setText("");
         inputItemName.setText("");
         inputPrice.setText("");
         inputQuantity.setValue(0);
@@ -601,6 +602,29 @@ public class CartMgmtDisplay extends javax.swing.JFrame {
             upiip.updatePurchasedItemData(getItemToPurchaseData, randomOrderID);
             
             JOptionPane.showMessageDialog(null, "Order has been placed. Please view your purchase detail in payment history.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        
+            // Reset Search and Details fields
+            inputSearchItem.setText("");
+
+            inputCartID.setText("");
+            inputItemName.setText("");
+            inputPrice.setText("");
+            inputQuantity.setValue(0);
+            inputTotalPrice.setText("");
+
+            // Disable editing
+            inputQuantity.setEnabled(false);
+
+            // Disable buttons
+            editBtn.setEnabled(false);
+            saveBtn.setEnabled(false);
+            deleteBtn.setEnabled(false);
+
+            purchaseBtn.setEnabled(false);
+
+            // Clear table
+            DefaultTableModel userTable = (DefaultTableModel) displayCartTable.getModel();
+            userTable.setRowCount(0);
         } else {
             System.out.println("Do nothing");
         }

@@ -473,7 +473,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
         // Assume password and confirm password are the same
         // Check for username and email uniqueness
         CheckSimilarity checkNewUser = new CheckSimilarity();
-        boolean credentialsAdminChecker = checkNewUser.credentialsAdminChecker(getUsername, getEmail);
+        boolean credentialsAdminChecker = checkNewUser.credentialsAdminChecker(getUsername, getEmail, getUsername, getEmail);
         
         // Enable the fields first
         if(inputPassword.isEditable()) {
@@ -558,8 +558,9 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // Get old username from table to compare with existing username in text file
+        // Get old username and old email from table to compare with existing username in text file
         String getOldUsername = displayUserTable.getValueAt(displayUserTable.getSelectedRow(), 0).toString();
+        String getOldEmail = displayUserTable.getValueAt(displayUserTable.getSelectedRow(), 1).toString();
         
         // Confirm Message
         String confirmMessage = "Save changes of user " + getOldUsername + " ?";
@@ -580,7 +581,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                 String[] newChangesArr = new String[] {getUsername, getEmail, getContact, getAddress, getAge, getGender};
 
                 // Check for username and email uniqueness
-                boolean credentialsAdminChecker = new CheckSimilarity().credentialsAdminChecker(getUsername, getEmail);
+                boolean credentialsAdminChecker = new CheckSimilarity().credentialsAdminChecker(getUsername, getEmail, getOldUsername, getOldEmail);
                 
                 if((!getUsername.equals("")) && (!getEmail.equals("")) && (!getContact.equals("")) && (!getAddress.equals(""))) {
                     if(!credentialsAdminChecker) {

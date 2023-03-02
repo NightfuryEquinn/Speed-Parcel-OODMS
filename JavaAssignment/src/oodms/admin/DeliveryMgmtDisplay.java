@@ -434,6 +434,10 @@ public class DeliveryMgmtDisplay extends javax.swing.JFrame {
         inputDeliveryStaff.setEnabled(false);
         inputOrderStatus.setEnabled(false);
         
+        inputOrderID.setText("");
+        inputCustomer.setText("");
+        inputCustomerAddress.setText("");
+        
         // Clear table
         DefaultTableModel deliveryTable = (DefaultTableModel) displayDeliveryTable.getModel();
         deliveryTable.setRowCount(0);
