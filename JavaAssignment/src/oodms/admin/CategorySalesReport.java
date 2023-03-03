@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.text.DecimalFormat;
-import java.util.Arrays;
 import oodms.oop.CountChildren;
 import oodms.oop.Create3DArray;
 import org.jfree.chart.ChartFactory;

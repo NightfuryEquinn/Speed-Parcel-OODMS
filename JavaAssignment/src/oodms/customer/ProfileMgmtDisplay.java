@@ -1,6 +1,5 @@
 package oodms.customer;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -354,6 +353,8 @@ public class ProfileMgmtDisplay extends javax.swing.JFrame {
         String[][] getTheUser = new SearchFileData().searchData(acceptUsername, 0, "/oodms/database/credentials.txt");
         
         for(String[] getTheUserData : getTheUser) {
+            inputPassword.setText(getTheUserData[1]);
+            inputConfirmPassword.setText(getTheUserData[1]);
             inputContact.setText(getTheUserData[3]);
             inputAddress.setText(getTheUserData[4]);
             inputAge.setValue(Integer.valueOf(getTheUserData[5]));
