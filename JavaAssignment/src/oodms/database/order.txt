@@ -3,3 +3,4 @@
 15118439 | UserAlpha | HDMI Port Cable | 2 | 39.90 | 79.8 | 2023-03-01 | Delivered
 15052159 | Neong | Black Skirt | 2 | 69.90 | 139.80 | 2023-03-01 | Delivered
 15954258 | UserAlpha | Wooden Phone Stand | 5 | 39.90 | 199.5 | 2023-03-02 | Delivered
+15025267 | Nox | Polo Shirt | 3 | 89.90 | 269.70 | 2023-03-12 | Unassigned

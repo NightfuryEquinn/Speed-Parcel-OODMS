@@ -708,9 +708,15 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                     if(checkSole[0].toLowerCase().startsWith("admin")) {
                         adminCount++;
                     }
+                    
+                    if(checkSole[0].toLowerCase().startsWith("delivery")) {
+                        adminCount++;
+                    }
                 }
                 
-                if(adminCount != 1) {
+                System.out.println(adminCount);
+                
+                if(adminCount > 2) {
                     // Get the selected row
                     int selectedRowIndex = displayUserTable.getSelectedRow();
 
@@ -756,7 +762,7 @@ public class UserMgmtDisplay extends javax.swing.JFrame {
                     // Information Message
                     JOptionPane.showMessageDialog(null, infoMessage, "Delete Success", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null, "There is only one admin account left.\nYou can't delete the last admin account.", "At least one admin account required.", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "There is only one admin account and one delivery account left.\nYou can't delete the last admin account or delivery account.", "At least one admin and one delivery account required.", JOptionPane.ERROR_MESSAGE);
                 }
             }
             
