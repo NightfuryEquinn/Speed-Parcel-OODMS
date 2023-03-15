@@ -488,7 +488,7 @@ public class MarketStorePage extends javax.swing.JFrame {
             double countQuantity = Double.parseDouble(inputQuantity.getValue().toString());
             double countTotalPrice = countPrice * countQuantity;
             
-            String getTotalPrice = String.valueOf(countTotalPrice);
+            String getTotalPrice = String.format("%.2f", countTotalPrice);
             
             if(!getQuantity.equals("0")) {
                 AddNewItemToCart newToCart = new AddNewItemToCart(randomCartID, acceptCustomerUsername, getItem, getPrice, getQuantity, getTotalPrice);

@@ -1,1 +1,4 @@
 3023400 | UserAlpha | Cranberry | 4.90 | 8 | 39.20
+3861213 | Nox | Queen-sized Bed | 1499.00 | 1 | 1499.00
+3021370 | Nox | Socket Set | 79.00 | 3 | 237.00
+3374797 | Nox | Strawberry | 3.90 | 13 | 50.70
