@@ -15,3 +15,7 @@ Provided are Java File, Form File and Text File for this project. There is no fo
 4. Delivery staffs are paid monthly based on the numbers of order delivery they accepted and delivered successfully.
 5. The profit of SPOODMS is taken from the total sales of all orders.
 6. Item added to cart by customer, if has been changed or updated by admin, will be considered as last item in stock, price of the item in cart will not be changed.
+
+<hr/>
+
+### 📂 Read documentation: [Here](https://github.com/NightfuryEquinn/Speed-Parcel-OODMS/blob/main/Finalized%20Java%20Documentation%20by%20Yip%20Zi%20Xian%20%26%20Tan%20Jia%20Yi.pdf)
